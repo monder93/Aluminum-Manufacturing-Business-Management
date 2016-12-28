@@ -36,7 +36,7 @@ public class OpenType {
 		initialize();
 	}
 
-	/**
+	/** 
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
