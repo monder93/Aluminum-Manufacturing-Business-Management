@@ -84,10 +84,10 @@ public class LoginPage extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblPleaseEnterYour = new JLabel("\u05D1\u05D1\u05E7\u05E9\u05D4 \u05EA\u05DB\u05E0\u05D9\u05E1 \u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9 \u05D5\u05E1\u05D9\u05E1\u05DE\u05D4 \u05DB\u05D3\u05D9 \u05E9\u05EA\u05D5\u05DB\u05DC \u05DC\u05DB\u05E0\u05E1 \u05DC\u05DE\u05E2\u05E8\u05DB\u05EA");
+		JLabel lblPleaseEnterYour = new JLabel("\u05DC\u05DB\u05E0\u05D9\u05E1\u05D4 \u05DC\u05DE\u05E2\u05E8\u05DB\u05EA , \u05E0\u05D0 \u05DC\u05D4\u05DB\u05E0\u05D9\u05E1 \u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9 \u05D5\u05E1\u05D9\u05E1\u05DE\u05D4");
 		lblPleaseEnterYour.setForeground(Color.LIGHT_GRAY);
 		lblPleaseEnterYour.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
-		lblPleaseEnterYour.setBounds(55, 68, 394, 43);
+		lblPleaseEnterYour.setBounds(86, 67, 356, 43);
 		contentPane.add(lblPleaseEnterYour);
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 0, 491, 428);
