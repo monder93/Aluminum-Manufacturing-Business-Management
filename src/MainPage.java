@@ -25,6 +25,7 @@ public class MainPage extends JFrame {
 				try {
 					MainPage frame = new MainPage();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,17 +38,19 @@ public class MainPage extends JFrame {
 	 */
 	public MainPage() 
 	{
-		//setResizable(false);
+		
 		initComponents();
-	
 	}
 	
 	private void initComponents()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-		setBounds(100, 100, 450, 300);
+		
+		// this 3 lines to set bounds for 100% of screen and set resizable to false 
+		setBounds(100, 100, 578, 374);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		setVisible(true);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
