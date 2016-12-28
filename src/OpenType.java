@@ -20,6 +20,7 @@ public class OpenType {
 				try {
 					OpenType window = new OpenType();
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
