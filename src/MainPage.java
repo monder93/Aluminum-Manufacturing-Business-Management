@@ -83,7 +83,7 @@ public class MainPage extends JFrame {
 		JMenu menu = new JMenu("\u05D8\u05D1\u05DC\u05D0\u05D5\u05EA");
 		menu.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu);
-		JMenu mnProjects = new JMenu("פרויקטים");
+		JMenu mnProjects = new JMenu("\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\u05D9\u05DD");
 		mnProjects.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnProjects);
 		
@@ -118,6 +118,7 @@ public class MainPage extends JFrame {
 		contentPane.add(button_4);
 		
 		JButton button_5 = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05DE\u05E9\u05E7\u05D5\u05E4\u05D9\u05DD \u05E2\u05D9\u05D5\u05D5\u05E8\u05D9\u05DD");
+		button_5.setFont(new Font("Tahoma", Font.BOLD, 13));
 		button_5.setBounds(352, 57, 158, 113);
 		contentPane.add(button_5);
 		
