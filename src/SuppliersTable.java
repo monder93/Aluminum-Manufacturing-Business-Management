@@ -17,6 +17,7 @@ public class SuppliersTable {
 				try {
 					SuppliersTable window = new SuppliersTable();
 					window.frame.setVisible(true);
+					//resizable false
 					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
