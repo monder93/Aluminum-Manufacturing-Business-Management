@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +14,9 @@ import javax.swing.JMenu;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainPage extends JFrame {
 
@@ -88,9 +91,70 @@ public class MainPage extends JFrame {
 		JMenu menu = new JMenu("\u05D8\u05D1\u05DC\u05D0\u05D5\u05EA");
 		menu.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu);
+
+		JMenuItem menuItem_1 = new JMenuItem("\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tables customers = new Tables("customers");
+			}
+		});
+		menu.add(menuItem_1);
+
+		JMenuItem menuItem_2 = new JMenuItem("\u05E1\u05E4\u05E7\u05D9\u05DD");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tables suppliers = new Tables("suppliers");
+
+			}
+		});
+		menu.add(menuItem_2);
+
+		JMenuItem menuItem_3 = new JMenuItem("\u05E4\u05E8\u05D5\u05E4\u05D9\u05DC\u05D9\u05DD");
+		menuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tables profiles = new Tables();
+
+			}
+		});
+		menu.add(menuItem_3);
+
+		JMenuItem menuItem_4 = new JMenuItem("\u05D6\u05D9\u05D2\u05D5\u05D2");
+		menuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tables glasses = new Tables();
+
+			}
+		});
+		menu.add(menuItem_4);
+
+		JMenuItem menuItem_5 = new JMenuItem("\u05E6\u05D1\u05E2\u05D9\u05DD");
+		menuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tables colors = new Tables();
+
+			}
+		});
+		menu.add(menuItem_5);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("\u05E1\u05D5\u05D2\u05D9 \u05E4\u05EA\u05D9\u05D7\u05D4");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				Tables openType = new Tables();
+				OpenType ot = new OpenType();
+			}
+		});
+		menu.add(mntmNewMenuItem);
 		JMenu mnProjects = new JMenu("\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\u05D9\u05DD");
 		mnProjects.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnProjects);
+
+		JMenuItem menuItem = new JMenuItem("\u05D4\u05E6\u05D2 \u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\u05D9\u05DD");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProjectsPage projects=new ProjectsPage();
+			}
+		});
+		mnProjects.add(menuItem);
 
 		JButton button = new JButton("\u05D2\u05DC\u05E8\u05D9\u05D4");
 		button.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -108,6 +172,11 @@ public class MainPage extends JFrame {
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05D6\u05DB\u05D5\u05DB\u05D9\u05EA");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 13));
 		button_3.setBounds(1086, 57, 158, 114);
 		contentPane.add(button_3);
@@ -166,7 +235,7 @@ public class MainPage extends JFrame {
 					{
 						Calendar cal = new GregorianCalendar();
 						int day=cal.get(Calendar.DAY_OF_MONTH);
-						int month=cal.get(Calendar.MONTH);
+						int month=cal.get(Calendar.MONTH+1);
 						int year=cal.get(Calendar.YEAR);
 
 						int second = cal.get(Calendar.SECOND);

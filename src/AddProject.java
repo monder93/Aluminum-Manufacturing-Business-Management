@@ -44,7 +44,8 @@ public class AddProject {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 900, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("\u05D0\u05EA\u05E8 :");
@@ -129,10 +130,6 @@ public class AddProject {
 		comboBox_5.setBounds(339, 361, 184, 29);
 		frame.getContentPane().add(comboBox_5);
 		
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setBounds(636, 410, 97, 23);
-		frame.getContentPane().add(checkBox);
-		
 		JComboBox comboBox_6 = new JComboBox();
 		comboBox_6.setBounds(545, 450, 184, 31);
 		frame.getContentPane().add(comboBox_6);
@@ -141,6 +138,14 @@ public class AddProject {
 		btnNewButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		btnNewButton.setBounds(339, 160, 184, 30);
 		frame.getContentPane().add(btnNewButton);
+		
+		JCheckBox checkBox = new JCheckBox("");
+		checkBox.setBounds(636, 410, 97, 23);
+		frame.getContentPane().add(checkBox);
+		
+		JButton btnNewButton_1 = new JButton("\u05D0\u05D9\u05E9\u05D5\u05E8");
+		btnNewButton_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		btnNewButton_1.setBounds(358, 504, 215, 46);
+		frame.getContentPane().add(btnNewButton_1);
 	}
-
 }

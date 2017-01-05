@@ -15,13 +15,15 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	static LoginPage frame;
 	/**
 	 * Launch the application.
 	 */
@@ -29,7 +31,7 @@ public class LoginPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginPage frame = new LoginPage();
+					frame = new LoginPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,6 +67,12 @@ public class LoginPage extends JFrame {
 		contentPane.add(lblUsername);
 		
 		JButton btnNewButton = new JButton("\u05DB\u05E0\u05D9\u05E1\u05D4");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainPage main=new MainPage();
+				frame.dispose();
+			}
+		});
 		btnNewButton.setBounds(147, 227, 187, 23);
 		contentPane.add(btnNewButton);
 		

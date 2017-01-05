@@ -42,9 +42,9 @@ public class OpenType {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 250, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JList list = new JList();
 		list.setFont(new Font("Tahoma", Font.BOLD, 11));
 		list.setBounds(20, 11, 198, 239);

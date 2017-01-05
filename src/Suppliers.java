@@ -2,8 +2,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -11,7 +19,10 @@ public class Suppliers extends JFrame {
 
 	private JFrame frame;
 	private JTable table;
-
+	static String url = "jdbc:mysql://localhost:3306/Final";
+	static String user = "root";
+	static String password = "";
+	public Connection	myConn;
 	/**
 	 * Launch the application.
 	 */
@@ -35,6 +46,11 @@ public class Suppliers extends JFrame {
 	 * Create the application.
 	 */
 	public Suppliers() {
+		try {
+			myConn = DriverManager.getConnection(url,user,password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		initialize();
 	}
 
@@ -69,6 +85,15 @@ public class Suppliers extends JFrame {
 		btnNewButton_2.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 		btnNewButton_2.setBounds(838, 279, 212, 74);
 		getContentPane().add(btnNewButton_2);
+		
+		try {
+			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = myStmt.executeQuery("select * from suppliers");
+			table.setModel(DbUtils.resultSetToTableModel(myRs));
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 
 }
