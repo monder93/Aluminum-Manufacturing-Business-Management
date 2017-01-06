@@ -235,7 +235,7 @@ public class MainPage extends JFrame {
 					{
 						Calendar cal = new GregorianCalendar();
 						int day=cal.get(Calendar.DAY_OF_MONTH);
-						int month=cal.get(Calendar.MONTH+1);
+						int month=cal.get(Calendar.MONTH)+1;
 						int year=cal.get(Calendar.YEAR);
 
 						int second = cal.get(Calendar.SECOND);
