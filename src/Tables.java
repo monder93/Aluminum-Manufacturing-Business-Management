@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
-public class Tables {
+public class Tables extends JFrame{
 
 	private JFrame frame;
 	public static JTable table_1;

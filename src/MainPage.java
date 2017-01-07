@@ -17,6 +17,9 @@ import java.awt.Color;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Cursor;
+import java.awt.ComponentOrientation;
 
 public class MainPage extends JFrame {
 
@@ -87,6 +90,29 @@ public class MainPage extends JFrame {
 		JMenu menu_1 = new JMenu("\u05D3\u05D5\u05D7\u05D5\u05EA");
 		menu_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu_1);
+		
+		JMenu mnNewMenu = new JMenu("\u05EA\u05DE\u05D7\u05D9\u05E8");
+		mnNewMenu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		mnNewMenu.setActionCommand("");
+		mnNewMenu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		mnNewMenu.setHorizontalTextPosition(SwingConstants.LEFT);
+		mnNewMenu.setHorizontalAlignment(SwingConstants.LEFT);
+		menu_1.add(mnNewMenu);
+		
+		JMenuItem menuItem_6 = new JMenuItem("");
+		mnNewMenu.add(menuItem_6);
+		
+		JMenuItem menuItem_7 = new JMenuItem("");
+		menu_1.add(menuItem_7);
+		
+		JMenuItem menuItem_8 = new JMenuItem("");
+		menu_1.add(menuItem_8);
+		
+		JMenuItem menuItem_9 = new JMenuItem("");
+		menu_1.add(menuItem_9);
+		
+		JMenuItem menuItem_10 = new JMenuItem("");
+		menu_1.add(menuItem_10);
 
 		JMenu menu = new JMenu("\u05D8\u05D1\u05DC\u05D0\u05D5\u05EA");
 		menu.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -167,33 +193,54 @@ public class MainPage extends JFrame {
 		contentPane.add(button_1);
 
 		JButton button_2 = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05E4\u05E8\u05D5\u05E4\u05D9\u05DC\u05D9\u05DD");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Orders profileOrder = new Orders("profilesOrders");
+			}
+		});
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_2.setBounds(598, 57, 158, 114);
+		button_2.setBounds(591, 57, 183, 114);
 		contentPane.add(button_2);
 
 		JButton button_3 = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05D6\u05DB\u05D5\u05DB\u05D9\u05EA");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Orders glassOrder = new Orders("glassOrders");
 
 			}
 		});
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_3.setBounds(1086, 57, 158, 114);
+		button_3.setBounds(1061, 57, 183, 114);
 		contentPane.add(button_3);
 
 		JButton btnNewButton = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05E4\u05D9\u05E8\u05D6\u05D5\u05DC");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Orders perfectionOrder = new Orders("perfectionsorders");
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton.setBounds(843, 57, 158, 114);
+		btnNewButton.setBounds(833, 57, 168, 114);
 		contentPane.add(btnNewButton);
 
 		JButton button_4 = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05EA\u05E8\u05D9\u05E1 \u05D2\u05DC\u05D9\u05DC\u05D4");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Orders shutterOrder = new Orders("shuttersOrders");
+			}
+		});
 		button_4.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_4.setBounds(109, 57, 158, 114);
+		button_4.setBounds(109, 57, 168, 114);
 		contentPane.add(button_4);
 
 		JButton button_5 = new JButton("\u05D4\u05D6\u05DE\u05E0\u05EA \u05DE\u05E9\u05E7\u05D5\u05E4\u05D9\u05DD \u05E2\u05D9\u05D5\u05D5\u05E8\u05D9\u05DD");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Orders lintelOrder = new Orders("lintelsOrders");
+			}
+		});
 		button_5.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_5.setBounds(344, 57, 175, 113);
+		button_5.setBounds(342, 58, 191, 113);
 		contentPane.add(button_5);
 
 		JButton button_6 = new JButton("\u05D7\u05D9\u05E9\u05D5\u05D1 \u05E9\u05D9\u05E4\u05D5\u05E2\u05D9\u05DD ,\u05D6\u05D5\u05D5\u05D9\u05EA \u05D5\u05E7\u05E9\u05EA\u05D5\u05EA");
@@ -202,11 +249,21 @@ public class MainPage extends JFrame {
 		contentPane.add(button_6);
 
 		JButton button_7 = new JButton("\u05D7\u05D5\u05D1\u05D5\u05EA \u05DC\u05E1\u05E4\u05E7\u05D9\u05DD");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Orders debtsForSupp = new Orders("debtsForSuppliers");
+			}
+		});
 		button_7.setFont(new Font("Tahoma", Font.BOLD, 13));
 		button_7.setBounds(108, 267, 564, 48);
 		contentPane.add(button_7);
 
 		JButton button_8 = new JButton("\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA \u05D7\u05D9\u05D9\u05D1\u05D9\u05DD");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DebtsPage customerDebt = new DebtsPage("customersDebts");
+			}
+		});
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 13));
 		button_8.setBounds(681, 267, 565, 48);
 		contentPane.add(button_8);
