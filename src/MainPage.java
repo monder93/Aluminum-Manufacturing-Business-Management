@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.ComponentOrientation;
+import java.awt.Component;
 
 public class MainPage extends JFrame {
 
@@ -73,7 +74,8 @@ public class MainPage extends JFrame {
 		contentPane.add(menuBar);
 		//-------------------------------------------------------------
 		// this line to align the menuBar to the right side
-		menuBar.add(Box.createHorizontalGlue());
+		Component horizontalGlue = Box.createHorizontalGlue();
+		menuBar.add(horizontalGlue);
 
 		JMenu menu_4 = new JMenu("\u05D9\u05E6\u05D9\u05D0\u05D4");
 		menu_4.setFont(new Font("Segoe UI", Font.BOLD, 14));
