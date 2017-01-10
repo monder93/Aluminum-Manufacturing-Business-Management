@@ -73,10 +73,20 @@ public class ProjectsPage extends JFrame
 		scrollPane.setBounds(10, 68, 980, 390);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable()
+		 {
+		    @Override
+		    public boolean isCellEditable(int row, int column) 
+		    {
+		        return column==1 || column==2 || column==3 || column==4 || column==5 || column==6 || column==7 ;                
+		    };
+		};
+		
 		//reversing JTable content to ---> right to left
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
+		
+		 
 		
         JTableHeader Theader = table.getTableHeader();
         //Theader.setBackground(Color.red);
