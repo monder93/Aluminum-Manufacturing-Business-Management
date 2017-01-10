@@ -278,7 +278,7 @@ public class MainPage extends JFrame {
 
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 22, 1352, 672);
-		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/background.jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
+		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);		
 	}
 	//----------------------------------------------------------------------------------------

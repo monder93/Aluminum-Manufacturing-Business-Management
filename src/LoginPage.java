@@ -61,7 +61,7 @@ public class LoginPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblUsername = new JLabel("\u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9");
-		lblUsername.setForeground(Color.LIGHT_GRAY);
+		lblUsername.setForeground(Color.BLACK);
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblUsername.setBounds(254, 142, 96, 30);
 		contentPane.add(lblUsername);
@@ -77,7 +77,7 @@ public class LoginPage extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("\u05E1\u05D9\u05E1\u05DE\u05D4");
-		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel.setForeground(Color.BLACK);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setBounds(254, 183, 80, 14);
 		contentPane.add(lblNewLabel);
@@ -93,13 +93,13 @@ public class LoginPage extends JFrame {
 		textField_1.setColumns(10);
 		
 		JLabel lblPleaseEnterYour = new JLabel("\u05DC\u05DB\u05E0\u05D9\u05E1\u05D4 \u05DC\u05DE\u05E2\u05E8\u05DB\u05EA , \u05E0\u05D0 \u05DC\u05D4\u05DB\u05E0\u05D9\u05E1 \u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9 \u05D5\u05E1\u05D9\u05E1\u05DE\u05D4");
-		lblPleaseEnterYour.setForeground(Color.LIGHT_GRAY);
+		lblPleaseEnterYour.setForeground(Color.BLACK);
 		lblPleaseEnterYour.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblPleaseEnterYour.setBounds(86, 67, 356, 43);
 		contentPane.add(lblPleaseEnterYour);
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 0, 491, 428);
-		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/background.jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
+		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
 	}
 	

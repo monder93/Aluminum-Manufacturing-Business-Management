@@ -1,11 +1,13 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
@@ -83,6 +85,11 @@ public class HelpFunctions
 		}
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------
 	
+	public static void setBackground(JLabel background_label)
+	{
+		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/banner1.jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
+	}
 	
 }
