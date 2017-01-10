@@ -27,13 +27,10 @@ public class ProjectProducts extends JFrame{
 	private JFrame frame;
 	private JTable table;
 	private JPanel contentPane;
-	static String url = "jdbc:mysql://localhost:3306/Final";
-	static String user = "root";
-	static String password = "";
 	public Connection	myConn;
 	private ButtonGroup proNumBG= new ButtonGroup();
 	private ButtonGroup  berzolNumBG= new ButtonGroup();
-
+	String id;
 	/**
 	 * Launch the application.
 	 */
@@ -55,14 +52,14 @@ public class ProjectProducts extends JFrame{
 	 * Create the application.
 	 */
 	public ProjectProducts() {
-		try {
-			myConn = DriverManager.getConnection(url,user,password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		initialize();
 	}
-
+	
+	public ProjectProducts(String id) {
+		this.id=id;
+		initialize();
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -85,8 +82,9 @@ public class ProjectProducts extends JFrame{
 		
 		
 		try {
+			myConn = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery("select * from projects");
+			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 		} catch (Exception e) {
 			e.printStackTrace();

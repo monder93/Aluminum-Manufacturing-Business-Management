@@ -17,9 +17,6 @@ public class Customers extends JFrame{
 
 	private JFrame frame;
 	private JTable table;
-	static String url = "jdbc:mysql://localhost:3306/Final";
-	static String user = "root";
-	static String password = "";
 	public Connection	myConn;
 	/**
 	 * Launch the application.
@@ -43,11 +40,6 @@ public class Customers extends JFrame{
 	 * Create the application.
 	 */
 	public Customers() {
-		try {
-			myConn = DriverManager.getConnection(url,user,password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		initialize();
 	}
 
@@ -80,6 +72,7 @@ public class Customers extends JFrame{
 		getContentPane().add(table);
 		
 		try {
+			myConn = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery("select * from customers");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));

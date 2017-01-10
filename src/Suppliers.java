@@ -19,9 +19,6 @@ public class Suppliers extends JFrame {
 
 	private JFrame frame;
 	private JTable table;
-	static String url = "jdbc:mysql://localhost:3306/Final";
-	static String user = "root";
-	static String password = "";
 	public Connection	myConn;
 	/**
 	 * Launch the application.
@@ -46,11 +43,7 @@ public class Suppliers extends JFrame {
 	 * Create the application.
 	 */
 	public Suppliers() {
-		try {
-			myConn = DriverManager.getConnection(url,user,password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		initialize();
 	}
 
@@ -87,6 +80,7 @@ public class Suppliers extends JFrame {
 		getContentPane().add(btnNewButton_2);
 		
 		try {
+			myConn = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery("select * from suppliers");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));

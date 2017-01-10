@@ -19,9 +19,6 @@ public class DebtsPage extends JFrame{
 
 	private JFrame frame;
 	public static JTable table_1;
-	static String url = "jdbc:mysql://localhost:3306/Final";
-	static String user = "root";
-	static String password = "";
 	public Connection	myConn;
 	
 	String table;
@@ -53,11 +50,6 @@ public class DebtsPage extends JFrame{
 	}
 	public DebtsPage(String table) {
 		this.table=table;
-		try {
-			myConn = DriverManager.getConnection(url,user,password);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		initialize();
 	}
 
@@ -81,7 +73,7 @@ public class DebtsPage extends JFrame{
 
 	try {
 //		Class.forName("com.mysql.jdbc.Driver").newInstance();
-//		Connection myConn = DriverManager.getConnection(url,user,password);
+		myConn = HelpFunctions.DbConnection();
 		Statement myStmt = myConn.createStatement();
 		ResultSet myRs = myStmt.executeQuery(query+table);
 		table_1.setModel(DbUtils.resultSetToTableModel(myRs));

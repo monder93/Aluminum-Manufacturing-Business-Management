@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -81,6 +82,7 @@ public class ProjectsPage extends JFrame
 		        return column==1 || column==2 || column==3 || column==4 || column==5 || column==6 || column==7 ;                
 		    };
 		};
+		table.setAutoCreateRowSorter(true);
 		
 		//reversing JTable content to ---> right to left
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -105,10 +107,19 @@ public class ProjectsPage extends JFrame
 		JButton btnNewButton_1 = new JButton("\u05D4\u05D5\u05E1\u05E4\u05D4/\u05E2\u05D3\u05DB\u05D5\u05DF \u05DE\u05D5\u05E6\u05E8\u05D9\u05DD \u05DC\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectProducts prjctPrdct = new ProjectProducts();
+				int row = table.getSelectedRow();
+				if(row<0)
+					JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה");
+//				System.out.println(row);
+				else
+				{
+				String Id=(table.getModel().getValueAt(row, 0)).toString();
+				System.out.println(Id);
+				ProjectProducts prjctPrdct = new ProjectProducts(Id);
+				}
 			}
 		});
-		btnNewButton_1.setBounds(1098, 136, 203, 46);
+		btnNewButton_1.setBounds(1098, 269, 203, 46);
 		getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05EA \u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
@@ -137,8 +148,8 @@ public class ProjectsPage extends JFrame
 		btnNewButton_2.setBounds(1098, 206, 203, 46);
 		getContentPane().add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("\u05DE\u05D9\u05D5\u05DF");
-		btnNewButton_3.setBounds(1098, 269, 203, 46);
+		JButton btnNewButton_3 = new JButton("עדכון פרויקט");
+		btnNewButton_3.setBounds(1098, 133, 203, 46);
 		getContentPane().add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("\u05D7\u05D9\u05E4\u05D5\u05E9");
@@ -146,6 +157,12 @@ public class ProjectsPage extends JFrame
 		getContentPane().add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("\u05D7\u05D6\u05E8\u05D4");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				
+			}
+		});
 		btnNewButton_5.setBounds(1098, 406, 203, 46);
 		getContentPane().add(btnNewButton_5);
 		
