@@ -5,12 +5,29 @@ import javax.swing.JLabel;
 import java.awt.Rectangle;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import com.mysql.jdbc.PreparedStatement;
+
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.awt.event.ActionEvent;
+
 
 public class AddProject {
-
+	public Connection	myConn;
+	static String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";
+	static String user = "root";
+	static String password = "";
+	
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -20,7 +37,7 @@ public class AddProject {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			public void run() {	
 				try {
 					AddProject window = new AddProject();
 					window.frame.setVisible(true);
@@ -144,6 +161,31 @@ public class AddProject {
 		frame.getContentPane().add(checkBox);
 		
 		JButton btnNewButton_1 = new JButton("\u05D0\u05D9\u05E9\u05D5\u05E8");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try
+				{
+					String name="שם";
+					String id="מספר";
+					myConn = DriverManager.getConnection(url,user,password);
+					String query = "insert into pro("+name+","+id+")VALUES('שםפפפ','מספר')";
+					System.out.println(query);
+					Statement myStmt = myConn.createStatement();
+					myStmt.executeUpdate(query);
+
+					//PreparedStatement myStmt = (PreparedStatement)myConn.prepareStatement(query);
+					//myStmt.executeUpdate();
+					
+					
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				} 
+
+			}
+		});
 		btnNewButton_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		btnNewButton_1.setBounds(358, 504, 215, 46);
 		frame.getContentPane().add(btnNewButton_1);

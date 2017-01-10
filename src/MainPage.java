@@ -51,7 +51,7 @@ public class MainPage extends JFrame {
 		setTitle("MainPage");
 
 		initComponents();
-		clock();
+		HelpFunctions.clock(timeLabel);
 	}
 
 	private void initComponents()
@@ -282,37 +282,7 @@ public class MainPage extends JFrame {
 		contentPane.add(background_label);		
 	}
 	//----------------------------------------------------------------------------------------
-	public void clock()
-	{
-		Thread clock=new Thread()
-		{
-			public void run()
-			{
-				try 
-				{
-					while(true)
-					{
-						Calendar cal = new GregorianCalendar();
-						int day=cal.get(Calendar.DAY_OF_MONTH);
-						int month=cal.get(Calendar.MONTH)+1;
-						int year=cal.get(Calendar.YEAR);
-
-						int second = cal.get(Calendar.SECOND);
-						int minute = cal.get(Calendar.MINUTE);
-						int hour=cal.get(Calendar.HOUR);
-
-						timeLabel.setText("Time :  "+hour + ":"+minute+":"+second+"   Date :  "+day+"/"+month+"/"+year);
-						sleep(1000);
-
-					}	
-				} catch (Exception e) 
-				{
-					// TODO: handle exception
-				}
-			}
-		};
-		clock.start();
-	}
+	
 	//----------------------------------------------------------------------------------------
 
 
