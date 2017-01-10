@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2017 at 09:12 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.6
+-- Generation Time: Jan 10, 2017 at 06:27 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) COLLATE utf8_bin NOT NULL,
+  `שם` varchar(20) COLLATE utf8_bin NOT NULL,
   `lname` varchar(20) COLLATE utf8_bin NOT NULL,
   `address` varchar(50) COLLATE utf8_bin NOT NULL,
   `phone` int(11) NOT NULL,
@@ -39,101 +39,9 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `name`, `lname`, `address`, `phone`, `email`) VALUES
-(1, 'monder', 'ashkar', 'deir hana', 520002001, 'monder@mondercompany.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customersdebts`
---
-
-CREATE TABLE `customersdebts` (
-  `סה"כ חוב (ש"ח)` int(11) NOT NULL,
-  `סה"כ שולם (ש"ח)` int(11) NOT NULL,
-  `סה"כ לתשלום(ש"ח)` int(11) NOT NULL,
-  `שם לקוח` varchar(20) COLLATE utf8_bin NOT NULL,
-  `תאריך` date NOT NULL,
-  `מס'` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `debtsforsuppliers`
---
-
-CREATE TABLE `debtsforsuppliers` (
-  `סה"כ חוב (ש"ח)` int(11) NOT NULL,
-  `סה"כ שולם (ש"ח)` int(11) NOT NULL,
-  `סה"כ לתשלום(ש"ח)` int(11) NOT NULL,
-  `שם ספק` int(11) NOT NULL,
-  `תאריך` int(11) NOT NULL,
-  `מס'` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `glassorders`
---
-
-CREATE TABLE `glassorders` (
-  `הערות` varchar(500) COLLATE utf8_bin NOT NULL,
-  `שם ספק` varchar(50) COLLATE utf8_bin NOT NULL,
-  `תיאור` varchar(500) COLLATE utf8_bin NOT NULL,
-  `תאריך` date NOT NULL,
-  `מס'` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `glassorders`
---
-
-INSERT INTO `glassorders` (`הערות`, `שם ספק`, `תיאור`, `תאריך`, `מס'`) VALUES
-('עד שבוע', 'M.S.I', 'בידודית', '2017-01-07', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lintelsorders`
---
-
-CREATE TABLE `lintelsorders` (
-  `שם ספק` varchar(50) COLLATE utf8_bin NOT NULL,
-  `כמות` int(11) NOT NULL,
-  `תיאור` varchar(500) COLLATE utf8_bin NOT NULL,
-  `תאריך` date NOT NULL,
-  `מס'` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `perfectionsorders`
---
-
-CREATE TABLE `perfectionsorders` (
-  `שם ספק` varchar(50) COLLATE utf8_bin NOT NULL,
-  `תיאור` varchar(500) COLLATE utf8_bin NOT NULL,
-  `תאריך` date NOT NULL,
-  `מס'` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `profilesorders`
---
-
-CREATE TABLE `profilesorders` (
-  `הערות` varchar(500) COLLATE utf8_bin NOT NULL,
-  `שם ספק` varchar(50) COLLATE utf8_bin NOT NULL,
-  `צבע` varchar(50) COLLATE utf8_bin NOT NULL,
-  `תיאור` varchar(500) COLLATE utf8_bin NOT NULL,
-  `תאריך` date NOT NULL,
-  `מס'` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+INSERT INTO `customers` (`id`, `שם`, `lname`, `address`, `phone`, `email`) VALUES
+(1, 'monder', 'ashkar', 'deir hana', 520002001, 'monder@mondercompany.com'),
+(2, 'aa', '11', 'cc', 11, 'ee');
 
 -- --------------------------------------------------------
 
@@ -143,59 +51,21 @@ CREATE TABLE `profilesorders` (
 
 CREATE TABLE `projects` (
   `מספר פרויקט` int(11) NOT NULL,
-  `איש קשר` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `אתר` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `שם מזמין` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `צבע` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `אתר` varchar(50) NOT NULL,
+  `שם מזמין` varchar(50) NOT NULL,
+  `צבע` varchar(50) NOT NULL,
   `מחיר צבע` int(50) NOT NULL,
-  `זיגוג` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `מחיר זיגוג` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `זיגוג` varchar(50) NOT NULL,
+  `מחיר זיגוג` int(50) NOT NULL,
+  `איש קשר` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`מספר פרויקט`, `איש קשר`, `אתר`, `שם מזמין`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`) VALUES
-(1, 'זהבי', 'חיפה', 'גלעד', 'IRON', 40, 'בידודית', 40),
-(8, 'ח', 'ח', 'ח', 'ח', 30, 'ח', 40);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `projectsproducts`
---
-
-CREATE TABLE `projectsproducts` (
-  `מספר פרויקט` int(11) NOT NULL,
-  `מספר מוצר` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `projectsproducts`
---
-
-INSERT INTO `projectsproducts` (`מספר פרויקט`, `מספר מוצר`) VALUES
-(1, 14),
-(1, 12),
-(1, 6),
-(2, 14),
-(2, 7),
-(8, 111);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `shuttersorders`
---
-
-CREATE TABLE `shuttersorders` (
-  `הערות` varchar(500) COLLATE utf8_bin NOT NULL,
-  `שם ספק` varchar(50) COLLATE utf8_bin NOT NULL,
-  `תיאור` varchar(500) COLLATE utf8_bin NOT NULL,
-  `תאריך` date NOT NULL,
-  `מס'` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+INSERT INTO `projects` (`מספר פרויקט`, `אתר`, `שם מזמין`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `איש קשר`) VALUES
+(1, 'aa', 'aa', 'a', 100, 'aa', 100, 'a');
 
 -- --------------------------------------------------------
 
@@ -248,12 +118,12 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `מספר פרויקט` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `מספר פרויקט` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
