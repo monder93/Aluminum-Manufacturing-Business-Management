@@ -25,7 +25,7 @@ public class ProjectsPage extends JFrame
 {
 
 	private JFrame frame;
-	private JTable table;
+	public static JTable table;
 	private JPanel contentPane;
 
 	/**
