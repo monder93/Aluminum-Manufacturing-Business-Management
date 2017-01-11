@@ -161,22 +161,31 @@ public class Contacts extends JFrame{
 
 		JButton btnNewButton_1 = new JButton("\u05E2\u05D3\u05DB\u05D5\u05DF");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				int row=table.getSelectedRow();
-				String id = table.getModel().getValueAt(row, 0).toString();
-				String name = table.getModel().getValueAt(row, 1).toString();
-				String lname = table.getModel().getValueAt(row, 2).toString();
-				String address = table.getModel().getValueAt(row, 3).toString();
-				String phone = table.getModel().getValueAt(row, 4).toString();
-				String email = table.getModel().getValueAt(row, 5).toString();
-				String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
-				Connection myConn = HelpFunctions.DbConnection();
-				Statement myStmt;
 				try {
+					if(row<0)
+					{
+						JOptionPane.showMessageDialog(null, "בחר איש קשר בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else
+					{
+						String id = table.getModel().getValueAt(row, 0).toString();
+						String name = table.getModel().getValueAt(row, 1).toString();
+						String lname = table.getModel().getValueAt(row, 2).toString();
+						String address = table.getModel().getValueAt(row, 3).toString();
+						String phone = table.getModel().getValueAt(row, 4).toString();
+						String email = table.getModel().getValueAt(row, 5).toString();
+						String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
+						Connection myConn = HelpFunctions.DbConnection();
+						Statement myStmt;
 					myStmt = myConn.createStatement();
 					myStmt.executeUpdate(q);
 					HelpFunctions.getTable("contacts", table, myConn);
 					JOptionPane.showMessageDialog(null, "updated!");
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -189,18 +198,37 @@ public class Contacts extends JFrame{
 
 		JButton btnNewButton_2 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
 		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				int row = table.getSelectedRow();
-				String PID=(table.getModel().getValueAt(row, 0)).toString();
-//				System.out.println(PID);
-				String ProId="מספר זהות";
-				String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
-				Connection myConn = HelpFunctions.DbConnection();
-				try{
-				Statement myStmt = myConn.createStatement();
-				myStmt.executeUpdate(query);
-				HelpFunctions.getTable("contacts", table, myConn);
-			      myConn.close();
+				int response=0;
+				try
+				{
+					if(row<0)
+					{
+						JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else
+					{
+						 response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+							        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					}
+				    if (response == JOptionPane.NO_OPTION) 
+				    {
+				    	return;
+				    }
+				    else if (response == JOptionPane.YES_OPTION) 
+				    {
+				    	String PID=(table.getModel().getValueAt(row, 0)).toString();
+						String ProId="מספר זהות";
+						String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
+						Connection myConn = HelpFunctions.DbConnection();
+					Statement myStmt = myConn.createStatement();
+					myStmt.executeUpdate(query);
+					HelpFunctions.getTable("contacts", table, myConn);
+				      myConn.close();
+				    }	
 				}
 				catch(Exception e2)
 				{
@@ -219,15 +247,32 @@ public class Contacts extends JFrame{
 			JButton button = new JButton("בחר");
 			button.setBounds(1025, 64, 243, 55);
 			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+				public void actionPerformed(ActionEvent arg0) 
+				{
+					
 					int row = table.getSelectedRow();
-					Id=table.getModel().getValueAt(row, 0).toString();
-					name=table.getModel().getValueAt(row,1).toString();
-					AddProject.id=Id;
-					AddProject.contact.setText(name);
-					dispose();
+					try{
+						if(row<0)
+						{
+							JOptionPane.showMessageDialog(null, "בחר איש קשר בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+						else
+						{
+							Id=table.getModel().getValueAt(row, 0).toString();
+							name=table.getModel().getValueAt(row,1).toString();
+							AddProject.id=Id;
+							AddProject.contact.setText(name);
+							dispose();
+						}
+					    }
+					
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+					}
 
-				}
 			});
 			button.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 

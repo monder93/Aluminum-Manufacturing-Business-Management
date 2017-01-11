@@ -114,7 +114,8 @@ public class ProjectsPage extends JFrame
 				{
 				String Id=(table.getModel().getValueAt(row, 0)).toString();
 				System.out.println(Id);
-				ProjectProducts prjctPrdct = new ProjectProducts(Id);
+				new ProjectProducts(Id);
+				
 				}
 			}
 		});
