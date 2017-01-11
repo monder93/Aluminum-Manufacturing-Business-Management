@@ -127,7 +127,7 @@ public class ProjectsPage extends JFrame
 			{
 				int row = table.getSelectedRow();
 				String PID=(table.getModel().getValueAt(row, 0)).toString();
-				System.out.println(PID);
+//				System.out.println(PID);
 				String ProId="מספר פרויקט";
 				String query = "DELETE FROM `projects` WHERE  `"+ProId+"`= '"+PID+"'";
 				Connection myConn = HelpFunctions.DbConnection();

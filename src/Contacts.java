@@ -1,3 +1,4 @@
+import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,14 +17,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.Button;
 
 public class Contacts extends JFrame{
 
 	private JFrame frame;
 	private JTable table;
 	private JPanel contentPane;
+	public static String Id;
+	public static String name;
 
 	public Connection	myConn;
+	private JTextField textField;
+	private JTextField textField1;
+	private JTextField textField2;
+	private JTextField textField3;
+	private JTextField textField4;
+	JButton button_1;
+	JLabel label;
+	JLabel label2;
+	JLabel label3;
+	JLabel label4;
+	JLabel label1;
 	/**
 	 * Launch the application.
 	 */
@@ -59,38 +81,188 @@ public class Contacts extends JFrame{
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		getContentPane().setLayout(null);
 		setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(59, 59, 859, 337);
-		getContentPane().add(scrollPane);
-		
+		scrollPane.setBounds(64, 64, 859, 337);
+
 		table = new JTable();
+		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
-		
+		label = new JLabel("משפחה :");
+		label.setVisible(false);
+		label.setBounds(1184, 531, 84, 33);
+
+		label1 = new JLabel("כתובת :");
+		label1.setVisible(false);
+		label1.setBounds(1184, 591, 84, 33);
+
+		label2 = new JLabel("טלפון :");
+		label2.setVisible(false);
+		label2.setBounds(854, 478, 84, 33);
+
+		label3 = new JLabel("דואר אלקטרוני :");
+		label3.setVisible(false);
+		label3.setBounds(854, 540, 84, 33);
+
+		label4 = new JLabel("שם :");
+		label4.setVisible(false);
+		label4.setBounds(1184, 478, 84, 33);
+
+
+		textField = new JTextField();
+		textField.setVisible(false);
+		textField.setBounds(1025, 478, 103, 33);
+		textField.setColumns(10);
+
+		textField1 = new JTextField();
+		textField1.setVisible(false);
+		textField1.setBounds(1025, 531, 103, 33);
+		textField1.setColumns(10);
+
+		textField2 = new JTextField();
+		textField2.setVisible(false);
+		textField2.setBounds(1025, 591, 103, 33);
+		textField2.setColumns(10);
+
+		textField3 = new JTextField();
+		textField3.setVisible(false);
+		textField3.setBounds(720, 478, 103, 33);
+		textField3.setColumns(10);
+
+		textField4 = new JTextField();
+		textField4.setVisible(false);
+		textField4.setBounds(720, 537, 103, 33);
+		textField4.setColumns(10);
+		contentPane.setLayout(null);
+		contentPane.add(scrollPane);
+
+		contentPane.add(label);
+		contentPane.add(label1);
+		contentPane.add(label2);
+		contentPane.add(label3);
+
 		JButton btnNewButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05DC\u05E7\u05D5\u05D7");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				hideOrShow(true);
+
+			}
+		});
+		btnNewButton.setBounds(1025, 152, 243, 55);
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-		btnNewButton.setBounds(1020, 59, 243, 92);
-		getContentPane().add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("\u05E2\u05D3\u05DB\u05D5\u05DF");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row=table.getSelectedRow();
+				String id = table.getModel().getValueAt(row, 0).toString();
+				String name = table.getModel().getValueAt(row, 1).toString();
+				String lname = table.getModel().getValueAt(row, 2).toString();
+				String address = table.getModel().getValueAt(row, 3).toString();
+				String phone = table.getModel().getValueAt(row, 4).toString();
+				String email = table.getModel().getValueAt(row, 5).toString();
+				String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
+				Connection myConn = HelpFunctions.DbConnection();
+				Statement myStmt;
+				try {
+					myStmt = myConn.createStatement();
+					myStmt.executeUpdate(q);
+					HelpFunctions.getTable("contacts", table, myConn);
+					JOptionPane.showMessageDialog(null, "updated!");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton_1.setBounds(1025, 241, 243, 63);
 		btnNewButton_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-		btnNewButton_1.setBounds(1020, 174, 243, 92);
-		getContentPane().add(btnNewButton_1);
-		
+
 		JButton btnNewButton_2 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				String PID=(table.getModel().getValueAt(row, 0)).toString();
+//				System.out.println(PID);
+				String ProId="מספר זהות";
+				String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
+				Connection myConn = HelpFunctions.DbConnection();
+				try{
+				Statement myStmt = myConn.createStatement();
+				myStmt.executeUpdate(query);
+				HelpFunctions.getTable("contacts", table, myConn);
+			      myConn.close();
+				}
+				catch(Exception e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_2.setBounds(1025, 329, 243, 63);
 		btnNewButton_2.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-		btnNewButton_2.setBounds(1020, 295, 243, 92);
-		getContentPane().add(btnNewButton_2);
-		
+
 		try 
 		{
 			myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("contacts", table, myConn);
-			
+
+			JButton button = new JButton("בחר");
+			button.setBounds(1025, 64, 243, 55);
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					int row = table.getSelectedRow();
+					Id=table.getModel().getValueAt(row, 0).toString();
+					name=table.getModel().getValueAt(row,1).toString();
+					AddProject.id=Id;
+					AddProject.contact.setText(name);
+					frame.dispose();
+
+				}
+			});
+			button.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+
+
+
+
+
+
+
+			contentPane.add(label4);
+			contentPane.add(textField);
+			contentPane.add(textField1);
+			contentPane.add(textField2);
+			contentPane.add(textField3);
+			contentPane.add(textField4);
+			contentPane.add(btnNewButton);
+			contentPane.add(btnNewButton_1);
+			contentPane.add(btnNewButton_2);
+			contentPane.add(button);
+			button_1 = new JButton("אישור");
+			button_1.setVisible(false);
+			button_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Connection myConn = HelpFunctions.DbConnection();
+					String q = "INSERT INTO `contacts`( `שם`, `משפחה`, `כתובת`, `טלפון`, `דואר אלקטרוני`) VALUES ('"+textField.getText()+"','"+textField1.getText()+"','"+textField2.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"')";
+					try {
+						Statement st = myConn.createStatement();
+						st.executeUpdate(q);
+						JOptionPane.showMessageDialog(null, "saved");
+						HelpFunctions.getTable("contacts", table, myConn);
+						hideOrShow(false);
+
+					} catch (Exception e) {
+						e.printStackTrace();					}
+				}
+			});
+			button_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+			button_1.setBounds(516, 501, 165, 42);
+			contentPane.add(button_1);
+
 			JLabel background_label = new JLabel("New label");
-			background_label.setBounds(0, 0, 1362, 705);
+			background_label.setBounds(0, 9, 1362, 705);
 			HelpFunctions.setBackground(background_label);
 			contentPane.add(background_label);
 		}
@@ -99,5 +271,21 @@ public class Contacts extends JFrame{
 			e.printStackTrace();
 
 		}
+
+
+	}
+	private void hideOrShow(boolean flag)
+	{
+		label.setVisible(flag);
+		label2.setVisible(flag);
+		label3.setVisible(flag);
+		label1.setVisible(flag);
+		label4.setVisible(flag);
+		textField.setVisible(flag);
+		textField1.setVisible(flag);
+		textField2.setVisible(flag);
+		textField3.setVisible(flag);
+		textField4.setVisible(flag);
+		button_1.setVisible(flag);
 	}
 }
