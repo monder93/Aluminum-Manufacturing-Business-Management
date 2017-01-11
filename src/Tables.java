@@ -8,13 +8,16 @@ import net.proteanit.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Tables extends JFrame{
 
 	private JFrame frame;
 	public static JTable table_1;
 	public Connection	myConn;
-	
+	public static String Id;
+	public static String name;
 	String table;
 	String query="select * from ";
 	/**
@@ -78,7 +81,31 @@ public class Tables extends JFrame{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 569, 340);
 		frame.getContentPane().add(scrollPane);
-		table_1 = new JTable();
+		table_1 = new JTable()
+		 {
+		    @Override
+		    public boolean isCellEditable(int row, int column) 
+		    {
+		        return false;                
+		    };
+		};
+		table_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent me) {
+				if(table.compareTo("contacts")==0)
+				{
+				int row = table_1.getSelectedRow();
+
+				if (me.getClickCount() == 2)
+				{
+					Id=table_1.getModel().getValueAt(row, 0).toString();
+					name=table_1.getModel().getValueAt(row,1).toString();
+					AddProject.id=Id;
+					AddProject.contact.setText(name);
+					}
+				}
+			}
+		});
 		scrollPane.setViewportView(table_1);
 		table_1.setBounds(0, 0, 589, 352);
 
@@ -90,6 +117,7 @@ public class Tables extends JFrame{
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 
 		}
 	}

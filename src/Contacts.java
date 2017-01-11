@@ -1,8 +1,10 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 
 import net.proteanit.sql.DbUtils;
 
@@ -12,11 +14,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 
-public class Customers extends JFrame{
+public class Contacts extends JFrame{
 
 	private JFrame frame;
 	private JTable table;
+	private JPanel contentPane;
+
 	public Connection	myConn;
 	/**
 	 * Launch the application.
@@ -25,7 +31,7 @@ public class Customers extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Customers frame = new Customers();
+					Contacts frame = new Contacts();
 					frame.setVisible(true);
 					//resizable  false
 					frame.setResizable(false);
@@ -39,7 +45,7 @@ public class Customers extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Customers() {
+	public Contacts() {
 		initialize();
 	}
 
@@ -47,10 +53,21 @@ public class Customers extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 		getContentPane().setLayout(null);
+		setVisible(true);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(59, 59, 859, 337);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+
 		
 		JButton btnNewButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05DC\u05E7\u05D5\u05D7");
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -67,16 +84,18 @@ public class Customers extends JFrame{
 		btnNewButton_2.setBounds(1020, 295, 243, 92);
 		getContentPane().add(btnNewButton_2);
 		
-		table = new JTable();
-		table.setBounds(59, 59, 859, 337);
-		getContentPane().add(table);
-		
-		try {
+		try 
+		{
 			myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery("select * from customers");
-			table.setModel(DbUtils.resultSetToTableModel(myRs));
-		} catch (Exception e) {
+			HelpFunctions.getTable("contacts", table, myConn);
+			
+			JLabel background_label = new JLabel("New label");
+			background_label.setBounds(0, 0, 1362, 705);
+			HelpFunctions.setBackground(background_label);
+			contentPane.add(background_label);
+		}
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 
 		}

@@ -264,6 +264,11 @@ public class ProjectProducts extends JFrame{
 			button_12.setBounds(192, 346, 152, 46);
 			contentPane.add(button_12);
 			
+			JLabel background_label = new JLabel("New label");
+			background_label.setBounds(0, 0, 1362, 705);
+			HelpFunctions.setBackground(background_label);
+			contentPane.add(background_label);
+			
 		
 	}
 }

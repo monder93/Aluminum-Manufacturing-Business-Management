@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 
@@ -10,17 +9,17 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import net.proteanit.sql.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
 public class ProjectsPage extends JFrame
 {
@@ -28,7 +27,7 @@ public class ProjectsPage extends JFrame
 	private JFrame frame;
 	public static JTable table;
 	private JPanel contentPane;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -149,6 +148,33 @@ public class ProjectsPage extends JFrame
 		getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("עדכון פרויקט");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row=table.getSelectedRow();
+				String id = table.getModel().getValueAt(row, 0).toString();
+				String contact = table.getModel().getValueAt(row, 1).toString();
+				String place = table.getModel().getValueAt(row, 2).toString();
+				String costumer = table.getModel().getValueAt(row, 3).toString();
+				String color = table.getModel().getValueAt(row, 4).toString();
+				String colorPrice = table.getModel().getValueAt(row, 5).toString();
+				String glass = table.getModel().getValueAt(row, 6).toString();
+				String glassPrice = table.getModel().getValueAt(row, 7).toString();
+				String query = "UPDATE `projects` SET`איש קשר`='"+contact+"',`אתר`='"+place+"',`שם מזמין`='"+costumer+"',`צבע`='"+color+"',`מחיר צבע`='"+colorPrice+"',`זיגוג`='"+glass+"',`מחיר זיגוג`='"+glassPrice+"' WHERE `מספר פרויקט`='"+id+"'";
+
+				Connection myConn = HelpFunctions.DbConnection();
+				Statement myStmt;
+				try {
+					myStmt = myConn.createStatement();
+					myStmt.executeUpdate(query);
+					HelpFunctions.getTable("projects", table, myConn);
+					JOptionPane.showMessageDialog(null, "updated!");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
 		btnNewButton_3.setBounds(1098, 133, 203, 46);
 		getContentPane().add(btnNewButton_3);
 		
@@ -168,5 +194,10 @@ public class ProjectsPage extends JFrame
 		
 			Connection myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("projects", table, myConn);
+			
+			JLabel background_label = new JLabel("New label");
+			background_label.setBounds(0, 0, 1362, 705);
+			HelpFunctions.setBackground(background_label);
+			contentPane.add(background_label);
 	}
 }

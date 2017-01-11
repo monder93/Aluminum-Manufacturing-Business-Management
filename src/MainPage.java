@@ -123,7 +123,7 @@ public class MainPage extends JFrame {
 		JMenuItem menuItem_1 = new JMenuItem("\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA");
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Tables customers = new Tables("customers");
+				Tables contacts = new Tables("contacts");
 			}
 		});
 		menu.add(menuItem_1);
@@ -286,8 +286,4 @@ public class MainPage extends JFrame {
 	//----------------------------------------------------------------------------------------
 
 
-	private void createEvents()
-	{
-
-	}
 }
