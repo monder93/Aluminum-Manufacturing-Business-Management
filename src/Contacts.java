@@ -1,3 +1,4 @@
+import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -66,6 +67,7 @@ public class Contacts extends JFrame{
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
 		
