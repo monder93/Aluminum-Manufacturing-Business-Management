@@ -85,7 +85,14 @@ public class Contacts extends JFrame{
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(64, 64, 859, 337);
 
-		table = new JTable();
+		table = new JTable()
+				{@Override
+			public boolean isCellEditable(int row, int column) 
+			    {
+			        return column==1 || column==2 || column==3 || column==4 || column==5  ;                
+			    };
+			
+				};
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
@@ -218,7 +225,7 @@ public class Contacts extends JFrame{
 					name=table.getModel().getValueAt(row,1).toString();
 					AddProject.id=Id;
 					AddProject.contact.setText(name);
-					frame.dispose();
+					dispose();
 
 				}
 			});

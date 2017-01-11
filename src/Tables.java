@@ -1,3 +1,4 @@
+import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -89,6 +90,7 @@ public class Tables extends JFrame{
 		        return false;                
 		    };
 		};
+		table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		table_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {

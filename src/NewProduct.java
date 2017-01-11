@@ -238,5 +238,10 @@ public class NewProduct extends JFrame{
 		JButton button_10 = new JButton("\u05D4\u05D2\u05D3\u05E8\u05D5\u05EA");
 		button_10.setBounds(35, 474, 196, 51);
 		contentPane.add(button_10);
+		
+		JLabel background_label = new JLabel("New label");
+		background_label.setBounds(0, 0, 1362, 705);
+		HelpFunctions.setBackground(background_label);
+		contentPane.add(background_label);
 	}
 }

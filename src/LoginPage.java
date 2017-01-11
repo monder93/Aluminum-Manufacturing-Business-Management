@@ -12,6 +12,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginPage extends JFrame {
 
@@ -43,7 +45,6 @@ public class LoginPage extends JFrame {
 		setResizable(false);
 		setTitle("Login Page");
 		initComponents();
-		createEvents();
 	}
 	
 	private void initComponents()
@@ -65,7 +66,6 @@ public class LoginPage extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				System.out.println(userText.getText());
 				if((userText.getText().compareTo("admin")==0)&&(passText.getText().compareTo("admin")==0))
 				{
 					new MainPage();
@@ -86,11 +86,25 @@ public class LoginPage extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		userText = new JTextField();
+		userText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					btnNewButton.doClick();
+			}
+		});
 		userText.setBounds(147, 149, 86, 20);
 		contentPane.add(userText);
 		userText.setColumns(10);
 		
 		passText = new JPasswordField();
+		passText.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					btnNewButton.doClick();
+			}
+		});
 		passText.setBounds(147, 182, 86, 20);
 		contentPane.add(passText);
 		passText.setColumns(10);
@@ -106,9 +120,4 @@ public class LoginPage extends JFrame {
 		contentPane.add(background_label);
 	}
 	
-	private void createEvents()
-	{
-		
-	}
-
 }

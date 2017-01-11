@@ -85,6 +85,7 @@ public class ProjectsPage extends JFrame
 		
 		//reversing JTable content to ---> right to left
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
 		scrollPane.setViewportView(table);
 		
 		 
@@ -109,7 +110,6 @@ public class ProjectsPage extends JFrame
 				int row = table.getSelectedRow();
 				if(row<0)
 					JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה");
-//				System.out.println(row);
 				else
 				{
 				String Id=(table.getModel().getValueAt(row, 0)).toString();
@@ -126,21 +126,39 @@ public class ProjectsPage extends JFrame
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				int row = table.getSelectedRow();
-				String PID=(table.getModel().getValueAt(row, 0)).toString();
-//				System.out.println(PID);
-				String ProId="מספר פרויקט";
-				String query = "DELETE FROM `projects` WHERE  `"+ProId+"`= '"+PID+"'";
-				Connection myConn = HelpFunctions.DbConnection();
+
+				
+				int response = 0;
 				try{
-				Statement myStmt = myConn.createStatement();
-				myStmt.executeUpdate(query);
-				HelpFunctions.getTable("projects", table, myConn);
-			      myConn.close();
-					System.out.println(query);
-				}
+					if(row<0)
+					{
+						JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else
+					{
+						 response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+							        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					}
+				    if (response == JOptionPane.NO_OPTION) 
+				    {
+				    	return;
+				    }
+				    else if (response == JOptionPane.YES_OPTION) 
+				    {
+				    	String PID=(table.getModel().getValueAt(row, 0)).toString();
+						String ProId="מספר פרויקט";
+						Connection myConn = HelpFunctions.DbConnection();
+						HelpFunctions.deleteDbRow("projects", ProId, PID, myConn);
+						HelpFunctions.getTable("projects", table, myConn);
+					    myConn.close();
+				    }
+				    
+				    }
+				
 				catch(Exception e)
 				{
-					
+					e.printStackTrace();
 				}
 				}
 		});
@@ -151,23 +169,28 @@ public class ProjectsPage extends JFrame
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row=table.getSelectedRow();
-				String id = table.getModel().getValueAt(row, 0).toString();
-				String contact = table.getModel().getValueAt(row, 1).toString();
-				String place = table.getModel().getValueAt(row, 2).toString();
-				String costumer = table.getModel().getValueAt(row, 3).toString();
-				String color = table.getModel().getValueAt(row, 4).toString();
-				String colorPrice = table.getModel().getValueAt(row, 5).toString();
-				String glass = table.getModel().getValueAt(row, 6).toString();
-				String glassPrice = table.getModel().getValueAt(row, 7).toString();
-				String query = "UPDATE `projects` SET`איש קשר`='"+contact+"',`אתר`='"+place+"',`שם מזמין`='"+costumer+"',`צבע`='"+color+"',`מחיר צבע`='"+colorPrice+"',`זיגוג`='"+glass+"',`מחיר זיגוג`='"+glassPrice+"' WHERE `מספר פרויקט`='"+id+"'";
-
-				Connection myConn = HelpFunctions.DbConnection();
-				Statement myStmt;
+				
 				try {
+					if(row<0)
+						JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+					else
+					{
+					String id = table.getModel().getValueAt(row, 0).toString();
+					String contact = table.getModel().getValueAt(row, 1).toString();
+					String place = table.getModel().getValueAt(row, 2).toString();
+					String costumer = table.getModel().getValueAt(row, 3).toString();
+					String color = table.getModel().getValueAt(row, 4).toString();
+					String colorPrice = table.getModel().getValueAt(row, 5).toString();
+					String glass = table.getModel().getValueAt(row, 6).toString();
+					String glassPrice = table.getModel().getValueAt(row, 7).toString();
+					String query = "UPDATE `projects` SET`איש קשר`='"+contact+"',`אתר`='"+place+"',`שם מזמין`='"+costumer+"',`צבע`='"+color+"',`מחיר צבע`='"+colorPrice+"',`זיגוג`='"+glass+"',`מחיר זיגוג`='"+glassPrice+"' WHERE `מספר פרויקט`='"+id+"'";
+					Connection myConn = HelpFunctions.DbConnection();
+					Statement myStmt;
 					myStmt = myConn.createStatement();
 					myStmt.executeUpdate(query);
 					HelpFunctions.getTable("projects", table, myConn);
 					JOptionPane.showMessageDialog(null, "updated!");
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -185,8 +208,7 @@ public class ProjectsPage extends JFrame
 		JButton btnNewButton_5 = new JButton("\u05D7\u05D6\u05E8\u05D4");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
-				
+				dispose();				
 			}
 		});
 		btnNewButton_5.setBounds(1098, 406, 203, 46);

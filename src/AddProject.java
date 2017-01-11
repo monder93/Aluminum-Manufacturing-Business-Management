@@ -77,14 +77,17 @@ public class AddProject {
 		frame.getContentPane().setLayout(null);
 		
 		JButton button = new JButton("צבע :");
+		button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button.setBounds(739, 357, 135, 29);
 		frame.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("זיגוג :");
+		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button_1.setBounds(739, 410, 135, 29);
 		frame.getContentPane().add(button_1);
 		
 		JButton shutter = new JButton("תריס :");
+		shutter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		shutter.setBounds(739, 461, 135, 29);
 		frame.getContentPane().add(shutter);
 
@@ -138,7 +141,7 @@ public class AddProject {
 		comboBox_4.addItem("תריס הזזה");
 		frame.getContentPane().add(comboBox_4);
 
-		JButton btnNewButton = new JButton("\u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8 \u05D7\u05D3\u05E9");
+		JButton btnNewButton = new JButton("איש קשר :");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -146,7 +149,7 @@ public class AddProject {
 			}
 		});
 		btnNewButton.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		btnNewButton.setBounds(339, 260, 184, 30);
+		btnNewButton.setBounds(739, 259, 135, 30);
 		frame.getContentPane().add(btnNewButton);
 
 		JCheckBox checkBox = new JCheckBox("");
@@ -231,17 +234,10 @@ public class AddProject {
 		textField_1.setBounds(545, 199, 184, 40);
 		frame.getContentPane().add(textField_1);
 		
-		JButton button_2 = new JButton("איש קשר :");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new Tables("contacts");
-				contact.setText(name);
-			}
-		});
-		button_2.setBounds(739, 257, 120, 29);
-		frame.getContentPane().add(button_2);
+		
 		
 		JButton button_3 = new JButton("צבע אביזרים :");
+		button_3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button_3.setBounds(739, 551, 135, 29);
 		frame.getContentPane().add(button_3);
 		

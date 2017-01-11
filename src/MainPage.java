@@ -25,7 +25,7 @@ import java.awt.Component;
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
-	private JLabel timeLabel;
+	private static JLabel timeLabel;
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +52,7 @@ public class MainPage extends JFrame {
 
 		initComponents();
 		HelpFunctions.clock(timeLabel);
+
 	}
 
 	private void initComponents()
@@ -179,7 +180,7 @@ public class MainPage extends JFrame {
 		JMenuItem menuItem = new JMenuItem("\u05D4\u05E6\u05D2 \u05E4\u05E8\u05D5\u05D9\u05E7\u05D8\u05D9\u05DD");
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectsPage projects=new ProjectsPage();
+				new ProjectsPage();
 			}
 		});
 		mnProjects.add(menuItem);
@@ -283,7 +284,6 @@ public class MainPage extends JFrame {
 	}
 	//----------------------------------------------------------------------------------------
 	
-	//----------------------------------------------------------------------------------------
 
 
 }
