@@ -314,7 +314,7 @@ public class Contacts extends JFrame{
 			contentPane.add(button_1);
 
 			JLabel background_label = new JLabel("New label");
-			background_label.setBounds(0, 9, 1362, 705);
+			background_label.setBounds(0, 0, 1362, 714);
 			HelpFunctions.setBackground(background_label);
 			contentPane.add(background_label);
 		}

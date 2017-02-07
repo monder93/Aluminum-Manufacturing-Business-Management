@@ -59,7 +59,7 @@ public class DebtsPage extends JFrame{
 	 */
 	private void initialize() {frame = new JFrame();
 	frame.setResizable(false);
-	frame.setBounds(100, 100, 841, 513);
+	frame.setBounds(250, 150, 841, 513);
 	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setExtendedState(JFrame.MAXIMIZED_BOTH);
 	frame.setVisible(true);

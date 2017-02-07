@@ -33,6 +33,7 @@ public class MainPage extends JFrame {
 					MainPage frame = new MainPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -68,16 +69,16 @@ public class MainPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("");
+		JButton btnNewButton = new JButton("מחשבון");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Calc("מחשבון");
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnNewButton.setBounds(756, 111,183, 114);
 		contentPane.add(btnNewButton);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
 		menuBar.setBounds(0, 0, 1376, 30);
@@ -107,6 +108,17 @@ public class MainPage extends JFrame {
 				menuBar.add(menu_6);
 				
 				JMenuItem mntmNewMenuItem_4 = new JMenuItem("הוראות שימוש");
+				mntmNewMenuItem_4.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						try {
+							PdfViewer pdfview =new PdfViewer();
+							pdfview.main();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 				mntmNewMenuItem_4.setHorizontalTextPosition(SwingConstants.RIGHT);
 				mntmNewMenuItem_4.setHorizontalAlignment(SwingConstants.RIGHT);
 				menu_6.add(mntmNewMenuItem_4);
@@ -391,6 +403,8 @@ public class MainPage extends JFrame {
 		timeLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		timeLabel.setBounds(10, 639, 336, 55);
 		contentPane.add(timeLabel);
+		
+
 
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 25, 1376, 693);
@@ -398,6 +412,5 @@ public class MainPage extends JFrame {
 		contentPane.add(background_label);	
 		
 		HelpFunctions.setIcon(btnNewButton, "calculator");
-
 	}
 }

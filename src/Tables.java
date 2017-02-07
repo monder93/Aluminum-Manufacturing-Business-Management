@@ -74,7 +74,7 @@ public class Tables extends JFrame{
 
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 595, 391);
+		frame.setBounds(400, 150, 595, 391);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);		

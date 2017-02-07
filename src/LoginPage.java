@@ -50,7 +50,7 @@ public class LoginPage extends JFrame {
 	private void initComponents()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(450, 100, 496, 456);
+		setBounds(450, 150, 496, 456);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
