@@ -112,12 +112,22 @@ public class Tables extends JFrame{
 		table_1.setBounds(0, 0, 589, 352);
 
 		try {
-//			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			myConn  = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery(query+table);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-		} catch (Exception e) {
+			
+			if(this.table.contentEquals("contacts"))
+				frame.setTitle("טבלת לקוחות");
+			if(this.table.contentEquals("suppliers"))
+				frame.setTitle("טבלת ספקים");
+			if(this.table.contentEquals("profiles"))
+				frame.setTitle("טבלת פרופילים");
+			
+				
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 			
 

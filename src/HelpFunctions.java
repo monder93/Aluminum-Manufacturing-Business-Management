@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -91,6 +92,13 @@ public class HelpFunctions
 	public static void setBackground(JLabel background_label)
 	{
 		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/banner1.jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------
+	
+	public static void setIcon(JButton background_button , String picName)
+	{
+		background_button.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+picName+".jpg")).getImage().getScaledInstance(background_button.getWidth(), background_button.getHeight(), Image.SCALE_DEFAULT)));
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------

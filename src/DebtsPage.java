@@ -69,7 +69,7 @@ public class DebtsPage extends JFrame{
 	scrollPane.setBounds(10, 144, 815, 340);
 	frame.getContentPane().add(scrollPane);
 	table_1 = new JTable();
-	table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+	//table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 	scrollPane.setViewportView(table_1);
 	table_1.setBounds(0, 0, 589, 352);
 

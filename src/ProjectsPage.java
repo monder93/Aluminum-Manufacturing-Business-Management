@@ -58,8 +58,10 @@ public class ProjectsPage extends JFrame
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 
+		setTitle("פרויקטים");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -113,7 +115,7 @@ public class ProjectsPage extends JFrame
 				else
 				{
 				String Id=(table.getModel().getValueAt(row, 0)).toString();
-				System.out.println(Id);
+//				System.out.println(Id);
 				new ProjectProducts(Id);
 				
 				}

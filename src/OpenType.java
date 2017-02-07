@@ -41,15 +41,14 @@ public class OpenType {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 250, 300);
+		frame.setBounds(550, 200, 250, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		JList list = new JList();
+		JList<String> list = new JList<String>();
 		list.setFont(new Font("Tahoma", Font.BOLD, 11));
 		list.setBounds(20, 11, 198, 239);
-		DefaultListModel<String> DLM = new DefaultListModel();
-//		DLM.addElement("1");
+		DefaultListModel<String> DLM = new DefaultListModel<String>();
 		DLM.addElement("\u05D3\u05DC\u05EA\u05D5\u05EA \u05E4\u05EA\u05D9\u05D7\u05D4\n");
 		DLM.addElement("\u05D3\u05DC\u05EA\u05D5\u05EA \u05D4\u05D6\u05D6\u05D4\n");
 		DLM.addElement("\u05D3\u05DC\u05EA\u05D5\u05EA \u05DB\u05D9\u05E1\n");

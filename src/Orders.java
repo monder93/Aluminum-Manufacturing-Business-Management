@@ -54,11 +54,8 @@ public class Orders extends JFrame {
 	}
 	public Orders(String table) {
 		this.table=table;
-//		try {
-//			myConn = DriverManager.getConnection(url,user,password);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
+
+
 		initialize();
 	}
 
@@ -116,6 +113,22 @@ public class Orders extends JFrame {
 			button_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 			button_3.setBounds(47, 42, 117, 41);
 			frame.getContentPane().add(button_3);
+			
+			if(table.contentEquals("glassOrders"))
+				frame.setTitle("הזמנת זכוכית");
+			if(table.contentEquals("perfectionsorders"))
+				frame.setTitle("הזמנת פירזול");
+			if(table.contentEquals("profilesOrders"))
+				frame.setTitle("הזמנת פרופילים");	
+			if(table.contentEquals("lintelsOrders"))
+				frame.setTitle("הזמנת משקופים עיוורים");	
+			if(table.contentEquals("shuttersOrders"))
+				frame.setTitle("הזמנת תריס גלילה");	
+			
+			
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 
