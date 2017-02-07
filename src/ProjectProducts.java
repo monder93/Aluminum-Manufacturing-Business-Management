@@ -181,7 +181,7 @@ public class ProjectProducts extends JFrame{
 			contentPane.add(radioButton_3);
 			
 			JLabel lblNewLabel_8 = new JLabel("");
-			lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\hosam\\workspace\\Final-Project\\Aluminum-Manufacturing-Business-Management\\src\\img\\background.jpg"));
+			lblNewLabel_8.setIcon(new ImageIcon(ProjectProducts.class.getResource("/img/background.jpg")));
 			lblNewLabel_8.setBounds(69, 24, 225, 265);
 			contentPane.add(lblNewLabel_8);
 			proNumBG.add(rdbtnNewRadioButton);

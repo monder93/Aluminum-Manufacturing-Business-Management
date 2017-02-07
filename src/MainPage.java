@@ -69,6 +69,11 @@ public class MainPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Calc("מחשבון");
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNewButton.setBounds(756, 111,183, 114);
 		contentPane.add(btnNewButton);
