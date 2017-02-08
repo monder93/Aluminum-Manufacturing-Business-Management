@@ -310,7 +310,7 @@ public class MainPage extends JFrame {
 		menuItem.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Orders("glassOrders");
+				new Orders("הזמנת זכוכית");
 			}
 		});
 		mnOrders.add(menuItem);
@@ -320,7 +320,7 @@ public class MainPage extends JFrame {
 		mntmNewMenuItem_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Orders("perfectionsorders");
+				new Orders("הזמנת פירזול");
 			}
 		});
 		mnOrders.add(mntmNewMenuItem_1);
@@ -330,7 +330,7 @@ public class MainPage extends JFrame {
 		menuItem_11.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Orders("profilesOrders");
+				new Orders("הזמנת פרופילים");
 			}
 		});
 		mnOrders.add(menuItem_11);
@@ -340,7 +340,7 @@ public class MainPage extends JFrame {
 		menuItem_12.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Orders("lintelsOrders");
+				new Orders("הזמנת משקופים עיוורים");
 			}
 		});
 		mnOrders.add(menuItem_12);
@@ -350,7 +350,7 @@ public class MainPage extends JFrame {
 		menuItem_13.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Orders("shuttersOrders");
+				new Orders("הזמנת תריס גלילה");
 			}
 		});
 		mnOrders.add(menuItem_13);

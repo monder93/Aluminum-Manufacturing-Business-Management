@@ -106,7 +106,7 @@ public class HelpFunctions
 	public static void deleteDbRow(String tableName ,String primaryId, String ID , Connection myConn)
 	{
 		try{
-			String query = "DELETE FROM `projects` WHERE  `"+primaryId+"`= '"+ID+"'";
+			String query = "DELETE FROM `"+tableName+"` WHERE  `"+primaryId+"`= '"+ID+"'";
 			Statement myStmt = myConn.createStatement();
 			myStmt.executeUpdate(query);
 			
