@@ -147,7 +147,7 @@ public class AddOrderItems {
 				
 				try {
 					Statement myStmt = myConn.createStatement();
-					ResultSet myRs = myStmt.executeQuery("SELECT  `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות` FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'  ");
+					ResultSet myRs = myStmt.executeQuery("SELECT  * FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'  ");
 					OrderItems.table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 				} catch (SQLException e1) {

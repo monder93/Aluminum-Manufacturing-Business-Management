@@ -23,7 +23,8 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class DebtsPage extends JFrame{
+public class DebtsPage extends JFrame
+{
 
 	private JFrame frame;
 	public static JTable table_1;
@@ -40,8 +41,10 @@ public class DebtsPage extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
 			public void run() {
 
 			}
@@ -51,10 +54,12 @@ public class DebtsPage extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public DebtsPage() {
+	public DebtsPage() 
+	{
 		initialize();
 	}
-	public DebtsPage(String table) {
+	public DebtsPage(String table)
+	{
 		this.table=table;
 		initialize();
 	}
@@ -83,12 +88,12 @@ public class DebtsPage extends JFrame{
 	};
 
 	table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-	//table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 	scrollPane.setViewportView(table_1);
 	table_1.setBounds(0, 0, 589, 352);
 
 
-	try {
+	try
+	{
 //		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		myConn = HelpFunctions.DbConnection();
 		Statement myStmt = myConn.createStatement();
@@ -115,6 +120,7 @@ public class DebtsPage extends JFrame{
 					myConn=HelpFunctions.DbConnection();
 					Statement st;
 					st = myConn.createStatement();
+					
 					//execute the query
 					st.executeUpdate(q);
 					//message for success
@@ -128,8 +134,9 @@ public class DebtsPage extends JFrame{
 					ResultSet myRs = myStmt.executeQuery(query+table);
 					table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 					
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+				} 
+				catch (SQLException e1) 
+				{
 					e1.printStackTrace();
 				}
 			

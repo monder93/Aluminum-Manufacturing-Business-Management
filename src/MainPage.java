@@ -34,7 +34,8 @@ public class MainPage extends JFrame {
 					frame.setVisible(true);
 					frame.setResizable(false);
 					
-				} catch (Exception e) {
+				} catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -111,7 +112,7 @@ public class MainPage extends JFrame {
 				mntmNewMenuItem_4.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						try {
-							PdfViewer pdfview =new PdfViewer();
+							PdfViewer pdfview =new PdfViewer("test");
 							pdfview.main();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -361,6 +362,11 @@ public class MainPage extends JFrame {
 		contentPane.add(button);
 
 		JButton button_1 = new JButton("קטלוגים");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Catalogue();
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		button_1.setBounds(756, 443, 183, 114);
 		contentPane.add(button_1);
