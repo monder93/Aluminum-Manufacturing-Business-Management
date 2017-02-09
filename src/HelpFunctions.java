@@ -96,6 +96,13 @@ public class HelpFunctions
 	
 	//----------------------------------------------------------------------------------------------------------------------
 	
+		public static void setBackground(JLabel background_label,String name)
+		{
+			background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+name+".jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
+		}
+	
+	//----------------------------------------------------------------------------------------------------------------------
+	
 	public static void setIcon(JButton background_button , String picName)
 	{
 		background_button.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+picName+".jpg")).getImage().getScaledInstance(background_button.getWidth(), background_button.getHeight(), Image.SCALE_DEFAULT)));
