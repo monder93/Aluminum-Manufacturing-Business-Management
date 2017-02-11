@@ -61,9 +61,10 @@ public class AddOrderItems {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 425, 500);
+		frame.setBounds(450, 150, 425, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("הוספת מוצרים להזמנה");
 		frame.setVisible(true);
 		
 		JLabel lblNewLabel = new JLabel("תיאור :");
@@ -159,5 +160,10 @@ public class AddOrderItems {
 		});
 		btnNewButton_1.setBounds(165, 393, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
+		
+		JLabel background_label = new JLabel("New label");
+		background_label.setBounds(0, 0, 409, 461);
+		frame.getContentPane().add(background_label);
+		HelpFunctions.setBackground(background_label);
 	}
 }

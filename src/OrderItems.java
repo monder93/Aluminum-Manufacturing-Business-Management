@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class OrderItems {
 
@@ -53,9 +54,10 @@ public class OrderItems {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 700, 500);
+		frame.setBounds(350, 150, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("מוצרי ההזמנה");
 		frame.setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(29, 174, 619, 276);
@@ -140,5 +142,10 @@ public class OrderItems {
 		button_2.setBounds(74, 58, 106, 48);
 		frame.getContentPane().add(button_2);
 		HelpFunctions.setIcon(button_2, "printer");
+		
+		JLabel background_label = new JLabel("New label");
+		background_label.setBounds(0, 0, 684, 461);
+		frame.getContentPane().add(background_label);
+		HelpFunctions.setBackground(background_label);
 	}
 }

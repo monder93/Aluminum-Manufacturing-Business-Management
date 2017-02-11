@@ -30,10 +30,11 @@ public class DebtsPagePaied extends JFrame {
 	public static String debtnumber;
 	private JLabel label;
 	private JTextField payTypeTextField;
-	private JTextField payAmmountTextField;
+	private JTextField payAmountTextField;
 	public static int debtAmount;
 	public static int paidAmount;
 	public static int toPayAmount;
+	private JLabel background_label;
 	
 	/**
 	 * Launch the application.
@@ -68,6 +69,7 @@ public class DebtsPagePaied extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setTitle("תשלומי לקוח");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 69, 491, 395);
@@ -91,7 +93,7 @@ public class DebtsPagePaied extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 				
-			if(!payTypeTextField.getText().contentEquals("") && (!payAmmountTextField.getText().contentEquals("")))
+			if(!payTypeTextField.getText().contentEquals("") && (!payAmountTextField.getText().contentEquals("")))
 				{
 				//getting current time
 				SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,7 +102,7 @@ public class DebtsPagePaied extends JFrame {
 				{
 					myConn = HelpFunctions.DbConnection();
 					Statement myStmt = myConn.createStatement();
-					String query = "INSERT INTO `customersdebtspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+payTypeTextField.getText()+"','"+payAmmountTextField.getText()+"')";			
+					String query = "INSERT INTO `customersdebtspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+payTypeTextField.getText()+"','"+payAmountTextField.getText()+"')";			
 					myStmt.executeUpdate(query);
 					
 					String query2="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
@@ -109,7 +111,7 @@ public class DebtsPagePaied extends JFrame {
 					System.out.println(query2);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					
-					paidAmount+=Integer.parseInt(payAmmountTextField.getText());
+					paidAmount+=Integer.parseInt(payAmountTextField.getText());
 					toPayAmount=debtAmount-paidAmount;
 					
 					//insert data to DebtsPage table
@@ -122,6 +124,11 @@ public class DebtsPagePaied extends JFrame {
 
 					System.out.println(query4);
 					DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
+					
+					payTypeTextField.setText("");
+					payAmountTextField.setText("");
+					
+					
 					
 					
 					
@@ -163,10 +170,15 @@ public class DebtsPagePaied extends JFrame {
 			contentPane.add(payTypeTextField);
 			payTypeTextField.setColumns(10);
 			
-			payAmmountTextField = new JTextField();
-			payAmmountTextField.setColumns(10);
-			payAmmountTextField.setBounds(566, 267, 86, 20);
-			contentPane.add(payAmmountTextField);
+			payAmountTextField = new JTextField();
+			payAmountTextField.setColumns(10);
+			payAmountTextField.setBounds(566, 267, 86, 20);
+			contentPane.add(payAmountTextField);
+			
+			background_label = new JLabel("New label");
+			background_label.setBounds(0, 0, 825, 475);
+			contentPane.add(background_label);
+			HelpFunctions.setBackground(background_label);
 		}
 		catch (Exception e)
 		{

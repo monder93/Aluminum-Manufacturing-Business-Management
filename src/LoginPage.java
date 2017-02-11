@@ -17,6 +17,10 @@ import java.awt.event.KeyEvent;
 
 public class LoginPage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField userText;
 	private JTextField passText;
@@ -86,9 +90,11 @@ public class LoginPage extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		userText = new JTextField();
-		userText.addKeyListener(new KeyAdapter() {
+		userText.addKeyListener(new KeyAdapter()
+		{
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e)
+			{
 				if(e.getKeyCode() == KeyEvent.VK_ENTER)
 					btnNewButton.doClick();
 			}

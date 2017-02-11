@@ -24,17 +24,13 @@ public class Tables extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-//				try {
-//					Tables window = new Tables();
-//					window.frame.setVisible(true);
-//					window.frame.setResizable(false);
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+
 			}
 		});
 	
@@ -43,35 +39,22 @@ public class Tables extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Tables() {
-		
-//		try {
-//			myConn = DriverManager.getConnection(url,user,password);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-
+	public Tables() 
+	{
 		initialize();
 	}
-	public Tables(String table){
+	
+	public Tables(String table)
+	{
 		this.table=table;
-//		try {
-//			myConn = DriverManager.getConnection(url,user,password);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
 		initialize();
-
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-
-
-		
-
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(400, 150, 595, 391);

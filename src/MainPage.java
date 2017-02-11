@@ -18,11 +18,19 @@ import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import java.awt.Rectangle;
+import javax.swing.JTextField;
 
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
 	private static JLabel timeLabel;
+	private JTable table;
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -77,8 +85,9 @@ public class MainPage extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		btnNewButton.setBounds(756, 111,183, 114);
+		btnNewButton.setBounds(787, 111,183, 114);
 		contentPane.add(btnNewButton);
+		
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
@@ -180,7 +189,7 @@ public class MainPage extends JFrame {
 		menuItem_23.setHorizontalAlignment(SwingConstants.RIGHT);
 		mnNewMenu.add(menuItem_23);
 
-		JMenu menu_5 = new JMenu("דוחי הזמנות");
+		JMenu menu_5 = new JMenu("דוחות הזמנות");
 		menu_5.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menu_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_5.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -357,8 +366,14 @@ public class MainPage extends JFrame {
 		mnOrders.add(menuItem_13);
 
 		JButton button = new JButton("גלריה");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				new gallery();
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button.setBounds(1062, 443,183, 114);
+		button.setBounds(1093, 443,183, 114);
 		contentPane.add(button);
 
 		JButton button_1 = new JButton("קטלוגים");
@@ -368,7 +383,7 @@ public class MainPage extends JFrame {
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_1.setBounds(756, 443, 183, 114);
+		button_1.setBounds(787, 443, 183, 114);
 		contentPane.add(button_1);
 
 		JButton button_3 = new JButton("פרויקטים");
@@ -381,7 +396,7 @@ public class MainPage extends JFrame {
 			}
 		});
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_3.setBounds(1062, 111, 183, 114);
+		button_3.setBounds(1093, 111, 183, 114);
 		contentPane.add(button_3);
 
 		JButton button_7 = new JButton("חובות לספקים");
@@ -391,24 +406,50 @@ public class MainPage extends JFrame {
 			}
 		});
 		button_7.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_7.setBounds(756, 278,183, 114);
+		button_7.setBounds(787, 278,183, 114);
 		contentPane.add(button_7);
 
-		JButton button_8 = new JButton("\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA \u05D7\u05D9\u05D9\u05D1\u05D9\u05DD");
+		JButton button_8 = new JButton("לקוחות חייבים");
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new DebtsPage("customersDebts");
 			}
 		});
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 13));
-		button_8.setBounds(1062, 278, 183, 114);
+		button_8.setBounds(1093, 278, 183, 114);
 		contentPane.add(button_8);
 
 		timeLabel = new JLabel("Time+Date");
+		timeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		timeLabel.setForeground(Color.BLACK);
 		timeLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		timeLabel.setBounds(10, 639, 336, 55);
+		timeLabel.setBounds(1000, 656, 336, 38);
 		contentPane.add(timeLabel);
+		
+		JButton button_2 = new JButton("הוספת תזכורת");
+		button_2.setBounds(567, 509, 111, 23);
+		contentPane.add(button_2);
+		
+		JButton button_1_1 = new JButton("מחיקת תזכורת");
+		button_1_1.setBounds(567, 534, 111, 23);
+		contentPane.add(button_1_1);
+		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.RIGHT);
+		textField.setBounds(25, 510, 524, 47);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(25, 111, 653, 387);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		//get reminders table
+		Connection myConn = HelpFunctions.DbConnection();
+		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		HelpFunctions.getTable("generalreminders", table, myConn);
 		
 
 

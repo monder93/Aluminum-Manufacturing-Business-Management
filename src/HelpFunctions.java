@@ -15,7 +15,7 @@ import javax.swing.JTable;
 
 import net.proteanit.sql.DbUtils;
 
-//class have functions that we need to usealot in different Frames in the project
+//class have functions that we need to use alot in different Frames in the project
 public class HelpFunctions 
 {
 
@@ -40,13 +40,14 @@ public class HelpFunctions
 						int minute = cal.get(Calendar.MINUTE);
 						int hour=cal.get(Calendar.HOUR);
 
-						timeLabel.setText("Time :  "+hour + ":"+minute+":"+second+"   Date :  "+day+"/"+month+"/"+year);
+						timeLabel.setText("שעה :  "+hour + ":"+minute+":"+second+"   תאריך :  "+day+"/"+month+"/"+year);
 						sleep(1000);
 
 					}	
-				} catch (Exception e) 
+				} 
+				catch (Exception e) 
 				{
-					// TODO: handle exception
+					e.printStackTrace();
 				}
 			}
 		};
@@ -57,71 +58,75 @@ public class HelpFunctions
 
 	public static Connection DbConnection()
 	{
-		 String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";
-		 String user = "root";
-		 String password = "";
-		 Connection myConn = null;
-		 
-		 try {
+		String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";
+		String user = "root";
+		String password = "";
+		Connection myConn = null;
+
+		try
+		{
 			myConn = DriverManager.getConnection(url,user,password);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
-		 
-		 return myConn;
+
+		return myConn;
 	}
-	
+
 	//---------------------------------------------------------------------------------------------------------------------
-	
+
 	public static void getTable(String tableName , JTable viewTable , Connection myConn)
 	{
-		try{
-		Statement myStmt = myConn.createStatement();
-		ResultSet myRs = myStmt.executeQuery("select * from "+tableName+"");
-		viewTable.setModel(DbUtils.resultSetToTableModel(myRs));
-	}
+		try
+		{
+			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = myStmt.executeQuery("select * from "+tableName+"");
+			viewTable.setModel(DbUtils.resultSetToTableModel(myRs));
+		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 	//----------------------------------------------------------------------------------------------------------------------
-	
+
 	public static void setBackground(JLabel background_label)
 	{
 		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/banner1.jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
 	}
-	
+
 	//----------------------------------------------------------------------------------------------------------------------
-	
-		public static void setBackground(JLabel background_label,String name)
-		{
-			background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+name+".jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
-		}
-	
+
+	public static void setBackground(JLabel background_label,String name)
+	{
+		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+name+".jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
+	}
+
 	//----------------------------------------------------------------------------------------------------------------------
-	
+
 	public static void setIcon(JButton background_button , String picName)
 	{
 		background_button.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+picName+".jpg")).getImage().getScaledInstance(background_button.getWidth(), background_button.getHeight(), Image.SCALE_DEFAULT)));
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------------------
-	
+
 	public static void deleteDbRow(String tableName ,String primaryId, String ID , Connection myConn)
 	{
-		try{
+		try
+		{
 			String query = "DELETE FROM `"+tableName+"` WHERE  `"+primaryId+"`= '"+ID+"'";
 			Statement myStmt = myConn.createStatement();
 			myStmt.executeUpdate(query);
-			
-	}
+
+		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 }

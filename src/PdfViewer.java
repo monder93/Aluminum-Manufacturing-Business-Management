@@ -4,30 +4,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.adobe.acrobat.Viewer;
 
-public class PdfViewer extends JPanel{
+public class PdfViewer extends JPanel
+{
 	private Viewer viewer;
 	String name="";
-	public PdfViewer(String name) throws Exception{
+	public PdfViewer(String name) throws Exception
+	{
 		this.name=name;
 		this.setLayout(new BorderLayout());
 		viewer = new Viewer();
-		//String temp = PdfViewer.class.getResource("files/"+name+".pdf").getPath();
-		//System.out.println(new String(temp.getBytes("ISO-8859-1"), "UTF-8"));
-
 		FileInputStream fis = new FileInputStream(PdfViewer.class.getResource("files/"+name+".pdf").getPath());
 		viewer.setDocumentInputStream(fis);
 		this.add(viewer, BorderLayout.CENTER);
 		viewer . zoomTo ( 2 );
 		viewer.activate();
 	}
-	
-//	public PdfViewer(String name){
-//		
-//	}
-	
-	
-
-	public void main() throws Exception {
+	public void main() throws Exception 
+	{
 
 		PdfViewer lecteur = new PdfViewer(name);
 		JFrame f = new JFrame("Lecteur PDF");

@@ -73,7 +73,8 @@ public class DebtsPage extends JFrame
 	frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setExtendedState(JFrame.MAXIMIZED_BOTH);
 	frame.setVisible(true);
-	frame.getContentPane().setLayout(null);		
+	frame.getContentPane().setLayout(null);	
+	frame.setTitle("לקוחות חייבים");
 	
 	JScrollPane scrollPane = new JScrollPane();
 	scrollPane.setBounds(10, 104, 534, 369);
@@ -94,7 +95,6 @@ public class DebtsPage extends JFrame
 
 	try
 	{
-//		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		myConn = HelpFunctions.DbConnection();
 		Statement myStmt = myConn.createStatement();
 		ResultSet myRs = myStmt.executeQuery(query+table);
@@ -194,6 +194,11 @@ public class DebtsPage extends JFrame
 		label = new JLabel("חוב");
 		label.setBounds(732, 283, 93, 14);
 		frame.getContentPane().add(label);
+		
+		JLabel background_label = new JLabel("New label");
+		background_label.setBounds(0, 0, 835, 484);
+		frame.getContentPane().add(background_label);
+		HelpFunctions.setBackground(background_label);
 	} catch (Exception e) {
 		e.printStackTrace();
 

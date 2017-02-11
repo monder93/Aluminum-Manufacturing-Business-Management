@@ -64,11 +64,12 @@ public class Catalogue extends JFrame {
 	private void initComponents()
 	{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 349, 350);
+		setBounds(550, 200, 349, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setTitle("קטלוגים");
 		setVisible(true);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -159,6 +160,24 @@ public class Catalogue extends JFrame {
 		radioButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		radioButton.setBounds(181, 36, 74, 23);
 		contentPane.add(radioButton);
+		radioButton.setSelected(true);
+		
+		//fetch data for radioButton selected default
+		companyName=radioButton.getText();
+		String query="SELECT `שם` FROM `catalogue` WHERE `חברה`='"+companyName+"' ";
+		pdfFileName="kalil/";
+		try 
+		{
+			Connection myConn = HelpFunctions.DbConnection();
+			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = myStmt.executeQuery(query);
+			table.setModel(DbUtils.resultSetToTableModel(myRs));
+			
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
 		
 		JRadioButton radioButton_1 = new JRadioButton("אקסטל");
 		radioButton_1.addActionListener(new ActionListener() 
@@ -189,12 +208,13 @@ public class Catalogue extends JFrame {
 		contentPane.add(radioButton_1);
 		
 		JLabel background_label = new JLabel("New label");
-		background_label.setBounds(0, 0, 337, 311);
+		background_label.setBounds(0, 0, 343, 322);
 		contentPane.add(background_label);
 		companyBG.add(radioButton);
 		companyBG.add(radioButton_1);
 		//setting background
 		HelpFunctions.setBackground(background_label);
-
+		
+		
 	}
 }

@@ -78,13 +78,13 @@ public class Contacts extends JFrame{
 		scrollPane.setBounds(64, 64, 859, 337);
 
 		table = new JTable()
-				{@Override
+		{@Override
 			public boolean isCellEditable(int row, int column) 
-			    {
-			        return column==1 || column==2 || column==3 || column==4 || column==5  ;                
-			    };
-			
-				};
+		{
+			return column==1 || column==2 || column==3 || column==4 || column==5  ;                
+		};
+
+		};
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
@@ -173,16 +173,16 @@ public class Contacts extends JFrame{
 						String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
 						Connection myConn = HelpFunctions.DbConnection();
 						Statement myStmt;
-					myStmt = myConn.createStatement();
-					myStmt.executeUpdate(q);
-					HelpFunctions.getTable("contacts", table, myConn);
-					JOptionPane.showMessageDialog(null, "updated!");
+						myStmt = myConn.createStatement();
+						myStmt.executeUpdate(q);
+						HelpFunctions.getTable("contacts", table, myConn);
+						JOptionPane.showMessageDialog(null, "updated!");
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		btnNewButton_1.setBounds(1025, 241, 243, 63);
@@ -203,24 +203,24 @@ public class Contacts extends JFrame{
 					}
 					else
 					{
-						 response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
-							        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
-				    if (response == JOptionPane.NO_OPTION) 
-				    {
-				    	return;
-				    }
-				    else if (response == JOptionPane.YES_OPTION) 
-				    {
-				    	String PID=(table.getModel().getValueAt(row, 0)).toString();
+					if (response == JOptionPane.NO_OPTION) 
+					{
+						return;
+					}
+					else if (response == JOptionPane.YES_OPTION) 
+					{
+						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר זהות";
 						String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
 						Connection myConn = HelpFunctions.DbConnection();
-					Statement myStmt = myConn.createStatement();
-					myStmt.executeUpdate(query);
-					HelpFunctions.getTable("contacts", table, myConn);
-				      myConn.close();
-				    }	
+						Statement myStmt = myConn.createStatement();
+						myStmt.executeUpdate(query);
+						HelpFunctions.getTable("contacts", table, myConn);
+						myConn.close();
+					}	
 				}
 				catch(Exception e2)
 				{
@@ -241,7 +241,7 @@ public class Contacts extends JFrame{
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					
+
 					int row = table.getSelectedRow();
 					try{
 						if(row<0)
@@ -257,13 +257,13 @@ public class Contacts extends JFrame{
 							AddProject.contact.setText(name);
 							dispose();
 						}
-					    }
-					
+					}
+
 					catch(Exception e)
 					{
 						e.printStackTrace();
 					}
-					}
+				}
 
 			});
 			button.setFont(new Font("Segoe UI", Font.PLAIN, 11));

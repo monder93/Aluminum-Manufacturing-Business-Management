@@ -29,7 +29,6 @@ public class Suppliers extends JFrame {
 				try {
 					Suppliers frame = new Suppliers();
 					frame.setVisible(true);
-					//resizable  false
 					frame.setResizable(false);
 
 				} catch (Exception e) {
