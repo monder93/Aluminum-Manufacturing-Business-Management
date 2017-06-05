@@ -1,9 +1,11 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 
 import net.proteanit.sql.DbUtils;
 
@@ -87,6 +89,9 @@ public class Catalogue extends JFrame {
 		};
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
+		JTableHeader Theader = table.getTableHeader();
+	    Theader.setBackground(Color.green);
+	    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JRadioButton radioButton = new JRadioButton("קליל");
 		radioButton.addActionListener(new ActionListener()

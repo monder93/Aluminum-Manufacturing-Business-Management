@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -141,7 +143,7 @@ public class Contacts extends JFrame{
 		contentPane.add(label2);
 		contentPane.add(label3);
 
-		JButton btnNewButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05DC\u05E7\u05D5\u05D7");
+		JButton btnNewButton = new JButton("הוספת איש קשר");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				hideOrShow(true);
@@ -304,6 +306,17 @@ public class Contacts extends JFrame{
 			button_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 			button_1.setBounds(516, 501, 165, 42);
 			contentPane.add(button_1);
+			
+			// changing JTable Cell Value Alignment
+			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+
 
 			JLabel background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 1362, 714);

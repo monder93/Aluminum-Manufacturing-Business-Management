@@ -24,12 +24,9 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-
-import com.itextpdf.text.log.SysoCounter;
-
 import javax.swing.JLabel;
 
-public class DebtsPage extends JFrame
+public class DebtsForSuppliersPage extends JFrame
 {
 
 	private JFrame frame;
@@ -40,10 +37,11 @@ public class DebtsPage extends JFrame
 	String query="select * from ";
 	private JButton addDebtButton;
 	private JButton button_1;
-	private JTextField customerNameTextField;
+	private JTextField supplierNameTextField;
 	private JTextField debtsTextField;
 	private JLabel lblNewLabel;
 	private JLabel label;
+	private JLabel logoLabel;
 	private JLabel logoLabel2;
 	/**
 	 * Launch the application.
@@ -61,11 +59,11 @@ public class DebtsPage extends JFrame
 	/**
 	 * Create the application.
 	 */
-	public DebtsPage() 
+	public DebtsForSuppliersPage() 
 	{
 		initialize();
 	}
-	public DebtsPage(String table)
+	public DebtsForSuppliersPage(String table)
 	{
 		this.table=table;
 		initialize();
@@ -83,13 +81,13 @@ public class DebtsPage extends JFrame
 	frame.getContentPane().setLayout(null);	
 	frame.setTitle("לקוחות חייבים");
 	
+	logoLabel = new JLabel("New label");
+	logoLabel.setBounds(566, 283, 259, 190);
+	frame.getContentPane().add(logoLabel);
+	
 	logoLabel2 = new JLabel("New label");
 	logoLabel2.setBounds(10, 11, 815, 82);
 	frame.getContentPane().add(logoLabel2);
-	
-	JLabel logoLabel = new JLabel("New label");
-	logoLabel.setBounds(566, 283, 259, 190);
-	frame.getContentPane().add(logoLabel);
 	
 	JScrollPane scrollPane = new JScrollPane();
 	scrollPane.setBounds(10, 104, 534, 323);
@@ -125,14 +123,14 @@ public class DebtsPage extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				if(!customerNameTextField.getText().contentEquals("") && (!debtsTextField.getText().contentEquals("")))
+				if(!supplierNameTextField.getText().contentEquals("") && (!debtsTextField.getText().contentEquals("")))
 				try {
 					//getting current time
 					SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
 					String current_time_str = time_formatter.format(System.currentTimeMillis());
 					
 					//query to insert data
-					String q = "INSERT INTO `customersdebts`( `שם לקוח`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+customerNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','0')";	
+					String q = "INSERT INTO `debtsforsuppliers`( `שם ספק`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+supplierNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";	
 					
 					//connection to database
 					myConn=HelpFunctions.DbConnection();
@@ -145,13 +143,12 @@ public class DebtsPage extends JFrame
 					JOptionPane.showMessageDialog(null, "saved");System.out.println(q);
 					
 					//reset TextFields
-					customerNameTextField.setText("");
+					supplierNameTextField.setText("");
 					debtsTextField.setText("");
 					
 					// update the table with the new data
 					ResultSet myRs = myStmt.executeQuery(query+table);
 					table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-					
 					// changing JTable Cell Value Alignment
 					DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
 					centerRenderr.setHorizontalAlignment(JLabel.CENTER);
@@ -161,7 +158,7 @@ public class DebtsPage extends JFrame
 					table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
 					table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
 					table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
-					
+
 				} 
 				catch (SQLException e1) 
 				{
@@ -181,12 +178,12 @@ public class DebtsPage extends JFrame
 		        int row = table.rowAtPoint(p);
 		        if (me.getClickCount() == 2) 
 		        {
-					DebtsPagePaied.debtnumber=(table.getModel().getValueAt(row, 0)).toString();
-					DebtsPagePaied.debtAmount=Integer.parseInt((table.getModel().getValueAt(row, 3)).toString());
-					DebtsPagePaied.paidAmount=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
-					DebtsPagePaied.toPayAmount=Integer.parseInt((table.getModel().getValueAt(row, 5)).toString());
+					DebtsForSupplierPagePaied.debtnumber=(table.getModel().getValueAt(row, 0)).toString();
+					DebtsForSupplierPagePaied.debtAmount=Integer.parseInt((table.getModel().getValueAt(row, 3)).toString());
+					DebtsForSupplierPagePaied.paidAmount=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
+					DebtsForSupplierPagePaied.toPayAmount=Integer.parseInt((table.getModel().getValueAt(row, 5)).toString());
 
-		        	new DebtsPagePaied();
+		        	new DebtsForSupplierPagePaied();
 		        }
 		    }
 		});		
@@ -201,7 +198,6 @@ public class DebtsPage extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
 				int row = table_1.getSelectedRow();
 
 
@@ -227,9 +223,9 @@ public class DebtsPage extends JFrame
 						String OID=(table_1.getModel().getValueAt(row, 0)).toString();
 						String OrderId="מספר חוב";
 						Connection myConn = HelpFunctions.DbConnection();
-						HelpFunctions.deleteDbRow("customersdebtspaied", OrderId, OID, myConn);
-						HelpFunctions.deleteDbRow("customersdebts", OrderId, OID, myConn);
-						HelpFunctions.getTable("customersdebts", table_1, myConn);
+						HelpFunctions.deleteDbRow("debtsforsupplierspaied", OrderId, OID, myConn);
+						HelpFunctions.deleteDbRow("debtsforsuppliers", OrderId, OID, myConn);
+						HelpFunctions.getTable("debtsforsuppliers", table_1, myConn);
 						
 						// changing JTable Cell Value Alignment
 						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
@@ -249,16 +245,15 @@ public class DebtsPage extends JFrame
 				{
 					e1.printStackTrace();
 				}
-				
 			}
 		});
 		button_1.setBounds(566, 104, 117, 41);
 		frame.getContentPane().add(button_1);
 		
-		customerNameTextField = new JTextField();
-		customerNameTextField.setColumns(10);
-		customerNameTextField.setBounds(580, 181, 103, 20);
-		frame.getContentPane().add(customerNameTextField);
+		supplierNameTextField = new JTextField();
+		supplierNameTextField.setColumns(10);
+		supplierNameTextField.setBounds(580, 181, 103, 20);
+		frame.getContentPane().add(supplierNameTextField);
 		
 		
 		debtsTextField = new JTextField();
@@ -266,7 +261,7 @@ public class DebtsPage extends JFrame
 		debtsTextField.setBounds(580, 239, 103, 20);
 		frame.getContentPane().add(debtsTextField);
 		
-		lblNewLabel = new JLabel("שם לקוח");
+		lblNewLabel = new JLabel("שם ספק");
 		lblNewLabel.setBounds(732, 184, 93, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -290,6 +285,8 @@ public class DebtsPage extends JFrame
 		HelpFunctions.setBackground(background_label);
 		HelpFunctions.setBackground(logoLabel, "finance");
 		HelpFunctions.setBackground(logoLabel2, "finance2");
+		
+
 	} catch (Exception e) {
 		e.printStackTrace();
 

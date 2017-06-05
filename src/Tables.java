@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import net.proteanit.sql.*;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -100,8 +102,21 @@ public class Tables extends JFrame{
 			ResultSet myRs = myStmt.executeQuery(query+table);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 			
+			// changing JTable Cell Value Alignment
+			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+			table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+						
+			
 			if(this.table.contentEquals("contacts"))
+			{
 				frame.setTitle("טבלת לקוחות");
+				table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+			}
 			if(this.table.contentEquals("suppliers"))
 				frame.setTitle("טבלת ספקים");
 			if(this.table.contentEquals("profiles"))

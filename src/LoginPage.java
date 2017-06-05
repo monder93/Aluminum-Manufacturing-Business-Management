@@ -24,6 +24,8 @@ public class LoginPage extends JFrame {
 	private JPanel contentPane;
 	private JTextField userText;
 	private JTextField passText;
+	public static String adminUserName="admin";
+	public static String adminPassword="admin";
 	static LoginPage frame;
 	/**
 	 * Launch the application.
@@ -50,7 +52,7 @@ public class LoginPage extends JFrame {
 		setTitle("Login Page");
 		initComponents();
 	}
-	
+
 	private void initComponents()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,36 +61,36 @@ public class LoginPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblUsername = new JLabel("\u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9");
 		lblUsername.setForeground(Color.BLACK);
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblUsername.setBounds(254, 142, 96, 30);
 		contentPane.add(lblUsername);
-		
+
 		JButton btnNewButton = new JButton("\u05DB\u05E0\u05D9\u05E1\u05D4");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				if((userText.getText().compareTo("admin")==0)&&(passText.getText().compareTo("admin")==0))
+				if((userText.getText().compareTo(adminUserName)==0)&&(passText.getText().compareTo(adminPassword)==0))
 				{
 					new MainPage();
 					frame.dispose();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "שם משתמש או סיסמה שגויים .. נא לנסות מחדש");
-			
-				}
+
+			}
 		});
 		btnNewButton.setBounds(147, 227, 187, 23);
 		contentPane.add(btnNewButton);
-		
+
 		JLabel lblNewLabel = new JLabel("\u05E1\u05D9\u05E1\u05DE\u05D4");
 		lblNewLabel.setForeground(Color.BLACK);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setBounds(254, 183, 80, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		userText = new JTextField();
 		userText.addKeyListener(new KeyAdapter()
 		{
@@ -102,7 +104,7 @@ public class LoginPage extends JFrame {
 		userText.setBounds(147, 149, 86, 20);
 		contentPane.add(userText);
 		userText.setColumns(10);
-		
+
 		passText = new JPasswordField();
 		passText.addKeyListener(new KeyAdapter() {
 			@Override
@@ -114,7 +116,7 @@ public class LoginPage extends JFrame {
 		passText.setBounds(147, 182, 86, 20);
 		contentPane.add(passText);
 		passText.setColumns(10);
-		
+
 		JLabel lblPleaseEnterYour = new JLabel("\u05DC\u05DB\u05E0\u05D9\u05E1\u05D4 \u05DC\u05DE\u05E2\u05E8\u05DB\u05EA , \u05E0\u05D0 \u05DC\u05D4\u05DB\u05E0\u05D9\u05E1 \u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9 \u05D5\u05E1\u05D9\u05E1\u05DE\u05D4");
 		lblPleaseEnterYour.setForeground(Color.BLACK);
 		lblPleaseEnterYour.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
@@ -125,5 +127,5 @@ public class LoginPage extends JFrame {
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
 	}
-	
+
 }

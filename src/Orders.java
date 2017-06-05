@@ -23,6 +23,7 @@ import java.awt.Point;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JTextField;
 import java.awt.ComponentOrientation;
 
@@ -267,6 +268,14 @@ public class Orders extends JFrame {
 			btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 			btnNewButton_1.setBounds(63, 109, 89, 23);
 			frame.getContentPane().add(btnNewButton_1);
+			
+			// changing JTable Cell Value Alignment
+			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+			table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
+			table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
 
 			background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 835, 484);

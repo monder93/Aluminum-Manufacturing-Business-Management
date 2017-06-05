@@ -1,5 +1,7 @@
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -92,10 +94,11 @@ public class ProjectsPage extends JFrame
 		
 		 
 		
-        JTableHeader Theader = table.getTableHeader();
-        //Theader.setBackground(Color.red);
-        ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
-        .setHorizontalAlignment(JLabel.CENTER);
+		JTableHeader Theader = table.getTableHeader();
+	    Theader.setBackground(Color.green);
+	    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+	    
+        ((DefaultTableCellRenderer)Theader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
 		
 		JButton btnNewButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -217,6 +220,9 @@ public class ProjectsPage extends JFrame
 		btnNewButton_5.setBounds(1098, 406, 203, 46);
 		getContentPane().add(btnNewButton_5);
 		
+
+
+		
 			Connection myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("projects", table, myConn);
 			
@@ -224,5 +230,17 @@ public class ProjectsPage extends JFrame
 			background_label.setBounds(0, 0, 1362, 705);
 			HelpFunctions.setBackground(background_label);
 			contentPane.add(background_label);
+			
+			// changing JTable Cell Value Alignment
+			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(6).setCellRenderer(centerRenderr);
+			table.getColumnModel().getColumn(7).setCellRenderer(centerRenderr);
 	}
 }

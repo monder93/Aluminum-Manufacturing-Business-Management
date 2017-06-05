@@ -8,16 +8,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class BigPic {
-
+public class BigPic 
+{
 	private JFrame frame;
-	String picUrl="";
+	//String picUrl="";
+	ImageIcon ImageIcon;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
 //				try {
 //					BigPic window = new BigPic();
 //					window.frame.setVisible(true);
@@ -31,8 +35,10 @@ public class BigPic {
 	/**
 	 * Create the application.
 	 */
-	public BigPic(String picUrl) {
-		this.picUrl=picUrl;
+	public BigPic(ImageIcon ImageIcon) 
+	{
+		//this.picUrl=picUrl;
+		this.ImageIcon=ImageIcon;
 		initialize();
 	}
 
@@ -47,7 +53,8 @@ public class BigPic {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(0, 0, 672, 673);
-		lblNewLabel.setIcon(new ImageIcon(new ImageIcon(gallery.class.getResource(picUrl)).getImage().getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_DEFAULT)));
+		//lblNewLabel.setIcon(new ImageIcon(new ImageIcon(gallery.class.getResource(picUrl)).getImage().getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_DEFAULT)));
+		HelpFunctions.setImageAsIcon(lblNewLabel, ImageIcon);
 		frame.getContentPane().add(lblNewLabel);
 		frame.setVisible(true);
 	}

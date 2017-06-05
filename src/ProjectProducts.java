@@ -10,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 
 import net.proteanit.sql.DbUtils;
 import javax.swing.JLabel;
@@ -26,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 
 
@@ -124,6 +127,9 @@ public class ProjectProducts extends JFrame
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
+			JTableHeader Theader = table.getTableHeader();
+		    Theader.setBackground(Color.green);
+		    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -355,6 +361,21 @@ public class ProjectProducts extends JFrame
 		background_label.setBounds(0, 0, 1362, 705);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
+		
+		// changing JTable Cell Value Alignment
+		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(7).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(8).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(9).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(10).setCellRenderer(centerRenderr);
 
 		HelpFunctions.setBackground(lblNewLabel_8, "nopic");
 		radioButton.setSelected(true);

@@ -2,6 +2,28 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.List;
+import com.itextpdf.text.ListItem;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Section;
+import com.itextpdf.text.log.SysoCounter;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JMenuBar;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -10,6 +32,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -18,19 +42,26 @@ import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Rectangle;
 import javax.swing.JTextField;
 
-public class MainPage extends JFrame {
+public class MainPage extends JFrame 
+{
 
 	private JPanel contentPane;
 	private static JLabel timeLabel;
 	private JTable table;
 	private JTextField textField;
+	private final com.itextpdf.text.Font Tahoma = FontFactory.getFont("c:/windows/fonts/tahoma.ttf",BaseFont.IDENTITY_H,16);
+	private final com.itextpdf.text.Font Arial = FontFactory.getFont("c:/windows/fonts/arial.ttf",BaseFont.IDENTITY_H,16);
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +72,7 @@ public class MainPage extends JFrame {
 					MainPage frame = new MainPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
-					
+
 				} catch (Exception e)
 				{
 					e.printStackTrace();
@@ -77,13 +108,20 @@ public class MainPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("מחשבון");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Calc("מחשבון");
 			}
 		});
+		
+		JLabel logoLabel = new JLabel("New label");
+		logoLabel.setBounds(25, 582, 653, 101);
+		contentPane.add(logoLabel);
+		
+		HelpFunctions.setBackground(logoLabel, "MainPageLogo");
+		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnNewButton.setBounds(787, 111,183, 114);
 		contentPane.add(btnNewButton);
@@ -112,31 +150,31 @@ public class MainPage extends JFrame {
 		JMenu menu_2 = new JMenu("הגדרות");
 		menu_2.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu_2);
-		
-				JMenu menu_6 = new JMenu("עזרה");
-				menu_6.setFont(new Font("Segoe UI", Font.BOLD, 14));
-				menuBar.add(menu_6);
-				
-				JMenuItem mntmNewMenuItem_4 = new JMenuItem("הוראות שימוש");
-				mntmNewMenuItem_4.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						try {
-							PdfViewer pdfview =new PdfViewer("test");
-							pdfview.main();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-				mntmNewMenuItem_4.setHorizontalTextPosition(SwingConstants.RIGHT);
-				mntmNewMenuItem_4.setHorizontalAlignment(SwingConstants.RIGHT);
-				menu_6.add(mntmNewMenuItem_4);
-				
-				JMenuItem mntmNewMenuItem_5 = new JMenuItem("חישוב שיפועים ,זווית וקשתות");
-				mntmNewMenuItem_5.setHorizontalAlignment(SwingConstants.RIGHT);
-				mntmNewMenuItem_5.setHorizontalTextPosition(SwingConstants.RIGHT);
-				menu_6.add(mntmNewMenuItem_5);
+
+		JMenu menu_6 = new JMenu("עזרה");
+		menu_6.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		menuBar.add(menu_6);
+
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("הוראות שימוש");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					PdfViewer pdfview =new PdfViewer("test");
+					pdfview.main();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mntmNewMenuItem_4.setHorizontalTextPosition(SwingConstants.RIGHT);
+		mntmNewMenuItem_4.setHorizontalAlignment(SwingConstants.RIGHT);
+		menu_6.add(mntmNewMenuItem_4);
+
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("חישוב שיפועים ,זווית וקשתות");
+		mntmNewMenuItem_5.setHorizontalAlignment(SwingConstants.RIGHT);
+		mntmNewMenuItem_5.setHorizontalTextPosition(SwingConstants.RIGHT);
+		menu_6.add(mntmNewMenuItem_5);
 
 		JMenu menu_3 = new JMenu("שרטוטים");
 		menu_3.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -232,6 +270,129 @@ public class MainPage extends JFrame {
 		menu_1.add(menuItem_8);
 
 		JMenuItem menuItem_9 = new JMenuItem("דוח לקוחות חייבים");
+		menuItem_9.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				try
+				{
+					// Listing 1. Instantiation of document object
+					Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+
+					// Listing 2. Creation of PdfWriter object
+					PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream("C:/temp/ITextTest.pdf"));
+		
+					writer.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+					//opening the document to write into it
+					document.open();
+					
+					PdfPTable table = new PdfPTable(6);
+					table.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
+					
+					//first cell
+					PdfPCell cell = new PdfPCell();
+					Paragraph p1 = new Paragraph("מספר חוב",Arial);
+					cell.addElement(p1);
+					table.addCell(cell);					
+					cell=new PdfPCell();
+					
+					//second cell
+					Paragraph p2 = new Paragraph("שם לקוח",Arial);
+					cell.addElement(p2);
+					table.addCell(cell);
+					cell=new PdfPCell();
+
+					
+					//third cell
+					Paragraph p3 = new Paragraph("תאריך",Arial);
+					cell.addElement(p3);
+					table.addCell(cell);
+					cell=new PdfPCell();
+
+					//4th cell
+					Paragraph p4 = new Paragraph("חוב",Arial);
+					cell.addElement(p4);
+					table.addCell(cell);
+					cell=new PdfPCell();
+
+					//5th cell
+					Paragraph p5 = new Paragraph("שולם",Arial);
+					cell.addElement(p5);
+					table.addCell(cell);
+					cell=new PdfPCell();
+					
+					//6th cell
+					Paragraph p6 = new Paragraph("לתשלום",Arial);
+					cell.addElement(p6);
+					table.addCell(cell);
+					cell=new PdfPCell();
+				
+					
+					
+					//getting the data from customersdebts table in database
+					Connection myConn = HelpFunctions.DbConnection();
+					String pdf_query = "SELECT * FROM `customersdebts`";
+					Statement st = myConn.createStatement();
+					ResultSet rs = st.executeQuery(pdf_query);
+					while(rs.next())
+					{
+						String cell1 = rs.getString(1);
+						String cell2 = rs.getString(2);
+						String cell3 = rs.getString(3);
+						String cell4 = rs.getString(4);
+						String cell5 = rs.getString(5);
+						String cell6 = rs.getString(6);
+
+						//first cell
+						cell = new PdfPCell();
+						p1 = new Paragraph(cell1,Arial);
+						cell.addElement(p1);
+						table.addCell(cell);					
+						cell=new PdfPCell();
+						
+						//second cell
+						p2 = new Paragraph(cell2,Arial);
+						cell.addElement(p2);
+						table.addCell(cell);
+						cell=new PdfPCell();
+
+						
+						//third cell
+						p3 = new Paragraph(cell3,Arial);
+						cell.addElement(p3);
+						table.addCell(cell);
+						cell=new PdfPCell();
+
+						//4th cell
+						p4 = new Paragraph(cell4,Arial);
+						cell.addElement(p4);
+						table.addCell(cell);
+						cell=new PdfPCell();
+
+						//5th cell
+						p5 = new Paragraph(cell5,Arial);
+						cell.addElement(p5);
+						table.addCell(cell);
+						cell=new PdfPCell();
+						
+						//6th cell
+						p6 = new Paragraph(cell6,Arial);
+						cell.addElement(p6);
+						table.addCell(cell);
+						cell=new PdfPCell();
+					
+					}
+					document.add(table);
+					
+
+					document.close();
+				}
+			catch(Exception e1)
+			{
+				System.out.println(e1);
+			}
+			}
+		});
 		menuItem_9.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_9.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_1.add(menuItem_9);
@@ -402,7 +563,7 @@ public class MainPage extends JFrame {
 		JButton button_7 = new JButton("חובות לספקים");
 		button_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Orders("debtsForSuppliers");
+				new DebtsForSuppliersPage("debtsforsuppliers");
 			}
 		});
 		button_7.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -425,39 +586,131 @@ public class MainPage extends JFrame {
 		timeLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		timeLabel.setBounds(1000, 656, 336, 38);
 		contentPane.add(timeLabel);
-		
+
 		JButton button_2 = new JButton("הוספת תזכורת");
+		button_2.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				if(!textField.getText().equals(""))
+				{
+				Connection myConn = HelpFunctions.DbConnection();
+					
+				String q = "INSERT INTO `generalreminders`(`תזכורת`) VALUES ('"+textField.getText().toString()+"')";
+				try
+				{
+					Statement st = myConn.createStatement();
+					st.executeUpdate(q);
+					JOptionPane.showMessageDialog(null, "saved new reminder");
+					HelpFunctions.getTable("generalreminders", table, myConn);
+					// changing JTable Cell Value Alignment
+					DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+					centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+					table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+					table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+					
+					//reset the textField to empty
+					textField.setText("");
+
+				} 
+				catch (Exception e1)
+				{
+					e1.printStackTrace();					
+				}
+				}
+				else
+				{
+				JOptionPane.showMessageDialog(null, "תכתוב תזכורת");
+				}
+			}
+		});
 		button_2.setBounds(567, 509, 111, 23);
 		contentPane.add(button_2);
-		
+
 		JButton button_1_1 = new JButton("מחיקת תזכורת");
+		button_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+
+				int row = table.getSelectedRow();
+
+				
+				int response = 0;
+				try{
+					if(row<0)
+					{
+						JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else
+					{
+						 response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+							        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					}
+				    if (response == JOptionPane.NO_OPTION) 
+				    {
+				    	return;
+				    }
+				    else if (response == JOptionPane.YES_OPTION) 
+				    {
+				    	String RID=(table.getModel().getValueAt(row, 0)).toString();
+						String remindId="מספר תזכורת";
+						Connection myConn = HelpFunctions.DbConnection();
+						HelpFunctions.deleteDbRow("generalreminders", remindId, RID, myConn);
+						HelpFunctions.getTable("generalreminders", table, myConn);
+						// changing JTable Cell Value Alignment
+						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+					    myConn.close();
+				    }
+				    
+				    }
+				
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});
 		button_1_1.setBounds(567, 534, 111, 23);
 		contentPane.add(button_1_1);
-		
+
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.RIGHT);
 		textField.setBounds(25, 510, 524, 47);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 111, 653, 387);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		//get reminders table
 		Connection myConn = HelpFunctions.DbConnection();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		HelpFunctions.getTable("generalreminders", table, myConn);
+
+		// changing JTable Cell Value Alignment
+		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
 		
+		JTableHeader Theader = table.getTableHeader();
+	    Theader.setBackground(Color.green);
+	    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+
 
 
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 25, 1376, 693);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);	
-		
+
 		HelpFunctions.setIcon(btnNewButton, "calculator");
 	}
 }

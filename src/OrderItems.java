@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import net.proteanit.sql.DbUtils;
 
@@ -142,6 +143,19 @@ public class OrderItems {
 		button_2.setBounds(74, 58, 106, 48);
 		frame.getContentPane().add(button_2);
 		HelpFunctions.setIcon(button_2, "printer");
+		
+		// changing JTable Cell Value Alignment
+		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderr);
+
+		
 		
 		JLabel background_label = new JLabel("New label");
 		background_label.setBounds(0, 0, 684, 461);

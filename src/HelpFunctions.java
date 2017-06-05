@@ -113,6 +113,12 @@ public class HelpFunctions
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------------
+	public static void setImageAsIcon(JLabel label , ImageIcon ImageIcon)
+	{
+		label.setIcon(new ImageIcon(ImageIcon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT)));
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------------------
 
 	public static void deleteDbRow(String tableName ,String primaryId, String ID , Connection myConn)
 	{
@@ -121,6 +127,8 @@ public class HelpFunctions
 			String query = "DELETE FROM `"+tableName+"` WHERE  `"+primaryId+"`= '"+ID+"'";
 			Statement myStmt = myConn.createStatement();
 			myStmt.executeUpdate(query);
+			System.out.println("done");
+			System.out.println(query);
 
 		}
 		catch(Exception e)
