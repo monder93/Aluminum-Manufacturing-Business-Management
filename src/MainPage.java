@@ -6,8 +6,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 import com.itextpdf.text.Anchor;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
@@ -42,6 +44,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -59,8 +62,8 @@ public class MainPage extends JFrame
 	private static JLabel timeLabel;
 	private JTable table;
 	private JTextField textField;
-	private final com.itextpdf.text.Font Tahoma = FontFactory.getFont("c:/windows/fonts/tahoma.ttf",BaseFont.IDENTITY_H,16);
-	private final com.itextpdf.text.Font Arial = FontFactory.getFont("c:/windows/fonts/arial.ttf",BaseFont.IDENTITY_H,16);
+	private final com.itextpdf.text.Font Tahoma = FontFactory.getFont("c:/windows/fonts/tahoma.ttf",BaseFont.IDENTITY_H,10);
+	private final com.itextpdf.text.Font Arial = FontFactory.getFont("c:/windows/fonts/arial.ttf",BaseFont.IDENTITY_H,10);
 	
 	/**
 	 * Launch the application.
@@ -277,11 +280,24 @@ public class MainPage extends JFrame
 				try
 				{
 					// Listing 1. Instantiation of document object
-					Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+					Document document = new Document(PageSize.A4, 0, 0, 50, 50);
+					
+			        File file = new File("C:\\temp2");
+			        if (!file.exists())
+			        {
+			            if (file.mkdir()) 
+			            {
+			                System.out.println("Directory is created!");
+			            } 
+			            else 
+			            {
+			                System.out.println("Failed to create directory!");
+			            }
+			        }
 
 					// Listing 2. Creation of PdfWriter object
-					PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream("C:/temp/ITextTest.pdf"));
-		
+					PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream("C:/temp2/ITextTest.pdf"));
+					
 					writer.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
 					//opening the document to write into it
 					document.open();
@@ -292,38 +308,55 @@ public class MainPage extends JFrame
 					//first cell
 					PdfPCell cell = new PdfPCell();
 					Paragraph p1 = new Paragraph("מספר חוב",Arial);
+					p1.setAlignment(PdfPCell.ALIGN_CENTER);
+					cell.setColspan(1);
 					cell.addElement(p1);
-					table.addCell(cell);					
+					table.addCell(cell);				
 					cell=new PdfPCell();
 					
 					//second cell
 					Paragraph p2 = new Paragraph("שם לקוח",Arial);
+					p2.setAlignment(PdfPCell.ALIGN_CENTER);
+					cell.setColspan(1);
 					cell.addElement(p2);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					table.addCell(cell);
 					cell=new PdfPCell();
 
 					
 					//third cell
 					Paragraph p3 = new Paragraph("תאריך",Arial);
+					p3.setAlignment(PdfPCell.ALIGN_CENTER);
 					cell.addElement(p3);
+					cell.setColspan(1);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					table.addCell(cell);
 					cell=new PdfPCell();
 
 					//4th cell
 					Paragraph p4 = new Paragraph("חוב",Arial);
+					p4.setAlignment(PdfPCell.ALIGN_CENTER);
+					cell.setColspan(1);
 					cell.addElement(p4);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					table.addCell(cell);
 					cell=new PdfPCell();
 
 					//5th cell
 					Paragraph p5 = new Paragraph("שולם",Arial);
+					p5.setAlignment(PdfPCell.ALIGN_CENTER);
+					cell.setColspan(1);
 					cell.addElement(p5);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					table.addCell(cell);
 					cell=new PdfPCell();
 					
 					//6th cell
 					Paragraph p6 = new Paragraph("לתשלום",Arial);
+					p6.setAlignment(PdfPCell.ALIGN_CENTER);
+					cell.setColspan(1);
 					cell.addElement(p6);
+					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					table.addCell(cell);
 					cell=new PdfPCell();
 				
@@ -346,45 +379,62 @@ public class MainPage extends JFrame
 						//first cell
 						cell = new PdfPCell();
 						p1 = new Paragraph(cell1,Arial);
+						p1.setAlignment(PdfPCell.ALIGN_CENTER);
+						cell.setColspan(1);
 						cell.addElement(p1);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 						table.addCell(cell);					
 						cell=new PdfPCell();
 						
 						//second cell
 						p2 = new Paragraph(cell2,Arial);
+						p2.setAlignment(PdfPCell.ALIGN_CENTER);
+						cell.setColspan(1);
 						cell.addElement(p2);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 						table.addCell(cell);
 						cell=new PdfPCell();
 
 						
 						//third cell
 						p3 = new Paragraph(cell3,Arial);
+						p3.setAlignment(PdfPCell.ALIGN_CENTER);
+						cell.setColspan(1);
 						cell.addElement(p3);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 						table.addCell(cell);
 						cell=new PdfPCell();
 
 						//4th cell
 						p4 = new Paragraph(cell4,Arial);
+						p4.setAlignment(PdfPCell.ALIGN_CENTER);
+						cell.setColspan(1);
 						cell.addElement(p4);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 						table.addCell(cell);
 						cell=new PdfPCell();
 
 						//5th cell
 						p5 = new Paragraph(cell5,Arial);
+						p5.setAlignment(PdfPCell.ALIGN_CENTER);
+						cell.setColspan(1);
 						cell.addElement(p5);
+						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 						table.addCell(cell);
 						cell=new PdfPCell();
 						
 						//6th cell
 						p6 = new Paragraph(cell6,Arial);
+						p6.setAlignment(PdfPCell.ALIGN_CENTER);
+						cell.setColspan(1);
 						cell.addElement(p6);
+						cell.setBackgroundColor(BaseColor.GREEN);
 						table.addCell(cell);
 						cell=new PdfPCell();
 					
 					}
 					document.add(table);
 					
-
 					document.close();
 				}
 			catch(Exception e1)
