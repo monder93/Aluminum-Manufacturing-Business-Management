@@ -1,3 +1,21 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 06, 2017 at 05:00 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.0.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `final-project`
 --
@@ -24,6 +42,26 @@ INSERT INTO `catalogue` (`מספר סידורי`, `חברה`, `שם`, `קישו�
 (2, 'קליל', 'בלגי', 'blge'),
 (3, 'קליל', 'אופיס', 'ofice'),
 (4, 'אקסטל', 'בלגי', 'blge');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `colors`
+--
+
+CREATE TABLE `colors` (
+  `מספר מזהה` int(11) NOT NULL,
+  `קוד מזהה` varchar(15) CHARACTER SET latin1 NOT NULL,
+  `תאור` varchar(15) NOT NULL,
+  `מחיר לקג` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `colors`
+--
+
+INSERT INTO `colors` (`מספר מזהה`, `קוד מזהה`, `תאור`, `מחיר לקג`) VALUES
+(1, 'RAL 1001', 'כתום חום', 36);
 
 -- --------------------------------------------------------
 
@@ -196,7 +234,28 @@ INSERT INTO `generalreminders` (`מספר תזכורת`, `תזכורת`) VALUES
 (13, '222222'),
 (14, '1'),
 (15, '1'),
-(19, 'vjfj');
+(19, 'vjfj'),
+(20, 'hi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `glass`
+--
+
+CREATE TABLE `glass` (
+  `מספר מזהה` int(11) NOT NULL,
+  `תאור` varchar(15) NOT NULL,
+  `מחיר למטר` int(11) NOT NULL,
+  `עובי זיגוג` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `glass`
+--
+
+INSERT INTO `glass` (`מספר מזהה`, `תאור`, `מחיר למטר`, `עובי זיגוג`) VALUES
+(1, 'שקופה 5 ממ', 65, 5);
 
 -- --------------------------------------------------------
 
@@ -224,7 +283,8 @@ INSERT INTO `orders` (`מספר הזמנה`, `שם ספק`, `תאריך`, `את�
 (10, 'צםצ', '2017-02-11', 'צםמגקר', 'debtsForSuppliers'),
 (11, '1', '2017-05-27', '1', 'הזמנת פירזול'),
 (12, '1', '2017-05-29', '1', 'הזמנת פרופילים'),
-(13, '1', '2017-06-04', '1', 'הזמנת תריס גלילה');
+(13, '1', '2017-06-04', '1', 'הזמנת תריס גלילה'),
+(14, 'ww', '2017-06-06', 'www', 'הזמנת משקופים');
 
 -- --------------------------------------------------------
 
@@ -311,6 +371,67 @@ INSERT INTO `projectsproducts` (`מספר סידורי`, `מספר פרויקט`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `scrollshuter`
+--
+
+CREATE TABLE `scrollshuter` (
+  `מספר מזהה` int(11) NOT NULL,
+  `תאור` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `משקל` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `scrollshuter`
+--
+
+INSERT INTO `scrollshuter` (`מספר מזהה`, `תאור`, `משקל`) VALUES
+(1, 'תריס גלילה - פלסטיק', 3.8),
+(2, 'תריס גלילה - משוך - איירן', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shutter`
+--
+
+CREATE TABLE `shutter` (
+  `מזהה` int(11) NOT NULL,
+  `סוג` varchar(100) NOT NULL,
+  `תאור` varchar(100) NOT NULL,
+  `גובה ארגז` int(11) NOT NULL,
+  `שדות תריס` varchar(100) NOT NULL,
+  `כמות לוקרים` int(11) NOT NULL,
+  `סוג ארגז` varchar(100) NOT NULL,
+  `מסילה לתריס` varchar(100) NOT NULL,
+  `הפעלה חשמלית` varchar(100) NOT NULL,
+  `יצרן מנוע` varchar(100) NOT NULL,
+  `כוח חשמל` varchar(100) NOT NULL,
+  `סגירה חיצונית` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slidingshutter`
+--
+
+CREATE TABLE `slidingshutter` (
+  `מספר מזהה` int(11) NOT NULL,
+  `תאור` varchar(100) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `slidingshutter`
+--
+
+INSERT INTO `slidingshutter` (`מספר מזהה`, `תאור`) VALUES
+(1, 'שלב 8 לתריס הזזה '),
+(2, 'שלב 8 מקוצף בצבע לבן'),
+(3, 'שלב 8 משוך בצבע לבן');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `suppliers`
 --
 
@@ -331,6 +452,12 @@ CREATE TABLE `suppliers` (
 --
 ALTER TABLE `catalogue`
   ADD PRIMARY KEY (`מספר סידורי`);
+
+--
+-- Indexes for table `colors`
+--
+ALTER TABLE `colors`
+  ADD PRIMARY KEY (`מספר מזהה`);
 
 --
 -- Indexes for table `contacts`
@@ -369,6 +496,12 @@ ALTER TABLE `generalreminders`
   ADD PRIMARY KEY (`מספר תזכורת`);
 
 --
+-- Indexes for table `glass`
+--
+ALTER TABLE `glass`
+  ADD PRIMARY KEY (`מספר מזהה`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -393,6 +526,24 @@ ALTER TABLE `projectsproducts`
   ADD PRIMARY KEY (`מספר סידורי`);
 
 --
+-- Indexes for table `scrollshuter`
+--
+ALTER TABLE `scrollshuter`
+  ADD PRIMARY KEY (`מספר מזהה`);
+
+--
+-- Indexes for table `shutter`
+--
+ALTER TABLE `shutter`
+  ADD PRIMARY KEY (`מזהה`);
+
+--
+-- Indexes for table `slidingshutter`
+--
+ALTER TABLE `slidingshutter`
+  ADD PRIMARY KEY (`מספר מזהה`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -408,6 +559,11 @@ ALTER TABLE `suppliers`
 ALTER TABLE `catalogue`
   MODIFY `מספר סידורי` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `colors`
+--
+ALTER TABLE `colors`
+  MODIFY `מספר מזהה` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
@@ -416,12 +572,12 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `customersdebts`
 --
 ALTER TABLE `customersdebts`
-  MODIFY `מספר חוב` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `מספר חוב` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `customersdebtspaied`
 --
 ALTER TABLE `customersdebtspaied`
-  MODIFY `מספר תשלום` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `מספר תשלום` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `debtsforsuppliers`
 --
@@ -436,12 +592,17 @@ ALTER TABLE `debtsforsupplierspaied`
 -- AUTO_INCREMENT for table `generalreminders`
 --
 ALTER TABLE `generalreminders`
-  MODIFY `מספר תזכורת` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `מספר תזכורת` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `glass`
+--
+ALTER TABLE `glass`
+  MODIFY `מספר מזהה` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `מספר הזמנה` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `מספר הזמנה` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `ordersproducts`
 --
@@ -451,12 +612,27 @@ ALTER TABLE `ordersproducts`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `מספר פרויקט` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `מספר פרויקט` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `projectsproducts`
 --
 ALTER TABLE `projectsproducts`
   MODIFY `מספר סידורי` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `scrollshuter`
+--
+ALTER TABLE `scrollshuter`
+  MODIFY `מספר מזהה` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `shutter`
+--
+ALTER TABLE `shutter`
+  MODIFY `מזהה` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `slidingshutter`
+--
+ALTER TABLE `slidingshutter`
+  MODIFY `מספר מזהה` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `suppliers`
 --

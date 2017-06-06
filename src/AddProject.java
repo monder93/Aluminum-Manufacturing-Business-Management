@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import com.adobe.acrobat.gui.ComboBox;
 
 import net.proteanit.sql.DbUtils;
 
@@ -31,9 +32,9 @@ public class AddProject
 	public Connection myConn;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	public static String id;
 	public static String name;
+	private JComboBox<String> comboBox_4;
 
 	/**
 	 * Launch the application.
@@ -78,16 +79,52 @@ public class AddProject
 		frame.setTitle("הוספת פרויקט");
 		
 		JButton button = new JButton("צבע :");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+					new colorList();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button.setBounds(297, 49, 135, 29);
 		frame.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("זיגוג :");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					new glassList();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button_1.setBounds(297, 99, 135, 29);
 		frame.getContentPane().add(button_1);
 		
 		JButton shutter = new JButton("תריס :");
+		shutter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (comboBox_4.getSelectedItem().toString().equals("תריס גלילה"))
+					new scrollShutter();
+				else
+					try {
+						new slidingShutter();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+		});
 		shutter.setFont(new Font("Tahoma", Font.BOLD, 12));
 		shutter.setBounds(297, 204, 135, 29);
 		frame.getContentPane().add(shutter);
@@ -136,7 +173,7 @@ public class AddProject
 		company.addItem("אלובין");
 		frame.getContentPane().add(company);
 
-		JComboBox<String> comboBox_4 = new JComboBox<String>();
+		comboBox_4 = new JComboBox<String>();
 		comboBox_4.setBounds(103, 205, 184, 29);
 		comboBox_4.addItem("תריס גלילה");
 		comboBox_4.addItem("תריס הזזה");
@@ -245,15 +282,15 @@ public class AddProject
 		
 		
 		JButton button_3 = new JButton("צבע אביזרים :");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new partsColors();
+			}
+		});
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_3.setBounds(297, 152, 135, 29);
+		button_3.setBounds(103, 152, 329, 29);
 		frame.getContentPane().add(button_3);
-		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		textField_2.setColumns(10);
-		textField_2.setBounds(103, 143, 184, 40);
-		frame.getContentPane().add(textField_2);
 		
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 0, 884, 376);

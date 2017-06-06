@@ -511,7 +511,7 @@ public class MainPage extends JFrame
 		menuItem_12.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Orders("הזמנת משקופים עיוורים");
+				new Orders("הזמנת משקופים");
 			}
 		});
 		mnOrders.add(menuItem_12);
