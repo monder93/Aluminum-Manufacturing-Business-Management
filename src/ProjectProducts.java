@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JFrame;
@@ -242,7 +243,14 @@ public class ProjectProducts extends JFrame
 
 		JButton btnNewButton = new JButton("פרופילים");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+					new profiles();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -250,6 +258,18 @@ public class ProjectProducts extends JFrame
 		contentPane.add(btnNewButton);
 
 		JButton button = new JButton("פירזולים");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+//					System.out.println("fat");
+					new hardware();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button.setBounds(534, 98, 123, 46);
 		contentPane.add(button);
@@ -260,6 +280,12 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_1);
 
 		JButton button_2 = new JButton("תריס גלילה");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new scrollShutter();
+			}
+		});
 		button_2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_2.setBounds(534, 198, 123, 47);
 		contentPane.add(button_2);
