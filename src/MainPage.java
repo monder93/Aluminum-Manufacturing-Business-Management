@@ -11,15 +11,9 @@ import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.List;
-import com.itextpdf.text.ListItem;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
-import com.itextpdf.text.log.SysoCounter;
 import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -52,7 +46,6 @@ import java.sql.Statement;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import java.awt.Rectangle;
 import javax.swing.JTextField;
 
 public class MainPage extends JFrame 
@@ -493,7 +486,7 @@ public class MainPage extends JFrame
 		menuItem_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Tables("glasses");
+				new Tables("glass");
 
 			}
 		});

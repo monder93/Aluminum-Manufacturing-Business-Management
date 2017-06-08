@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JFrame;
@@ -179,22 +180,10 @@ public class ProjectProducts extends JFrame
 		rdbtnNewRadioButton.setBounds(876, 55, 123, 23);
 		contentPane.add(rdbtnNewRadioButton);
 
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\u05D0\u05DC\u05D5\u05D1\u05D9\u05DF");
-		rdbtnNewRadioButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnNewRadioButton_1.setHorizontalTextPosition(SwingConstants.LEFT);
-		rdbtnNewRadioButton_1.setBounds(876, 81, 123, 23);
-		contentPane.add(rdbtnNewRadioButton_1);
-
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("\u05E9\u05E8\u05DE\u05E8");
-		rdbtnNewRadioButton_2.setHorizontalTextPosition(SwingConstants.LEFT);
-		rdbtnNewRadioButton_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnNewRadioButton_2.setBounds(876, 107, 123, 23);
-		contentPane.add(rdbtnNewRadioButton_2);
-
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("\u05D0\u05E7\u05E1\u05D8\u05DC");
 		rdbtnNewRadioButton_3.setHorizontalTextPosition(SwingConstants.LEFT);
 		rdbtnNewRadioButton_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnNewRadioButton_3.setBounds(876, 133, 123, 23);
+		rdbtnNewRadioButton_3.setBounds(880, 81, 123, 23);
 		contentPane.add(rdbtnNewRadioButton_3);
 
 		JLabel lblNewLabel_7 = new JLabel("\u05DE\u05E1' \u05E4\u05D9\u05E8\u05D6\u05D5\u05DC :");
@@ -209,40 +198,31 @@ public class ProjectProducts extends JFrame
 		radioButton.setBounds(720, 55, 136, 23);
 		contentPane.add(radioButton);
 
-		JRadioButton radioButton_1 = new JRadioButton("\u05D0\u05DC\u05D5\u05D1\u05D9\u05DF");
-		radioButton_1.setHorizontalTextPosition(SwingConstants.LEFT);
-		radioButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		radioButton_1.setBounds(720, 81, 136, 23);
-		contentPane.add(radioButton_1);
-
 		JRadioButton radioButton_2 = new JRadioButton("\u05D0\u05E7\u05E1\u05D8\u05DC");
 		radioButton_2.setHorizontalTextPosition(SwingConstants.LEFT);
 		radioButton_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		radioButton_2.setBounds(720, 107, 136, 23);
+		radioButton_2.setBounds(720, 81, 136, 23);
 		contentPane.add(radioButton_2);
-
-		JRadioButton radioButton_3 = new JRadioButton("\u05D0\u05E8\u05E4\u05DC");
-		radioButton_3.setHorizontalTextPosition(SwingConstants.LEFT);
-		radioButton_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		radioButton_3.setBounds(720, 133, 136, 23);
-		contentPane.add(radioButton_3);
 
 		//	lblNewLabel_8.setIcon(new ImageIcon(ProjectProducts.class.getResource("/img/background.jpg")));
 		lblNewLabel_8.setBounds(69, 24, 225, 265);
 		contentPane.add(lblNewLabel_8);
 		proNumBG.add(rdbtnNewRadioButton);
-		proNumBG.add(rdbtnNewRadioButton_1);
-		proNumBG.add(rdbtnNewRadioButton_2);
 		proNumBG.add(rdbtnNewRadioButton_3);
 
 		berzolNumBG.add(radioButton);
-		berzolNumBG.add(radioButton_1);
 		berzolNumBG.add(radioButton_2);
-		berzolNumBG.add(radioButton_3);
 
 		JButton btnNewButton = new JButton("פרופילים");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+					new profiles();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -250,6 +230,18 @@ public class ProjectProducts extends JFrame
 		contentPane.add(btnNewButton);
 
 		JButton button = new JButton("פירזולים");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+//					System.out.println("fat");
+					new hardware();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button.setBounds(534, 98, 123, 46);
 		contentPane.add(button);
@@ -260,6 +252,12 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_1);
 
 		JButton button_2 = new JButton("תריס גלילה");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new scrollShutter();
+			}
+		});
 		button_2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_2.setBounds(534, 198, 123, 47);
 		contentPane.add(button_2);
