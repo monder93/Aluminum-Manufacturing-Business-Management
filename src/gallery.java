@@ -166,6 +166,7 @@ public class gallery extends JFrame
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
+				if(index+5<ArrayOfImages.size())
 				new BigPic(new ImageIcon(ArrayOfImages.get(index+5)));
 			}
 		});
@@ -179,6 +180,7 @@ public class gallery extends JFrame
 			@Override
 			public void mouseClicked(MouseEvent arg0) 
 			{
+				if(index+3<ArrayOfImages.size())
 				new BigPic(new ImageIcon(ArrayOfImages.get(index+3)));
 
 			}
@@ -193,6 +195,7 @@ public class gallery extends JFrame
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
+				if(index+4<ArrayOfImages.size())
 				new BigPic(new ImageIcon(ArrayOfImages.get(index+4)));
 			}
 		});
@@ -208,6 +211,7 @@ public class gallery extends JFrame
 			@Override
 			public void mouseClicked(MouseEvent arg0) 
 			{
+				if(index+0<ArrayOfImages.size())
 				new BigPic(new ImageIcon(ArrayOfImages.get(index+0)));
 			}
 		});
@@ -221,6 +225,7 @@ public class gallery extends JFrame
 			@Override
 			public void mouseClicked(MouseEvent arg0)
 			{
+				if(index+1<ArrayOfImages.size())
 				new BigPic(new ImageIcon(ArrayOfImages.get(index+1)));
 			}
 		});
@@ -233,6 +238,7 @@ public class gallery extends JFrame
 			@Override
 			public void mouseClicked(MouseEvent e) 
 			{
+				if(index+2<ArrayOfImages.size())
 				new BigPic(new ImageIcon(ArrayOfImages.get(index+2)));
 			}
 		});

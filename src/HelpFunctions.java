@@ -56,6 +56,21 @@ public class HelpFunctions
 
 	//------------------------------------------------------------------------------------------------------------------	
 
+	public static String getCurrentTime()
+	{
+		Calendar cal = new GregorianCalendar();
+		int day=cal.get(Calendar.DAY_OF_MONTH);
+		int month=cal.get(Calendar.MONTH)+1;
+		int year=cal.get(Calendar.YEAR);
+
+		int second = cal.get(Calendar.SECOND);
+		int minute = cal.get(Calendar.MINUTE);
+		int hour=cal.get(Calendar.HOUR);
+
+		String s="שעה :  "+hour + ":"+minute+":"+second+"   תאריך :  "+day+"/"+month+"/"+year;
+		return s;
+	}
+	
 	public static Connection DbConnection()
 	{
 		String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";

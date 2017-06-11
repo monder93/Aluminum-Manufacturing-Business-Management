@@ -132,7 +132,7 @@ public class DebtsPage extends JFrame
 					String current_time_str = time_formatter.format(System.currentTimeMillis());
 					
 					//query to insert data
-					String q = "INSERT INTO `customersdebts`( `שם לקוח`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+customerNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','0')";	
+					String q = "INSERT INTO `customersdebts`( `שם לקוח`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+customerNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";	
 					
 					//connection to database
 					myConn=HelpFunctions.DbConnection();

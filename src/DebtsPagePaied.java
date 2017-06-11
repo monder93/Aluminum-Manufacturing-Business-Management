@@ -95,7 +95,7 @@ public class DebtsPagePaied extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 
-				if(!payTypeTextField.getText().contentEquals("") && (!payAmountTextField.getText().contentEquals("")))
+				if(!payTypeTextField.getText().contentEquals("") && (!payAmountTextField.getText().contentEquals("") && (Integer.parseInt(payAmountTextField.getText())<=debtAmount-paidAmount)))
 				{
 					//getting current time
 					SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -156,6 +156,13 @@ public class DebtsPagePaied extends JFrame {
 						// TODO: handle exception
 					}
 
+				}
+				else
+				{
+					if(payAmountTextField.getText().equals(""))
+						JOptionPane.showMessageDialog(null, "תכניס סכום");
+					else
+						JOptionPane.showMessageDialog(null, "סכום מקסימלי "+(debtAmount-paidAmount));
 				}
 			}}
 				);

@@ -84,7 +84,7 @@ public class Orders extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);		
-		frame.setTitle("חובות לספקים");
+		frame.setTitle("הזמנות");
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -288,10 +288,10 @@ public class Orders extends JFrame {
 				frame.setTitle("הזמנת פירזול");
 			if(type.contentEquals("הזמנת פרופילים"))
 				frame.setTitle("הזמנת פרופילים");	
-			if(type.contentEquals("הזמנת משקופים עיוורים"))
+			if(type.contentEquals("הזמנת משקופים"))
 				frame.setTitle("הזמנת משקופים עיוורים");	
-			if(type.contentEquals("הזמנת תריס"))
-				frame.setTitle("הזמנת תריס");	
+			if(type.contentEquals("הזמנת תריס גלילה"))
+				frame.setTitle("הזמנת תריס גלילה");	
 
 
 

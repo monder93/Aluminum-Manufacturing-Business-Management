@@ -79,7 +79,7 @@ public class DebtsForSuppliersPage extends JFrame
 	setExtendedState(JFrame.MAXIMIZED_BOTH);
 	frame.setVisible(true);
 	frame.getContentPane().setLayout(null);	
-	frame.setTitle("לקוחות חייבים");
+	frame.setTitle("חובות לספקים");
 	
 	logoLabel = new JLabel("New label");
 	logoLabel.setBounds(566, 283, 259, 190);

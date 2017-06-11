@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 public class BigPic 
 {
 	private JFrame frame;
-	//String picUrl="";
 	ImageIcon ImageIcon;
 	/**
 	 * Launch the application.
@@ -22,12 +21,6 @@ public class BigPic
 		{
 			public void run() 
 			{
-//				try {
-//					BigPic window = new BigPic();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
 			}
 		});
 	}
@@ -37,7 +30,6 @@ public class BigPic
 	 */
 	public BigPic(ImageIcon ImageIcon) 
 	{
-		//this.picUrl=picUrl;
 		this.ImageIcon=ImageIcon;
 		initialize();
 	}
@@ -49,6 +41,7 @@ public class BigPic
 		frame = new JFrame();
 		frame.setBounds(400, 10, 688, 712);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setTitle("תמונה גדולה");
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");

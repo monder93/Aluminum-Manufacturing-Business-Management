@@ -55,21 +55,24 @@ public class MainPage extends JFrame
 	private static JLabel timeLabel;
 	private JTable table;
 	private JTextField textField;
-	private final com.itextpdf.text.Font Tahoma = FontFactory.getFont("c:/windows/fonts/tahoma.ttf",BaseFont.IDENTITY_H,10);
-	private final com.itextpdf.text.Font Arial = FontFactory.getFont("c:/windows/fonts/arial.ttf",BaseFont.IDENTITY_H,10);
-	
+
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					MainPage frame = new MainPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
 
-				} catch (Exception e)
+				} 
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
@@ -111,17 +114,17 @@ public class MainPage extends JFrame
 				new Calc("מחשבון");
 			}
 		});
-		
+
 		JLabel logoLabel = new JLabel("New label");
 		logoLabel.setBounds(25, 582, 653, 101);
 		contentPane.add(logoLabel);
-		
+
 		HelpFunctions.setBackground(logoLabel, "MainPageLogo");
-		
+
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
 		btnNewButton.setBounds(787, 111,183, 114);
 		contentPane.add(btnNewButton);
-		
+
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
@@ -166,11 +169,6 @@ public class MainPage extends JFrame
 		mntmNewMenuItem_4.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mntmNewMenuItem_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_6.add(mntmNewMenuItem_4);
-
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("חישוב שיפועים ,זווית וקשתות");
-		mntmNewMenuItem_5.setHorizontalAlignment(SwingConstants.RIGHT);
-		mntmNewMenuItem_5.setHorizontalTextPosition(SwingConstants.RIGHT);
-		menu_6.add(mntmNewMenuItem_5);
 
 		JMenu menu_3 = new JMenu("שרטוטים");
 		menu_3.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -270,178 +268,12 @@ public class MainPage extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try
-				{
-					// Listing 1. Instantiation of document object
-					Document document = new Document(PageSize.A4, 0, 0, 50, 50);
-					
-			        File file = new File("C:\\temp2");
-			        if (!file.exists())
-			        {
-			            if (file.mkdir()) 
-			            {
-			                System.out.println("Directory is created!");
-			            } 
-			            else 
-			            {
-			                System.out.println("Failed to create directory!");
-			            }
-			        }
-
-					// Listing 2. Creation of PdfWriter object
-					PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream("C:/temp2/ITextTest.pdf"));
-					
-					writer.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
-					//opening the document to write into it
-					document.open();
-					
-					PdfPTable table = new PdfPTable(6);
-					table.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
-					
-					//first cell
-					PdfPCell cell = new PdfPCell();
-					Paragraph p1 = new Paragraph("מספר חוב",Arial);
-					p1.setAlignment(PdfPCell.ALIGN_CENTER);
-					cell.setColspan(1);
-					cell.addElement(p1);
-					table.addCell(cell);				
-					cell=new PdfPCell();
-					
-					//second cell
-					Paragraph p2 = new Paragraph("שם לקוח",Arial);
-					p2.setAlignment(PdfPCell.ALIGN_CENTER);
-					cell.setColspan(1);
-					cell.addElement(p2);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table.addCell(cell);
-					cell=new PdfPCell();
-
-					
-					//third cell
-					Paragraph p3 = new Paragraph("תאריך",Arial);
-					p3.setAlignment(PdfPCell.ALIGN_CENTER);
-					cell.addElement(p3);
-					cell.setColspan(1);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table.addCell(cell);
-					cell=new PdfPCell();
-
-					//4th cell
-					Paragraph p4 = new Paragraph("חוב",Arial);
-					p4.setAlignment(PdfPCell.ALIGN_CENTER);
-					cell.setColspan(1);
-					cell.addElement(p4);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table.addCell(cell);
-					cell=new PdfPCell();
-
-					//5th cell
-					Paragraph p5 = new Paragraph("שולם",Arial);
-					p5.setAlignment(PdfPCell.ALIGN_CENTER);
-					cell.setColspan(1);
-					cell.addElement(p5);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table.addCell(cell);
-					cell=new PdfPCell();
-					
-					//6th cell
-					Paragraph p6 = new Paragraph("לתשלום",Arial);
-					p6.setAlignment(PdfPCell.ALIGN_CENTER);
-					cell.setColspan(1);
-					cell.addElement(p6);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table.addCell(cell);
-					cell=new PdfPCell();
-				
-					
-					
-					//getting the data from customersdebts table in database
-					Connection myConn = HelpFunctions.DbConnection();
-					String pdf_query = "SELECT * FROM `customersdebts`";
-					Statement st = myConn.createStatement();
-					ResultSet rs = st.executeQuery(pdf_query);
-					while(rs.next())
-					{
-						String cell1 = rs.getString(1);
-						String cell2 = rs.getString(2);
-						String cell3 = rs.getString(3);
-						String cell4 = rs.getString(4);
-						String cell5 = rs.getString(5);
-						String cell6 = rs.getString(6);
-
-						//first cell
-						cell = new PdfPCell();
-						p1 = new Paragraph(cell1,Arial);
-						p1.setAlignment(PdfPCell.ALIGN_CENTER);
-						cell.setColspan(1);
-						cell.addElement(p1);
-						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-						table.addCell(cell);					
-						cell=new PdfPCell();
-						
-						//second cell
-						p2 = new Paragraph(cell2,Arial);
-						p2.setAlignment(PdfPCell.ALIGN_CENTER);
-						cell.setColspan(1);
-						cell.addElement(p2);
-						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-						table.addCell(cell);
-						cell=new PdfPCell();
-
-						
-						//third cell
-						p3 = new Paragraph(cell3,Arial);
-						p3.setAlignment(PdfPCell.ALIGN_CENTER);
-						cell.setColspan(1);
-						cell.addElement(p3);
-						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-						table.addCell(cell);
-						cell=new PdfPCell();
-
-						//4th cell
-						p4 = new Paragraph(cell4,Arial);
-						p4.setAlignment(PdfPCell.ALIGN_CENTER);
-						cell.setColspan(1);
-						cell.addElement(p4);
-						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-						table.addCell(cell);
-						cell=new PdfPCell();
-
-						//5th cell
-						p5 = new Paragraph(cell5,Arial);
-						p5.setAlignment(PdfPCell.ALIGN_CENTER);
-						cell.setColspan(1);
-						cell.addElement(p5);
-						cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-						table.addCell(cell);
-						cell=new PdfPCell();
-						
-						//6th cell
-						p6 = new Paragraph(cell6,Arial);
-						p6.setAlignment(PdfPCell.ALIGN_CENTER);
-						cell.setColspan(1);
-						cell.addElement(p6);
-						cell.setBackgroundColor(BaseColor.GREEN);
-						table.addCell(cell);
-						cell=new PdfPCell();
-					
-					}
-					document.add(table);
-					
-					document.close();
-				}
-			catch(Exception e1)
-			{
-				System.out.println(e1);
-			}
+				customerDebtsPDF.main(null);
 			}
 		});
 		menuItem_9.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_9.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_1.add(menuItem_9);
-
-		JMenuItem menuItem_10 = new JMenuItem("");
-		menu_1.add(menuItem_10);
 
 		JMenu menu = new JMenu("טבלאות");
 		menu.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -562,15 +394,18 @@ public class MainPage extends JFrame
 		JMenuItem menuItem_13 = new JMenuItem("הזמנת תריס גלילה");
 		menuItem_13.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_13.setHorizontalAlignment(SwingConstants.RIGHT);
-		menuItem_13.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		menuItem_13.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				new Orders("הזמנת תריס גלילה");
 			}
 		});
 		mnOrders.add(menuItem_13);
 
 		JButton button = new JButton("גלריה");
-		button.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				new gallery();
@@ -581,8 +416,10 @@ public class MainPage extends JFrame
 		contentPane.add(button);
 
 		JButton button_1 = new JButton("קטלוגים");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		button_1.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				new Catalogue();
 			}
 		});
@@ -604,8 +441,10 @@ public class MainPage extends JFrame
 		contentPane.add(button_3);
 
 		JButton button_7 = new JButton("חובות לספקים");
-		button_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		button_7.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				new DebtsForSuppliersPage("debtsforsuppliers");
 			}
 		});
@@ -614,8 +453,10 @@ public class MainPage extends JFrame
 		contentPane.add(button_7);
 
 		JButton button_8 = new JButton("לקוחות חייבים");
-		button_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		button_8.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				new DebtsPage("customersDebts");
 			}
 		});
@@ -637,33 +478,33 @@ public class MainPage extends JFrame
 			{
 				if(!textField.getText().equals(""))
 				{
-				Connection myConn = HelpFunctions.DbConnection();
-					
-				String q = "INSERT INTO `generalreminders`(`תזכורת`) VALUES ('"+textField.getText().toString()+"')";
-				try
-				{
-					Statement st = myConn.createStatement();
-					st.executeUpdate(q);
-					JOptionPane.showMessageDialog(null, "saved new reminder");
-					HelpFunctions.getTable("generalreminders", table, myConn);
-					// changing JTable Cell Value Alignment
-					DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-					centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-					table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-					table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-					
-					//reset the textField to empty
-					textField.setText("");
+					Connection myConn = HelpFunctions.DbConnection();
 
-				} 
-				catch (Exception e1)
-				{
-					e1.printStackTrace();					
-				}
+					String q = "INSERT INTO `generalreminders`(`תזכורת`) VALUES ('"+textField.getText().toString()+"')";
+					try
+					{
+						Statement st = myConn.createStatement();
+						st.executeUpdate(q);
+						JOptionPane.showMessageDialog(null, "נוספה תזכורת חדשה","תזכורת חדשה",1);
+						HelpFunctions.getTable("generalreminders", table, myConn);
+						// changing JTable Cell Value Alignment
+						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
+						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+
+						//reset the textField to empty
+						textField.setText("");
+
+					} 
+					catch (Exception e1)
+					{
+						e1.printStackTrace();					
+					}
 				}
 				else
 				{
-				JOptionPane.showMessageDialog(null, "תכתוב תזכורת");
+					JOptionPane.showMessageDialog(null, "תכתוב תזכורת", "הוספת תזכורת", 2);
 				}
 			}
 		});
@@ -677,26 +518,26 @@ public class MainPage extends JFrame
 
 				int row = table.getSelectedRow();
 
-				
+
 				int response = 0;
 				try{
 					if(row<0)
 					{
-						JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "בחר תזכורת בבקשה", "בחירת תזכורת", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					else
 					{
-						 response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
-							        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						response = JOptionPane.showConfirmDialog(null, "האם אתה בטוח שברצונך להמשיך?", "מחיקת תזקורת",
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
-				    if (response == JOptionPane.NO_OPTION) 
-				    {
-				    	return;
-				    }
-				    else if (response == JOptionPane.YES_OPTION) 
-				    {
-				    	String RID=(table.getModel().getValueAt(row, 0)).toString();
+					if (response == JOptionPane.NO_OPTION) 
+					{
+						return;
+					}
+					else if (response == JOptionPane.YES_OPTION) 
+					{
+						String RID=(table.getModel().getValueAt(row, 0)).toString();
 						String remindId="מספר תזכורת";
 						Connection myConn = HelpFunctions.DbConnection();
 						HelpFunctions.deleteDbRow("generalreminders", remindId, RID, myConn);
@@ -706,11 +547,11 @@ public class MainPage extends JFrame
 						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
 						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
 						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-					    myConn.close();
-				    }
-				    
-				    }
-				
+						myConn.close();
+					}
+
+				}
+
 				catch(Exception e)
 				{
 					e.printStackTrace();
@@ -742,10 +583,10 @@ public class MainPage extends JFrame
 		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
 		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
 		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-		
+
 		JTableHeader Theader = table.getTableHeader();
-	    Theader.setBackground(Color.green);
-	    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+		Theader.setBackground(Color.green);
+		Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 
 
