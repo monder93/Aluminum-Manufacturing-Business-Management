@@ -177,13 +177,13 @@ public class ProjectProducts extends JFrame
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\u05E7\u05DC\u05D9\u05DC");
 		rdbtnNewRadioButton.setHorizontalTextPosition(SwingConstants.LEFT);
 		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnNewRadioButton.setBounds(876, 55, 123, 23);
+		rdbtnNewRadioButton.setBounds(880, 55, 119, 23);
 		contentPane.add(rdbtnNewRadioButton);
 
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("\u05D0\u05E7\u05E1\u05D8\u05DC");
 		rdbtnNewRadioButton_3.setHorizontalTextPosition(SwingConstants.LEFT);
 		rdbtnNewRadioButton_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		rdbtnNewRadioButton_3.setBounds(880, 81, 123, 23);
+		rdbtnNewRadioButton_3.setBounds(880, 81, 119, 23);
 		contentPane.add(rdbtnNewRadioButton_3);
 
 		JLabel lblNewLabel_7 = new JLabel("\u05DE\u05E1' \u05E4\u05D9\u05E8\u05D6\u05D5\u05DC :");

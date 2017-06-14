@@ -15,6 +15,8 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,13 +33,12 @@ public class DebtsPagePaied extends JFrame {
 	public Connection	myConn;
 	public static String debtnumber;
 	private JLabel label;
-	private JTextField payTypeTextField;
 	private JTextField payAmountTextField;
 	public static int debtAmount;
 	public static int paidAmount;
 	public static int toPayAmount;
 	private JLabel background_label;
-
+	JComboBox comboBox;
 	/**
 	 * Launch the application.
 	 */
@@ -95,7 +96,7 @@ public class DebtsPagePaied extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 
-				if(!payTypeTextField.getText().contentEquals("") && (!payAmountTextField.getText().contentEquals("") && (Integer.parseInt(payAmountTextField.getText())<=debtAmount-paidAmount)))
+				if((!payAmountTextField.getText().contentEquals("") && (Integer.parseInt(payAmountTextField.getText())<=debtAmount-paidAmount)))
 				{
 					//getting current time
 					SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -104,7 +105,7 @@ public class DebtsPagePaied extends JFrame {
 					{
 						myConn = HelpFunctions.DbConnection();
 						Statement myStmt = myConn.createStatement();
-						String query = "INSERT INTO `customersdebtspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+payTypeTextField.getText()+"','"+payAmountTextField.getText()+"')";			
+						String query = "INSERT INTO `customersdebtspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+comboBox.getSelectedItem().toString()+"','"+payAmountTextField.getText()+"')";			
 						myStmt.executeUpdate(query);
 
 						String query2="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
@@ -127,7 +128,6 @@ public class DebtsPagePaied extends JFrame {
 						System.out.println(query4);
 						DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
-						payTypeTextField.setText("");
 						payAmountTextField.setText("");
 
 						// changing JTable Cell Value Alignment
@@ -261,22 +261,26 @@ public class DebtsPagePaied extends JFrame {
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 			JLabel lblNewLabel = new JLabel("סוג תשלום :");
-			lblNewLabel.setBounds(711, 171, 92, 34);
+			lblNewLabel.setBounds(711, 172, 92, 34);
 			contentPane.add(lblNewLabel);
 
 			label = new JLabel("סכום :");
 			label.setBounds(733, 260, 70, 34);
 			contentPane.add(label);
 
-			payTypeTextField = new JTextField();
-			payTypeTextField.setBounds(566, 178, 86, 20);
-			contentPane.add(payTypeTextField);
-			payTypeTextField.setColumns(10);
+
 
 			payAmountTextField = new JTextField();
 			payAmountTextField.setColumns(10);
 			payAmountTextField.setBounds(566, 267, 86, 20);
 			contentPane.add(payAmountTextField);
+			
+			comboBox = new JComboBox();
+			comboBox.setBounds(566, 172, 86, 34);
+			contentPane.add(comboBox);
+			comboBox.addItem("מזומן");
+			comboBox.addItem("ציק");
+			comboBox.addItem("ויזה");
 
 			// changing JTable Cell Value Alignment
 			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();

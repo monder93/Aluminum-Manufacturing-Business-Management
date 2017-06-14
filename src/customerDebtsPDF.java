@@ -1,8 +1,11 @@
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.channels.ShutdownChannelGroupException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -17,6 +20,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class customerDebtsPDF
 {
+	
 	public static void main(String[] args) 
 	{
 
@@ -25,14 +29,34 @@ public class customerDebtsPDF
 		double paidValue=0;
 		double needToPayValue=0;
 		final String RESOURCE = "src/img/logoAluminuim.jpg";
+		JButton save = new JButton();
+		JFileChooser fc = new JFileChooser();
+
 		//----------------------------------------------------------------------------------------------------------------------
 
+		fc.setCurrentDirectory(new java.io.File("C:\\"));
+		fc.setDialogTitle("Save a File");
+		//fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		if(fc.showSaveDialog(save) == JFileChooser.APPROVE_OPTION)
+		{
+			//
+		}
+		String url = fc.getSelectedFile().getAbsolutePath();
+		String url2= fc.getSelectedFile().getParent();
+		String url3 = "C:\\";
+		
+			
+			
+		
+		
+		//---------------
+		
 		try
 		{
 			// Listing 1. Instantiation of document object
 			Document document = new Document(PageSize.A4, 0, 0, 50, 50);
 
-			File file = new File(".//reports//");
+			File file = new File(".//reports//customersDebts.pdf");
 			if (!file.exists())
 			{
 				if (file.mkdir()) 
@@ -44,9 +68,17 @@ public class customerDebtsPDF
 					System.out.println("Failed to create directory!");
 				}
 			}
+			else
+				System.out.println("mwgoood");
 
 			// Listing 2. Creation of PdfWriter object
-			PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream(".//reports/customersDebts.pdf"));
+			if(url2.compareTo(url3)==0)
+			{
+				
+				url=url2+"\\temp\\"+fc.getSelectedFile().getName();
+			}
+			
+				PdfWriter writer = PdfWriter.getInstance(document,new FileOutputStream(url + ".pdf"));
 
 			writer.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
 			//opening the document to write into it
@@ -297,4 +329,7 @@ public class customerDebtsPDF
 			System.out.println(e1);
 		}
 	}
+	
+	
+	
 }

@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import com.adobe.acrobat.gui.ComboBox;
+
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JTable;
@@ -21,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class DebtsForSupplierPagePaied extends JFrame {
 
@@ -31,12 +34,12 @@ public class DebtsForSupplierPagePaied extends JFrame {
 	public Connection	myConn;
 	public static String debtnumber;
 	private JLabel label;
-	private JTextField payTypeTextField;
 	private JTextField payAmountTextField;
 	public static int debtAmount;
 	public static int paidAmount;
 	public static int toPayAmount;
 	private JLabel background_label;
+	JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -95,7 +98,7 @@ public class DebtsForSupplierPagePaied extends JFrame {
 			public void actionPerformed(ActionEvent e) 
 			{
 
-				if(!payTypeTextField.getText().contentEquals("") && (!payAmountTextField.getText().contentEquals(""))&& (Integer.parseInt(payAmountTextField.getText())<=debtAmount-paidAmount))
+				if((!payAmountTextField.getText().contentEquals(""))&& (Integer.parseInt(payAmountTextField.getText())<=debtAmount-paidAmount))
 				{
 					//getting current time
 					SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -104,7 +107,7 @@ public class DebtsForSupplierPagePaied extends JFrame {
 					{
 						myConn = HelpFunctions.DbConnection();
 						Statement myStmt = myConn.createStatement();
-						String query = "INSERT INTO `debtsforsupplierspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+payTypeTextField.getText()+"','"+payAmountTextField.getText()+"')";			
+						String query = "INSERT INTO `debtsforsupplierspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+ comboBox.getSelectedItem().toString() +"','"+payAmountTextField.getText()+"')";			
 						myStmt.executeUpdate(query);
 
 						String query2="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
@@ -147,7 +150,7 @@ public class DebtsForSupplierPagePaied extends JFrame {
 
 
 
-						payTypeTextField.setText("");
+						
 						payAmountTextField.setText("");
 
 
@@ -272,10 +275,6 @@ public class DebtsForSupplierPagePaied extends JFrame {
 			label.setBounds(733, 260, 70, 34);
 			contentPane.add(label);
 
-			payTypeTextField = new JTextField();
-			payTypeTextField.setBounds(566, 178, 86, 20);
-			contentPane.add(payTypeTextField);
-			payTypeTextField.setColumns(10);
 
 			payAmountTextField = new JTextField();
 			payAmountTextField.setColumns(10);
@@ -291,6 +290,13 @@ public class DebtsForSupplierPagePaied extends JFrame {
 			table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
 			table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);			
 
+			comboBox = new JComboBox();
+			comboBox.setBounds(566, 171, 86, 34);
+			contentPane.add(comboBox);
+			comboBox.addItem("מזומן");
+			comboBox.addItem("ציק");
+			comboBox.addItem("ויזה");
+			
 			background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 825, 475);
 			contentPane.add(background_label);

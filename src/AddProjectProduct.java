@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddProjectProduct 
 {
@@ -62,6 +64,12 @@ public class AddProjectProduct
 		frame.setVisible(true);
 		
 		JButton chooseProduct = new JButton("בחירת מוצר");
+		chooseProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				new product();
+			}
+		});
 		chooseProduct.setBounds(363, 58, 214, 54);
 		frame.getContentPane().add(chooseProduct);
 		
@@ -169,7 +177,7 @@ public class AddProjectProduct
 		frame.getContentPane().add(textField_9);
 		
 		JLabel background_label = new JLabel("רקע");
-		background_label.setBounds(0, 0, 690, 561);
+		background_label.setBounds(0, 0, 644, 561);
 		frame.getContentPane().add(background_label);
 		HelpFunctions.setBackground(background_label);
 		
