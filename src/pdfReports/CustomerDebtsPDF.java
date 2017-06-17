@@ -1,12 +1,9 @@
 package pdfReports;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -20,6 +17,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import helpClasses.Fonts;
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 
 public class CustomerDebtsPDF implements Pdf
 {
@@ -193,10 +191,10 @@ public class CustomerDebtsPDF implements Pdf
 			cell=new PdfPCell();
 
 			//getting the data from customers debts table in database
-			Connection myConn = HelpFunctions.DbConnection();
+//			Connection myConn = HelpFunctions.DbConnection();
 			String pdf_query = "SELECT * FROM `customersdebts`";
-			Statement st = myConn.createStatement();
-			ResultSet rs = st.executeQuery(pdf_query);
+//			Statement st = myConn.createStatement();
+			ResultSet rs = MysqlConnect.getDbCon().selectQuery(pdf_query);
 			while(rs.next())
 			{
 				String cell2 = rs.getString(2);

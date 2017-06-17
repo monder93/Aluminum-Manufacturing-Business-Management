@@ -17,6 +17,7 @@ import javax.swing.table.JTableHeader;
 
 import helpClasses.Calc;
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -135,9 +136,9 @@ public class ProjectProducts extends JFrame
 
 		try 
 		{
-			myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
+//			myConn = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
 			JTableHeader Theader = table.getTableHeader();

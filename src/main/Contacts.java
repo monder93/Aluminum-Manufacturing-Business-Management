@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 
 import java.awt.Font;
 import java.sql.Connection;
@@ -181,10 +182,11 @@ public class Contacts extends JFrame{
 						String phone = table.getModel().getValueAt(row, 4).toString();
 						String email = table.getModel().getValueAt(row, 5).toString();
 						String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
-						Connection myConn = HelpFunctions.DbConnection();
-						Statement myStmt;
-						myStmt = myConn.createStatement();
-						myStmt.executeUpdate(q);
+//						Connection myConn = HelpFunctions.DbConnection();
+//						Statement myStmt;
+//						myStmt = myConn.createStatement();
+//						myStmt.executeUpdate(q);
+						MysqlConnect.getDbCon().updateQuery(q);
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "updated!");
@@ -226,9 +228,10 @@ public class Contacts extends JFrame{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר זהות";
 						String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
-						Connection myConn = HelpFunctions.DbConnection();
-						Statement myStmt = myConn.createStatement();
-						myStmt.executeUpdate(query);
+//						Connection myConn = HelpFunctions.DbConnection();
+//						Statement myStmt = myConn.createStatement();
+//						myStmt.executeUpdate(query);
+						MysqlConnect.getDbCon().deleteRow("contacts", ProId, PID);
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
 						myConn.close();
@@ -245,7 +248,7 @@ public class Contacts extends JFrame{
 
 		try 
 		{
-			myConn = HelpFunctions.DbConnection();
+//			myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("contacts", table);
 			HelpFunctions.renderingTable(table);
 
@@ -303,12 +306,13 @@ public class Contacts extends JFrame{
 			{
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					Connection myConn = HelpFunctions.DbConnection();
+//					Connection myConn = HelpFunctions.DbConnection();
 					String q = "INSERT INTO `contacts`( `שם`, `משפחה`, `כתובת`, `טלפון`, `דואר אלקטרוני`) VALUES ('"+textField.getText()+"','"+textField1.getText()+"','"+textField2.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"')";
 					try
 					{
-						Statement st = myConn.createStatement();
-						st.executeUpdate(q);
+//						Statement st = myConn.createStatement();
+//						st.executeUpdate(q);
+						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "saved");
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);

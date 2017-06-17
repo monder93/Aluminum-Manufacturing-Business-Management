@@ -72,9 +72,9 @@ public class OrderItems {
 
 		try 
 		{
-			myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+this.id+"'");
+//			myConn = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+this.id+"'");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
 		}
@@ -120,7 +120,7 @@ public class OrderItems {
 					{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר סידורי";
-						Connection myConn = HelpFunctions.DbConnection();
+//						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("ordersproducts", ProId, PID);
 						Statement myStmt = myConn.createStatement();
 						ResultSet myRs = myStmt.executeQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'");

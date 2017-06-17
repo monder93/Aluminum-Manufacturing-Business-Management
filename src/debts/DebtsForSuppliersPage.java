@@ -112,9 +112,9 @@ public class DebtsForSuppliersPage extends JFrame
 
 	try
 	{
-		myConn = HelpFunctions.DbConnection();
-		Statement myStmt = myConn.createStatement();
-		ResultSet myRs = myStmt.executeQuery(query+table);
+//		myConn = HelpFunctions.DbConnection();
+//		Statement myStmt = myConn.createStatement();
+		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 		table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
 
@@ -134,12 +134,13 @@ public class DebtsForSuppliersPage extends JFrame
 						String q = "INSERT INTO `debtsforsuppliers`( `שם ספק`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+supplierNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";
 
 						//connection to database
-						myConn=HelpFunctions.DbConnection();
-						Statement st;
-						st = myConn.createStatement();
+//						myConn=HelpFunctions.DbConnection();
+//						Statement st;
+//						st = myConn.createStatement();
 
 						//execute the query
-						st.executeUpdate(q);
+//						st.executeUpdate(q);
+						MysqlConnect.getDbCon().insertQuery(q);
 						//message for success
 						JOptionPane.showMessageDialog(null, "saved");System.out.println(q);
 
@@ -148,7 +149,7 @@ public class DebtsForSuppliersPage extends JFrame
 						debtsTextField.setText("");
 
 						// update the table with the new data
-						ResultSet myRs = myStmt.executeQuery(query+table);
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 						table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table_1);
@@ -215,7 +216,7 @@ public class DebtsForSuppliersPage extends JFrame
 					{
 						String OID=(table_1.getModel().getValueAt(row, 0)).toString();
 						String OrderId="מספר חוב";
-						Connection myConn = HelpFunctions.DbConnection();
+//						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", OrderId, OID);
 						MysqlConnect.getDbCon().deleteRow("debtsforsuppliers", OrderId, OID);
 						HelpFunctions.getTable("debtsforsuppliers", table_1);

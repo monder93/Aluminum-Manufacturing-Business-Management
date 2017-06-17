@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
@@ -124,9 +125,9 @@ public class product extends JFrame{
 
 		try 
 		{
-			myConn  = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery(query);
+//			myConn  = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table_1);
@@ -169,9 +170,9 @@ public class product extends JFrame{
 
 		try 
 		{
-			myConn2  = HelpFunctions.DbConnection();
-			Statement myStmt = myConn2.createStatement();
-			ResultSet myRs = myStmt.executeQuery("SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'");
+//			myConn2  = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn2.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'");
 			table_2.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table_2);
 

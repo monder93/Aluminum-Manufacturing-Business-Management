@@ -73,25 +73,25 @@ public class HelpFunctions
 		return s;
 	}
 
-	public static Connection DbConnection()
-	{
-		String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";
-		String user = "root";
-		String password = "";
-		Connection myConn = null;
-
-		try
-		{
-			myConn = DriverManager.getConnection(url,user,password);
-		}
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-
-		return myConn;
-	}
-
+//	public static Connection DbConnection()
+//	{
+//		String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";
+//		String user = "root";
+//		String password = "";
+//		Connection myConn = null;
+//
+//		try
+//		{
+//			myConn = DriverManager.getConnection(url,user,password);
+//		}
+//		catch (SQLException e) 
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return myConn;
+//	}
+//
 	//---------------------------------------------------------------------------------------------------------------------
 
 	public static void getTable(String tableName , JTable viewTable)

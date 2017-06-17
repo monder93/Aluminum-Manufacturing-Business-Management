@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -65,10 +66,10 @@ public class hardware {
 		scrollPane.setViewportView(table);
 		
 		//connection to database 
-		myConn = HelpFunctions.DbConnection();
-		Statement myStmt = myConn.createStatement();
+//		myConn = HelpFunctions.DbConnection();
+//		Statement myStmt = myConn.createStatement();
 		String query = "SELECT * FROM hardware";
-		ResultSet myRs = myStmt.executeQuery(query);
+		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
 		HelpFunctions.renderingTable(table);
 

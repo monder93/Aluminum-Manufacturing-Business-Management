@@ -110,13 +110,12 @@ public class DebtsForSupplierPagePaied extends JFrame
 					String current_time_str = time_formatter.format(System.currentTimeMillis());
 					try 
 					{
-						myConn = HelpFunctions.DbConnection();
-						Statement myStmt = myConn.createStatement();
+
 						String query = "INSERT INTO `debtsforsupplierspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+ comboBox.getSelectedItem().toString() +"','"+payAmountTextField.getText()+"')";			
-						myStmt.executeUpdate(query);
+						MysqlConnect.getDbCon().insertQuery(query);
 
 						String query2="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
-						ResultSet myRs = myStmt.executeQuery(query2);
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 
 						System.out.println(query2);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
@@ -127,11 +126,11 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 						//insert data to DebtsPage table
 						String query3="UPDATE `debtsforsuppliers` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
-						myStmt.executeUpdate(query3);
+						MysqlConnect.getDbCon().updateQuery(query3);
 						System.out.println(query3);
 
 						String query4="select * from `debtsforsuppliers`";
-						myRs = myStmt.executeQuery(query4);
+						MysqlConnect.getDbCon().selectQuery(query4);
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
 
@@ -201,7 +200,7 @@ public class DebtsForSupplierPagePaied extends JFrame
 						Statement myStmt = myConn.createStatement();
 						String PID=(table.getModel().getValueAt(row, 1)).toString();
 						String ProId="מספר תשלום";
-						Connection myConn = HelpFunctions.DbConnection();
+//						Connection myConn = HelpFunctions.DbConnection();
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
 						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", ProId, PID);
@@ -247,11 +246,11 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 		try 
 		{			
-			myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
+//			myConn = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
 
 			String query="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
-			ResultSet myRs = myStmt.executeQuery(query);
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 			JLabel lblNewLabel = new JLabel("סוג תשלום :");

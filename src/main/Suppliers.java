@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -87,9 +88,9 @@ public class Suppliers extends JFrame
 
 		try 
 		{
-			myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery("select * from suppliers");
+//			myConn = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("select * from suppliers");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
 

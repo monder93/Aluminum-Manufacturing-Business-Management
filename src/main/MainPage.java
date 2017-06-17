@@ -31,8 +31,6 @@ import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.Statement;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -482,8 +480,9 @@ public class MainPage extends JFrame
 					String q = "INSERT INTO `generalreminders`(`תזכורת`) VALUES ('"+textField.getText().toString()+"')";
 					try
 					{
-						Statement st = MysqlConnect.getDbCon().conn.createStatement();
-						st.executeUpdate(q);
+//						Statement st = MysqlConnect.getDbCon().conn.createStatement();
+//						st.executeUpdate(q);
+						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "נוספה תזכורת חדשה","תזכורת חדשה",1);
 						HelpFunctions.getTable("generalreminders", table);
 						

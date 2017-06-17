@@ -6,15 +6,14 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class AddProject 
@@ -25,7 +24,7 @@ public class AddProject
 	public static JTextField contact;
 	public static JTextField color;
 	public static JTextField glass;
-	public Connection myConn;
+	//public Connection myConn;
 	private JTextField textField;
 	private JTextField textField_1;
 	public static String id;
@@ -210,9 +209,10 @@ public class AddProject
 					String q = "insert into `projects`(`אתר`, `שם מזמין`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `איש קשר`) values('" + plc
 							+ "','" + cust + "','" + col + "','" + colPr + "','" + gla + "','" + glaPr + "','" + cont
 							+ "') ";
-					myConn=HelpFunctions.DbConnection();
-					Statement st = myConn.createStatement();
-					st.executeUpdate(q);
+//					myConn=HelpFunctions.DbConnection();
+//					Statement st = myConn.createStatement();
+//					st.executeUpdate(q);
+					MysqlConnect.getDbCon().insertQuery(q);
 					JOptionPane.showMessageDialog(null, "saved");
 				} 
 				catch (Exception e) 
@@ -221,9 +221,10 @@ public class AddProject
 				}
 				try 
 				{
-					Statement myStmt = myConn.createStatement();
-					ResultSet myRs = myStmt.executeQuery("select * from projects");
+//					Statement myStmt = myConn.createStatement();
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery("select * from projects");
 					ProjectsPage.table.setModel(DbUtils.resultSetToTableModel(myRs));
+					HelpFunctions.renderingTable(ProjectsPage.table);
 
 				}
 				catch (SQLException e1) 

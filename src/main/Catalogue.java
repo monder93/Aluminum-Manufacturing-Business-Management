@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import helpClasses.PdfViewer;
 import net.proteanit.sql.DbUtils;
 
@@ -107,9 +108,9 @@ public class Catalogue extends JFrame {
 				pdfFileName="kalil/";
 				try 
 				{
-					Connection myConn = HelpFunctions.DbConnection();
-					Statement myStmt = myConn.createStatement();
-					ResultSet myRs = myStmt.executeQuery(query);
+//					Connection myConn = HelpFunctions.DbConnection();
+//					Statement myStmt = myConn.createStatement();
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					HelpFunctions.renderingTable(table);
 					
@@ -141,9 +142,9 @@ public class Catalogue extends JFrame {
 					try{
 						//get link from database
 						String query="SELECT `קישור` FROM `catalogue` WHERE `חברה`='"+companyName+"' AND `שם`='"+choosedName+"' ";
-						Connection myConn = HelpFunctions.DbConnection();
-						Statement myStmt = myConn.createStatement();
-						ResultSet myRs = myStmt.executeQuery(query);
+//						Connection myConn = HelpFunctions.DbConnection();
+//						Statement myStmt = myConn.createStatement();
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 						String StringTemp=pdfFileName;
 						 while (myRs.next())
 						 {
@@ -177,9 +178,9 @@ public class Catalogue extends JFrame {
 		pdfFileName="kalil/";
 		try 
 		{
-			Connection myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery(query);
+//			Connection myConn = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
 			
@@ -200,9 +201,9 @@ public class Catalogue extends JFrame {
 				pdfFileName="akstel/";
 				try 
 				{
-					Connection myConn = HelpFunctions.DbConnection();
-					Statement myStmt = myConn.createStatement();
-					ResultSet myRs = myStmt.executeQuery(query);
+//					Connection myConn = HelpFunctions.DbConnection();
+//					Statement myStmt = myConn.createStatement();
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					HelpFunctions.renderingTable(table);
 

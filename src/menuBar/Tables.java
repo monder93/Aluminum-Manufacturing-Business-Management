@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import main.AddProject;
 
 import javax.swing.JScrollPane;
@@ -100,9 +101,9 @@ public class Tables extends JFrame
 		table_1.setBounds(0, 0, 589, 352);
 
 		try {
-			myConn  = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery(query+table);
+//			myConn  = HelpFunctions.DbConnection();
+//			Statement myStmt = myConn.createStatement();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
 			// changing JTable Cell Value Alignment

@@ -169,11 +169,11 @@ public class ProjectsPage extends JFrame
 					{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר פרויקט";
-						Connection myConn = HelpFunctions.DbConnection();
+//						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("projects", ProId, PID);
 						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
-						myConn.close();
+//						myConn.close();
 					}
 				}
 				catch(Exception e)
@@ -206,10 +206,11 @@ public class ProjectsPage extends JFrame
 						String glass = table.getModel().getValueAt(row, 6).toString();
 						String glassPrice = table.getModel().getValueAt(row, 7).toString();
 						String query = "UPDATE `projects` SET`איש קשר`='"+contact+"',`אתר`='"+place+"',`שם מזמין`='"+costumer+"',`צבע`='"+color+"',`מחיר צבע`='"+colorPrice+"',`זיגוג`='"+glass+"',`מחיר זיגוג`='"+glassPrice+"' WHERE `מספר פרויקט`='"+id+"'";
-						Connection myConn = HelpFunctions.DbConnection();
-						Statement myStmt;
-						myStmt = myConn.createStatement();
-						myStmt.executeUpdate(query);
+//						Connection myConn = HelpFunctions.DbConnection();
+//						Statement myStmt;
+//						myStmt = myConn.createStatement();
+//						myStmt.executeUpdate(query);
+						MysqlConnect.getDbCon().updateQuery(query);
 						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "updated!");
@@ -247,7 +248,7 @@ public class ProjectsPage extends JFrame
 		btnNewButton_5.setBounds(1098, 406, 203, 46);
 		getContentPane().add(btnNewButton_5);
 
-		Connection myConn = HelpFunctions.DbConnection();
+//		Connection myConn = HelpFunctions.DbConnection();
 		HelpFunctions.getTable("projects", table);
 		HelpFunctions.renderingTable(table);
 
@@ -281,13 +282,13 @@ public class ProjectsPage extends JFrame
 				String searchBy=comboBox.getSelectedItem().toString();
 				String searchWord=searchword.getText();
 
-				Connection myConn = HelpFunctions.DbConnection();
-				Statement myStmt;
+//				Connection myConn = HelpFunctions.DbConnection();
+//				Statement myStmt;
 				try
 				{
 					String query="SELECT * FROM `projects` WHERE `"+ searchBy +"` = '"+ searchWord +"'";
-					myStmt = myConn.createStatement();
-					ResultSet myRs = myStmt.executeQuery(query);
+//					myStmt = myConn.createStatement();
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 				} 
 				catch (SQLException e) 
@@ -311,12 +312,12 @@ public class ProjectsPage extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				Connection myConn = HelpFunctions.DbConnection();
-				Statement myStmt;
+//				Connection myConn = HelpFunctions.DbConnection();
+//				Statement myStmt;
 				try
 				{
-					myStmt = myConn.createStatement();
-					ResultSet myRs = myStmt.executeQuery("SELECT * FROM `projects`");
+//					myStmt = myConn.createStatement();
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projects`");
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					HelpFunctions.renderingTable(table);
 				} 

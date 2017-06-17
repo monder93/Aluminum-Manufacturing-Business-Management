@@ -109,7 +109,7 @@ public class Orders extends JFrame
 
 		try 
 		{
-			myConn = HelpFunctions.DbConnection();
+//			myConn = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
@@ -181,7 +181,7 @@ public class Orders extends JFrame
 						{
 							String PID=(table_1.getModel().getValueAt(row, 0)).toString();
 							String ProId="מספר הזמנה";
-							Connection myConn = HelpFunctions.DbConnection();
+//							Connection myConn = HelpFunctions.DbConnection();
 							MysqlConnect.getDbCon().deleteRow("orders", ProId, PID);
 
 							query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
@@ -256,12 +256,13 @@ public class Orders extends JFrame
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					Connection myConn = HelpFunctions.DbConnection();
+//					Connection myConn = HelpFunctions.DbConnection();
 					String q = "INSERT INTO `orders`( `שם ספק`, `תאריך`, `אתר`, `סוג`) VALUES ('"+textField.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"','"+type+"')";
 					try 
 					{
-						Statement st = myConn.createStatement();
-						st.executeUpdate(q);
+//						Statement st = myConn.createStatement();
+//						st.executeUpdate(q);
+						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "saved");
 						query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
 						Statement myStmt = myConn.createStatement();
