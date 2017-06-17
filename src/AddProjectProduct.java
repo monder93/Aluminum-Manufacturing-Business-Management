@@ -5,14 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class AddProjectProduct 
 {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	public static JTextField textField;
+	public static JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
@@ -21,7 +22,8 @@ public class AddProjectProduct
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-
+	public static String colorId="err";
+	public static String glassId="err";
 	/**
 	 * Launch the application.
 	 */
@@ -103,6 +105,17 @@ public class AddProjectProduct
 		HelpFunctions.setBackground(lblNewLabel_6,"nopic");
 		
 		JButton btnNewButton = new JButton("צבע");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+			 try {
+				new colorList("AddProjectProduct");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			}
+		});
 		btnNewButton.setBounds(270, 240, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
@@ -112,6 +125,17 @@ public class AddProjectProduct
 		textField.setColumns(10);
 		
 		JButton button = new JButton("זיגוג");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					new glassList("AddProjectProduct");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		button.setBounds(270, 280, 89, 23);
 		frame.getContentPane().add(button);
 		

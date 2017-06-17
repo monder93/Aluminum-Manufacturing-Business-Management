@@ -27,14 +27,16 @@ public class AddProject
 	private JTextField place;
 	private JTextField customer;
 	public static JTextField contact;
-	private JTextField color;
-	private JTextField glass;
+	public static JTextField color;
+	public static JTextField glass;
 	public Connection myConn;
 	private JTextField textField;
 	private JTextField textField_1;
 	public static String id;
 	public static String name;
 	private JComboBox<String> comboBox_4;
+	public static String colorId="err";
+	public static String glassId="err";
 
 	/**
 	 * Launch the application.
@@ -83,7 +85,7 @@ public class AddProject
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				try {
-					new colorList();
+					new colorList("AddProject");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -99,7 +101,7 @@ public class AddProject
 			public void actionPerformed(ActionEvent e) 
 			{
 				try {
-					new glassList();
+					new glassList("AddProject");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

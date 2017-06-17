@@ -35,7 +35,7 @@ public class Tables extends JFrame{
 
 			}
 		});
-	
+
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Tables extends JFrame{
 	{
 		initialize();
 	}
-	
+
 	public Tables(String table)
 	{
 		this.table=table;
@@ -63,17 +63,17 @@ public class Tables extends JFrame{
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);		
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 569, 340);
 		frame.getContentPane().add(scrollPane);
 		table_1 = new JTable()
-		 {
-		    @Override
-		    public boolean isCellEditable(int row, int column) 
-		    {
-		        return false;                
-		    };
+		{
+			@Override
+			public boolean isCellEditable(int row, int column) 
+			{
+				return false;                
+			};
 		};
 		table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		table_1.addMouseListener(new MouseAdapter() {
@@ -81,14 +81,14 @@ public class Tables extends JFrame{
 			public void mouseClicked(MouseEvent me) {
 				if(table.compareTo("contacts")==0)
 				{
-				int row = table_1.getSelectedRow();
+					int row = table_1.getSelectedRow();
 
-				if (me.getClickCount() == 2)
-				{
-					Id=table_1.getModel().getValueAt(row, 0).toString();
-					name=table_1.getModel().getValueAt(row,1).toString();
-					AddProject.id=Id;
-					AddProject.contact.setText(name);
+					if (me.getClickCount() == 2)
+					{
+						Id=table_1.getModel().getValueAt(row, 0).toString();
+						name=table_1.getModel().getValueAt(row,1).toString();
+						AddProject.id=Id;
+						AddProject.contact.setText(name);
 					}
 				}
 			}
@@ -101,17 +101,16 @@ public class Tables extends JFrame{
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery(query+table);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-			
+
 			// changing JTable Cell Value Alignment
 			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
 			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-						
-			
+			for(int i = 0 ; i<table_1.getColumnCount();i++)
+			{
+				table_1.getColumnModel().getColumn(i).setCellRenderer(centerRenderr);
+			}
+
+
 			if(this.table.contentEquals("contacts"))
 			{
 				frame.setTitle("טבלת לקוחות");
@@ -121,13 +120,13 @@ public class Tables extends JFrame{
 				frame.setTitle("טבלת ספקים");
 			if(this.table.contentEquals("profiles"))
 				frame.setTitle("טבלת פרופילים");
-			
-				
+
+
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-			
+
 
 		}
 	}
