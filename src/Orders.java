@@ -27,7 +27,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JTextField;
 import java.awt.ComponentOrientation;
 
-public class Orders extends JFrame {
+public class Orders extends JFrame 
+{
 
 	private JFrame frame;
 	public static JTable table_1;
