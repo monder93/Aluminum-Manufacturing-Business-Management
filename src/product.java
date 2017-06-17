@@ -61,8 +61,6 @@ public class product extends JFrame{
 		initialize();
 	}
 	
-
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -86,7 +84,8 @@ public class product extends JFrame{
 		        return false;                
 		    };
 		};
-		table_1.addMouseListener(new MouseAdapter() {
+		table_1.addMouseListener(new MouseAdapter() 
+		{
 			@Override
 			public void mousePressed(MouseEvent me) 
 			{
@@ -99,18 +98,18 @@ public class product extends JFrame{
 		        	System.out.println(type);
 		        	query2= "SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'";
 		        	Statement myStmt;
-					try {
+					try 
+					{
 						myStmt = myConn.createStatement();
 						ResultSet myRs = myStmt.executeQuery(query2);
 						table_2.setModel(DbUtils.resultSetToTableModel(myRs));
-					} catch (SQLException e) {
+					} 
+					catch (SQLException e) 
+					{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-		        	
-		        }
-				
-				
+		        }		
 			}
 		});
 	
@@ -119,26 +118,18 @@ public class product extends JFrame{
 		scrollPane.setViewportView(table_1);
 		table_1.setBounds(0, 0, 589, 352);
 
-		try {
+		try 
+		{
 			myConn  = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-			
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-
-						
-			
-				
+			HelpFunctions.renderingTable(table_1);
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-			
-
 		}
 		
 		JScrollPane scrollPane2 = new JScrollPane();
@@ -153,9 +144,11 @@ public class product extends JFrame{
 		    };
 		};
 		
-		table_2.addMouseListener(new MouseAdapter() {
+		table_2.addMouseListener(new MouseAdapter() 
+		{
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent e) 
+			{
 				JTable table =(JTable) e.getSource();
 		        Point p = e.getPoint();
 		        int row = table.rowAtPoint(p);
@@ -170,11 +163,14 @@ public class product extends JFrame{
 		scrollPane2.setViewportView(table_2);
 		table_2.setBounds(0, 0, 289, 352);
 
-		try {
+		try 
+		{
 			myConn2  = HelpFunctions.DbConnection();
 			Statement myStmt = myConn2.createStatement();
 			ResultSet myRs = myStmt.executeQuery("SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'");
 			table_2.setModel(DbUtils.resultSetToTableModel(myRs));
+			HelpFunctions.renderingTable(table_2);
+
 			
 			JLabel label = new JLabel("כמות כנפי זכוכית:");
 			label.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -233,19 +229,11 @@ public class product extends JFrame{
 			btnNewButton.setBounds(36, 341, 107, 34);
 			frame.getContentPane().add(btnNewButton);
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table_2.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-
-						
-			
-				
+			HelpFunctions.renderingTable(table_2);
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-			
-
 		}
 	}
 }

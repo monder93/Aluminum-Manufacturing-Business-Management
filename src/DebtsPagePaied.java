@@ -1,22 +1,16 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
 import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,7 +18,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DebtsPagePaied extends JFrame {
+public class DebtsPagePaied extends JFrame 
+{
 
 	private JPanel contentPane;
 	private JTable table;
@@ -42,13 +37,19 @@ public class DebtsPagePaied extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					DebtsPagePaied frame = new DebtsPagePaied();
 					frame.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -131,21 +132,12 @@ public class DebtsPagePaied extends JFrame {
 						payAmountTextField.setText("");
 
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table);
+
 						
 						// changing JTable Cell Value Alignment
-						DebtsPage.table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(DebtsPage.table_1);
+
 
 
 
@@ -210,13 +202,8 @@ public class DebtsPagePaied extends JFrame {
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 						
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table);
+
 						
 						//insert data to DebtsPage table
 						String query3="UPDATE `customersdebts` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
@@ -230,12 +217,8 @@ public class DebtsPagePaied extends JFrame {
 						DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						
 						// changing JTable Cell Value Alignment
-						DebtsPage.table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-						DebtsPage.table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(DebtsPage.table_1);
+
 
 						myConn.close();
 					}
@@ -283,13 +266,8 @@ public class DebtsPagePaied extends JFrame {
 			comboBox.addItem("ויזה");
 
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);			
+			HelpFunctions.renderingTable(table);
+			
 
 			background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 825, 475);

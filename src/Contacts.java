@@ -1,13 +1,10 @@
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,7 +12,6 @@ import java.sql.Statement;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -178,6 +174,7 @@ public class Contacts extends JFrame{
 						myStmt = myConn.createStatement();
 						myStmt.executeUpdate(q);
 						HelpFunctions.getTable("contacts", table, myConn);
+						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "updated!");
 					}
 				} catch (SQLException e1) {
@@ -221,6 +218,7 @@ public class Contacts extends JFrame{
 						Statement myStmt = myConn.createStatement();
 						myStmt.executeUpdate(query);
 						HelpFunctions.getTable("contacts", table, myConn);
+						HelpFunctions.renderingTable(table);
 						myConn.close();
 					}	
 				}
@@ -237,6 +235,7 @@ public class Contacts extends JFrame{
 		{
 			myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("contacts", table, myConn);
+			HelpFunctions.renderingTable(table);
 
 			JButton button = new JButton("בחר");
 			button.setBounds(1025, 64, 243, 55);
@@ -297,6 +296,7 @@ public class Contacts extends JFrame{
 						st.executeUpdate(q);
 						JOptionPane.showMessageDialog(null, "saved");
 						HelpFunctions.getTable("contacts", table, myConn);
+						HelpFunctions.renderingTable(table);
 						hideOrShow(false);
 
 					} catch (Exception e) {
@@ -308,14 +308,7 @@ public class Contacts extends JFrame{
 			contentPane.add(button_1);
 			
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+			HelpFunctions.renderingTable(table);
 
 
 			JLabel background_label = new JLabel("New label");

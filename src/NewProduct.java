@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +12,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class NewProduct extends JFrame{
-
+public class NewProduct extends JFrame
+{
 	private JFrame frame;
 	private JPanel contentPane;
 	private JTextField textField;
@@ -33,14 +32,20 @@ public class NewProduct extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					NewProduct frame = new NewProduct();
 					frame.setVisible(true);
 					frame.setResizable(false);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -50,14 +55,16 @@ public class NewProduct extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public NewProduct() {
+	public NewProduct() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);

@@ -68,6 +68,7 @@ public class hardware {
 		String query = "SELECT * FROM hardware";
 		ResultSet myRs = myStmt.executeQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
+		HelpFunctions.renderingTable(table);
 
 	}
 }

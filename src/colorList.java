@@ -103,6 +103,8 @@ public class colorList {
 		String query = "SELECT * FROM colors";
 		ResultSet myRs = myStmt.executeQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
+		HelpFunctions.renderingTable(table);
+
 
 	}
 }

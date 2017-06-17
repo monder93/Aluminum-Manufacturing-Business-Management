@@ -108,6 +108,7 @@ public class Catalogue extends JFrame {
 					Statement myStmt = myConn.createStatement();
 					ResultSet myRs = myStmt.executeQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
+					HelpFunctions.renderingTable(table);
 					
 				} 
 				catch (Exception e1) 
@@ -177,6 +178,7 @@ public class Catalogue extends JFrame {
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery(query);
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
+			HelpFunctions.renderingTable(table);
 			
 		} catch (Exception e) 
 		{
@@ -199,7 +201,8 @@ public class Catalogue extends JFrame {
 					Statement myStmt = myConn.createStatement();
 					ResultSet myRs = myStmt.executeQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
-					
+					HelpFunctions.renderingTable(table);
+
 				} catch (Exception e) 
 				{
 					e.printStackTrace();

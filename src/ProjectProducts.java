@@ -44,14 +44,20 @@ public class ProjectProducts extends JFrame
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run()
+			{
+				try
+				{
 					ProjectProducts frame = new ProjectProducts();
 					frame.setVisible(true);
 					frame.setResizable(false);
-				} catch (Exception e) {
+				} 
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -61,8 +67,8 @@ public class ProjectProducts extends JFrame
 	/**
 	 * Create the application.
 	 */
-	public ProjectProducts() {
-
+	public ProjectProducts() 
+	{
 		initialize();
 	}
 
@@ -74,7 +80,8 @@ public class ProjectProducts extends JFrame
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -123,17 +130,20 @@ public class ProjectProducts extends JFrame
 			}
 		});
 
-		try {
+		try 
+		{
 			myConn = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
+			HelpFunctions.renderingTable(table);
 			JTableHeader Theader = table.getTableHeader();
-		    Theader.setBackground(Color.green);
-		    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
-		} catch (Exception e) {
+			Theader.setBackground(Color.green);
+			Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
-
 		}
 		JLabel lblNewLabel = new JLabel("סה\"כ מחיר הפרויקט(ש\"ח) לפני מע\"ם :");
 		lblNewLabel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -214,12 +224,16 @@ public class ProjectProducts extends JFrame
 		berzolNumBG.add(radioButton_2);
 
 		JButton btnNewButton = new JButton("פרופילים");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				try {
+				try 
+				{
 					new profiles();
-				} catch (SQLException e) {
+				}
+				catch (SQLException e) 
+				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -230,13 +244,16 @@ public class ProjectProducts extends JFrame
 		contentPane.add(btnNewButton);
 
 		JButton button = new JButton("פירזולים");
-		button.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				try {
-//					System.out.println("fat");
+				try 
+				{
 					new hardware();
-				} catch (SQLException e) {
+				} 
+				catch (SQLException e) 
+				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -252,7 +269,8 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_1);
 
 		JButton button_2 = new JButton("תריס גלילה");
-		button_2.addActionListener(new ActionListener() {
+		button_2.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				new scrollShutter();
@@ -359,21 +377,9 @@ public class ProjectProducts extends JFrame
 		background_label.setBounds(0, 0, 1362, 705);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
-		
+
 		// changing JTable Cell Value Alignment
-		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(7).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(8).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(9).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(10).setCellRenderer(centerRenderr);
+		HelpFunctions.renderingTable(table);
 
 		HelpFunctions.setBackground(lblNewLabel_8, "nopic");
 		radioButton.setSelected(true);

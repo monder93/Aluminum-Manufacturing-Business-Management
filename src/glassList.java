@@ -28,13 +28,19 @@ public class glassList {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
+				try 
+				{
 					glassList window = new glassList();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -45,12 +51,14 @@ public class glassList {
 	 * Create the application.
 	 * @throws SQLException 
 	 */
-	public glassList() throws SQLException {
+	public glassList() throws SQLException 
+	{
 
 		initialize();
 	}
 
-	public glassList(String c) throws SQLException {
+	public glassList(String c) throws SQLException 
+	{
 		this.className=c;
 		initialize();
 
@@ -72,7 +80,8 @@ public class glassList {
 		frame.getContentPane().add(scrollPane);
 
 		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		table.addMouseListener(new MouseAdapter() 
+		{
 			@Override
 			public void mousePressed(MouseEvent e) 
 			{
@@ -108,6 +117,8 @@ public class glassList {
 		String query = "SELECT * FROM glass";
 		ResultSet myRs = myStmt.executeQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
+		HelpFunctions.renderingTable(table);
+
 
 	}
 }

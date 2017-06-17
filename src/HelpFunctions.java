@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import net.proteanit.sql.DbUtils;
 
@@ -69,7 +70,7 @@ public class HelpFunctions
 		String s="שעה :  "+hour + ":"+minute+":"+second+"   תאריך :  "+day+"/"+month+"/"+year;
 		return s;
 	}
-	
+
 	public static Connection DbConnection()
 	{
 		String url = "jdbc:mysql://localhost:3306/final-project?useUnicode=yes&characterEncoding=UTF-8";
@@ -104,7 +105,18 @@ public class HelpFunctions
 			e.printStackTrace();
 		}
 	}
+	//----------------------------------------------------------------------------------------------------------------------
 
+	public static void renderingTable(JTable table)
+	{
+		// changing JTable Cell Value Alignment
+		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
+		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
+		for(int i = 0 ; i<table.getColumnCount();i++)
+		{
+			table.getColumnModel().getColumn(i).setCellRenderer(centerRenderr);
+		}
+	}
 	//----------------------------------------------------------------------------------------------------------------------
 
 	public static void setBackground(JLabel background_label)
@@ -131,7 +143,7 @@ public class HelpFunctions
 	{
 		label.setIcon(new ImageIcon(ImageIcon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT)));
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------------------
 
 	public static void deleteDbRow(String tableName ,String primaryId, String ID , Connection myConn)

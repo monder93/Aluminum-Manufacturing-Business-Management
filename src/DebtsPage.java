@@ -8,25 +8,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import net.proteanit.sql.DbUtils;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-
-import com.itextpdf.text.log.SysoCounter;
-
 import javax.swing.JLabel;
 
 public class DebtsPage extends JFrame
@@ -153,14 +146,8 @@ public class DebtsPage extends JFrame
 					table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 					
 					// changing JTable Cell Value Alignment
-					DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-					centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-					table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-					table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-					table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-					table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-					table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-					table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+					HelpFunctions.renderingTable(table_1);
+
 					
 				} 
 				catch (SQLException e1) 
@@ -232,14 +219,8 @@ public class DebtsPage extends JFrame
 						HelpFunctions.getTable("customersdebts", table_1, myConn);
 						
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-						table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table_1);
+
 						
 					}
 
@@ -275,14 +256,8 @@ public class DebtsPage extends JFrame
 		frame.getContentPane().add(label);
 		
 		// changing JTable Cell Value Alignment
-		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-		table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-		table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-		table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-		table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-		table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-		table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+		HelpFunctions.renderingTable(table_1);
+
 		
 		JLabel background_label = new JLabel("New label");
 		background_label.setBounds(0, 0, 835, 484);

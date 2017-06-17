@@ -12,7 +12,8 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
 
-public class profiles {
+public class profiles 
+{
 
 	private JFrame frame;
 	private JTable table;
@@ -21,13 +22,19 @@ public class profiles {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run()
+			{
+				try 
+				{
 					profiles window = new profiles();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -38,7 +45,8 @@ public class profiles {
 	 * Create the application.
 	 * @throws SQLException 
 	 */
-	public profiles() throws SQLException {
+	public profiles() throws SQLException
+	{
 		initialize();
 	}
 
@@ -68,6 +76,6 @@ public class profiles {
 		String query = "SELECT * FROM profiles";
 		ResultSet myRs = myStmt.executeQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
-
+		HelpFunctions.renderingTable(table);
 	}
 }

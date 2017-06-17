@@ -1,9 +1,7 @@
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import net.proteanit.sql.*;
 import javax.swing.JFrame;
@@ -14,8 +12,8 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Tables extends JFrame{
-
+public class Tables extends JFrame
+{
 	private JFrame frame;
 	public static JTable table_1;
 	public Connection	myConn;
@@ -103,19 +101,12 @@ public class Tables extends JFrame{
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			for(int i = 0 ; i<table_1.getColumnCount();i++)
-			{
-				table_1.getColumnModel().getColumn(i).setCellRenderer(centerRenderr);
-			}
+			HelpFunctions.renderingTable(table_1);
+
 
 
 			if(this.table.contentEquals("contacts"))
-			{
 				frame.setTitle("טבלת לקוחות");
-				table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
-			}
 			if(this.table.contentEquals("suppliers"))
 				frame.setTitle("טבלת ספקים");
 			if(this.table.contentEquals("profiles"))

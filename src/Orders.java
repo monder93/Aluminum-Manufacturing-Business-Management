@@ -1,16 +1,11 @@
 import java.awt.EventQueue;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import net.proteanit.sql.DbUtils;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -19,11 +14,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Point;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.JTextField;
 import java.awt.ComponentOrientation;
 
@@ -53,8 +46,10 @@ public class Orders extends JFrame
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
 			public void run() 
 			{
 			}
@@ -64,18 +59,20 @@ public class Orders extends JFrame
 	/**
 	 * Create the application.
 	 */
-	public Orders() {
+	public Orders() 
+	{
 		initialize();
 	}
-	public Orders(String type) {
+	public Orders(String type) 
+	{
 		this.type=type;
 		query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
-
 		initialize();
 	}
 
 
-	private void initialize() {
+	private void initialize() 
+	{
 		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String date = time_formatter.format(System.currentTimeMillis());
 		frame = new JFrame();
@@ -110,6 +107,7 @@ public class Orders extends JFrame
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
+			HelpFunctions.renderingTable(table_1);
 
 			btnNewButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05D4");
 			btnNewButton.addActionListener(new ActionListener() 
@@ -120,8 +118,10 @@ public class Orders extends JFrame
 				}
 			});
 
-			table_1.addMouseListener(new MouseAdapter() {
-				public void mousePressed(MouseEvent me) {
+			table_1.addMouseListener(new MouseAdapter() 
+			{
+				public void mousePressed(MouseEvent me) 
+				{
 					Point p = me.getPoint();
 					int row = table_1.rowAtPoint(p);
 					String id = "";
@@ -132,7 +132,8 @@ public class Orders extends JFrame
 
 						id = (table_1.getModel().getValueAt(row, 0)).toString();
 					}
-					if (me.getClickCount() == 2) {
+					if (me.getClickCount() == 2) 
+					{
 						new OrderItems(id);
 					}
 				}
@@ -149,12 +150,11 @@ public class Orders extends JFrame
 
 			button_1 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
 			button_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			button_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-
+			button_1.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e)
+				{
 					int row = table_1.getSelectedRow();
-
-
 					int response = 0;
 					try{
 						if(row<0)
@@ -182,17 +182,15 @@ public class Orders extends JFrame
 							Statement myStmt = myConn.createStatement();
 							ResultSet myRs = myStmt.executeQuery(query);
 							table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-							
+							HelpFunctions.renderingTable(table_1);
+
 							myConn.close();
 						}
-
 					}
-
 					catch(Exception e1)
 					{
 						e1.printStackTrace();
 					}
-
 				}
 			});
 			button_1.setBounds(359, 42, 117, 41);
@@ -247,11 +245,14 @@ public class Orders extends JFrame
 
 			btnNewButton_1 = new JButton("אישור");
 			btnNewButton_1.setVisible(false);
-			btnNewButton_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+			btnNewButton_1.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
 					Connection myConn = HelpFunctions.DbConnection();
 					String q = "INSERT INTO `orders`( `שם ספק`, `תאריך`, `אתר`, `סוג`) VALUES ('"+textField.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"','"+type+"')";
-					try {
+					try 
+					{
 						Statement st = myConn.createStatement();
 						st.executeUpdate(q);
 						JOptionPane.showMessageDialog(null, "saved");
@@ -261,22 +262,21 @@ public class Orders extends JFrame
 						table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						hideOrShow(false);
 
-					} catch (Exception e1) {
-						e1.printStackTrace();					}
+					} 
+					catch (Exception e1)
+					{
+						e1.printStackTrace();				
+					}
 
 				}
 			});
 			btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 			btnNewButton_1.setBounds(63, 109, 89, 23);
 			frame.getContentPane().add(btnNewButton_1);
-			
+
+
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-			table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
+			HelpFunctions.renderingTable(table_1);
 
 			background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 835, 484);
@@ -294,16 +294,11 @@ public class Orders extends JFrame
 			if(type.contentEquals("הזמנת תריס גלילה"))
 				frame.setTitle("הזמנת תריס גלילה");	
 
-
-
-
-
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
-
 		}
-
-
 	}
 
 	private void hideOrShow(boolean flag)

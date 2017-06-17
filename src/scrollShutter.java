@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,7 +11,8 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class scrollShutter {
+public class scrollShutter 
+{
 
 	private JFrame frame;
 	private JTextField textField;
@@ -55,13 +55,19 @@ public class scrollShutter {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					scrollShutter window = new scrollShutter();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -71,14 +77,16 @@ public class scrollShutter {
 	/**
 	 * Create the application.
 	 */
-	public scrollShutter() {
+	public scrollShutter() 
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 658, 502);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -86,12 +94,16 @@ public class scrollShutter {
 		frame.setVisible(true);
 
 		JButton btnNewButton = new JButton("סוג שלב");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try {
+				try 
+				{
 					new scrollShutterType();
-				} catch (SQLException e1) {
+				}
+				catch (SQLException e1)
+				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -276,6 +288,7 @@ public class scrollShutter {
 		radioButton_20.setBounds(156, 406, 43, 23);
 		frame.getContentPane().add(radioButton_20);
 		
+		bg1.add(rdbtnNewRadioButton);
 		bg1.add(radioButton);
 		bg1.add(radioButton_1);
 		bg1.add(radioButton_2);

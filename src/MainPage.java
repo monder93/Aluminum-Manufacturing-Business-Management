@@ -2,24 +2,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chapter;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-
-import net.proteanit.sql.DbUtils;
-
 import javax.swing.JMenuBar;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -29,7 +12,6 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -38,19 +20,14 @@ import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
-
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class MainPage extends JFrame 
 {
-
 	private JPanel contentPane;
 	private static JLabel timeLabel;
 	private JTable table;
@@ -487,11 +464,9 @@ public class MainPage extends JFrame
 						st.executeUpdate(q);
 						JOptionPane.showMessageDialog(null, "נוספה תזכורת חדשה","תזכורת חדשה",1);
 						HelpFunctions.getTable("generalreminders", table, myConn);
+						
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table);
 
 						//reset the textField to empty
 						textField.setText("");
@@ -542,11 +517,10 @@ public class MainPage extends JFrame
 						Connection myConn = HelpFunctions.DbConnection();
 						HelpFunctions.deleteDbRow("generalreminders", remindId, RID, myConn);
 						HelpFunctions.getTable("generalreminders", table, myConn);
+					
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table);
+
 						myConn.close();
 					}
 
@@ -578,16 +552,14 @@ public class MainPage extends JFrame
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		HelpFunctions.getTable("generalreminders", table, myConn);
 
-		// changing JTable Cell Value Alignment
-		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-
+		//coloring green the header of the table 
 		JTableHeader Theader = table.getTableHeader();
 		Theader.setBackground(Color.green);
 		Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
 
+		// changing JTable Cell Value Alignment
+		HelpFunctions.renderingTable(table);
+		
 
 
 		JLabel background_label = new JLabel("");

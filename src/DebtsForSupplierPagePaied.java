@@ -4,16 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-
-import com.adobe.acrobat.gui.ComboBox;
-
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -25,7 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class DebtsForSupplierPagePaied extends JFrame {
+public class DebtsForSupplierPagePaied extends JFrame 
+{
 
 	private JPanel contentPane;
 	private JTable table;
@@ -44,13 +39,19 @@ public class DebtsForSupplierPagePaied extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run()
+			{
+				try 
+				{
 					DebtsForSupplierPagePaied frame = new DebtsForSupplierPagePaied();
 					frame.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -128,29 +129,20 @@ public class DebtsForSupplierPagePaied extends JFrame {
 						String query4="select * from `debtsforsuppliers`";
 						myRs = myStmt.executeQuery(query4);
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table);
+
 
 						System.out.println(query4);
 						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						// changing JTable Cell Value Alignment
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(DebtsForSuppliersPage.table_1);
 
 
 
 
-						
+
+
 						payAmountTextField.setText("");
 
 
@@ -217,13 +209,8 @@ public class DebtsForSupplierPagePaied extends JFrame {
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						// changing JTable Cell Value Alignment
-						DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-						centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-						table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(table);
+
 
 						//insert data to DebtsPage table
 						String query3="UPDATE `debtsforsuppliers` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
@@ -236,12 +223,8 @@ public class DebtsForSupplierPagePaied extends JFrame {
 						System.out.println(query4);
 						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						// changing JTable Cell Value Alignment
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-						DebtsForSuppliersPage.table_1.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
+						HelpFunctions.renderingTable(DebtsForSuppliersPage.table_1);
+
 
 
 						myConn.close();
@@ -282,13 +265,8 @@ public class DebtsForSupplierPagePaied extends JFrame {
 			contentPane.add(payAmountTextField);
 
 			// changing JTable Cell Value Alignment
-			DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-			centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-			table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-			table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);			
+			HelpFunctions.renderingTable(table);
+
 
 			comboBox = new JComboBox();
 			comboBox.setBounds(566, 171, 86, 34);
@@ -296,7 +274,7 @@ public class DebtsForSupplierPagePaied extends JFrame {
 			comboBox.addItem("מזומן");
 			comboBox.addItem("ציק");
 			comboBox.addItem("ויזה");
-			
+
 			background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 825, 475);
 			contentPane.add(background_label);

@@ -7,22 +7,29 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import java.awt.Font;
 
-public class OpenType {
+public class OpenType
+{
 
 	private JFrame frame;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
+				try
+				{
 					OpenType window = new OpenType();
 					window.frame.setVisible(true);
 					//resizable false
 					window.frame.setResizable(false);
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -32,14 +39,16 @@ public class OpenType {
 	/**
 	 * Create the application.
 	 */
-	public OpenType() {
+	public OpenType() 
+	{
 		initialize();
 	}
 
 	/** 
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.setBounds(550, 200, 250, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,7 +70,7 @@ public class OpenType {
 		DLM.addElement("\u05DE\u05E2\u05E7\u05D5\u05EA");
 		DLM.addElement("\u05DE\u05E7\u05DC\u05D7\u05D5\u05E0\u05D9\u05DD");
 		DLM.addElement("\u05E7\u05D9\u05E8\u05D5\u05EA \u05DE\u05E1\u05DA");
-		
+
 		list.setModel(DLM);
 		frame.getContentPane().add(list);
 		DefaultListCellRenderer renderer =  (DefaultListCellRenderer)list.getCellRenderer();  

@@ -3,16 +3,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import javax.swing.JFrame;
 import javax.swing.JTable;
-
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
 
-public class slidingShutter {
+public class slidingShutter 
+{
 
 	private JFrame frame;
 	private JTable table;
@@ -21,13 +19,19 @@ public class slidingShutter {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try
+				{
 					slidingShutter window = new slidingShutter();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -38,7 +42,8 @@ public class slidingShutter {
 	 * Create the application.
 	 * @throws SQLException 
 	 */
-	public slidingShutter() throws SQLException {
+	public slidingShutter() throws SQLException 
+	{
 		initialize();
 	}
 
@@ -57,17 +62,19 @@ public class slidingShutter {
 		scrollPane.setBounds(10, 11, 302, 448);
 		frame.getContentPane().add(scrollPane);
 		frame.setName("שלבי תריס הזזה");
-		
+
 		table = new JTable();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
+
 		//connection to database 
 		myConn = HelpFunctions.DbConnection();
 		Statement myStmt = myConn.createStatement();
 		String query = "SELECT * FROM slidingShutter";
 		ResultSet myRs = myStmt.executeQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
+		HelpFunctions.renderingTable(table);
+
 
 	}
 }

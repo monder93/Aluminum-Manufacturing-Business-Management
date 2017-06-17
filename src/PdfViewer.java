@@ -21,7 +21,6 @@ public class PdfViewer extends JPanel
 	}
 	public void main() throws Exception 
 	{
-
 		PdfViewer lecteur = new PdfViewer(name);
 		JFrame f = new JFrame("Lecteur PDF");
 		f.setSize(1024,768);

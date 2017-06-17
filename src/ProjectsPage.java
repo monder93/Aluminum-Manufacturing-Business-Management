@@ -41,15 +41,20 @@ public class ProjectsPage extends JFrame
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					ProjectsPage frame = new ProjectsPage();
 					frame.setVisible(true);
 					frame.setResizable(false);
-
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -59,9 +64,9 @@ public class ProjectsPage extends JFrame
 	/**
 	 * Create the application.
 	 */
-	public ProjectsPage() {
+	public ProjectsPage() 
+	{
 		setTitle("Projects");
-
 		initialize();
 	}
 
@@ -108,8 +113,10 @@ public class ProjectsPage extends JFrame
 		((DefaultTableCellRenderer)Theader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
 		JButton btnNewButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				AddProject newProject=new AddProject();
 			}
 		});
@@ -117,17 +124,17 @@ public class ProjectsPage extends JFrame
 		getContentPane().add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("\u05D4\u05D5\u05E1\u05E4\u05D4/\u05E2\u05D3\u05DB\u05D5\u05DF \u05DE\u05D5\u05E6\u05E8\u05D9\u05DD \u05DC\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnNewButton_1.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				int row = table.getSelectedRow();
 				if(row<0)
 					JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה");
 				else
 				{
 					String Id=(table.getModel().getValueAt(row, 0)).toString();
-					//				System.out.println(Id);
 					new ProjectProducts(Id);
-
 				}
 			}
 		});
@@ -139,8 +146,6 @@ public class ProjectsPage extends JFrame
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				int row = table.getSelectedRow();
-
-
 				int response = 0;
 				try{
 					if(row<0)
@@ -164,11 +169,10 @@ public class ProjectsPage extends JFrame
 						Connection myConn = HelpFunctions.DbConnection();
 						HelpFunctions.deleteDbRow("projects", ProId, PID, myConn);
 						HelpFunctions.getTable("projects", table, myConn);
+						HelpFunctions.renderingTable(table);
 						myConn.close();
 					}
-
 				}
-
 				catch(Exception e)
 				{
 					e.printStackTrace();
@@ -179,11 +183,13 @@ public class ProjectsPage extends JFrame
 		getContentPane().add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("עדכון פרויקט");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton_3.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				int row=table.getSelectedRow();
-
-				try {
+				try
+				{
 					if(row<0)
 						JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
 					else
@@ -202,20 +208,23 @@ public class ProjectsPage extends JFrame
 						myStmt = myConn.createStatement();
 						myStmt.executeUpdate(query);
 						HelpFunctions.getTable("projects", table, myConn);
+						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "updated!");
 					}
-				} catch (SQLException e1) {
+				} 
+				catch (SQLException e1) 
+				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
 			}
 		});
 		btnNewButton_3.setBounds(1098, 133, 203, 46);
 		getContentPane().add(btnNewButton_3);
 
 		JButton btnNewButton_4 = new JButton("\u05D7\u05D9\u05E4\u05D5\u05E9");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		btnNewButton_4.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				showHide(true);
@@ -225,19 +234,19 @@ public class ProjectsPage extends JFrame
 		getContentPane().add(btnNewButton_4);
 
 		JButton btnNewButton_5 = new JButton("\u05D7\u05D6\u05E8\u05D4");
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnNewButton_5.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				dispose();				
 			}
 		});
 		btnNewButton_5.setBounds(1098, 406, 203, 46);
 		getContentPane().add(btnNewButton_5);
 
-
-
-
 		Connection myConn = HelpFunctions.DbConnection();
 		HelpFunctions.getTable("projects", table, myConn);
+		HelpFunctions.renderingTable(table);
 
 		sb = new JLabel("חפש לפי :");
 		sb.setVisible(false);
@@ -259,12 +268,10 @@ public class ProjectsPage extends JFrame
 		comboBox.addItem("שם מזמין");
 		comboBox.addItem("אתר");
 
-
-
-
 		search = new JButton("חפש");
 		search.setVisible(false);
-		search.addActionListener(new ActionListener() {
+		search.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 
@@ -273,12 +280,14 @@ public class ProjectsPage extends JFrame
 
 				Connection myConn = HelpFunctions.DbConnection();
 				Statement myStmt;
-				try {
+				try
+				{
 					String query="SELECT * FROM `projects` WHERE `"+ searchBy +"` = '"+ searchWord +"'";
 					myStmt = myConn.createStatement();
 					ResultSet myRs = myStmt.executeQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
-				} catch (SQLException e) 
+				} 
+				catch (SQLException e) 
 				{
 					e.printStackTrace();
 				}
@@ -295,16 +304,20 @@ public class ProjectsPage extends JFrame
 
 		cancel = new JButton("בטל חיפוש");
 		cancel.setVisible(false);
-		cancel.addActionListener(new ActionListener() {
+		cancel.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				Connection myConn = HelpFunctions.DbConnection();
 				Statement myStmt;
-				try {
+				try
+				{
 					myStmt = myConn.createStatement();
 					ResultSet myRs = myStmt.executeQuery("SELECT * FROM `projects`");
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
-				} catch (SQLException e) 
+					HelpFunctions.renderingTable(table);
+				} 
+				catch (SQLException e) 
 				{
 					e.printStackTrace();
 				}
@@ -320,16 +333,8 @@ public class ProjectsPage extends JFrame
 		contentPane.add(background_label);
 
 		// changing JTable Cell Value Alignment
-		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(7).setCellRenderer(centerRenderr);
+		HelpFunctions.renderingTable(table);
+
 	}
 	private void showHide(boolean flag)
 	{

@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import net.proteanit.sql.DbUtils;
 
@@ -68,19 +67,24 @@ public class OrderItems {
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
-		try {
+		try 
+		{
 			myConn = HelpFunctions.DbConnection();
 			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = myStmt.executeQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+this.id+"'");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
-		} catch (Exception e) {
+			HelpFunctions.renderingTable(table);
+		}
+		catch (Exception e) 
+		{
 			e.printStackTrace();
-
 		}
 
 		JButton btnNewButton = new JButton("הוספת מוצר");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				new AddOrderItems(id);
 			}
 		});
@@ -88,12 +92,11 @@ public class OrderItems {
 		frame.getContentPane().add(btnNewButton);
 
 		JButton button = new JButton("מחיקת מוצר");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
+		button.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				int row = table.getSelectedRow();
-
-
 				int response = 0;
 				try{
 					if(row<0)
@@ -119,16 +122,14 @@ public class OrderItems {
 						Statement myStmt = myConn.createStatement();
 						ResultSet myRs = myStmt.executeQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'");
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
+						HelpFunctions.renderingTable(table);
 						myConn.close();
 					}
-
 				}
-
 				catch(Exception e1)
 				{
 					e1.printStackTrace();
 				}
-
 			}
 		});
 		button.setBounds(366, 58, 106, 48);
@@ -145,21 +146,12 @@ public class OrderItems {
 		HelpFunctions.setIcon(button_2, "printer");
 		
 		// changing JTable Cell Value Alignment
-		DefaultTableCellRenderer centerRenderr = new DefaultTableCellRenderer();
-		centerRenderr.setHorizontalAlignment(JLabel.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(1).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(2).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(3).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderr);
-		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderr);
-
-		
+		HelpFunctions.renderingTable(table);
 		
 		JLabel background_label = new JLabel("New label");
 		background_label.setBounds(0, 0, 684, 461);
 		frame.getContentPane().add(background_label);
+		
 		HelpFunctions.setBackground(background_label);
 	}
 }
