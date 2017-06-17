@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -203,7 +204,7 @@ public class DebtsForSupplierPagePaied extends JFrame
 						Connection myConn = HelpFunctions.DbConnection();
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
-						HelpFunctions.deleteDbRow("debtsforsupplierspaied", ProId, PID, myConn);
+						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", ProId, PID);
 
 						String query2="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 						ResultSet myRs = myStmt.executeQuery(query2);

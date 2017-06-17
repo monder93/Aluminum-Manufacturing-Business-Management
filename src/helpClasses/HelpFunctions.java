@@ -94,11 +94,11 @@ public class HelpFunctions
 
 	//---------------------------------------------------------------------------------------------------------------------
 
-	public static void getTable(String tableName , JTable viewTable , Connection myConn)
+	public static void getTable(String tableName , JTable viewTable)
 	{
 		try
 		{
-			Statement myStmt = myConn.createStatement();
+			Statement myStmt = MysqlConnect.getDbCon().conn.createStatement();
 			ResultSet myRs = myStmt.executeQuery("select * from "+tableName+"");
 			viewTable.setModel(DbUtils.resultSetToTableModel(myRs));
 		}
@@ -148,21 +148,21 @@ public class HelpFunctions
 
 	//-----------------------------------------------------------------------------------------------------------------------
 
-	public static void deleteDbRow(String tableName ,String primaryId, String ID , Connection myConn)
-	{
-		try
-		{
-			String query = "DELETE FROM `"+tableName+"` WHERE  `"+primaryId+"`= '"+ID+"'";
-			Statement myStmt = myConn.createStatement();
-			myStmt.executeUpdate(query);
-			System.out.println("done");
-			System.out.println(query);
-
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+//	public static void deleteDbRow(String tableName ,String primaryId, String ID)
+//	{
+//		try
+//		{
+//			String query = "DELETE FROM `"+tableName+"` WHERE  `"+primaryId+"`= '"+ID+"'";
+//			Statement myStmt = MysqlConnect.getDbCon().conn.createStatement();
+//			myStmt.executeUpdate(query);
+//			System.out.println("done");
+//			System.out.println(query);
+//
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//	}
 
 }

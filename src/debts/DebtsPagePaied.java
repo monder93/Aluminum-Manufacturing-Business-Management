@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -190,17 +191,16 @@ public class DebtsPagePaied extends JFrame
 					}
 					else if (response == JOptionPane.YES_OPTION) 
 					{
-						Statement myStmt = myConn.createStatement();
 						String PID=(table.getModel().getValueAt(row, 1)).toString();
 						String ProId="מספר תשלום";
 						Connection myConn = HelpFunctions.DbConnection();
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
-						HelpFunctions.deleteDbRow("customersdebtspaied", ProId, PID, myConn);
+						MysqlConnect.getDbCon().deleteRow("customersdebtspaied", ProId, PID);
 						
 						String query2="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
-						ResultSet myRs = myStmt.executeQuery(query2);
-
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
+						
 						System.out.println(query2);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 						
@@ -210,11 +210,12 @@ public class DebtsPagePaied extends JFrame
 						
 						//insert data to DebtsPage table
 						String query3="UPDATE `customersdebts` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
-						myStmt.executeUpdate(query3);
+						MysqlConnect.getDbCon().updateQuery(query3);
 						System.out.println(query3);
 
 						String query4="select * from `customersdebts`";
-						myRs = myStmt.executeQuery(query4);
+						//myRs = myStmt.executeQuery(query4);
+						myRs = MysqlConnect.getDbCon().selectQuery(query4);
 
 						System.out.println(query4);
 						DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));

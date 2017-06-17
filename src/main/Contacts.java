@@ -43,15 +43,21 @@ public class Contacts extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try
+				{
 					Contacts frame = new Contacts();
 					frame.setVisible(true);
 					//resizable  false
 					frame.setResizable(false);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -61,14 +67,16 @@ public class Contacts extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Contacts() {
+	public Contacts()
+	{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -177,7 +185,7 @@ public class Contacts extends JFrame{
 						Statement myStmt;
 						myStmt = myConn.createStatement();
 						myStmt.executeUpdate(q);
-						HelpFunctions.getTable("contacts", table, myConn);
+						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "updated!");
 					}
@@ -221,7 +229,7 @@ public class Contacts extends JFrame{
 						Connection myConn = HelpFunctions.DbConnection();
 						Statement myStmt = myConn.createStatement();
 						myStmt.executeUpdate(query);
-						HelpFunctions.getTable("contacts", table, myConn);
+						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
 						myConn.close();
 					}	
@@ -238,7 +246,7 @@ public class Contacts extends JFrame{
 		try 
 		{
 			myConn = HelpFunctions.DbConnection();
-			HelpFunctions.getTable("contacts", table, myConn);
+			HelpFunctions.getTable("contacts", table);
 			HelpFunctions.renderingTable(table);
 
 			JButton button = new JButton("בחר");
@@ -291,26 +299,31 @@ public class Contacts extends JFrame{
 			contentPane.add(button);
 			button_1 = new JButton("אישור");
 			button_1.setVisible(false);
-			button_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+			button_1.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent arg0) 
+				{
 					Connection myConn = HelpFunctions.DbConnection();
 					String q = "INSERT INTO `contacts`( `שם`, `משפחה`, `כתובת`, `טלפון`, `דואר אלקטרוני`) VALUES ('"+textField.getText()+"','"+textField1.getText()+"','"+textField2.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"')";
-					try {
+					try
+					{
 						Statement st = myConn.createStatement();
 						st.executeUpdate(q);
 						JOptionPane.showMessageDialog(null, "saved");
-						HelpFunctions.getTable("contacts", table, myConn);
+						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
 						hideOrShow(false);
 
-					} catch (Exception e) {
-						e.printStackTrace();					}
+					} catch (Exception e)
+					{
+						e.printStackTrace();
+					}
 				}
 			});
 			button_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 			button_1.setBounds(516, 501, 165, 42);
 			contentPane.add(button_1);
-			
+
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
 

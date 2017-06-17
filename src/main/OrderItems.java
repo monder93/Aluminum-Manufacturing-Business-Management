@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -120,7 +121,7 @@ public class OrderItems {
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר סידורי";
 						Connection myConn = HelpFunctions.DbConnection();
-						HelpFunctions.deleteDbRow("ordersproducts", ProId, PID, myConn);
+						MysqlConnect.getDbCon().deleteRow("ordersproducts", ProId, PID);
 						Statement myStmt = myConn.createStatement();
 						ResultSet myRs = myStmt.executeQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'");
 						table.setModel(DbUtils.resultSetToTableModel(myRs));

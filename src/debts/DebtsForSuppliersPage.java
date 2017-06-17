@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 
 import javax.swing.JLabel;
 
@@ -215,9 +216,9 @@ public class DebtsForSuppliersPage extends JFrame
 						String OID=(table_1.getModel().getValueAt(row, 0)).toString();
 						String OrderId="מספר חוב";
 						Connection myConn = HelpFunctions.DbConnection();
-						HelpFunctions.deleteDbRow("debtsforsupplierspaied", OrderId, OID, myConn);
-						HelpFunctions.deleteDbRow("debtsforsuppliers", OrderId, OID, myConn);
-						HelpFunctions.getTable("debtsforsuppliers", table_1, myConn);
+						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", OrderId, OID);
+						MysqlConnect.getDbCon().deleteRow("debtsforsuppliers", OrderId, OID);
+						HelpFunctions.getTable("debtsforsuppliers", table_1);
 
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table_1);

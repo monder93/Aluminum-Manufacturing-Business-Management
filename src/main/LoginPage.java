@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import com.mysql.jdbc.Connection;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,7 +33,7 @@ public class LoginPage extends JFrame
 	private JTextField passText;;
 	public  String DbPassword;
 	static LoginPage frame;
-	private Connection conn;	
+	//private Connection conn;	
 
 	/**
 	 * Launch the application.
@@ -122,12 +123,12 @@ public class LoginPage extends JFrame
 		background_label.setBounds(0, 0, 400, 238);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
-		conn = (Connection) HelpFunctions.DbConnection();
-
+		//conn = (Connection) HelpFunctions.DbConnection();
+		
 		try 
 		{
 			String query="SELECT `ערך` FROM `settings` WHERE `שם משתנה` = 'סיסמה' ";
-			Statement myStmt = conn.createStatement();
+			Statement myStmt = MysqlConnect.getDbCon().conn.createStatement();
 			ResultSet res = myStmt.executeQuery(query);
 			res.next();
 			DbPassword=res.getString(1);

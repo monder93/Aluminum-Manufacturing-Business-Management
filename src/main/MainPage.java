@@ -8,6 +8,7 @@ import debts.DebtsForSuppliersPage;
 import debts.DebtsPage;
 import helpClasses.Calc;
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import helpClasses.PdfViewer;
 import menuBar.OpenType;
 import menuBar.Orders;
@@ -38,6 +39,10 @@ import javax.swing.JTextField;
 
 public class MainPage extends JFrame 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static JLabel timeLabel;
 	private JTable table;
@@ -145,13 +150,16 @@ public class MainPage extends JFrame
 		menuBar.add(menu_6);
 
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("הוראות שימוש");
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+		mntmNewMenuItem_4.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent arg0) {
-				try {
+				try
+				{
 					PdfViewer pdfview =new PdfViewer("test");
 					pdfview.main();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				} 
+				catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -469,15 +477,15 @@ public class MainPage extends JFrame
 			{
 				if(!textField.getText().equals(""))
 				{
-					Connection myConn = HelpFunctions.DbConnection();
+					//Connection myConn = HelpFunctions.DbConnection();
 
 					String q = "INSERT INTO `generalreminders`(`תזכורת`) VALUES ('"+textField.getText().toString()+"')";
 					try
 					{
-						Statement st = myConn.createStatement();
+						Statement st = MysqlConnect.getDbCon().conn.createStatement();
 						st.executeUpdate(q);
 						JOptionPane.showMessageDialog(null, "נוספה תזכורת חדשה","תזכורת חדשה",1);
-						HelpFunctions.getTable("generalreminders", table, myConn);
+						HelpFunctions.getTable("generalreminders", table);
 						
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
@@ -528,14 +536,14 @@ public class MainPage extends JFrame
 					{
 						String RID=(table.getModel().getValueAt(row, 0)).toString();
 						String remindId="מספר תזכורת";
-						Connection myConn = HelpFunctions.DbConnection();
-						HelpFunctions.deleteDbRow("generalreminders", remindId, RID, myConn);
-						HelpFunctions.getTable("generalreminders", table, myConn);
+						//Connection myConn = HelpFunctions.DbConnection();
+						MysqlConnect.getDbCon().deleteRow("generalreminders", remindId, RID);
+						HelpFunctions.getTable("generalreminders", table);
 					
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
 
-						myConn.close();
+						//myConn.close();
 					}
 
 				}
@@ -562,9 +570,9 @@ public class MainPage extends JFrame
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		//get reminders table
-		Connection myConn = HelpFunctions.DbConnection();
+		//Connection myConn = HelpFunctions.DbConnection();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		HelpFunctions.getTable("generalreminders", table, myConn);
+		HelpFunctions.getTable("generalreminders", table);
 
 		//coloring green the header of the table 
 		JTableHeader Theader = table.getTableHeader();

@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JButton;
@@ -169,8 +170,8 @@ public class ProjectsPage extends JFrame
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר פרויקט";
 						Connection myConn = HelpFunctions.DbConnection();
-						HelpFunctions.deleteDbRow("projects", ProId, PID, myConn);
-						HelpFunctions.getTable("projects", table, myConn);
+						MysqlConnect.getDbCon().deleteRow("projects", ProId, PID);
+						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
 						myConn.close();
 					}
@@ -209,7 +210,7 @@ public class ProjectsPage extends JFrame
 						Statement myStmt;
 						myStmt = myConn.createStatement();
 						myStmt.executeUpdate(query);
-						HelpFunctions.getTable("projects", table, myConn);
+						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "updated!");
 					}
@@ -247,7 +248,7 @@ public class ProjectsPage extends JFrame
 		getContentPane().add(btnNewButton_5);
 
 		Connection myConn = HelpFunctions.DbConnection();
-		HelpFunctions.getTable("projects", table, myConn);
+		HelpFunctions.getTable("projects", table);
 		HelpFunctions.renderingTable(table);
 
 		sb = new JLabel("חפש לפי :");

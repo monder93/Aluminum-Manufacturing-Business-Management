@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 
 import javax.swing.JLabel;
 
@@ -31,7 +32,7 @@ public class DebtsPage extends JFrame
 
 	private JFrame frame;
 	public static JTable table_1;
-	public Connection	myConn;
+	//public Connection	myConn;
 	
 	String table;
 	String query="select * from ";
@@ -110,9 +111,9 @@ public class DebtsPage extends JFrame
 
 	try
 	{
-		myConn = HelpFunctions.DbConnection();
-		Statement myStmt = myConn.createStatement();
-		ResultSet myRs = myStmt.executeQuery(query+table);
+		//myConn = HelpFunctions.DbConnection();
+		//Statement myStmt = myConn.createStatement();
+		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 		table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 		
 
@@ -132,9 +133,9 @@ public class DebtsPage extends JFrame
 					String q = "INSERT INTO `customersdebts`( `שם לקוח`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+customerNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";	
 					
 					//connection to database
-					myConn=HelpFunctions.DbConnection();
+					//myConn=HelpFunctions.DbConnection();
 					Statement st;
-					st = myConn.createStatement();
+					st = MysqlConnect.getDbCon().conn.createStatement();
 					
 					//execute the query
 					st.executeUpdate(q);
@@ -146,7 +147,7 @@ public class DebtsPage extends JFrame
 					debtsTextField.setText("");
 					
 					// update the table with the new data
-					ResultSet myRs = myStmt.executeQuery(query+table);
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 					table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 					
 					// changing JTable Cell Value Alignment
@@ -214,13 +215,13 @@ public class DebtsPage extends JFrame
 					}
 					else if (response == JOptionPane.YES_OPTION) 
 					{
-						Statement myStmt = myConn.createStatement();
+						//Statement myStmt = myConn.createStatement();
 						String OID=(table_1.getModel().getValueAt(row, 0)).toString();
 						String OrderId="מספר חוב";
-						Connection myConn = HelpFunctions.DbConnection();
-						HelpFunctions.deleteDbRow("customersdebtspaied", OrderId, OID, myConn);
-						HelpFunctions.deleteDbRow("customersdebts", OrderId, OID, myConn);
-						HelpFunctions.getTable("customersdebts", table_1, myConn);
+						//Connection myConn = HelpFunctions.DbConnection();
+						MysqlConnect.getDbCon().deleteRow("customersdebtspaied", OrderId, OID);
+						MysqlConnect.getDbCon().deleteRow("customersdebts", OrderId, OID);
+						HelpFunctions.getTable("customersdebts", table_1);
 						
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table_1);

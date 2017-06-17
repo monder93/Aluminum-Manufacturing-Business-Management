@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import helpClasses.HelpFunctions;
+import helpClasses.MysqlConnect;
 import main.OrderItems;
 
 import javax.swing.JTextField;
@@ -181,13 +182,14 @@ public class Orders extends JFrame
 							String PID=(table_1.getModel().getValueAt(row, 0)).toString();
 							String ProId="מספר הזמנה";
 							Connection myConn = HelpFunctions.DbConnection();
-							HelpFunctions.deleteDbRow("orders", ProId, PID, myConn);
+							MysqlConnect.getDbCon().deleteRow("orders", ProId, PID);
 
 							query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
-							Statement myStmt = myConn.createStatement();
+							Statement myStmt = MysqlConnect.getDbCon().conn.createStatement();
 							ResultSet myRs = myStmt.executeQuery(query);
 							table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 							HelpFunctions.renderingTable(table_1);
+							
 
 							myConn.close();
 						}
