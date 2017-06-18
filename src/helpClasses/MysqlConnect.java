@@ -37,24 +37,23 @@ public final class MysqlConnect
 		}
 		return db;
 	}
-	/**
-	 *
-	 * @param query String The query to be executed
-	 * @return a ResultSet object containing the results or null if not available
-	 * @throws SQLException
-	 */
+
+	
 	public ResultSet selectQuery(String query) throws SQLException
 	{
 		statement = db.conn.createStatement();
 		ResultSet res = statement.executeQuery(query);
 		return res;
 	}
-	/**
-	 * @desc Method to insert data to a table
-	 * @param insertQuery String The Insert query
-	 * @return boolean
-	 * @throws SQLException
-	 */
+	
+	public ResultSet selectWhereQuery(String tableName , String ID , String idValue) throws SQLException
+	{
+		String query = "SELECT * FROM "+tableName+" WHERE "+ID+" = "+idValue+"";
+		statement = db.conn.createStatement();
+		ResultSet res = statement.executeQuery(query);
+		return res;
+	}
+
 	public int insertQuery(String insertQuery) throws SQLException 
 	{
 		statement = db.conn.createStatement();

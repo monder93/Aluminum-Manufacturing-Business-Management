@@ -2,20 +2,15 @@ package main;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.awt.Point;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import net.proteanit.sql.*;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
-
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

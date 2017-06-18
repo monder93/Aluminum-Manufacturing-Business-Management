@@ -105,15 +105,12 @@ public class DebtsPagePaied extends JFrame
 					String current_time_str = time_formatter.format(System.currentTimeMillis());
 					try 
 					{
-//						myConn = HelpFunctions.DbConnection();
-//						Statement myStmt = myConn.createStatement();
+						
 						String query = "INSERT INTO `customersdebtspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+comboBox.getSelectedItem().toString()+"','"+payAmountTextField.getText()+"')";			
 						MysqlConnect.getDbCon().insertQuery(query);
 
-						String query2="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
-						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
-
-						System.out.println(query2);
+						
+						ResultSet myRs = MysqlConnect.getDbCon().selectWhereQuery("customersdebtspaied","מספר חוב", debtnumber);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						paidAmount+=Integer.parseInt(payAmountTextField.getText());
