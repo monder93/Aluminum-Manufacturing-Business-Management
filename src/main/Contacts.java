@@ -11,9 +11,7 @@ import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 
 import java.awt.Font;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,7 +27,6 @@ public class Contacts extends JFrame{
 	public static String Id;
 	public static String name;
 
-	public Connection	myConn;
 	private JTextField textField;
 	private JTextField textField1;
 	private JTextField textField2;
@@ -234,7 +231,6 @@ public class Contacts extends JFrame{
 						MysqlConnect.getDbCon().deleteRow("contacts", ProId, PID);
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
-						myConn.close();
 					}	
 				}
 				catch(Exception e2)

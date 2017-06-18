@@ -2,11 +2,9 @@ package main;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import java.awt.Point;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import net.proteanit.sql.*;
 
 import javax.swing.ButtonGroup;
@@ -35,8 +33,7 @@ public class product extends JFrame{
 	private ButtonGroup BG2= new ButtonGroup();
 	public String series="";
 	
-	public Connection	myConn;
-	public Connection	myConn2;
+
 	public static String Id;
 	public static String name;
 	String query="SELECT `שם` FROM `opentypes`  ";
@@ -102,11 +99,11 @@ public class product extends JFrame{
 		        	type=(table.getModel().getValueAt(row, 0)).toString();
 		        	System.out.println(type);
 		        	query2= "SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'";
-		        	Statement myStmt;
+//		        	Statement myStmt;
 					try 
 					{
-						myStmt = myConn.createStatement();
-						ResultSet myRs = myStmt.executeQuery(query2);
+//						myStmt = myConn.createStatement();
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 						table_2.setModel(DbUtils.resultSetToTableModel(myRs));
 					} 
 					catch (SQLException e) 

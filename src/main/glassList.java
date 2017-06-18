@@ -1,10 +1,8 @@
 package main;
 import java.awt.EventQueue;
 import java.awt.Point;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -22,7 +20,6 @@ public class glassList {
 
 	private JFrame frame;
 	private JTable table;
-	private Connection	myConn;
 	public String glassID="";
 	public String glassName="";
 	private String className;

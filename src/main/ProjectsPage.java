@@ -19,10 +19,8 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;

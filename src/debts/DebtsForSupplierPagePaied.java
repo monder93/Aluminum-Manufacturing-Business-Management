@@ -1,9 +1,7 @@
 package debts;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,7 +28,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 	private JTable table;
 	private JButton button;
 	private JButton button_2;
-	public Connection	myConn;
 	public static String debtnumber;
 	private JLabel label;
 	private JTextField payAmountTextField;
@@ -197,18 +194,17 @@ public class DebtsForSupplierPagePaied extends JFrame
 					}
 					else if (response == JOptionPane.YES_OPTION) 
 					{
-						Statement myStmt = myConn.createStatement();
 						String PID=(table.getModel().getValueAt(row, 1)).toString();
 						String ProId="מספר תשלום";
-//						Connection myConn = HelpFunctions.DbConnection();
+						//						Connection myConn = HelpFunctions.DbConnection();
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
 						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", ProId, PID);
 
 						String query2="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
-						ResultSet myRs = myStmt.executeQuery(query2);
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 
-						System.out.println(query2);
+						//System.out.println(query2);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						// changing JTable Cell Value Alignment
@@ -217,20 +213,17 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 						//insert data to DebtsPage table
 						String query3="UPDATE `debtsforsuppliers` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
-						myStmt.executeUpdate(query3);
-						System.out.println(query3);
+						MysqlConnect.getDbCon().updateQuery(query3);
+					//	System.out.println(query3);
 
 						String query4="select * from `debtsforsuppliers`";
-						myRs = myStmt.executeQuery(query4);
+						myRs = MysqlConnect.getDbCon().selectQuery(query4);
 
-						System.out.println(query4);
+					//	System.out.println(query4);
 						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsForSuppliersPage.table_1);
 
-
-
-						myConn.close();
 					}
 
 				}
@@ -246,8 +239,8 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 		try 
 		{			
-//			myConn = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
+			//			myConn = HelpFunctions.DbConnection();
+			//			Statement myStmt = myConn.createStatement();
 
 			String query="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);

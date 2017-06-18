@@ -8,10 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +31,7 @@ public class DebtsPage extends JFrame
 	private JFrame frame;
 	public static JTable table_1;
 	//public Connection	myConn;
-	
+
 	String table;
 	String query="select * from ";
 	private JButton addDebtButton;
@@ -80,33 +78,33 @@ public class DebtsPage extends JFrame
 	frame.setVisible(true);
 	frame.getContentPane().setLayout(null);	
 	frame.setTitle("לקוחות חייבים");
-	
+
 	logoLabel2 = new JLabel("New label");
 	logoLabel2.setBounds(10, 11, 815, 82);
 	frame.getContentPane().add(logoLabel2);
-	
+
 	JLabel logoLabel = new JLabel("New label");
 	logoLabel.setBounds(566, 283, 259, 190);
 	frame.getContentPane().add(logoLabel);
-	
+
 	JScrollPane scrollPane = new JScrollPane();
 	scrollPane.setBounds(10, 104, 534, 323);
 	frame.getContentPane().add(scrollPane);
 	table_1 = new JTable()
-	 {
-	    @Override
-	    public boolean isCellEditable(int row, int column) 
-	    {
-	        return column==1 ||  column==3 ;                
-	    };
+	{
+		@Override
+		public boolean isCellEditable(int row, int column) 
+		{
+			return column==1 ||  column==3 ;                
+		};
 	};
 
 	table_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 	scrollPane.setViewportView(table_1);
 	table_1.setBounds(0, 0, 589, 352);
 	JTableHeader Theader = table_1.getTableHeader();
-    Theader.setBackground(Color.green);
-    Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+	Theader.setBackground(Color.green);
+	Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 
 	try
@@ -115,85 +113,80 @@ public class DebtsPage extends JFrame
 		//Statement myStmt = myConn.createStatement();
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 		table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-		
 
-		
+
+
 		addDebtButton = new JButton("\u05D4\u05D5\u05E1\u05E4\u05D4");
 		addDebtButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				if(!customerNameTextField.getText().contentEquals("") && (!debtsTextField.getText().contentEquals("")))
-				try {
-					//getting current time
-					SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
-					String current_time_str = time_formatter.format(System.currentTimeMillis());
-					
-					//query to insert data
-					String q = "INSERT INTO `customersdebts`( `שם לקוח`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+customerNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";	
-					
-					//connection to database
-					//myConn=HelpFunctions.DbConnection();
-					Statement st;
-					st = MysqlConnect.getDbCon().conn.createStatement();
-					
-					//execute the query
-					st.executeUpdate(q);
-					//message for success
-					JOptionPane.showMessageDialog(null, "saved");System.out.println(q);
-					
-					//reset TextFields
-					customerNameTextField.setText("");
-					debtsTextField.setText("");
-					
-					// update the table with the new data
-					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
-					table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-					
-					// changing JTable Cell Value Alignment
-					HelpFunctions.renderingTable(table_1);
+					try {
+						//getting current time
+						SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
+						String current_time_str = time_formatter.format(System.currentTimeMillis());
 
-					
-				} 
+						//query to insert data
+						String q = "INSERT INTO `customersdebts`( `שם לקוח`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+customerNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";	
+
+						//connection to database
+						MysqlConnect.getDbCon().insertQuery(q);
+						//message for success
+						JOptionPane.showMessageDialog(null, "saved");System.out.println(q);
+
+						//reset TextFields
+						customerNameTextField.setText("");
+						debtsTextField.setText("");
+
+						// update the table with the new data
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
+						table_1.setModel(DbUtils.resultSetToTableModel(myRs));
+
+						// changing JTable Cell Value Alignment
+						HelpFunctions.renderingTable(table_1);
+
+
+					} 
 				catch (SQLException e1) 
 				{
 					e1.printStackTrace();
 				}
-			
+
 			}
-				
+
 		});
-		
+
 		table_1.addMouseListener(new MouseAdapter() 
 		{
-		    public void mousePressed(MouseEvent me)
-		    {
-		        JTable table =(JTable) me.getSource();
-		        Point p = me.getPoint();
-		        int row = table.rowAtPoint(p);
-		        if (me.getClickCount() == 2) 
-		        {
+			public void mousePressed(MouseEvent me)
+			{
+				JTable table =(JTable) me.getSource();
+				Point p = me.getPoint();
+				int row = table.rowAtPoint(p);
+				if (me.getClickCount() == 2) 
+				{
 					DebtsPagePaied.debtnumber=(table.getModel().getValueAt(row, 0)).toString();
 					DebtsPagePaied.debtAmount=Integer.parseInt((table.getModel().getValueAt(row, 3)).toString());
 					DebtsPagePaied.paidAmount=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 					DebtsPagePaied.toPayAmount=Integer.parseInt((table.getModel().getValueAt(row, 5)).toString());
 
-		        	new DebtsPagePaied();
-		        }
-		    }
+					new DebtsPagePaied();
+				}
+			}
 		});		
-		
+
 		addDebtButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		addDebtButton.setBounds(708, 104, 117, 41);
 		frame.getContentPane().add(addDebtButton);
-		
+
 		button_1 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
 		button_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				
+
 				int row = table_1.getSelectedRow();
 
 
@@ -222,11 +215,11 @@ public class DebtsPage extends JFrame
 						MysqlConnect.getDbCon().deleteRow("customersdebtspaied", OrderId, OID);
 						MysqlConnect.getDbCon().deleteRow("customersdebts", OrderId, OID);
 						HelpFunctions.getTable("customersdebts", table_1);
-						
+
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table_1);
 
-						
+
 					}
 
 				}
@@ -235,35 +228,35 @@ public class DebtsPage extends JFrame
 				{
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		button_1.setBounds(566, 104, 117, 41);
 		frame.getContentPane().add(button_1);
-		
+
 		customerNameTextField = new JTextField();
 		customerNameTextField.setColumns(10);
 		customerNameTextField.setBounds(580, 181, 103, 20);
 		frame.getContentPane().add(customerNameTextField);
-		
-		
+
+
 		debtsTextField = new JTextField();
 		debtsTextField.setColumns(10);
 		debtsTextField.setBounds(580, 239, 103, 20);
 		frame.getContentPane().add(debtsTextField);
-		
+
 		lblNewLabel = new JLabel("שם לקוח");
 		lblNewLabel.setBounds(732, 184, 93, 14);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		label = new JLabel("חוב");
 		label.setBounds(732, 242, 93, 14);
 		frame.getContentPane().add(label);
-		
+
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table_1);
 
-		
+
 		JLabel background_label = new JLabel("New label");
 		background_label.setBounds(0, 0, 835, 484);
 		frame.getContentPane().add(background_label);
@@ -274,5 +267,5 @@ public class DebtsPage extends JFrame
 		e.printStackTrace();
 
 	}
-}
+	}
 }

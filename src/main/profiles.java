@@ -1,9 +1,7 @@
 package main;
 import java.awt.EventQueue;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -20,7 +18,6 @@ public class profiles
 
 	private JFrame frame;
 	private JTable table;
-	private Connection	myConn;
 
 	/**
 	 * Launch the application.

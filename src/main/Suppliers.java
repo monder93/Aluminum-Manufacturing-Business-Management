@@ -8,9 +8,7 @@ import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -18,7 +16,6 @@ public class Suppliers extends JFrame
 {
 	private JFrame frame;
 	private JTable table;
-	public Connection	myConn;
 	/**
 	 * Launch the application.
 	 */

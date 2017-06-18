@@ -1,8 +1,6 @@
 package debts;
 import java.awt.EventQueue;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,7 +27,6 @@ public class DebtsPagePaied extends JFrame
 	private JTable table;
 	private JButton button;
 	private JButton button_2;
-	public Connection	myConn;
 	public static String debtnumber;
 	private JLabel label;
 	private JTextField payAmountTextField;
@@ -222,9 +219,6 @@ public class DebtsPagePaied extends JFrame
 						
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsPage.table_1);
-
-
-						myConn.close();
 					}
 
 				}

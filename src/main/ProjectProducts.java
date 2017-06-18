@@ -1,9 +1,7 @@
 package main;
 import java.awt.EventQueue;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,7 +39,6 @@ public class ProjectProducts extends JFrame
 {
 	private JTable table;
 	private JPanel contentPane;
-	public Connection	myConn;
 	private ButtonGroup proNumBG= new ButtonGroup();
 	private ButtonGroup  berzolNumBG= new ButtonGroup();
 	String id;

@@ -1,9 +1,7 @@
 package menuBar;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import net.proteanit.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,11 +20,11 @@ public class Tables extends JFrame
 {
 	private JFrame frame;
 	public static JTable table_1;
-	public Connection	myConn;
 	public static String Id;
 	public static String name;
 	String table;
 	String query="select * from ";
+	String query2="SELECT `שם` FROM `opentypes`";
 	/**
 	 * Launch the application.
 	 */
@@ -49,12 +47,12 @@ public class Tables extends JFrame
 	{
 		initialize();
 	}
-
 	public Tables(String table)
 	{
 		this.table=table;
 		initialize();
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -101,11 +99,16 @@ public class Tables extends JFrame
 		table_1.setBounds(0, 0, 589, 352);
 
 		try {
-//			myConn  = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
-			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-
+			if(this.table.compareTo("opentypes")==0)
+			{
+				ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
+				table_1.setModel(DbUtils.resultSetToTableModel(myRs));
+			}
+			else
+			{
+				ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
+				table_1.setModel(DbUtils.resultSetToTableModel(myRs));
+			}
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table_1);
 
@@ -121,8 +124,8 @@ public class Tables extends JFrame
 				frame.setTitle(("טבלת זיגוג"));
 			else if(this.table.contentEquals("colors"))
 				frame.setTitle(("טבלת צבעים"));
-			
-				
+
+
 
 
 		} 

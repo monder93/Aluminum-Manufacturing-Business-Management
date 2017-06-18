@@ -1,8 +1,6 @@
 package menuBar;
 import java.awt.EventQueue;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -31,7 +29,6 @@ public class Orders extends JFrame
 
 	private JFrame frame;
 	public static JTable table_1;
-	public Connection	myConn;
 
 	String type;
 	String query;
@@ -109,9 +106,8 @@ public class Orders extends JFrame
 
 		try 
 		{
-//			myConn = HelpFunctions.DbConnection();
-			Statement myStmt = myConn.createStatement();
-			ResultSet myRs = myStmt.executeQuery(query);
+			//			myConn = HelpFunctions.DbConnection();
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table_1);
 
@@ -181,17 +177,14 @@ public class Orders extends JFrame
 						{
 							String PID=(table_1.getModel().getValueAt(row, 0)).toString();
 							String ProId="מספר הזמנה";
-//							Connection myConn = HelpFunctions.DbConnection();
+							//							Connection myConn = HelpFunctions.DbConnection();
 							MysqlConnect.getDbCon().deleteRow("orders", ProId, PID);
 
 							query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
-							Statement myStmt = MysqlConnect.getDbCon().conn.createStatement();
-							ResultSet myRs = myStmt.executeQuery(query);
+							ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 							table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 							HelpFunctions.renderingTable(table_1);
-							
 
-							myConn.close();
 						}
 					}
 					catch(Exception e1)
@@ -256,17 +249,16 @@ public class Orders extends JFrame
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-//					Connection myConn = HelpFunctions.DbConnection();
+					//					Connection myConn = HelpFunctions.DbConnection();
 					String q = "INSERT INTO `orders`( `שם ספק`, `תאריך`, `אתר`, `סוג`) VALUES ('"+textField.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"','"+type+"')";
 					try 
 					{
-//						Statement st = myConn.createStatement();
-//						st.executeUpdate(q);
+						//						Statement st = myConn.createStatement();
+						//						st.executeUpdate(q);
 						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "saved");
 						query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
-						Statement myStmt = myConn.createStatement();
-						ResultSet myRs = myStmt.executeQuery(query);
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 						table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						hideOrShow(false);
 

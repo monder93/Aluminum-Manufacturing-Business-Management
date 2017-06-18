@@ -8,10 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,8 +30,6 @@ public class DebtsForSuppliersPage extends JFrame
 
 	private JFrame frame;
 	public static JTable table_1;
-	public Connection	myConn;
-
 	String table;
 	String query="select * from ";
 	private JButton addDebtButton;

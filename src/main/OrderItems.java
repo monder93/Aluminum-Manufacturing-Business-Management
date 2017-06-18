@@ -13,9 +13,7 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -23,7 +21,6 @@ public class OrderItems {
 
 	private JFrame frame;
 	public static JTable table;
-	public Connection	myConn;
 	String id;
 	/**
 	 * Launch the application.
@@ -122,11 +119,10 @@ public class OrderItems {
 						String ProId="מספר סידורי";
 //						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("ordersproducts", ProId, PID);
-						Statement myStmt = myConn.createStatement();
-						ResultSet myRs = myStmt.executeQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'");
+						String query1="SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'";
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query1);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 						HelpFunctions.renderingTable(table);
-						myConn.close();
 					}
 				}
 				catch(Exception e1)

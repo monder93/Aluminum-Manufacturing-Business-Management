@@ -338,7 +338,7 @@ public class MainPage extends JFrame
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				new OpenType();
+				new Tables("opentypes");
 			}
 		});
 		menu.add(mntmNewMenuItem);
