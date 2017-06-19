@@ -48,7 +48,7 @@ public final class MysqlConnect
 	
 	public ResultSet selectWhereQuery(String tableName , String ID , String idValue) throws SQLException
 	{
-		String query = "SELECT * FROM "+tableName+" WHERE "+ID+" = "+idValue+"";
+		String query = "SELECT * FROM "+tableName+" WHERE `"+ID+"` = '"+idValue+"'";
 		statement = db.conn.createStatement();
 		ResultSet res = statement.executeQuery(query);
 		return res;

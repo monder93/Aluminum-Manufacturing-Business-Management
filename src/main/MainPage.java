@@ -14,6 +14,10 @@ import menuBar.OpenType;
 import menuBar.Orders;
 import menuBar.Tables;
 import pdfReports.PdfMaker;
+import products.OpeningDoor;
+import products.ProductFactory;
+import products.Products;
+
 import javax.swing.JMenuBar;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -31,6 +35,8 @@ import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -589,5 +595,14 @@ public class MainPage extends JFrame
 		contentPane.add(background_label);	
 
 		HelpFunctions.setIcon(btnNewButton, "calculator");
+		OpeningDoor p;
+		try {
+			p = (OpeningDoor) ProductFactory.getProduct("openingDoor", 1000, 2000, 36.18, 45 , "4400",2);
+			p.calculatePrice();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
 }

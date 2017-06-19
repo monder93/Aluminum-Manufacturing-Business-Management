@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class product extends JFrame{
 
@@ -27,7 +29,7 @@ public class product extends JFrame{
 	private ButtonGroup BG1= new ButtonGroup();
 	private ButtonGroup BG2= new ButtonGroup();
 	public String series="";
-	
+	public int wingCount;
 
 	public static String Id;
 	public static String name;
@@ -223,6 +225,12 @@ public class product extends JFrame{
 			BG2.add(radioButton_3);
 			
 			JButton btnNewButton = new JButton("אשור");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) 
+				{
+					
+				}
+			});
 			btnNewButton.setBounds(36, 341, 107, 34);
 			frame.getContentPane().add(btnNewButton);
 			// changing JTable Cell Value Alignment
