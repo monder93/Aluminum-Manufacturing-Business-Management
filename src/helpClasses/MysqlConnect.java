@@ -75,8 +75,6 @@ public final class MysqlConnect
 			String query = "DELETE FROM `"+tableName+"` WHERE  `"+primaryId+"`= '"+ID+"'";
 			statement = db.conn.createStatement();
 			statement.executeUpdate(query);
-			System.out.println("done");
-			System.out.println(query);
 		}
 		catch(Exception e)
 		{

@@ -114,7 +114,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 						String query2="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 
-						System.out.println(query2);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 
@@ -124,7 +123,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 						//insert data to DebtsPage table
 						String query3="UPDATE `debtsforsuppliers` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
 						MysqlConnect.getDbCon().updateQuery(query3);
-						System.out.println(query3);
 
 						String query4="select * from `debtsforsuppliers`";
 						MysqlConnect.getDbCon().selectQuery(query4);
@@ -132,7 +130,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 						HelpFunctions.renderingTable(table);
 
 
-						System.out.println(query4);
 						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						// changing JTable Cell Value Alignment
@@ -204,7 +201,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 						String query2="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 
-						//System.out.println(query2);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						// changing JTable Cell Value Alignment
@@ -214,12 +210,10 @@ public class DebtsForSupplierPagePaied extends JFrame
 						//insert data to DebtsPage table
 						String query3="UPDATE `debtsforsuppliers` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
 						MysqlConnect.getDbCon().updateQuery(query3);
-					//	System.out.println(query3);
 
 						String query4="select * from `debtsforsuppliers`";
 						myRs = MysqlConnect.getDbCon().selectQuery(query4);
 
-					//	System.out.println(query4);
 						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsForSuppliersPage.table_1);

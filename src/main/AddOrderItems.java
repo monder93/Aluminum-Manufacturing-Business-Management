@@ -139,8 +139,6 @@ public class AddOrderItems {
 				//				Connection myConn = HelpFunctions.DbConnection();
 				String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+textField.getText()+"','"+textField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
 				try {
-					//					Statement st = myConn.createStatement();
-					//					st.executeUpdate(q);
 					MysqlConnect.getDbCon().insertQuery(q);
 					JOptionPane.showMessageDialog(null, "saved");
 
@@ -151,12 +149,13 @@ public class AddOrderItems {
 
 				try
 				{
-//					Statement myStmt = myConn.createStatement();
-					ResultSet myRs =MysqlConnect.getDbCon().selectQuery("SELECT  * FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'  ");
-//					ResultSet myRs = myStmt.executeQuery("SELECT  * FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'  ");
+					String query1="SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'";
+					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query1);
 					OrderItems.table.setModel(DbUtils.resultSetToTableModel(myRs));
-
-				} catch (SQLException e1) {
+					HelpFunctions.renderingTable(OrderItems.table);
+				} 
+				catch (SQLException e1)
+				{
 					e1.printStackTrace();
 				}
 

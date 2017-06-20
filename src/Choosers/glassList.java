@@ -1,4 +1,4 @@
-package main;
+package Choosers;
 import java.awt.EventQueue;
 import java.awt.Point;
 import java.sql.ResultSet;
@@ -9,6 +9,8 @@ import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.AddProject;
+import main.AddProjectProduct;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;

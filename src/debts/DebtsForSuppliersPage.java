@@ -20,6 +20,7 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
+import Choosers.Suppliers;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 
@@ -34,12 +35,12 @@ public class DebtsForSuppliersPage extends JFrame
 	String query="select * from ";
 	private JButton addDebtButton;
 	private JButton button_1;
-	private JTextField supplierNameTextField;
+	public static JTextField supplierNameTextField;
 	private JTextField debtsTextField;
-	private JLabel lblNewLabel;
 	private JLabel label;
 	private JLabel logoLabel;
 	private JLabel logoLabel2;
+	private JButton button;
 	/**
 	 * Launch the application.
 	 */
@@ -77,6 +78,17 @@ public class DebtsForSuppliersPage extends JFrame
 	frame.setVisible(true);
 	frame.getContentPane().setLayout(null);	
 	frame.setTitle("חובות לספקים");
+	
+	button = new JButton("שם ספק");
+	button.addActionListener(new ActionListener() 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			new Suppliers("debtsforsuppliers");
+		}
+	});
+	button.setBounds(708, 180, 89, 23);
+	frame.getContentPane().add(button);
 
 	logoLabel = new JLabel("New label");
 	logoLabel.setBounds(566, 283, 259, 190);
@@ -130,15 +142,10 @@ public class DebtsForSuppliersPage extends JFrame
 						String q = "INSERT INTO `debtsforsuppliers`( `שם ספק`, `תאריך`, `חוב`, `שולם`, `לתשלום`)  VALUES ('"+supplierNameTextField.getText()+"','"+current_time_str+"','"+debtsTextField.getText()+"','0','"+debtsTextField.getText()+"')";
 
 						//connection to database
-//						myConn=HelpFunctions.DbConnection();
-//						Statement st;
-//						st = myConn.createStatement();
 
-						//execute the query
-//						st.executeUpdate(q);
 						MysqlConnect.getDbCon().insertQuery(q);
 						//message for success
-						JOptionPane.showMessageDialog(null, "saved");System.out.println(q);
+						JOptionPane.showMessageDialog(null, "saved");
 
 						//reset TextFields
 						supplierNameTextField.setText("");
@@ -235,6 +242,7 @@ public class DebtsForSuppliersPage extends JFrame
 		frame.getContentPane().add(button_1);
 
 		supplierNameTextField = new JTextField();
+		supplierNameTextField.setEditable(false);
 		supplierNameTextField.setColumns(10);
 		supplierNameTextField.setBounds(580, 181, 103, 20);
 		frame.getContentPane().add(supplierNameTextField);
@@ -244,10 +252,6 @@ public class DebtsForSuppliersPage extends JFrame
 		debtsTextField.setColumns(10);
 		debtsTextField.setBounds(580, 239, 103, 20);
 		frame.getContentPane().add(debtsTextField);
-
-		lblNewLabel = new JLabel("שם ספק");
-		lblNewLabel.setBounds(732, 184, 93, 14);
-		frame.getContentPane().add(lblNewLabel);
 
 		label = new JLabel("חוב");
 		label.setBounds(732, 242, 93, 14);

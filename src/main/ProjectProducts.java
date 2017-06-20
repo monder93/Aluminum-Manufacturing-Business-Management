@@ -13,6 +13,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
+import Choosers.hardware;
+import Choosers.partsColors;
+import Choosers.profiles;
+import Choosers.scrollShutter;
 import helpClasses.Calc;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
@@ -434,7 +438,6 @@ public class ProjectProducts extends JFrame
 		{
 			e.printStackTrace();
 		}
-		System.out.println(proCount);
 		return price;
 	}
 }

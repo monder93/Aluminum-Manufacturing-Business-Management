@@ -204,10 +204,6 @@ public class ProjectsPage extends JFrame
 						String glass = table.getModel().getValueAt(row, 6).toString();
 						String glassPrice = table.getModel().getValueAt(row, 7).toString();
 						String query = "UPDATE `projects` SET`איש קשר`='"+contact+"',`אתר`='"+place+"',`שם מזמין`='"+costumer+"',`צבע`='"+color+"',`מחיר צבע`='"+colorPrice+"',`זיגוג`='"+glass+"',`מחיר זיגוג`='"+glassPrice+"' WHERE `מספר פרויקט`='"+id+"'";
-//						Connection myConn = HelpFunctions.DbConnection();
-//						Statement myStmt;
-//						myStmt = myConn.createStatement();
-//						myStmt.executeUpdate(query);
 						MysqlConnect.getDbCon().updateQuery(query);
 						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
@@ -216,7 +212,6 @@ public class ProjectsPage extends JFrame
 				} 
 				catch (SQLException e1) 
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

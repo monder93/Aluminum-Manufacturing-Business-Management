@@ -14,7 +14,7 @@ public class PdfViewer extends JPanel
 		this.name=name;
 		this.setLayout(new BorderLayout());
 		viewer = new Viewer();
-		FileInputStream fis = new FileInputStream(PdfViewer.class.getResource("files/"+name+".pdf").getPath());
+		FileInputStream fis = new FileInputStream(PdfViewer.class.getResource("../files/"+name+".pdf").getPath());
 		viewer.setDocumentInputStream(fis);
 		this.add(viewer, BorderLayout.CENTER);
 		viewer.zoomTo(2);

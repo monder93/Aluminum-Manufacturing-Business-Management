@@ -1,4 +1,4 @@
-package main;
+package Choosers;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -7,8 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import debts.DebtsForSuppliersPage;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.AddProject;
+import menuBar.Orders;
 
 import java.awt.Font;
 import java.sql.SQLException;
@@ -19,13 +22,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
-public class Contacts extends JFrame{
+public class Suppliers extends JFrame{
 
 	private JFrame frame;
 	private JTable table;
 	private JPanel contentPane;
 	public static String Id;
 	public static String name;
+	private String fromWindow;
 
 	private JTextField textField;
 	private JTextField textField1;
@@ -49,9 +53,8 @@ public class Contacts extends JFrame{
 			{
 				try
 				{
-					Contacts frame = new Contacts();
+					Suppliers frame = new Suppliers("ספקים");
 					frame.setVisible(true);
-					//resizable  false
 					frame.setResizable(false);
 				} 
 				catch (Exception e) 
@@ -65,9 +68,10 @@ public class Contacts extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Contacts()
+	public Suppliers(String from)
 	{
 		initialize();
+		fromWindow=from;
 	}
 
 	/**
@@ -84,7 +88,7 @@ public class Contacts extends JFrame{
 		setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(64, 64, 859, 337);
-		setTitle("איש קשר");
+		setTitle("ספקים");
 		table = new JTable()
 		{@Override
 			public boolean isCellEditable(int row, int column) 
@@ -96,15 +100,15 @@ public class Contacts extends JFrame{
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
-		label = new JLabel("משפחה :");
+		label = new JLabel("טלפון :");
 		label.setVisible(false);
 		label.setBounds(1184, 531, 84, 33);
 
-		label1 = new JLabel("כתובת :");
+		label1 = new JLabel("מיקום :");
 		label1.setVisible(false);
 		label1.setBounds(1184, 591, 84, 33);
 
-		label2 = new JLabel("טלפון :");
+		label2 = new JLabel("פקס :");
 		label2.setVisible(false);
 		label2.setBounds(854, 478, 84, 33);
 
@@ -149,7 +153,7 @@ public class Contacts extends JFrame{
 		contentPane.add(label2);
 		contentPane.add(label3);
 
-		JButton btnNewButton = new JButton("הוספת איש קשר");
+		JButton btnNewButton = new JButton("הוספת ספק");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				hideOrShow(true);
@@ -174,17 +178,13 @@ public class Contacts extends JFrame{
 					{
 						String id = table.getModel().getValueAt(row, 0).toString();
 						String name = table.getModel().getValueAt(row, 1).toString();
-						String lname = table.getModel().getValueAt(row, 2).toString();
-						String address = table.getModel().getValueAt(row, 3).toString();
-						String phone = table.getModel().getValueAt(row, 4).toString();
+						String address = table.getModel().getValueAt(row, 2).toString();
+						String phone = table.getModel().getValueAt(row, 3).toString();
+						String fax = table.getModel().getValueAt(row, 4).toString();
 						String email = table.getModel().getValueAt(row, 5).toString();
-						String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
-//						Connection myConn = HelpFunctions.DbConnection();
-//						Statement myStmt;
-//						myStmt = myConn.createStatement();
-//						myStmt.executeUpdate(q);
+						String q = "UPDATE `suppliers` SET`שם`='"+name+"',`טלפון`='"+phone+"',`מיקום`='"+address+"',`פקס`='"+fax+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר מזהה` = '"+id+"'";
 						MysqlConnect.getDbCon().updateQuery(q);
-						HelpFunctions.getTable("contacts", table);
+						HelpFunctions.getTable("suppliers", table);
 						HelpFunctions.renderingTable(table);
 						JOptionPane.showMessageDialog(null, "עודכן");
 					}
@@ -223,13 +223,10 @@ public class Contacts extends JFrame{
 					else if (response == JOptionPane.YES_OPTION) 
 					{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
-						String ProId="מספר זהות";
-						String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
-//						Connection myConn = HelpFunctions.DbConnection();
-//						Statement myStmt = myConn.createStatement();
-//						myStmt.executeUpdate(query);
-						MysqlConnect.getDbCon().deleteRow("contacts", ProId, PID);
-						HelpFunctions.getTable("contacts", table);
+						String ProId="מספר מזהה";
+						String query = "DELETE FROM `suppliers` WHERE  `"+ProId+"`= '"+PID+"'";
+						MysqlConnect.getDbCon().deleteRow("suppliers", ProId, PID);
+						HelpFunctions.getTable("suppliers", table);
 						HelpFunctions.renderingTable(table);
 					}	
 				}
@@ -244,8 +241,8 @@ public class Contacts extends JFrame{
 
 		try 
 		{
-//			myConn = HelpFunctions.DbConnection();
-			HelpFunctions.getTable("contacts", table);
+			//			myConn = HelpFunctions.DbConnection();
+			HelpFunctions.getTable("suppliers", table);
 			HelpFunctions.renderingTable(table);
 
 			JButton button = new JButton("בחר");
@@ -265,18 +262,23 @@ public class Contacts extends JFrame{
 						{
 							Id=table.getModel().getValueAt(row, 0).toString();
 							name=table.getModel().getValueAt(row,1).toString();
-							AddProject.id=Id;
-							AddProject.contact.setText(name);
-							dispose();
+							if(fromWindow.equals("orders"))
+							{
+								Orders.textField.setText(name);
+								dispose();
+							}
+							if(fromWindow.equalsIgnoreCase("debtsforsuppliers"))
+							{
+								DebtsForSuppliersPage.supplierNameTextField.setText(name);
+								dispose();
+							}
 						}
 					}
-
 					catch(Exception e)
 					{
 						e.printStackTrace();
 					}
 				}
-
 			});
 			button.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
@@ -302,15 +304,12 @@ public class Contacts extends JFrame{
 			{
 				public void actionPerformed(ActionEvent arg0) 
 				{
-//					Connection myConn = HelpFunctions.DbConnection();
-					String q = "INSERT INTO `contacts`( `שם`, `משפחה`, `כתובת`, `טלפון`, `דואר אלקטרוני`) VALUES ('"+textField.getText()+"','"+textField1.getText()+"','"+textField2.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"')";
+					String q = "INSERT INTO `suppliers`(`שם`, `מיקום`, `טלפון`, `פקס`, `דואר אלקטרוני`) VALUES ('"+textField.getText()+"','"+textField2.getText()+"','"+textField1.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"')";
 					try
 					{
-//						Statement st = myConn.createStatement();
-//						st.executeUpdate(q);
 						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "נשמר");
-						HelpFunctions.getTable("contacts", table);
+						HelpFunctions.getTable("suppliers", table);
 						HelpFunctions.renderingTable(table);
 						hideOrShow(false);
 
@@ -326,7 +325,7 @@ public class Contacts extends JFrame{
 
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
-			
+
 			JButton btnNewButton_3 = new JButton("ביטול");
 			btnNewButton_3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) 
@@ -341,12 +340,12 @@ public class Contacts extends JFrame{
 			});
 			btnNewButton_3.setBounds(516, 565, 165, 42);
 			contentPane.add(btnNewButton_3);
-			
-			
-						JLabel background_label = new JLabel("New label");
-						background_label.setBounds(0, 0, 1362, 714);
-						HelpFunctions.setBackground(background_label);
-						contentPane.add(background_label);
+
+
+			JLabel background_label = new JLabel("New label");
+			background_label.setBounds(0, 0, 1362, 714);
+			HelpFunctions.setBackground(background_label);
+			contentPane.add(background_label);
 		}
 		catch (Exception e) 
 		{

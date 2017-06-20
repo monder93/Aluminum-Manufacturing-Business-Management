@@ -1,6 +1,7 @@
 package menuBar;
 import java.awt.EventQueue;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -8,15 +9,13 @@ import javax.swing.JTable;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.Point;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import Choosers.Suppliers;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import main.OrderItems;
@@ -37,14 +36,17 @@ public class Orders extends JFrame
 	private JButton button_1;
 	private JButton button_2;
 	private JButton button_3;
-	private JLabel lblNewLabel;
 	private JLabel label;
 	private JLabel label_1;
-	private JTextField textField;
+	public static JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JButton btnNewButton_1;
 	private JLabel background_label;
+	private JButton btnNewButton_2;
+	private Boolean flag=true;
+	private String globalDate;
+
 
 	/**
 	 * Launch the application.
@@ -78,18 +80,32 @@ public class Orders extends JFrame
 	{
 		SimpleDateFormat time_formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String date = time_formatter.format(System.currentTimeMillis());
+		globalDate=date;
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(250, 150, 841, 513);
+		frame.setBounds(250, 150, 800, 513);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);		
 		frame.setTitle("הזמנות");
+		
+		btnNewButton_2 = new JButton("שם ספק ");
+		btnNewButton_2.setVisible(false);
+		btnNewButton_2.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				new Suppliers("orders");
+
+			}
+		});
+		btnNewButton_2.setBounds(666, 98, 118, 23);
+		frame.getContentPane().add(btnNewButton_2);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		scrollPane.setBounds(10, 144, 815, 340);
+		scrollPane.setBounds(10, 133, 773, 340);
 		frame.getContentPane().add(scrollPane);
 		table_1 = new JTable()
 		{
@@ -103,7 +119,6 @@ public class Orders extends JFrame
 		scrollPane.setViewportView(table_1);
 
 		table_1.setBounds(0, 0, 589, 352);
-
 		try 
 		{
 			//			myConn = HelpFunctions.DbConnection();
@@ -116,38 +131,57 @@ public class Orders extends JFrame
 			{
 				public void actionPerformed(ActionEvent arg0)
 				{
-					hideOrShow(true);
-				}
-			});
-
-			table_1.addMouseListener(new MouseAdapter() 
-			{
-				public void mousePressed(MouseEvent me) 
-				{
-					Point p = me.getPoint();
-					int row = table_1.rowAtPoint(p);
-					String id = "";
-					if(row<0)
-						JOptionPane.showMessageDialog(null, "בחר הזמנה בבקשה");
+					hideOrShow(flag);
+					if(flag==true)
+						flag=false;
 					else
-					{
-
-						id = (table_1.getModel().getValueAt(row, 0)).toString();
-					}
-					if (me.getClickCount() == 2) 
-					{
-						new OrderItems(id);
-					}
+						flag=true;
 				}
 			});
+
 
 			btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			btnNewButton.setBounds(666, 42, 117, 41);
+			btnNewButton.setBounds(666, 31, 117, 41);
 			frame.getContentPane().add(btnNewButton);
 
 			button = new JButton("\u05E2\u05D3\u05DB\u05D5\u05DF");
+			button.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+					int row=table_1.getSelectedRow();
+					try
+					{
+						if(row<0)
+							JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						else
+						{
+							String id = table_1.getModel().getValueAt(row, 0).toString();
+							String supplier = table_1.getModel().getValueAt(row, 1).toString();
+							String date = table_1.getModel().getValueAt(row, 2).toString();
+							String site = table_1.getModel().getValueAt(row, 3).toString();
+							
+							String query = "UPDATE `orders` SET`שם ספק`='"+supplier+"',`אתר`='"+site+"',`תאריך`='"+date+"' WHERE `מספר הזמנה`='"+id+"'";
+
+							MysqlConnect.getDbCon().updateQuery(query);
+							
+							String query2="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
+
+							ResultSet rs = MysqlConnect.getDbCon().selectQuery(query2);
+							table_1.setModel(DbUtils.resultSetToTableModel(rs));
+							HelpFunctions.renderingTable(table_1);
+							JOptionPane.showMessageDialog(null, "עודכן");
+						}
+					} 
+					catch (SQLException e1) 
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
 			button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			button.setBounds(510, 42, 117, 41);
+			button.setBounds(510, 31, 117, 41);
 			frame.getContentPane().add(button);
 
 			button_1 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
@@ -177,7 +211,11 @@ public class Orders extends JFrame
 						{
 							String PID=(table_1.getModel().getValueAt(row, 0)).toString();
 							String ProId="מספר הזמנה";
-							//							Connection myConn = HelpFunctions.DbConnection();
+							
+							//deleting all the items of the order 
+							MysqlConnect.getDbCon().deleteRow("ordersproducts", ProId, PID);
+
+							//deleting the order
 							MysqlConnect.getDbCon().deleteRow("orders", ProId, PID);
 
 							query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
@@ -193,53 +231,64 @@ public class Orders extends JFrame
 					}
 				}
 			});
-			button_1.setBounds(359, 42, 117, 41);
+			button_1.setBounds(359, 31, 117, 41);
 			frame.getContentPane().add(button_1);
 
 			button_2 = new JButton("\u05EA\u05D6\u05DB\u05D5\u05E8\u05EA");
 			button_2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			button_2.setBounds(204, 42, 117, 41);
+			button_2.setBounds(204, 31, 117, 41);
 			frame.getContentPane().add(button_2);
 
-			button_3 = new JButton("\u05D7\u05D6\u05E8\u05D4");
-			button_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			button_3.setBounds(47, 42, 117, 41);
-			frame.getContentPane().add(button_3);
+			button_3 = new JButton("הוספת מוצר להזמנה");
+			button_3.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					int row=table_1.getSelectedRow();
+					if(row<0)
+						JOptionPane.showMessageDialog(null, "בחר  בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+					else
+					{
+						String id = (table_1.getModel().getValueAt(row, 0)).toString();
+						new OrderItems(id);
 
-			lblNewLabel = new JLabel("שם ספק :");
-			lblNewLabel.setVisible(false);
-			lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblNewLabel.setBounds(756, 107, 69, 26);
-			frame.getContentPane().add(lblNewLabel);
+					}
+
+				}
+			});
+			button_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+			button_3.setBounds(10, 31, 154, 41);
+			frame.getContentPane().add(button_3);
 
 			label = new JLabel("אתר :");
 			label.setVisible(false);
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			label.setBounds(553, 107, 47, 26);
+			label.setBounds(486, 96, 31, 26);
 			frame.getContentPane().add(label);
 
 			label_1 = new JLabel("תאריך :");
 			label_1.setVisible(false);
 			label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-			label_1.setBounds(335, 107, 61, 26);
+			label_1.setBounds(293, 96, 61, 26);
 			frame.getContentPane().add(label_1);
 
 			textField = new JTextField();
+			textField.setEditable(false);
 			textField.setVisible(false);
-			textField.setBounds(620, 110, 133, 20);
+			textField.setBounds(522, 99, 105, 20);
 			frame.getContentPane().add(textField);
 			textField.setColumns(10);
 
 			textField_1 = new JTextField();
 			textField_1.setVisible(false);
 			textField_1.setColumns(10);
-			textField_1.setBounds(410, 110, 133, 20);
+			textField_1.setBounds(359, 99, 117, 20);
 			frame.getContentPane().add(textField_1);
 
 			textField_2 = new JTextField();
 			textField_2.setVisible(false);
 			textField_2.setColumns(10);
-			textField_2.setBounds(185, 110, 133, 20);
+			textField_2.setBounds(207, 99, 98, 20);
 			textField_2.setText(date);
 			frame.getContentPane().add(textField_2);
 
@@ -249,29 +298,37 @@ public class Orders extends JFrame
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					//					Connection myConn = HelpFunctions.DbConnection();
-					String q = "INSERT INTO `orders`( `שם ספק`, `תאריך`, `אתר`, `סוג`) VALUES ('"+textField.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"','"+type+"')";
-					try 
+					if(!textField.getText().equals("") && !textField_1.getText().equals("") && !textField_2.getText().equals(""))
 					{
-						//						Statement st = myConn.createStatement();
-						//						st.executeUpdate(q);
-						MysqlConnect.getDbCon().insertQuery(q);
-						JOptionPane.showMessageDialog(null, "saved");
-						query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
-						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
-						table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-						hideOrShow(false);
+						//					Connection myConn = HelpFunctions.DbConnection();
+						String q = "INSERT INTO `orders`( `שם ספק`, `תאריך`, `אתר`, `סוג`) VALUES ('"+textField.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"','"+type+"')";
+						try 
+						{
+							//						Statement st = myConn.createStatement();
+							//						st.executeUpdate(q);
+							MysqlConnect.getDbCon().insertQuery(q);
+							JOptionPane.showMessageDialog(null, "saved");
+							query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
+							ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
+							table_1.setModel(DbUtils.resultSetToTableModel(myRs));
+							HelpFunctions.renderingTable(table_1);
+							hideOrShow(false);
 
-					} 
-					catch (Exception e1)
-					{
-						e1.printStackTrace();				
+						} 
+						catch (Exception e1)
+						{
+							e1.printStackTrace();				
+						}
+
 					}
-
+					else
+					{
+						JOptionPane.showMessageDialog(null, "יש למלא כל הנתונים");
+					}
 				}
 			});
 			btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-			btnNewButton_1.setBounds(63, 109, 89, 23);
+			btnNewButton_1.setBounds(10, 98, 154, 23);
 			frame.getContentPane().add(btnNewButton_1);
 
 
@@ -279,7 +336,7 @@ public class Orders extends JFrame
 			HelpFunctions.renderingTable(table_1);
 
 			background_label = new JLabel("New label");
-			background_label.setBounds(0, 0, 835, 484);
+			background_label.setBounds(0, 0, 799, 484);
 			frame.getContentPane().add(background_label);
 			HelpFunctions.setBackground(background_label);
 
@@ -303,12 +360,14 @@ public class Orders extends JFrame
 
 	private void hideOrShow(boolean flag)
 	{
-		lblNewLabel.setVisible(flag);
+		btnNewButton_2.setVisible(flag);
 		label.setVisible(flag);
 		label_1.setVisible(flag);
 		textField.setVisible(flag);
 		textField_1.setVisible(flag);
 		textField_2.setVisible(flag);
+		textField_1.setText("");
+		textField_2.setText(globalDate);
 		btnNewButton_1.setVisible(flag);
 	}
 }

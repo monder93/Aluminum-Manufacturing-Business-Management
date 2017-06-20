@@ -133,7 +133,7 @@ public class DebtsPage extends JFrame
 						//connection to database
 						MysqlConnect.getDbCon().insertQuery(q);
 						//message for success
-						JOptionPane.showMessageDialog(null, "saved");System.out.println(q);
+						JOptionPane.showMessageDialog(null, "saved");
 
 						//reset TextFields
 						customerNameTextField.setText("");

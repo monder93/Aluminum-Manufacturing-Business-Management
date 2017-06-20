@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
+import Choosers.colorList;
+import Choosers.glassList;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;

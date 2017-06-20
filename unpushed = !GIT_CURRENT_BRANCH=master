@@ -1,0 +1,251 @@
+[33mcommit c75cc11a64bfee2f06c72964474233dd38352745[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Wed Jun 21 01:06:50 2017 +0300
+
+    Finished contacts & suppliers , updates , testing
+
+[33mcommit 0bf0701aabae6c09a3d20b77d355f90d73e4458d[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Jun 20 21:06:34 2017 +0300
+
+    more fixing and updates
+
+[33mcommit bced778d054db00efa06e03262740da98e29da2a[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Jun 20 05:16:18 2017 +0300
+
+    updated and fixed in classes of projects , added new functionals and
+    calculations
+
+[33mcommit aeec2a4b2c7a8c6182f77921bbde27bfb9b5f5af[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Mon Jun 19 04:26:31 2017 +0300
+
+    implemented Door Product , with 2 doors , openingDoor 1 wings and 2
+    wings
+
+[33mcommit 30eb841c2fc00fbf556d8ca2123a09111410136e[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Mon Jun 19 00:00:15 2017 +0300
+
+    added a factory design pattern to implement the Products factory
+
+[33mcommit 7c9a065d26755c2820335319f2f5ccaf2acf7b82[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Sun Jun 18 16:10:38 2017 +0300
+
+    database connections updates
+
+[33mcommit b53aca7cb37641cd982c5ca44b833226a6807570[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sun Jun 18 02:55:58 2017 +0300
+
+    Updated connections and statements in all the classes and replaced them
+    with the new singleton connection functions
+
+[33mcommit 6ea2adc08d197ecfb50c1b98e81068b4a0704fb6[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sun Jun 18 01:18:39 2017 +0300
+
+    Singleton database connection and using it with part of the classes ,
+    added new functions to the singleton class to insert select and delete
+    from tables using queries
+
+[33mcommit 8f71c757fa257dc1a14984e52cd2ea15418a4488[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sat Jun 17 21:34:12 2017 +0300
+
+    moved every class for its relevant package , implemented facade design
+    pattern to PDF Reports , and implemented Chain Of Responsibility design
+    pattern
+
+[33mcommit 346ebd0d6498c407193cabcc0a7788cb0f0e20a1[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sat Jun 17 19:54:48 2017 +0300
+
+    updated and sorted all the classes lines and rendering lines with a
+    helping function instead
+
+[33mcommit 014b7197688406677a282f41cae65b7b5b335d2a[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sat Jun 17 18:38:14 2017 +0300
+
+    changed LoginPage and its logic
+    updated Debtsforsupplierpage , HelpFunctions , Orders
+
+[33mcommit 20178cb6dd0f76f52ca4b8ded7d89c894d76aa4d[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Sat Jun 17 03:27:51 2017 +0300
+
+    database tables ( glass , colors ) added and matched to the program ,
+    updates..
+
+[33mcommit b520d6477436682e263fb3e6a36129e1d1f7d3f4[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Wed Jun 14 21:54:15 2017 +0300
+
+    edited projects
+
+[33mcommit 1e0659c020617e77e9d71789d21c06b0ae76b06f[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sun Jun 11 15:57:17 2017 +0300
+
+    added PdfReport Classes for all needed reports , fixed the gallery with
+    the big picture on click , fixed and checked paied values in
+    customersdebts and debtsforsuppliers , added getCurrentTime to
+    HelpFucntions class , added Fonts class to include our fonts we need to
+    use , finished customersDebtsPDF report
+
+[33mcommit 7dd1dde142fb6cb2a999d1ab00908b0133455436[m
+Merge: 697a2e8 61a4ed6
+Author: Monder <monder_1993@hotmail.com>
+Date:   Thu Jun 8 19:46:33 2017 +0300
+
+    edited projectProducts page
+
+[33mcommit 61a4ed67f9342b93ce31ef547d495e6b0c16827b[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Thu Jun 8 16:23:37 2017 +0300
+
+    2 classes added , edit and update on ProjectProducts class
+
+[33mcommit 697a2e8eeed4a093deafda143be05a371452d7fa[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Tue Jun 6 18:44:09 2017 +0300
+
+    pdf save editing
+
+[33mcommit 9b391244c6d244e94375ef3f2ea2baed07879b87[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Jun 6 18:03:00 2017 +0300
+
+    added classes : colorlist, glasslist, partsColors, scrollShutter,
+    scrollShutterType, slidingShutter ,, also updated the database
+
+[33mcommit b88037e851f9d5436b9fc0ce486168688b7c5448[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Mon Jun 5 15:04:03 2017 +0300
+
+    updated the database , linked the itextpdf library
+
+[33mcommit 4b71f3b228cd6f5e679ff199729d14d28309cc69[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Mon Jun 5 14:28:11 2017 +0300
+
+    fixed and finished --> DebtsForSuppliers,CustomersDebts,Gallery page
+    with option for big picture view , catalogue and contacts pages ready ,
+    also fixed some functions in orders , projects , projectProducts , and
+    added names for the right tables in Tables class
+
+[33mcommit f6e925afb5b5c2c0e5f19f42a7854613900cc794[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Sat Feb 11 21:11:51 2017 +0200
+
+    added page to add project product for specefic project , sorted the code
+    , fixed the code in some classses , added titles for all the jframes .
+
+[33mcommit 6b52ed402acb7c703681b93323d0f368fb1f697e[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Thu Feb 9 03:10:01 2017 +0200
+
+    edited gallery and added PicPic class to
+    blow up the picture
+
+[33mcommit 7e0350b6a3dfa60faf14cfecca7766c2cea6d021[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Thu Feb 9 01:14:45 2017 +0200
+
+    added Catalogue and gallery classes
+
+[33mcommit 4046ef4d3bfb91390ac2462a4cd9f6c6d0054e01[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Wed Feb 8 19:00:17 2017 +0200
+
+    finished depts and paied depts for each customer .
+
+[33mcommit a778a0e14b2cb932496c7ed31078070f8fe3f0e7[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Wed Feb 8 18:55:09 2017 +0200
+
+    finished orders, add,delete and fully functional
+
+[33mcommit 1c009faac14204eba70ddfc7792bb278cdb07257[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Feb 7 23:36:06 2017 +0200
+
+    updated projectProducts page
+
+[33mcommit ad7021d5c2cecf8d3542db9317c3e694b3cac451[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Feb 7 20:50:27 2017 +0200
+
+    replaced all windows to correct place , added PdfViewer Class , added help page how to use the program
+
+[33mcommit 1f97efcb952ab648afd8652972bc78bcef86da20[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Feb 7 17:52:13 2017 +0200
+
+    Calculator Added
+
+[33mcommit 4288aa9af78cce4806716cd577d30fd3c829b7ff[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Tue Feb 7 17:33:26 2017 +0200
+
+    fixed all the sorting of the items in the program , fixed some code +
+    prepared for calculator
+
+[33mcommit 2896ddd0c0f7aa3dd8ab41f8f51f4713ff08adc7[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Wed Jan 11 08:59:41 2017 +0200
+
+    contacts checks try catch with options confirmation
+
+[33mcommit e2ff533a9209f6346b187b9707f1f98c638845ef[m
+Merge: ac3ec5e 64e863b
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Wed Jan 11 08:45:58 2017 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    Conflicts:
+            src/ProjectsPage.java
+    ..updates
+
+[33mcommit ac3ec5e3e4d5ec4762e48ea1a1a61d456f066ac6[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Wed Jan 11 08:32:57 2017 +0200
+
+    updates
+
+[33mcommit 64e863bf602c28568c83a0f3a2530c70d046767b[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Wed Jan 11 08:32:19 2017 +0200
+
+    updates
+
+[33mcommit ac0193c15fdbce9f545b78913134649faa1967e5[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Wed Jan 11 06:21:41 2017 +0200
+
+    added double click on table item .. added update function , delete
+    function etc...
+
+[33mcommit 233c31e2d742641707874eff46c3f88a89de3d54[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Jan 10 22:19:24 2017 +0200
+
+    database
+
+[33mcommit c8b0453df75ec46c1e3f05c51bb1712ee1b8f89d[m
+Author: HosamKhatib <hosam.kh@live.com>
+Date:   Tue Jan 10 22:14:09 2017 +0200
+
+    updates
+
+[33mcommit f119783a4a1306777765fa197a6a080d5e58e03b[m
+Author: Monder <monder_1993@hotmail.com>
+Date:   Tue Jan 10 22:10:36 2017 +0200
+
+    added setBackground to HelpFunctions and fixed colors in loginpage
+
+[33mcommit 6b8d50

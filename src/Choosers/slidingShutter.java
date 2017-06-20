@@ -1,19 +1,21 @@
-package main;
+package Choosers;
 import java.awt.EventQueue;
+import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JFrame;
 import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.AddProject;
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class profiles 
+public class slidingShutter 
 {
 
 	private JFrame frame;
@@ -26,14 +28,14 @@ public class profiles
 	{
 		EventQueue.invokeLater(new Runnable() 
 		{
-			public void run()
+			public void run() 
 			{
-				try 
+				try
 				{
-					profiles window = new profiles();
+					slidingShutter window = new slidingShutter();
 					window.frame.setVisible(true);
-				} 
-				catch (Exception e) 
+				}
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
@@ -45,7 +47,7 @@ public class profiles
 	 * Create the application.
 	 * @throws SQLException 
 	 */
-	public profiles() throws SQLException
+	public slidingShutter() throws SQLException 
 	{
 		initialize();
 	}
@@ -57,25 +59,51 @@ public class profiles
 	private void initialize() throws SQLException 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 428, 509);
+		frame.setBounds(100, 100, 338, 509);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 392, 448);
+		scrollPane.setBounds(10, 11, 302, 448);
 		frame.getContentPane().add(scrollPane);
-		frame.setName("פרופילים");
-		frame.setVisible(true);
+		frame.setName("שלבי תריס הזזה");
+
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) 
+			{
+
+				JTable table =(JTable) e.getSource();
+				Point p = e.getPoint();
+				int row = table.rowAtPoint(p);
+				if (e.getClickCount() == 2) 
+				{
+						String shutterID=(table.getModel().getValueAt(row, 0)).toString();
+						AddProject.shutterId=shutterID;
+						String shutterName=(table.getModel().getValueAt(row, 1)).toString();
+						AddProject.shutterName.setText(shutterName);
+						String shutterWeight=(table.getModel().getValueAt(row, 2)).toString();
+						AddProject.shutterWeight=shutterWeight;
+					
+
+					frame.dispose();
+				}
+			
+				
+			}
+		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
+
 		//connection to database 
 //		myConn = HelpFunctions.DbConnection();
 //		Statement myStmt = myConn.createStatement();
-		String query = "SELECT * FROM profiles";
+		String query = "SELECT * FROM slidingShutter";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
 		HelpFunctions.renderingTable(table);
+
+
 	}
 }

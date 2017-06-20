@@ -1,4 +1,4 @@
-package main;
+package Choosers;
 import java.awt.EventQueue;
 
 import javax.swing.ButtonGroup;
@@ -12,6 +12,7 @@ import javax.swing.event.ChangeListener;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.ProjectProducts;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.JButton;

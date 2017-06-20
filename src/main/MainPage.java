@@ -96,7 +96,7 @@ public class MainPage extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// this 3 lines to set bounds for 100% of screen and set resizable to false 
-		setBounds(100, 100, 578, 374);
+		setBounds(100, 100, 1368, 734);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setVisible(true);
 
@@ -326,12 +326,14 @@ public class MainPage extends JFrame
 			}
 		});
 		menu.add(menuItem_4);
+
 		JMenuItem menuItem_5 = new JMenuItem("טבלת צבעים");
 		menuItem_5.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Tables("colors");
+
 			}
 		});
 		menu.add(menuItem_5);
@@ -479,13 +481,10 @@ public class MainPage extends JFrame
 			{
 				if(!textField.getText().equals(""))
 				{
-					//Connection myConn = HelpFunctions.DbConnection();
 
 					String q = "INSERT INTO `generalreminders`(`תזכורת`) VALUES ('"+textField.getText().toString()+"')";
 					try
 					{
-//						Statement st = MysqlConnect.getDbCon().conn.createStatement();
-//						st.executeUpdate(q);
 						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "נוספה תזכורת חדשה","תזכורת חדשה",1);
 						HelpFunctions.getTable("generalreminders", table);
@@ -539,7 +538,6 @@ public class MainPage extends JFrame
 					{
 						String RID=(table.getModel().getValueAt(row, 0)).toString();
 						String remindId="מספר תזכורת";
-						//Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("generalreminders", remindId, RID);
 						HelpFunctions.getTable("generalreminders", table);
 					
@@ -572,6 +570,9 @@ public class MainPage extends JFrame
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		//get reminders table
+		//Connection myConn = HelpFunctions.DbConnection();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		HelpFunctions.getTable("generalreminders", table);
 
@@ -586,12 +587,13 @@ public class MainPage extends JFrame
 
 
 		JLabel background_label = new JLabel("");
-		background_label.setBounds(0, 25, 1376, 693);
+		background_label.setBounds(0, 25, 1376, 680);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);	
 
 		HelpFunctions.setIcon(btnNewButton, "calculator");
 
+//		}
 
 	}
 }

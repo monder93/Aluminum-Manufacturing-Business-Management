@@ -5,6 +5,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import Choosers.Contacts;
+import Choosers.colorList;
+import Choosers.glassList;
+import Choosers.scrollShutterType;
+import Choosers.slidingShutter;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
