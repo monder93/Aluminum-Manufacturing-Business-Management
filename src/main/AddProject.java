@@ -31,7 +31,10 @@ public class AddProject
 	public static String name;
 	private JComboBox<String> comboBox_4;
 	public static String colorId="err";
+	public static String colorPrice="err";
 	public static String glassId="err";
+	public static String glassPrice="err";
+
 
 	/**
 	 * Launch the application.

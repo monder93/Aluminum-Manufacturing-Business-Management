@@ -25,11 +25,13 @@ import java.awt.Image;
 
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
-
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -37,11 +39,11 @@ import java.awt.ComponentOrientation;
 
 public class ProjectProducts extends JFrame
 {
-	private JTable table;
+	public static JTable table;
 	private JPanel contentPane;
 	private ButtonGroup proNumBG= new ButtonGroup();
 	private ButtonGroup  berzolNumBG= new ButtonGroup();
-	String id;
+	public static String id;
 	/**
 	 * Launch the application.
 	 */
@@ -93,9 +95,10 @@ public class ProjectProducts extends JFrame
 		setContentPane(contentPane);
 		getContentPane().setLayout(null);
 		JLabel lblNewLabel_5;
-		JLabel lblNewLabel_8;
+		JLabel proPic;
 		lblNewLabel_5 = new JLabel("0");
-		lblNewLabel_8 = new JLabel("");
+		lblNewLabel_5.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		proPic = new JLabel("");
 		JScrollPane scrollPane = new JScrollPane();
 
 		scrollPane.setBounds(10, 419, 1342, 286);
@@ -114,27 +117,32 @@ public class ProjectProducts extends JFrame
 					JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה");
 				else
 				{
-					String price=(table.getModel().getValueAt(row, 10)).toString();
-					int pricee = Integer.parseInt(price);
-					pricee=(pricee*117/100);
-					price = Integer.toString(pricee);
-					lblNewLabel_5.setText(price);
-					if(row==0)
+					double price=Math.floor((double) (table.getModel().getValueAt(row, 10)));
+					price=(price*117/100);
+					lblNewLabel_5.setText(String.valueOf(price));
+					String query="SELECT  `תמונה` FROM `products` WHERE `מזהה` ='"+(table.getModel().getValueAt(row, 2))+"'";
+					ResultSet rs;
+					try 
 					{
-						lblNewLabel_8.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/29.jpg")).getImage().getScaledInstance(lblNewLabel_8.getWidth(), lblNewLabel_8.getHeight(), Image.SCALE_DEFAULT)));
+						rs = MysqlConnect.getDbCon().selectQuery(query);
+						rs.next();
+						java.sql.Blob blob = rs.getBlob(1);  
+						java.io.InputStream in = blob.getBinaryStream();  
+						BufferedImage image = ImageIO.read(in);
+						HelpFunctions.setImageAsIcon(proPic,new ImageIcon(image));
 					}
-					if(row==1)
+					catch (SQLException | IOException e1) 
 					{
-						lblNewLabel_8.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/1700.jpg")).getImage().getScaledInstance(lblNewLabel_8.getWidth(), lblNewLabel_8.getHeight(), Image.SCALE_DEFAULT)));
+						e1.printStackTrace();
 					}
+
 				}
 			}
 		});
 
 		try 
 		{
-//			myConn = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
+
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
@@ -165,18 +173,20 @@ public class ProjectProducts extends JFrame
 		contentPane.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("18005");
+		lblNewLabel_3.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(1058, 24, 39, 24);
+		lblNewLabel_3.setBounds(1036, 24, 61, 24);
 		contentPane.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("5266.5");
+		lblNewLabel_4.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		lblNewLabel_4.setBounds(1058, 90, 39, 24);
+		lblNewLabel_4.setBounds(1036, 90, 61, 24);
 		contentPane.add(lblNewLabel_4);
 
 
 		lblNewLabel_5.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		lblNewLabel_5.setBounds(1058, 125, 39, 24);
+		lblNewLabel_5.setBounds(1036, 125, 61, 24);
 		contentPane.add(lblNewLabel_5);
 
 		JLabel lblNewLabel_6 = new JLabel("\u05DE\u05E1' \u05E4\u05E8\u05D5\u05E4\u05D9\u05DC\u05D9\u05DD :");
@@ -216,8 +226,8 @@ public class ProjectProducts extends JFrame
 		contentPane.add(radioButton_2);
 
 		//	lblNewLabel_8.setIcon(new ImageIcon(ProjectProducts.class.getResource("/img/background.jpg")));
-		lblNewLabel_8.setBounds(69, 24, 225, 265);
-		contentPane.add(lblNewLabel_8);
+		proPic.setBounds(69, 24, 225, 265);
+		contentPane.add(proPic);
 		proNumBG.add(rdbtnNewRadioButton);
 		proNumBG.add(rdbtnNewRadioButton_3);
 
@@ -370,8 +380,9 @@ public class ProjectProducts extends JFrame
 		contentPane.add(label);
 
 		JLabel label_1 = new JLabel("21066");
+		label_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		label_1.setBounds(1058, 55, 39, 24);
+		label_1.setBounds(1036, 55, 61, 24);
 		contentPane.add(label_1);
 
 		JLabel background_label = new JLabel("New label");
@@ -382,7 +393,7 @@ public class ProjectProducts extends JFrame
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table);
 
-		HelpFunctions.setBackground(lblNewLabel_8, "nopic");
+		HelpFunctions.setBackground(proPic, "nopic");
 		radioButton.setSelected(true);
 		rdbtnNewRadioButton.setSelected(true);
 	}

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import helpClasses.MysqlConnect;
 
-public class OpeningDoor extends Door implements info
+public class OpeningDoor extends Door
 {
 
 	private double productionsCost;
@@ -49,8 +49,7 @@ public class OpeningDoor extends Door implements info
 	public double calculatePrice() 
 	{
 		double price = calculateCosts();
-		System.out.println(Math.floor(price*profit*100)/100);
-		return price*profit;
+		return (Math.floor(price*profit*100)/100);
 
 	}
 

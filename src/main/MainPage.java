@@ -595,14 +595,17 @@ public class MainPage extends JFrame
 		contentPane.add(background_label);	
 
 		HelpFunctions.setIcon(btnNewButton, "calculator");
-		OpeningDoor p;
-		try {
-			p = (OpeningDoor) ProductFactory.getProduct("openingDoor", 1000, 2000, 36.18, 45 , "4400",2);
-			p.calculatePrice();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		OpeningDoor p;
+//		try {
+//			p = (OpeningDoor) ProductFactory.getProduct("openingDoor", 1000, 2000, 36.18, 45 , "4400",2);
+//			ProductFactory pr = new ProductFactory();
+//			Products p = pr.getProduct("דלתות הזזה", 2000, 2000, 36.18, 45, "9200", 2);
+//			
+//			System.out.println(p.calculatePrice());
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 
 	}
 }

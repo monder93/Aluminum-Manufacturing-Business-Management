@@ -22,6 +22,8 @@ public class colorList {
 	private JTable table;
 	public String colorID="";
 	public String colorName="";
+	public String colorPrice="";
+
 	private String className;
 
 
@@ -82,6 +84,8 @@ public class colorList {
 						AddProjectProduct.colorId=colorID;
 						colorName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProjectProduct.textField.setText(colorName);
+						colorPrice=(table.getModel().getValueAt(row, 3)).toString();
+						AddProjectProduct.colorPrice=colorPrice;
 					}
 					else
 					{
@@ -89,8 +93,10 @@ public class colorList {
 						AddProject.colorId=colorID;
 						colorName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProject.color.setText(colorName);
+						colorPrice=(table.getModel().getValueAt(row, 3)).toString();
+						AddProject.colorPrice=colorPrice;
 					}
-
+					frame.dispose();
 				}
 			}
 		});

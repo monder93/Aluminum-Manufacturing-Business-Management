@@ -21,6 +21,7 @@ public class glassList {
 	private JFrame frame;
 	private JTable table;
 	public String glassID="";
+	public String glassPrice="";
 	public String glassName="";
 	private String className;
 
@@ -96,6 +97,8 @@ public class glassList {
 						AddProjectProduct.colorId=glassID;
 						glassName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProjectProduct.textField_1.setText(glassName);
+						glassPrice=(table.getModel().getValueAt(row, 0)).toString();
+						AddProjectProduct.colorPrice=glassPrice;
 					}
 					else
 					{
@@ -103,8 +106,10 @@ public class glassList {
 						AddProject.colorId=glassID;
 						glassName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProject.glass.setText(glassName);
+						glassPrice=(table.getModel().getValueAt(row, 0)).toString();
+						AddProject.colorPrice=glassPrice;
 					}
-
+					frame.dispose();
 				}
 			}
 		});

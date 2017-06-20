@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import helpClasses.MysqlConnect;
 
-public class SlidingDoor extends Door
+public class OpeningWindow extends Door
 {
 
 	private double productionsCost;
@@ -15,7 +15,7 @@ public class SlidingDoor extends Door
 	private double mashkofEverPrice;
 
 
-	public SlidingDoor(double width, double height, double colorPrice,double glassPrice, String series ,int wingCount) throws SQLException
+	public OpeningWindow(double width, double height, double colorPrice,double glassPrice, String series ,int wingCount) throws SQLException
 	{
 		super(width, height, colorPrice,glassPrice, series , wingCount);
 
@@ -95,13 +95,13 @@ public class SlidingDoor extends Door
 	public double calculateCosts() {
 		double price = 0;
 		price	+= calculateAluminumKg();
-//		System.out.println(price);
+		System.out.println(price);
 		price	+= calculateGlassPrice();
-//		System.out.println(price);
+		System.out.println(price);
 		price += mashkofEverPrice*2*(height+width)/1000 ;
-//		System.out.println(price);
-		price += 915.49;
-//		System.out.println(price);
+		System.out.println(price);
+		price += 375.39;
+		System.out.println(price);
 		return price*productionsCost*workingCost;
 	}
 

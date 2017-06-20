@@ -8,9 +8,6 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JRadioButtonMenuItem;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.event.ChangeListener;
 
 import helpClasses.HelpFunctions;

@@ -1,6 +1,6 @@
 package products;
 
-public abstract class Products 
+public abstract class Products implements info
 {
 	protected double width;
 	protected double height;

@@ -4,17 +4,28 @@ import java.awt.EventQueue;
 import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import net.proteanit.sql.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+
 import javax.swing.SwingConstants;
+
+import com.itextpdf.text.pdf.codec.Base64.InputStream;
+
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -30,12 +41,12 @@ public class product extends JFrame{
 	private ButtonGroup BG2= new ButtonGroup();
 	public String series="";
 	public int wingCount;
-
+	JLabel label;
 	public static String Id;
 	public static String name;
 	String query="SELECT `שם` FROM `opentypes`  ";
 	String query2="SELECT `שם` FROM `opentypes`  ";
-	private JTextField textField;
+	private JTextField wing;
 	String type="";
 	/**
 	 * Launch the application.
@@ -94,7 +105,8 @@ public class product extends JFrame{
 		        if (me.getClickCount() == 2) 
 		        {
 		        	type=(table.getModel().getValueAt(row, 0)).toString();
-		        	System.out.println(type);
+		        	AddProjectProduct.type=type;
+//		        	System.out.println("type at product: "+ type);
 		        	query2= "SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'";
 //		        	Statement myStmt;
 					try 
@@ -154,7 +166,9 @@ public class product extends JFrame{
 		        if (e.getClickCount() == 2) 
 		        {
 		        	series=(table.getModel().getValueAt(row, 0)).toString();
-		        	System.out.println(series);
+//		        	System.out.println(series);
+		        	wing.show();
+		        	label.show();
 		        }
 			}
 		});
@@ -171,17 +185,17 @@ public class product extends JFrame{
 			HelpFunctions.renderingTable(table_2);
 
 			
-			JLabel label = new JLabel("כמות כנפי זכוכית:");
+			label = new JLabel("כמות כנפי זכוכית:");
 			label.setHorizontalTextPosition(SwingConstants.LEFT);
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
 			label.setBounds(36, 35, 107, 28);
 			frame.getContentPane().add(label);
-			
-			textField = new JTextField();
-			textField.setBounds(36, 63, 107, 28);
-			frame.getContentPane().add(textField);
-			textField.setColumns(10);
-			
+			label.hide();
+			wing = new JTextField();
+			wing.setBounds(36, 63, 107, 28);
+			frame.getContentPane().add(wing);
+			wing.setColumns(10);
+			wing.hide();
 			JLabel label_1 = new JLabel("מונובלוק:");
 			label_1.setHorizontalTextPosition(SwingConstants.LEFT);
 			label_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -195,6 +209,7 @@ public class product extends JFrame{
 			frame.getContentPane().add(radioButton);
 			
 			JRadioButton radioButton_1 = new JRadioButton("בלי מונובלוק");
+			radioButton_1.setSelected(true);
 			radioButton_1.setHorizontalTextPosition(SwingConstants.LEFT);
 			radioButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
 			radioButton_1.setBounds(36, 182, 109, 23);
@@ -213,6 +228,7 @@ public class product extends JFrame{
 			frame.getContentPane().add(radioButton_2);
 			
 			JRadioButton radioButton_3 = new JRadioButton("בלי רשת");
+			radioButton_3.setSelected(true);
 			radioButton_3.setHorizontalTextPosition(SwingConstants.LEFT);
 			radioButton_3.setHorizontalAlignment(SwingConstants.RIGHT);
 			radioButton_3.setBounds(38, 294, 109, 23);
@@ -228,7 +244,35 @@ public class product extends JFrame{
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					
+					if(!(type.equals(""))&&!(series.equals(""))&&!(wing.getText().equals("")))
+					{
+						
+						String query = "SELECT * FROM `products` WHERE `סדרה` = '"+series+"' AND `סוג פתיחה` = '"+type+"' AND `מס כנפים` = '"+wing.getText().toString()+"'";
+//						System.out.println(query);
+						try
+						{
+						ResultSet rs = MysqlConnect.getDbCon().selectQuery(query);
+						rs.next();
+						AddProjectProduct.proId = rs.getInt(1) ;
+						AddProjectProduct.textField_4.setText(""+rs.getInt(5));
+						AddProjectProduct.textField_5.setText(rs.getString(3)+"-"+rs.getString(6)+"-"+rs.getString(7)+" כנפיים ");
+						AddProjectProduct.wingsNumber = Integer.parseInt(wing.getText().toString());
+						AddProjectProduct.type=type;
+						AddProjectProduct.series=series;
+						java.sql.Blob blob = rs.getBlob(8);  
+						java.io.InputStream in = blob.getBinaryStream();  
+						BufferedImage image = ImageIO.read(in);
+						HelpFunctions.setImageAsIcon(AddProjectProduct.proPic,new ImageIcon(image));
+						frame.dispose();
+						}
+						catch (Exception e) 
+						{
+							e.printStackTrace();
+						}
+						
+						}
+					else
+						JOptionPane.showMessageDialog(null, "יש למלא הכל");
 				}
 			});
 			btnNewButton.setBounds(36, 341, 107, 34);
