@@ -203,11 +203,14 @@ public class AddProject
 					int colPr = 30;
 					String cust = customer.getText();
 					String plc = place.getText();
-
+					String add = adress.getText();
+					String phonenum = phone.getText();
+					String cmp = company.getSelectedItem().toString();
+					String shut = shutterName.getText();
+					
 					try {
-						String q = "insert into `projects`(`אתר`, `שם מזמין`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `איש קשר`) values('" + plc
-								+ "','" + cust + "','" + col + "','" + colPr + "','" + gla + "','" + glaPr + "','" + cont
-								+ "') ";
+						String q = "INSERT INTO `projects`(`איש קשר`, `מזהה קשר`, `אתר`, `שם מזמין`, `כתובת`, `טלפון`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `תעשייה`, `תריס`) VALUES('" +cont
+								+ "','" + id + "','" + plc + "','" + cust + "','" + add + "','" + phonenum + "','" + col + "','" + colPr + "','" + gla + "','" + glaPr + "','" + cmp + "','" + shut + "') ";
 						//					myConn=HelpFunctions.DbConnection();
 						//					Statement st = myConn.createStatement();
 						//					st.executeUpdate(q);

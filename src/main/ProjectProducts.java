@@ -173,13 +173,13 @@ public class ProjectProducts extends JFrame
 		lblNewLabel_2.setBounds(1105, 125, 247, 24);
 		contentPane.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("18005");
+		JLabel lblNewLabel_3 = new JLabel("0");
 		lblNewLabel_3.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(1036, 24, 61, 24);
 		contentPane.add(lblNewLabel_3);
 
-		JLabel lblNewLabel_4 = new JLabel("5266.5");
+		JLabel lblNewLabel_4 = new JLabel("0");
 		lblNewLabel_4.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(1036, 90, 61, 24);
@@ -391,21 +391,30 @@ public class ProjectProducts extends JFrame
 		label_1.setBounds(1036, 55, 61, 24);
 		contentPane.add(label_1);
 
-		JLabel background_label = new JLabel("New label");
-		background_label.setBounds(0, 0, 1362, 705);
-		HelpFunctions.setBackground(background_label);
-		contentPane.add(background_label);
-
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table);
 
 		HelpFunctions.setBackground(proPic, "nopic");
 		radioButton.setSelected(true);
 		rdbtnNewRadioButton.setSelected(true);
-
-		lblNewLabel_3.setText(String.valueOf(calcAllProductPrice()));
-		label_1.setText(String.valueOf(calcAllProductPrice()*1.17));
-		lblNewLabel_4.setText(String.valueOf(calcAllProductPrice()/proCount));
+		double allPrice=calcAllProductPrice();
+		lblNewLabel_3.setText(String.valueOf(allPrice));
+		label_1.setText(String.valueOf(allPrice*1.17));
+		
+		JButton button_16 = new JButton("צבע אביזרים");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				new partsColors();
+			}
+		});
+		button_16.setBounds(831, 137, 108, 40);
+		contentPane.add(button_16);
+		
+				JLabel background_label = new JLabel("New label");
+				background_label.setBounds(0, 0, 1362, 705);
+				HelpFunctions.setBackground(background_label);
+				contentPane.add(background_label);
 	}
 
 	private double calcAllProductPrice()
@@ -417,7 +426,7 @@ public class ProjectProducts extends JFrame
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			while(myRs.next())
 			{
-				proCount++;
+				proCount+=(Double.parseDouble(myRs.getString(2)));
 				price+=(Double.parseDouble(myRs.getString(1)))*(Double.parseDouble(myRs.getString(2)));
 			}
 		}
@@ -425,7 +434,7 @@ public class ProjectProducts extends JFrame
 		{
 			e.printStackTrace();
 		}
-		
+		System.out.println(proCount);
 		return price;
 	}
 }

@@ -326,14 +326,12 @@ public class MainPage extends JFrame
 			}
 		});
 		menu.add(menuItem_4);
-
 		JMenuItem menuItem_5 = new JMenuItem("טבלת צבעים");
 		menuItem_5.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		menuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Tables("colors");
-
 			}
 		});
 		menu.add(menuItem_5);
@@ -574,8 +572,6 @@ public class MainPage extends JFrame
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		//get reminders table
-		//Connection myConn = HelpFunctions.DbConnection();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		HelpFunctions.getTable("generalreminders", table);
 
@@ -595,17 +591,7 @@ public class MainPage extends JFrame
 		contentPane.add(background_label);	
 
 		HelpFunctions.setIcon(btnNewButton, "calculator");
-//		OpeningDoor p;
-//		try {
-//			p = (OpeningDoor) ProductFactory.getProduct("openingDoor", 1000, 2000, 36.18, 45 , "4400",2);
-//			ProductFactory pr = new ProductFactory();
-//			Products p = pr.getProduct("דלתות הזזה", 2000, 2000, 36.18, 45, "9200", 2);
-//			
-//			System.out.println(p.calculatePrice());
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+
 
 	}
 }

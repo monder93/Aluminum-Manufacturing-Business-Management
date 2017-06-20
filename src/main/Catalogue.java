@@ -148,9 +148,7 @@ public class Catalogue extends JFrame {
 						 {
 							 pdfFileName=pdfFileName+myRs.getString(1);
 						 }
-						System.out.println(pdfFileName);
 						
-					System.out.println(pdfFileName);	
 					PdfViewer pdfview =new PdfViewer(pdfFileName);
 					pdfview.main();
 					pdfFileName=StringTemp;
