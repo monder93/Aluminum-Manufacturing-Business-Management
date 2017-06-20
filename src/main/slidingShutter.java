@@ -1,5 +1,6 @@
 package main;
 import java.awt.EventQueue;
+import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFrame;
@@ -10,6 +11,8 @@ import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class slidingShutter 
 {
@@ -65,6 +68,30 @@ public class slidingShutter
 		frame.setName("שלבי תריס הזזה");
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) 
+			{
+
+				JTable table =(JTable) e.getSource();
+				Point p = e.getPoint();
+				int row = table.rowAtPoint(p);
+				if (e.getClickCount() == 2) 
+				{
+						String shutterID=(table.getModel().getValueAt(row, 0)).toString();
+						AddProject.shutterId=shutterID;
+						String shutterName=(table.getModel().getValueAt(row, 1)).toString();
+						AddProject.shutterName.setText(shutterName);
+						String shutterWeight=(table.getModel().getValueAt(row, 2)).toString();
+						AddProject.shutterWeight=shutterWeight;
+					
+
+					frame.dispose();
+				}
+			
+				
+			}
+		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 

@@ -156,7 +156,7 @@ public class ProjectsPage extends JFrame
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "להמשיך ?", "אישור",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
@@ -211,7 +211,7 @@ public class ProjectsPage extends JFrame
 						MysqlConnect.getDbCon().updateQuery(query);
 						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
-						JOptionPane.showMessageDialog(null, "updated!");
+						JOptionPane.showMessageDialog(null, "עודכן");
 					}
 				} 
 				catch (SQLException e1) 

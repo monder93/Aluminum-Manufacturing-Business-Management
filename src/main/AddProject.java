@@ -25,8 +25,8 @@ public class AddProject
 	public static JTextField color;
 	public static JTextField glass;
 	//public Connection myConn;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField adress;
+	private JTextField phone;
 	public static String id;
 	public static String name;
 	private JComboBox<String> comboBox_4;
@@ -34,6 +34,11 @@ public class AddProject
 	public static String colorPrice="err";
 	public static String glassId="err";
 	public static String glassPrice="err";
+	public static String shutterId="err";
+	public static String shutterWeight="err";
+
+
+	public static JTextField shutterName;
 
 
 	/**
@@ -77,7 +82,7 @@ public class AddProject
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("הוספת פרויקט");
-		
+
 		JButton button = new JButton("צבע :");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
@@ -93,7 +98,7 @@ public class AddProject
 		button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button.setBounds(297, 49, 135, 29);
 		frame.getContentPane().add(button);
-		
+
 		JButton button_1 = new JButton("זיגוג :");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -109,24 +114,24 @@ public class AddProject
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		button_1.setBounds(297, 99, 135, 29);
 		frame.getContentPane().add(button_1);
-		
+
 		JButton shutter = new JButton("תריס :");
 		shutter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				if (comboBox_4.getSelectedItem().toString().equals("תריס גלילה"))
-					new scrollShutter();
-				else
-					try {
+				try {
+					if (comboBox_4.getSelectedItem().toString().equals("תריס גלילה"))
+						new scrollShutterType();
+					else
 						new slidingShutter();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		shutter.setFont(new Font("Tahoma", Font.BOLD, 12));
-		shutter.setBounds(297, 204, 135, 29);
+		shutter.setBounds(297, 255, 135, 29);
 		frame.getContentPane().add(shutter);
 
 		JLabel lblNewLabel = new JLabel("\u05D0\u05EA\u05E8 :");
@@ -144,13 +149,6 @@ public class AddProject
 		lblNewLabel_3.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		lblNewLabel_3.setBounds(739, 300, 120, 40);
 		frame.getContentPane().add(lblNewLabel_3);
-
-		JLabel lblNewLabel_7 = new JLabel(
-				"\u05E9\u05D3\u05D4 \u05EA\u05E8\u05D9\u05E1 \u05D2\u05DC\u05D9\u05DC\u05D4 :");
-		lblNewLabel_7.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		lblNewLabel_7.setBounds(312, 249, 120, 40);
-		frame.getContentPane().add(lblNewLabel_7);
-		lblNewLabel_7.setFont(new Font("Segoe UI", Font.BOLD, 12));
 
 		place = new JTextField();
 		place.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -191,112 +189,116 @@ public class AddProject
 		btnNewButton.setBounds(739, 51, 135, 30);
 		frame.getContentPane().add(btnNewButton);
 
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setBounds(202, 266, 97, 23);
-		frame.getContentPane().add(checkBox);
-
 		JButton btnNewButton_1 = new JButton("\u05D0\u05D9\u05E9\u05D5\u05E8");
 		btnNewButton_1.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				String cont = contact.getText();
-				String gla = glass.getText();
-				int glaPr = 40;
-				String col = color.getText();
-				int colPr = 30;
-				String cust = customer.getText();
-				String plc = place.getText();
-				
-				try {
-					String q = "insert into `projects`(`אתר`, `שם מזמין`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `איש קשר`) values('" + plc
-							+ "','" + cust + "','" + col + "','" + colPr + "','" + gla + "','" + glaPr + "','" + cont
-							+ "') ";
-//					myConn=HelpFunctions.DbConnection();
-//					Statement st = myConn.createStatement();
-//					st.executeUpdate(q);
-					MysqlConnect.getDbCon().insertQuery(q);
-					JOptionPane.showMessageDialog(null, "saved");
-				} 
-				catch (Exception e) 
-				{
-					e.printStackTrace();
-				}
-				try 
-				{
-//					Statement myStmt = myConn.createStatement();
-					ResultSet myRs = MysqlConnect.getDbCon().selectQuery("select * from projects");
-					ProjectsPage.table.setModel(DbUtils.resultSetToTableModel(myRs));
-					HelpFunctions.renderingTable(ProjectsPage.table);
+				if(!(contact.getText().equals(""))&&!(glass.getText().equals(""))&&!(color.getText().equals(""))&&!(place.getText().equals(""))&&!(customer.getText().equals(""))&&!(adress.getText().equals(""))&&!(phone.getText().equals("")))
+				{		
+					String cont = contact.getText();
+					String gla = glass.getText();
+					int glaPr = 40;
+					String col = color.getText();
+					int colPr = 30;
+					String cust = customer.getText();
+					String plc = place.getText();
 
+					try {
+						String q = "insert into `projects`(`אתר`, `שם מזמין`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `איש קשר`) values('" + plc
+								+ "','" + cust + "','" + col + "','" + colPr + "','" + gla + "','" + glaPr + "','" + cont
+								+ "') ";
+						//					myConn=HelpFunctions.DbConnection();
+						//					Statement st = myConn.createStatement();
+						//					st.executeUpdate(q);
+						MysqlConnect.getDbCon().insertQuery(q);
+						JOptionPane.showMessageDialog(null, "saved");
+					} 
+					catch (Exception e) 
+					{
+						e.printStackTrace();
+					}
+					try 
+					{
+						//					Statement myStmt = myConn.createStatement();
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery("select * from projects");
+						ProjectsPage.table.setModel(DbUtils.resultSetToTableModel(myRs));
+						HelpFunctions.renderingTable(ProjectsPage.table);
+
+					}
+					catch (SQLException e1) 
+					{
+						e1.printStackTrace();
+					}
+					frame.dispose();
 				}
-				catch (SQLException e1) 
+				else
 				{
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null , "יש למלא הכל");
 				}
-				frame.dispose();
 			}
 		});
 		btnNewButton_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		btnNewButton_1.setBounds(103, 300, 329, 46);
+		btnNewButton_1.setBounds(103, 306, 329, 40);
 		frame.getContentPane().add(btnNewButton_1);
 
 		contact = new JTextField();
+		contact.setEditable(false);
 		contact.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		contact.setColumns(10);
 		contact.setBounds(545, 42, 184, 40);
 		frame.getContentPane().add(contact);
 
 		color = new JTextField();
+		color.setEditable(false);
 		color.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		color.setColumns(10);
 		color.setBounds(103, 42, 184, 40);
 		frame.getContentPane().add(color);
 
 		glass = new JTextField();
+		glass.setEditable(false);
 		glass.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		glass.setColumns(10);
 		glass.setBounds(103, 93, 184, 40);
 		frame.getContentPane().add(glass);
-		
+
 		JLabel label = new JLabel("כתובת :");
 		label.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		label.setBounds(739, 194, 120, 40);
 		frame.getContentPane().add(label);
-		
+
 		JLabel label_1 = new JLabel("טלפון :");
 		label_1.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		label_1.setBounds(739, 249, 120, 40);
 		frame.getContentPane().add(label_1);
+
+		adress = new JTextField();
+		adress.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		adress.setColumns(10);
+		adress.setBounds(545, 197, 184, 40);
+		frame.getContentPane().add(adress);
+
+		phone = new JTextField();
+		phone.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		phone.setColumns(10);
+		phone.setBounds(545, 249, 184, 40);
+		frame.getContentPane().add(phone);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		textField.setColumns(10);
-		textField.setBounds(545, 197, 184, 40);
-		frame.getContentPane().add(textField);
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		textField_1.setColumns(10);
-		textField_1.setBounds(545, 249, 184, 40);
-		frame.getContentPane().add(textField_1);
-		
-		
-		
-		JButton button_3 = new JButton("צבע אביזרים :");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				new partsColors();
-			}
-		});
-		button_3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		button_3.setBounds(103, 152, 329, 29);
-		frame.getContentPane().add(button_3);
-		
-		JLabel background_label = new JLabel("");
-		background_label.setBounds(0, 0, 884, 376);
-		HelpFunctions.setBackground(background_label);
-		frame.getContentPane().add(background_label);
+		JLabel lblNewLabel_2 = new JLabel("סוג תריס :");
+		lblNewLabel_2.setBounds(297, 205, 135, 29);
+		frame.getContentPane().add(lblNewLabel_2);
+				
+				shutterName = new JTextField();
+				shutterName.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+				shutterName.setEditable(false);
+				shutterName.setColumns(10);
+				shutterName.setBounds(103, 245, 184, 40);
+				frame.getContentPane().add(shutterName);
+				
+						JLabel background_label = new JLabel("");
+						background_label.setBounds(0, 0, 884, 376);
+						HelpFunctions.setBackground(background_label);
+						frame.getContentPane().add(background_label);
 	}
 }

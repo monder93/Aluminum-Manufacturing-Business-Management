@@ -84,7 +84,7 @@ public class Contacts extends JFrame{
 		setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(64, 64, 859, 337);
-
+		setTitle("איש קשר");
 		table = new JTable()
 		{@Override
 			public boolean isCellEditable(int row, int column) 
@@ -186,7 +186,7 @@ public class Contacts extends JFrame{
 						MysqlConnect.getDbCon().updateQuery(q);
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
-						JOptionPane.showMessageDialog(null, "updated!");
+						JOptionPane.showMessageDialog(null, "עודכן");
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -213,7 +213,7 @@ public class Contacts extends JFrame{
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "להמשיך ?", "אישור",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
@@ -309,7 +309,7 @@ public class Contacts extends JFrame{
 //						Statement st = myConn.createStatement();
 //						st.executeUpdate(q);
 						MysqlConnect.getDbCon().insertQuery(q);
-						JOptionPane.showMessageDialog(null, "saved");
+						JOptionPane.showMessageDialog(null, "נשמר");
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
 						hideOrShow(false);
@@ -326,12 +326,27 @@ public class Contacts extends JFrame{
 
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
-
-
-			JLabel background_label = new JLabel("New label");
-			background_label.setBounds(0, 0, 1362, 714);
-			HelpFunctions.setBackground(background_label);
-			contentPane.add(background_label);
+			
+			JButton btnNewButton_3 = new JButton("ביטול");
+			btnNewButton_3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) 
+				{
+					textField.setText("");
+					textField1.setText("");
+					textField2.setText("");
+					textField3.setText("");
+					textField4.setText("");
+					hideOrShow(false);
+				}
+			});
+			btnNewButton_3.setBounds(516, 565, 165, 42);
+			contentPane.add(btnNewButton_3);
+			
+			
+						JLabel background_label = new JLabel("New label");
+						background_label.setBounds(0, 0, 1362, 714);
+						HelpFunctions.setBackground(background_label);
+						contentPane.add(background_label);
 		}
 		catch (Exception e) 
 		{

@@ -44,6 +44,7 @@ public class ProjectProducts extends JFrame
 	private ButtonGroup proNumBG= new ButtonGroup();
 	private ButtonGroup  berzolNumBG= new ButtonGroup();
 	public static String id;
+	double proCount=0;
 	/**
 	 * Launch the application.
 	 */
@@ -84,7 +85,7 @@ public class ProjectProducts extends JFrame
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize()
-{
+	{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -329,6 +330,11 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_8);
 
 		JButton button_9 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+			}
+		});
 		button_9.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_9.setBounds(742, 346, 152, 46);
 		contentPane.add(button_9);
@@ -396,5 +402,30 @@ public class ProjectProducts extends JFrame
 		HelpFunctions.setBackground(proPic, "nopic");
 		radioButton.setSelected(true);
 		rdbtnNewRadioButton.setSelected(true);
+
+		lblNewLabel_3.setText(String.valueOf(calcAllProductPrice()));
+		label_1.setText(String.valueOf(calcAllProductPrice()*1.17));
+		lblNewLabel_4.setText(String.valueOf(calcAllProductPrice()/proCount));
+	}
+
+	private double calcAllProductPrice()
+	{
+		double price=0;
+		try
+		{
+			String query="SELECT`מחיר` , `כמות`FROM `projectsproducts` WHERE `מספר פרויקט` = '"+id+"' ";
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
+			while(myRs.next())
+			{
+				proCount++;
+				price+=(Double.parseDouble(myRs.getString(1)))*(Double.parseDouble(myRs.getString(2)));
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return price;
 	}
 }

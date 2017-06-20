@@ -106,7 +106,7 @@ public class OrderItems {
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "להמשיך ?", "אישור",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
