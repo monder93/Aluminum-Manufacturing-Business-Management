@@ -120,8 +120,7 @@ public class DebtsForSuppliersPage extends JFrame
 
 	try
 	{
-//		myConn = HelpFunctions.DbConnection();
-//		Statement myStmt = myConn.createStatement();
+
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query+table);
 		table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
@@ -145,7 +144,7 @@ public class DebtsForSuppliersPage extends JFrame
 
 						MysqlConnect.getDbCon().insertQuery(q);
 						//message for success
-						JOptionPane.showMessageDialog(null, "saved");
+						JOptionPane.showMessageDialog(null, "חוב נשמר");
 
 						//reset TextFields
 						supplierNameTextField.setText("");
@@ -208,7 +207,7 @@ public class DebtsForSuppliersPage extends JFrame
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "בטוח שרוצה להמשיך ?", "Confirm",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
@@ -219,7 +218,6 @@ public class DebtsForSuppliersPage extends JFrame
 					{
 						String OID=(table_1.getModel().getValueAt(row, 0)).toString();
 						String OrderId="מספר חוב";
-//						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", OrderId, OID);
 						MysqlConnect.getDbCon().deleteRow("debtsforsuppliers", OrderId, OID);
 						HelpFunctions.getTable("debtsforsuppliers", table_1);

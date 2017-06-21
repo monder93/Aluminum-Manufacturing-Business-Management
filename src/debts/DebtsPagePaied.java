@@ -1,10 +1,12 @@
 package debts;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
@@ -13,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -91,7 +95,11 @@ public class DebtsPagePaied extends JFrame
 
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-
+		
+		JTableHeader Theader = table.getTableHeader();
+		Theader.setBackground(Color.green);
+		Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+		
 		button = new JButton("הוספה");
 		button.addActionListener(new ActionListener() 
 		{
@@ -119,12 +127,10 @@ public class DebtsPagePaied extends JFrame
 						//insert data to DebtsPage table
 						String query3="UPDATE `customersdebts` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
 						MysqlConnect.getDbCon().updateQuery(query3);
-						System.out.println(query3);
 
 						String query4="select * from `customersdebts`";
 						myRs = MysqlConnect.getDbCon().selectQuery(query4);
 
-						System.out.println(query4);
 						DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 
 						payAmountTextField.setText("");
@@ -135,6 +141,7 @@ public class DebtsPagePaied extends JFrame
 						
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsPage.table_1);
+						JOptionPane.showMessageDialog(null, "תשלום נוסף");
 
 
 
@@ -176,7 +183,7 @@ public class DebtsPagePaied extends JFrame
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "בטוח שרוצה להמשיך ?", "Confirm",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
@@ -187,7 +194,6 @@ public class DebtsPagePaied extends JFrame
 					{
 						String PID=(table.getModel().getValueAt(row, 1)).toString();
 						String ProId="מספר תשלום";
-//						Connection myConn = HelpFunctions.DbConnection();
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
 						MysqlConnect.getDbCon().deleteRow("customersdebtspaied", ProId, PID);
@@ -195,7 +201,6 @@ public class DebtsPagePaied extends JFrame
 						String query2="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 						
-						System.out.println(query2);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 						
 						// changing JTable Cell Value Alignment
@@ -205,13 +210,11 @@ public class DebtsPagePaied extends JFrame
 						//insert data to DebtsPage table
 						String query3="UPDATE `customersdebts` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
 						MysqlConnect.getDbCon().updateQuery(query3);
-						System.out.println(query3);
 
 						String query4="select * from `customersdebts`";
 						//myRs = myStmt.executeQuery(query4);
 						myRs = MysqlConnect.getDbCon().selectQuery(query4);
 
-						System.out.println(query4);
 						DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 						
 						// changing JTable Cell Value Alignment

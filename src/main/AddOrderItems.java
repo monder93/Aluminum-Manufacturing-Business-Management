@@ -140,7 +140,7 @@ public class AddOrderItems {
 				String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+textField.getText()+"','"+textField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
 				try {
 					MysqlConnect.getDbCon().insertQuery(q);
-					JOptionPane.showMessageDialog(null, "saved");
+					JOptionPane.showMessageDialog(null, "נשמר");
 
 				} catch (Exception e1) 
 				{

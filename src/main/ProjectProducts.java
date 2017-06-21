@@ -48,7 +48,10 @@ public class ProjectProducts extends JFrame
 	private ButtonGroup proNumBG= new ButtonGroup();
 	private ButtonGroup  berzolNumBG= new ButtonGroup();
 	public static String id;
-	double proCount=0;
+	static double proCount=0;
+	public static JLabel lblNewLabel_3;
+	public static JLabel lblNewLabel_4;
+	public static JLabel label_1;
 	/**
 	 * Launch the application.
 	 */
@@ -117,11 +120,7 @@ public class ProjectProducts extends JFrame
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
-				int row = table.getSelectedRow();
-				if(row<0)
-					JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה");
-				else
-				{
+					int row = table.getSelectedRow();
 					double price=Math.floor((double) (table.getModel().getValueAt(row, 10)));
 					price=(price*117/100);
 					lblNewLabel_5.setText(String.valueOf(price));
@@ -141,7 +140,7 @@ public class ProjectProducts extends JFrame
 						e1.printStackTrace();
 					}
 
-				}
+				
 			}
 		});
 
@@ -177,13 +176,13 @@ public class ProjectProducts extends JFrame
 		lblNewLabel_2.setBounds(1105, 125, 247, 24);
 		contentPane.add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("0");
+		lblNewLabel_3 = new JLabel("0");
 		lblNewLabel_3.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(1036, 24, 61, 24);
 		contentPane.add(lblNewLabel_3);
 
-		JLabel lblNewLabel_4 = new JLabel("0");
+		lblNewLabel_4 = new JLabel("0");
 		lblNewLabel_4.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_4.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(1036, 90, 61, 24);
@@ -389,7 +388,7 @@ public class ProjectProducts extends JFrame
 		label.setBounds(1105, 55, 247, 24);
 		contentPane.add(label);
 
-		JLabel label_1 = new JLabel("21066");
+		label_1 = new JLabel("21066");
 		label_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		label_1.setBounds(1036, 55, 61, 24);
@@ -403,10 +402,11 @@ public class ProjectProducts extends JFrame
 		rdbtnNewRadioButton.setSelected(true);
 		double allPrice=calcAllProductPrice();
 		lblNewLabel_3.setText(String.valueOf(allPrice));
-		label_1.setText(String.valueOf(allPrice*1.17));
+		label_1.setText(String.valueOf(Math.floor(allPrice*1.17)/100*100));
 		
 		JButton button_16 = new JButton("צבע אביזרים");
-		button_16.addActionListener(new ActionListener() {
+		button_16.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
 				new partsColors();
@@ -421,7 +421,7 @@ public class ProjectProducts extends JFrame
 				contentPane.add(background_label);
 	}
 
-	private double calcAllProductPrice()
+	public static double calcAllProductPrice()
 	{
 		double price=0;
 		try

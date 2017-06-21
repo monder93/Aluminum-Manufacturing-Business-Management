@@ -133,7 +133,7 @@ public class DebtsPage extends JFrame
 						//connection to database
 						MysqlConnect.getDbCon().insertQuery(q);
 						//message for success
-						JOptionPane.showMessageDialog(null, "saved");
+						JOptionPane.showMessageDialog(null, "חוב נשמר");
 
 						//reset TextFields
 						customerNameTextField.setText("");
@@ -199,7 +199,7 @@ public class DebtsPage extends JFrame
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "בטוח שרוצה להמשיך ?", "Confirm",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
@@ -208,10 +208,8 @@ public class DebtsPage extends JFrame
 					}
 					else if (response == JOptionPane.YES_OPTION) 
 					{
-						//Statement myStmt = myConn.createStatement();
 						String OID=(table_1.getModel().getValueAt(row, 0)).toString();
 						String OrderId="מספר חוב";
-						//Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("customersdebtspaied", OrderId, OID);
 						MysqlConnect.getDbCon().deleteRow("customersdebts", OrderId, OID);
 						HelpFunctions.getTable("customersdebts", table_1);

@@ -40,6 +40,7 @@ import java.sql.SQLException;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import java.awt.Frame;
 
 public class MainPage extends JFrame 
 {
@@ -96,9 +97,9 @@ public class MainPage extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// this 3 lines to set bounds for 100% of screen and set resizable to false 
-		setBounds(100, 100, 1368, 734);
-		setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		setBounds(0, 0, 1368, 734);
 		setVisible(true);
+		setExtendedState(MAXIMIZED_BOTH);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -127,7 +128,7 @@ public class MainPage extends JFrame
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
-		menuBar.setBounds(0, 0, 1376, 30);
+		menuBar.setBounds(0, 0, 1366, 30);
 		contentPane.add(menuBar);
 		//-------------------------------------------------------------
 		// this line to align the menuBar to the right side
@@ -135,9 +136,11 @@ public class MainPage extends JFrame
 		menuBar.add(horizontalGlue);
 
 		JMenu menu_4 = new JMenu("יציאה");
-		menu_4.addMouseListener(new MouseAdapter() {
+		menu_4.addMouseListener(new MouseAdapter()
+		{
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(MouseEvent arg0) 
+			{
 				System.exit(0);
 			}
 		});
@@ -145,9 +148,20 @@ public class MainPage extends JFrame
 		menuBar.add(menu_4);
 
 
+		//-------------------------------------------------------Settings menuBar button-------------------------------------------
 		JMenu menu_2 = new JMenu("הגדרות");
+		menu_2.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				new Settings();
+			}
+		});
 		menu_2.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu_2);
+
+		//-------------------------------------------------------help menuBar button-------------------------------------------
 
 		JMenu menu_6 = new JMenu("עזרה");
 		menu_6.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -172,6 +186,9 @@ public class MainPage extends JFrame
 		mntmNewMenuItem_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_6.add(mntmNewMenuItem_4);
 
+		
+		//-------------------------------------------------------pictures menuBar buttons-------------------------------------------
+
 		JMenu menu_3 = new JMenu("שרטוטים");
 		menu_3.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu_3);
@@ -186,6 +203,7 @@ public class MainPage extends JFrame
 		mntmNewMenuItem_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_3.add(mntmNewMenuItem_3);
 
+		//-------------------------------------------------------pdf reports menuBar buttons-------------------------------------------
 		JMenu menu_1 = new JMenu("דוחות");
 		menu_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(menu_1);
@@ -271,13 +289,15 @@ public class MainPage extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				pdfMaker.exportCustomerDebtsPDF();
-				
+
 			}
 		});
 		menuItem_9.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_9.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_1.add(menuItem_9);
 
+		
+		//-------------------------------------------------------tables menuBar buttons-------------------------------------------
 		JMenu menu = new JMenu("טבלאות");
 		menu.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menu.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -348,6 +368,8 @@ public class MainPage extends JFrame
 			}
 		});
 		menu.add(mntmNewMenuItem);
+		
+		//-------------------------------------------------------Orders menuBar buttons-------------------------------------------
 		JMenu mnOrders = new JMenu("הזמנות");
 		mnOrders.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mnOrders.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -406,6 +428,7 @@ public class MainPage extends JFrame
 		});
 		mnOrders.add(menuItem_13);
 
+		//-------------------------------------------------------Main Page buttons-------------------------------------------
 		JButton button = new JButton("גלריה");
 		button.addActionListener(new ActionListener() 
 		{
@@ -488,7 +511,7 @@ public class MainPage extends JFrame
 						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "נוספה תזכורת חדשה","תזכורת חדשה",1);
 						HelpFunctions.getTable("generalreminders", table);
-						
+
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
 
@@ -540,7 +563,7 @@ public class MainPage extends JFrame
 						String remindId="מספר תזכורת";
 						MysqlConnect.getDbCon().deleteRow("generalreminders", remindId, RID);
 						HelpFunctions.getTable("generalreminders", table);
-					
+
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
 
@@ -570,7 +593,7 @@ public class MainPage extends JFrame
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		
+
 		//get reminders table
 		//Connection myConn = HelpFunctions.DbConnection();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -583,7 +606,7 @@ public class MainPage extends JFrame
 
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table);
-		
+
 
 
 		JLabel background_label = new JLabel("");
@@ -593,7 +616,7 @@ public class MainPage extends JFrame
 
 		HelpFunctions.setIcon(btnNewButton, "calculator");
 
-//		}
+		//		}
 
 	}
 }

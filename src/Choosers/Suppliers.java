@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JEditorPane;
 
 public class Suppliers extends JFrame{
 
@@ -37,11 +38,13 @@ public class Suppliers extends JFrame{
 	private JTextField textField3;
 	private JTextField textField4;
 	JButton button_1;
+	JButton btnNewButton_3;
 	JLabel label;
 	JLabel label2;
 	JLabel label3;
 	JLabel label4;
 	JLabel label1;
+	private JEditorPane editorPane;
 	/**
 	 * Launch the application.
 	 */
@@ -80,14 +83,13 @@ public class Suppliers extends JFrame{
 	private void initialize()
 	{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 578, 374);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setBounds(250, 20, 909, 695);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setVisible(true);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(64, 64, 859, 337);
+		scrollPane.setBounds(20, 63, 859, 337);
 		setTitle("ספקים");
 		table = new JTable()
 		{@Override
@@ -101,51 +103,64 @@ public class Suppliers extends JFrame{
 		scrollPane.setViewportView(table);
 
 		label = new JLabel("טלפון :");
+		label.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label.setVisible(false);
-		label.setBounds(1184, 531, 84, 33);
+		label.setBounds(795, 562, 84, 33);
 
 		label1 = new JLabel("מיקום :");
+		label1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label1.setVisible(false);
-		label1.setBounds(1184, 591, 84, 33);
+		label1.setBounds(795, 622, 84, 33);
 
 		label2 = new JLabel("פקס :");
+		label2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label2.setVisible(false);
-		label2.setBounds(854, 478, 84, 33);
+		label2.setBounds(465, 509, 84, 33);
 
 		label3 = new JLabel("דואר אלקטרוני :");
+		label3.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label3.setVisible(false);
-		label3.setBounds(854, 540, 84, 33);
+		label3.setBounds(465, 571, 84, 33);
 
 		label4 = new JLabel("שם :");
+		label4.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label4.setVisible(false);
-		label4.setBounds(1184, 478, 84, 33);
+		label4.setBounds(795, 509, 84, 33);
 
 
 		textField = new JTextField();
 		textField.setVisible(false);
-		textField.setBounds(1025, 478, 103, 33);
+		textField.setBounds(636, 509, 103, 33);
 		textField.setColumns(10);
 
 		textField1 = new JTextField();
 		textField1.setVisible(false);
-		textField1.setBounds(1025, 531, 103, 33);
+		textField1.setBounds(636, 562, 103, 33);
 		textField1.setColumns(10);
 
 		textField2 = new JTextField();
 		textField2.setVisible(false);
-		textField2.setBounds(1025, 591, 103, 33);
+		textField2.setBounds(636, 622, 103, 33);
 		textField2.setColumns(10);
 
 		textField3 = new JTextField();
 		textField3.setVisible(false);
-		textField3.setBounds(720, 478, 103, 33);
+		textField3.setBounds(331, 509, 103, 33);
 		textField3.setColumns(10);
 
 		textField4 = new JTextField();
 		textField4.setVisible(false);
-		textField4.setBounds(720, 537, 103, 33);
+		textField4.setBounds(331, 568, 103, 33);
 		textField4.setColumns(10);
 		contentPane.setLayout(null);
+		
+		editorPane = new JEditorPane();
+		editorPane.setText("ספקים");
+		editorPane.setFont(new Font("Tahoma", Font.BOLD, 22));
+		editorPane.setEditable(false);
+		editorPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		editorPane.setBounds(432, 0, 84, 33);
+		contentPane.add(editorPane);
 		contentPane.add(scrollPane);
 
 		contentPane.add(label);
@@ -160,7 +175,7 @@ public class Suppliers extends JFrame{
 
 			}
 		});
-		btnNewButton.setBounds(1025, 152, 243, 55);
+		btnNewButton.setBounds(727, 407, 152, 63);
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnNewButton_1 = new JButton("\u05E2\u05D3\u05DB\u05D5\u05DF");
@@ -195,7 +210,7 @@ public class Suppliers extends JFrame{
 
 			}
 		});
-		btnNewButton_1.setBounds(1025, 241, 243, 63);
+		btnNewButton_1.setBounds(501, 407, 152, 63);
 		btnNewButton_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnNewButton_2 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
@@ -236,7 +251,7 @@ public class Suppliers extends JFrame{
 				}
 			}
 		});
-		btnNewButton_2.setBounds(1025, 329, 243, 63);
+		btnNewButton_2.setBounds(271, 407, 152, 63);
 		btnNewButton_2.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		try 
@@ -246,7 +261,7 @@ public class Suppliers extends JFrame{
 			HelpFunctions.renderingTable(table);
 
 			JButton button = new JButton("בחר");
-			button.setBounds(1025, 64, 243, 55);
+			button.setBounds(20, 411, 152, 63);
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) 
 				{
@@ -319,14 +334,16 @@ public class Suppliers extends JFrame{
 					}
 				}
 			});
-			button_1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-			button_1.setBounds(516, 501, 165, 42);
+			button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+			button_1.setBounds(127, 513, 165, 42);
 			contentPane.add(button_1);
 
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
 
-			JButton btnNewButton_3 = new JButton("ביטול");
+			 btnNewButton_3 = new JButton("ביטול");
+			 btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+			 btnNewButton_3.setVisible(false);
 			btnNewButton_3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) 
 				{
@@ -338,12 +355,12 @@ public class Suppliers extends JFrame{
 					hideOrShow(false);
 				}
 			});
-			btnNewButton_3.setBounds(516, 565, 165, 42);
+			btnNewButton_3.setBounds(127, 566, 165, 42);
 			contentPane.add(btnNewButton_3);
 
 
 			JLabel background_label = new JLabel("New label");
-			background_label.setBounds(0, 0, 1362, 714);
+			background_label.setBounds(0, 0, 904, 666);
 			HelpFunctions.setBackground(background_label);
 			contentPane.add(background_label);
 		}
@@ -368,5 +385,6 @@ public class Suppliers extends JFrame{
 		textField3.setVisible(flag);
 		textField4.setVisible(flag);
 		button_1.setVisible(flag);
+		btnNewButton_3.setVisible(flag);
 	}
 }

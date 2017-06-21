@@ -197,12 +197,12 @@ public class ProjectsPage extends JFrame
 					{
 						String id = table.getModel().getValueAt(row, 0).toString();
 						String contact = table.getModel().getValueAt(row, 1).toString();
-						String place = table.getModel().getValueAt(row, 2).toString();
-						String costumer = table.getModel().getValueAt(row, 3).toString();
-						String color = table.getModel().getValueAt(row, 4).toString();
-						String colorPrice = table.getModel().getValueAt(row, 5).toString();
-						String glass = table.getModel().getValueAt(row, 6).toString();
-						String glassPrice = table.getModel().getValueAt(row, 7).toString();
+						String place = table.getModel().getValueAt(row, 3).toString();
+						String costumer = table.getModel().getValueAt(row, 4).toString();
+						String color = table.getModel().getValueAt(row, 6).toString();
+						String colorPrice = table.getModel().getValueAt(row, 8).toString();
+						String glass = table.getModel().getValueAt(row, 9).toString();
+						String glassPrice = table.getModel().getValueAt(row, 10).toString();
 						String query = "UPDATE `projects` SET`איש קשר`='"+contact+"',`אתר`='"+place+"',`שם מזמין`='"+costumer+"',`צבע`='"+color+"',`מחיר צבע`='"+colorPrice+"',`זיגוג`='"+glass+"',`מחיר זיגוג`='"+glassPrice+"' WHERE `מספר פרויקט`='"+id+"'";
 						MysqlConnect.getDbCon().updateQuery(query);
 						HelpFunctions.getTable("projects", table);
@@ -275,14 +275,12 @@ public class ProjectsPage extends JFrame
 				String searchBy=comboBox.getSelectedItem().toString();
 				String searchWord=searchword.getText();
 
-//				Connection myConn = HelpFunctions.DbConnection();
-//				Statement myStmt;
 				try
 				{
 					String query="SELECT * FROM `projects` WHERE `"+ searchBy +"` = '"+ searchWord +"'";
-//					myStmt = myConn.createStatement();
 					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
+					HelpFunctions.renderingTable(table);
 				} 
 				catch (SQLException e) 
 				{

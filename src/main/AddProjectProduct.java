@@ -192,7 +192,10 @@ public class AddProjectProduct
 						myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id +"'  ");
 						ProjectProducts.table.setModel(DbUtils.resultSetToTableModel(myRs));
 						HelpFunctions.renderingTable(ProjectProducts.table);
-						JTableHeader Theader = ProjectProducts.table.getTableHeader();
+						
+						double allPrice=ProjectProducts.calcAllProductPrice();
+						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
+						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
 					} 
 					catch (SQLException e1) 
 					{

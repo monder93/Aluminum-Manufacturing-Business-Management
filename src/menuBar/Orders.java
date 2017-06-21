@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.table.JTableHeader;
 
 import Choosers.Suppliers;
 import helpClasses.HelpFunctions;
@@ -21,6 +22,8 @@ import helpClasses.MysqlConnect;
 import main.OrderItems;
 
 import javax.swing.JTextField;
+
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 
 public class Orders extends JFrame 
@@ -89,7 +92,7 @@ public class Orders extends JFrame
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);		
 		frame.setTitle("הזמנות");
-		
+
 		btnNewButton_2 = new JButton("שם ספק ");
 		btnNewButton_2.setVisible(false);
 		btnNewButton_2.addActionListener(new ActionListener() 
@@ -121,7 +124,6 @@ public class Orders extends JFrame
 		table_1.setBounds(0, 0, 589, 352);
 		try 
 		{
-			//			myConn = HelpFunctions.DbConnection();
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table_1);
@@ -139,7 +141,10 @@ public class Orders extends JFrame
 				}
 			});
 
-
+			JTableHeader Theader = table_1.getTableHeader();
+			Theader.setBackground(Color.green);
+			Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
+			
 			btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 			btnNewButton.setBounds(666, 31, 117, 41);
 			frame.getContentPane().add(btnNewButton);
@@ -153,18 +158,18 @@ public class Orders extends JFrame
 					try
 					{
 						if(row<0)
-							JOptionPane.showMessageDialog(null, "בחר פרויקט בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "בחר הזמנה בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
 						else
 						{
 							String id = table_1.getModel().getValueAt(row, 0).toString();
 							String supplier = table_1.getModel().getValueAt(row, 1).toString();
 							String date = table_1.getModel().getValueAt(row, 2).toString();
 							String site = table_1.getModel().getValueAt(row, 3).toString();
-							
+
 							String query = "UPDATE `orders` SET`שם ספק`='"+supplier+"',`אתר`='"+site+"',`תאריך`='"+date+"' WHERE `מספר הזמנה`='"+id+"'";
 
 							MysqlConnect.getDbCon().updateQuery(query);
-							
+
 							String query2="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
 
 							ResultSet rs = MysqlConnect.getDbCon().selectQuery(query2);
@@ -175,7 +180,6 @@ public class Orders extends JFrame
 					} 
 					catch (SQLException e1) 
 					{
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -211,7 +215,7 @@ public class Orders extends JFrame
 						{
 							String PID=(table_1.getModel().getValueAt(row, 0)).toString();
 							String ProId="מספר הזמנה";
-							
+
 							//deleting all the items of the order 
 							MysqlConnect.getDbCon().deleteRow("ordersproducts", ProId, PID);
 
@@ -246,12 +250,11 @@ public class Orders extends JFrame
 				{
 					int row=table_1.getSelectedRow();
 					if(row<0)
-						JOptionPane.showMessageDialog(null, "בחר  בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "בחר  הזמנה בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
 					else
 					{
 						String id = (table_1.getModel().getValueAt(row, 0)).toString();
 						new OrderItems(id);
-
 					}
 
 				}
@@ -300,14 +303,11 @@ public class Orders extends JFrame
 				{
 					if(!textField.getText().equals("") && !textField_1.getText().equals("") && !textField_2.getText().equals(""))
 					{
-						//					Connection myConn = HelpFunctions.DbConnection();
 						String q = "INSERT INTO `orders`( `שם ספק`, `תאריך`, `אתר`, `סוג`) VALUES ('"+textField.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"','"+type+"')";
 						try 
 						{
-							//						Statement st = myConn.createStatement();
-							//						st.executeUpdate(q);
 							MysqlConnect.getDbCon().insertQuery(q);
-							JOptionPane.showMessageDialog(null, "saved");
+							JOptionPane.showMessageDialog(null, "הזמנה נוספה");
 							query="SELECT `מספר הזמנה`, `שם ספק`, `תאריך`, `אתר` FROM `orders` WHERE `סוג` = '"+type+"' ";
 							ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 							table_1.setModel(DbUtils.resultSetToTableModel(myRs));
@@ -366,6 +366,7 @@ public class Orders extends JFrame
 		textField.setVisible(flag);
 		textField_1.setVisible(flag);
 		textField_2.setVisible(flag);
+		textField.setText("");
 		textField_1.setText("");
 		textField_2.setText(globalDate);
 		btnNewButton_1.setVisible(flag);

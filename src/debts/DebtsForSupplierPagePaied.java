@@ -1,11 +1,14 @@
 package debts;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.JTableHeader;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
@@ -93,6 +96,10 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
+		
+		JTableHeader Theader = table.getTableHeader();
+		Theader.setBackground(Color.green);
+		Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
 
 		button = new JButton("הוספה");
 		button.addActionListener(new ActionListener() 
@@ -125,26 +132,14 @@ public class DebtsForSupplierPagePaied extends JFrame
 						MysqlConnect.getDbCon().updateQuery(query3);
 
 						String query4="select * from `debtsforsuppliers`";
-						MysqlConnect.getDbCon().selectQuery(query4);
+						ResultSet rs = MysqlConnect.getDbCon().selectQuery(query4);
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
-
-
-						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-
+						DebtsForSuppliersPage.table_1.setModel(DbUtils.resultSetToTableModel(rs));
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsForSuppliersPage.table_1);
-
-
-
-
-
-
 						payAmountTextField.setText("");
-
-
-
-
+						JOptionPane.showMessageDialog(null, "תשלום נוסף");
 
 					} catch (Exception e2)
 					{
@@ -182,7 +177,7 @@ public class DebtsForSupplierPagePaied extends JFrame
 					}
 					else
 					{
-						response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+						response = JOptionPane.showConfirmDialog(null, "בטוח שרוצה להמשיך ?", "Confirm",
 								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					if (response == JOptionPane.NO_OPTION) 
@@ -193,7 +188,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 					{
 						String PID=(table.getModel().getValueAt(row, 1)).toString();
 						String ProId="מספר תשלום";
-						//						Connection myConn = HelpFunctions.DbConnection();
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
 						MysqlConnect.getDbCon().deleteRow("debtsforsupplierspaied", ProId, PID);
