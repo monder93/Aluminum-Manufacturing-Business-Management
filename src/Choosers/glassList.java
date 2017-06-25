@@ -11,6 +11,7 @@ import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import main.AddProject;
 import main.AddProjectProduct;
+import main.ProjectProducts;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -101,6 +102,8 @@ public class glassList {
 						AddProjectProduct.textField_1.setText(glassName);
 						glassPrice=(table.getModel().getValueAt(row, 0)).toString();
 						AddProjectProduct.colorPrice=glassPrice;
+						ProjectProducts.glassPrice=Integer.parseInt(glassPrice);
+
 					}
 					else
 					{

@@ -1,10 +1,16 @@
 package Choosers;
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
@@ -12,6 +18,9 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class hardware {
 
@@ -53,18 +62,51 @@ public class hardware {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		
+		JLabel lblPic = new JLabel("pic");
+		lblPic.setBounds(73, 343, 248, 116);
+		frame.getContentPane().add(lblPic);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 392, 448);
+		scrollPane.setBounds(10, 11, 392, 332);
 		frame.getContentPane().add(scrollPane);
 		frame.setName("פרזול");
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mousePressed(MouseEvent arg0) 
+			{
+				if(!table.getSelectionModel().isSelectionEmpty())
+				{
+					int row = table.getSelectedRow();
+					String query="SELECT  `תמונה` FROM `hardware` WHERE `מזהה` ='"+(table.getModel().getValueAt(row, 0))+"'";
+					ResultSet rs;
+					try 
+					{
+						rs = MysqlConnect.getDbCon().selectQuery(query);
+						rs.next();
+						java.sql.Blob blob = rs.getBlob(1);  
+						java.io.InputStream in = blob.getBinaryStream();  
+						BufferedImage image = ImageIO.read(in);
+						HelpFunctions.setImageAsIcon(lblPic,new ImageIcon(image));
+					}
+					catch (SQLException | IOException e1) 
+					{
+						e1.printStackTrace();
+					}
+				}
+				else
+				{
+					System.out.println("no picture selected");
+				}
+			}
+		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 		
-		//connection to database 
-//		myConn = HelpFunctions.DbConnection();
-//		Statement myStmt = myConn.createStatement();
+	
+		
 		String query = "SELECT * FROM hardware";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));

@@ -34,6 +34,8 @@ public class Contacts extends JFrame{
 	private JTextField textField2;
 	private JTextField textField3;
 	private JTextField textField4;
+	private JLabel lblNewLabel;
+	
 	JButton button_1;
 	JButton btnNewButton_3;
 	JLabel label;
@@ -42,6 +44,9 @@ public class Contacts extends JFrame{
 	JLabel label4;
 	JLabel label1;
 	private JEditorPane editorPane;
+	private JTextField textField_1;
+	private JLabel lblNewLabel_1;
+	private JTextField textField_2;
 	/**
 	 * Launch the application.
 	 */
@@ -142,14 +147,38 @@ public class Contacts extends JFrame{
 
 		textField3 = new JTextField();
 		textField3.setVisible(false);
-		textField3.setBounds(331, 509, 103, 33);
+		textField3.setBounds(271, 509, 163, 33);
 		textField3.setColumns(10);
 
 		textField4 = new JTextField();
 		textField4.setVisible(false);
-		textField4.setBounds(331, 568, 103, 33);
+		textField4.setBounds(271, 568, 163, 33);
 		textField4.setColumns(10);
 		contentPane.setLayout(null);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(127, 622, 103, 33);
+		textField_1.setVisible(false);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(331, 622, 103, 33);
+		textField_2.setVisible(false);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		lblNewLabel_1 = new JLabel("שם משתמש :");
+		lblNewLabel_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		lblNewLabel_1.setVisible(false);
+		lblNewLabel_1.setBounds(465, 622, 84, 33);
+		contentPane.add(lblNewLabel_1);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		lblNewLabel = new JLabel("סיסמה :");
+		lblNewLabel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		lblNewLabel.setVisible(false);
+		lblNewLabel.setBounds(235, 622, 61, 33);
+		contentPane.add(lblNewLabel);
 		
 		editorPane = new JEditorPane();
 		editorPane.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -195,10 +224,6 @@ public class Contacts extends JFrame{
 						String phone = table.getModel().getValueAt(row, 4).toString();
 						String email = table.getModel().getValueAt(row, 5).toString();
 						String q = "UPDATE `contacts` SET`שם`='"+name+"',`משפחה`='"+lname+"',`כתובת`='"+address+"',`טלפון`='"+phone+"',`דואר אלקטרוני`='"+email+"' WHERE `מספר זהות` = '"+id+"'";
-//						Connection myConn = HelpFunctions.DbConnection();
-//						Statement myStmt;
-//						myStmt = myConn.createStatement();
-//						myStmt.executeUpdate(q);
 						MysqlConnect.getDbCon().updateQuery(q);
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
@@ -318,12 +343,9 @@ public class Contacts extends JFrame{
 			{
 				public void actionPerformed(ActionEvent arg0) 
 				{
-//					Connection myConn = HelpFunctions.DbConnection();
-					String q = "INSERT INTO `contacts`( `שם`, `משפחה`, `כתובת`, `טלפון`, `דואר אלקטרוני`) VALUES ('"+textField.getText()+"','"+textField1.getText()+"','"+textField2.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"')";
+					String q = "INSERT INTO `contacts`( `שם`, `משפחה`, `כתובת`, `טלפון`, `דואר אלקטרוני`,`username`,`pass`) VALUES ('"+textField.getText()+"','"+textField1.getText()+"','"+textField2.getText()+"','"+textField3.getText()+"','"+textField4.getText()+"','"+textField_2.getText()+"','"+textField_1.getText()+"')";
 					try
 					{
-//						Statement st = myConn.createStatement();
-//						st.executeUpdate(q);
 						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "נשמר");
 						HelpFunctions.getTable("contacts", table);
@@ -337,7 +359,7 @@ public class Contacts extends JFrame{
 				}
 			});
 			button_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-			button_1.setBounds(127, 509, 165, 42);
+			button_1.setBounds(81, 509, 165, 42);
 			contentPane.add(button_1);
 
 			// changing JTable Cell Value Alignment
@@ -357,7 +379,7 @@ public class Contacts extends JFrame{
 					hideOrShow(false);
 				}
 			});
-			btnNewButton_3.setBounds(127, 566, 165, 42);
+			btnNewButton_3.setBounds(81, 566, 165, 42);
 			contentPane.add(btnNewButton_3);
 			
 			
@@ -381,11 +403,15 @@ public class Contacts extends JFrame{
 		label3.setVisible(flag);
 		label1.setVisible(flag);
 		label4.setVisible(flag);
+		lblNewLabel.setVisible(flag);
+		lblNewLabel_1.setVisible(flag);
 		textField.setVisible(flag);
 		textField1.setVisible(flag);
 		textField2.setVisible(flag);
 		textField3.setVisible(flag);
 		textField4.setVisible(flag);
+		textField_1.setVisible(flag);
+		textField_2.setVisible(flag);
 		button_1.setVisible(flag);
 		btnNewButton_3.setVisible(flag);
 		

@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import Choosers.colorList;
 import Choosers.glassList;
 import helpClasses.HelpFunctions;
@@ -139,6 +141,7 @@ public class AddProjectProduct
 		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		textField.setBounds(76, 240, 184, 20);
 		frame.getContentPane().add(textField);
+		textField.setText(ProjectProducts.color);
 		textField.setColumns(10);
 
 		JButton button = new JButton("זיגוג");
@@ -160,6 +163,7 @@ public class AddProjectProduct
 		textField_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		textField_1.setColumns(10);
 		textField_1.setBounds(76, 280, 184, 20);
+		textField_1.setText(ProjectProducts.glass);
 		frame.getContentPane().add(textField_1);
 
 		JButton btnNewButton_1 = new JButton("אישור");
@@ -170,19 +174,25 @@ public class AddProjectProduct
 				double price=0;
 				if(!(textField.getText().equals(""))&&!(textField_1.getText().equals(""))&&!(textField_4.getText().equals(""))&&!(textField_5.getText().equals(""))&&!(textField_6.getText().equals(""))&&!(textField_7.getText().equals(""))&&!(textField_8.getText().equals("")))
 				{
-					try {
+					try
+					{
 						ProductFactory pr = new ProductFactory();
-						Products p = pr.getProduct(type, Double.parseDouble(textField_6.getText().toString()), Double.parseDouble(textField_7.getText().toString()),36.18, 45,String.valueOf(series), 2);
+						Products p = pr.getProduct(type, Double.parseDouble(textField_6.getText().toString()), Double.parseDouble(textField_7.getText().toString()),ProjectProducts.colorPrice, ProjectProducts.glassPrice,String.valueOf(series), 2);
 						price=p.calculatePrice();
-					} catch (SQLException e1) {
+					} 
+					catch (SQLException e1) 
+					{
 						e1.printStackTrace();
 					}
 
 
 					String query="INSERT INTO `projectsproducts`(`מספר פרויקט`, `קוד מוצר`, `תיאור`, `סדרה`, `רוחב`, `גובה`, `כמות`, `צבע`, `זיגוג`, `מחיר`) VALUES ('"+ProjectId+"','"+proId+"','"+textField_5.getText().toString()+"','"+textField_4.getText().toString()+"','"+textField_6.getText().toString()+"','"+textField_7.getText().toString()+"','"+textField_8.getText().toString()+"','"+textField.getText().toString()+"','"+textField_1.getText().toString()+"','"+price+"')";
-					try {
+					try
+					{
 						MysqlConnect.getDbCon().insertQuery(query);
-					} catch (SQLException e1) {
+					} 
+					catch (SQLException e1)
+					{
 						e1.printStackTrace();
 					}
 					
@@ -194,8 +204,10 @@ public class AddProjectProduct
 						HelpFunctions.renderingTable(ProjectProducts.table);
 						
 						double allPrice=ProjectProducts.calcAllProductPrice();
+						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
 						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
 					} 
 					catch (SQLException e1) 
 					{

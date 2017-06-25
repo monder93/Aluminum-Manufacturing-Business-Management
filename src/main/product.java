@@ -107,7 +107,7 @@ public class product extends JFrame{
 		        	type=(table.getModel().getValueAt(row, 0)).toString();
 		        	AddProjectProduct.type=type;
 //		        	System.out.println("type at product: "+ type);
-		        	query2= "SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'";
+		        	query2= "SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"' GROUP BY `סדרה`";
 //		        	Statement myStmt;
 					try 
 					{
@@ -248,11 +248,12 @@ public class product extends JFrame{
 					{
 						
 						String query = "SELECT * FROM `products` WHERE `סדרה` = '"+series+"' AND `סוג פתיחה` = '"+type+"' AND `מס כנפים` = '"+wing.getText().toString()+"'";
-//						System.out.println(query);
 						try
 						{
 						ResultSet rs = MysqlConnect.getDbCon().selectQuery(query);
-						rs.next();
+
+						if(rs.next())
+						{
 						AddProjectProduct.proId = rs.getInt(1) ;
 						AddProjectProduct.textField_4.setText(""+rs.getInt(5));
 						AddProjectProduct.textField_5.setText(rs.getString(3)+"-"+rs.getString(6)+"-"+rs.getString(7)+" כנפיים ");
@@ -264,6 +265,11 @@ public class product extends JFrame{
 						BufferedImage image = ImageIO.read(in);
 						HelpFunctions.setImageAsIcon(AddProjectProduct.proPic,new ImageIcon(image));
 						frame.dispose();
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "אין מהמוצר הזה");
+						}
 						}
 						catch (Exception e) 
 						{

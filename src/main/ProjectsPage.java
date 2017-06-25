@@ -39,6 +39,7 @@ public class ProjectsPage extends JFrame
 	private JLabel sb;
 	private JLabel sw;
 	private JButton search;
+
 	/**
 	 * Launch the application.
 	 */
@@ -135,6 +136,10 @@ public class ProjectsPage extends JFrame
 				else
 				{
 					String Id=(table.getModel().getValueAt(row, 0)).toString();
+					ProjectProducts.color = table.getModel().getValueAt(row, 7).toString();
+					ProjectProducts.colorPrice = (int) table.getModel().getValueAt(row, 8);
+					ProjectProducts.glass = table.getModel().getValueAt(row, 9).toString();
+					ProjectProducts.glassPrice = (int) table.getModel().getValueAt(row, 10);
 					new ProjectProducts(Id);
 				}
 			}
@@ -167,11 +172,9 @@ public class ProjectsPage extends JFrame
 					{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר פרויקט";
-//						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("projects", ProId, PID);
 						HelpFunctions.getTable("projects", table);
 						HelpFunctions.renderingTable(table);
-//						myConn.close();
 					}
 				}
 				catch(Exception e)
@@ -241,7 +244,7 @@ public class ProjectsPage extends JFrame
 		btnNewButton_5.setBounds(1098, 406, 203, 46);
 		getContentPane().add(btnNewButton_5);
 
-//		Connection myConn = HelpFunctions.DbConnection();
+		//		Connection myConn = HelpFunctions.DbConnection();
 		HelpFunctions.getTable("projects", table);
 		HelpFunctions.renderingTable(table);
 
@@ -303,11 +306,8 @@ public class ProjectsPage extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-//				Connection myConn = HelpFunctions.DbConnection();
-//				Statement myStmt;
 				try
 				{
-//					myStmt = myConn.createStatement();
 					ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projects`");
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					HelpFunctions.renderingTable(table);

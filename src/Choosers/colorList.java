@@ -11,6 +11,7 @@ import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import main.AddProject;
 import main.AddProjectProduct;
+import main.ProjectProducts;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -86,8 +87,10 @@ public class colorList {
 						AddProjectProduct.colorId=colorID;
 						colorName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProjectProduct.textField.setText(colorName);
-						colorPrice=(table.getModel().getValueAt(row, 3)).toString();
+						//colorPrice=table.getModel().getValueAt(row, 3);
 						AddProjectProduct.colorPrice=colorPrice;
+						ProjectProducts.colorPrice=(double) table.getModel().getValueAt(row, 3);
+						
 					}
 					else
 					{

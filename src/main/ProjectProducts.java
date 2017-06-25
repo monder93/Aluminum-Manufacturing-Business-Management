@@ -52,6 +52,10 @@ public class ProjectProducts extends JFrame
 	public static JLabel lblNewLabel_3;
 	public static JLabel lblNewLabel_4;
 	public static JLabel label_1;
+	public static String color;
+	public static double colorPrice;
+	public static String glass;
+	public static double glassPrice;
 	/**
 	 * Launch the application.
 	 */
@@ -85,7 +89,7 @@ public class ProjectProducts extends JFrame
 
 	public ProjectProducts(String id)
 	{
-		this.id=id;
+		ProjectProducts.id=id;
 		initialize();
 	}
 	/**
@@ -120,6 +124,8 @@ public class ProjectProducts extends JFrame
 			@Override
 			public void valueChanged(ListSelectionEvent e)
 			{
+				if(!table.getSelectionModel().isSelectionEmpty())
+				{
 					int row = table.getSelectedRow();
 					double price=Math.floor((double) (table.getModel().getValueAt(row, 10)));
 					price=(price*117/100);
@@ -139,15 +145,19 @@ public class ProjectProducts extends JFrame
 					{
 						e1.printStackTrace();
 					}
+				}
+				else
+				{
+					lblNewLabel_5.setText("0");
+				}
 
-				
 			}
 		});
 
 		try 
 		{
 
-			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+this.id+"'  ");
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
 			JTableHeader Theader = table.getTableHeader();
@@ -333,9 +343,49 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_8);
 
 		JButton button_9 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
-		button_9.addActionListener(new ActionListener() {
+		button_9.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
+
+				int row = table.getSelectedRow();
+				int response = 0;
+				try{
+					if(row<0)
+					{
+						JOptionPane.showMessageDialog(null, "בחר מוצר בבקשה", "row selection", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else
+					{
+						response = JOptionPane.showConfirmDialog(null, "להמשיך ?", "אישור",
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					}
+					if (response == JOptionPane.NO_OPTION) 
+					{
+						return;
+					}
+					else if (response == JOptionPane.YES_OPTION) 
+					{
+						String PID=(table.getModel().getValueAt(row, 0)).toString();
+						String ProId="מספר סידורי";
+						MysqlConnect.getDbCon().deleteRow("projectsproducts", ProId, PID);
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
+						table.setModel(DbUtils.resultSetToTableModel(myRs));
+						HelpFunctions.renderingTable(table);
+						
+						double allPrice=ProjectProducts.calcAllProductPrice();
+						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
+						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
+						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
+					}
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+				}
+			
 			}
 		});
 		button_9.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -343,6 +393,51 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_9);
 
 		JButton button_10 = new JButton("\u05D4\u05E2\u05EA\u05E7\u05D4");
+		button_10.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				int row = table.getSelectedRow();
+				if(row<0)
+				{
+					JOptionPane.showMessageDialog(null, "יש לבחור מוצר להעתיק");
+				}
+				else
+				{
+					int projectId= (int) table.getModel().getValueAt(row, 1);
+					String codeItem = table.getModel().getValueAt(row, 2).toString();
+					String te2or = table.getModel().getValueAt(row, 3).toString();
+					String series = table.getModel().getValueAt(row, 4).toString();
+					String width = table.getModel().getValueAt(row, 5).toString();
+					String height = table.getModel().getValueAt(row, 6).toString();
+					String quantity = table.getModel().getValueAt(row, 7).toString();
+					String color = table.getModel().getValueAt(row, 8).toString();
+					String glass = table.getModel().getValueAt(row, 9).toString();
+					double price = (double) table.getModel().getValueAt(row, 10);
+					String sql="INSERT INTO `projectsproducts`(`מספר פרויקט`, `קוד מוצר`, `תיאור`, `סדרה`, `רוחב`, `גובה`, `כמות`, `צבע`, `זיגוג`, `מחיר`) VALUES ('"+projectId+"','"+codeItem+"','"+te2or+"','"+series+"','"+width+"','"+height+"','"+quantity+"','"+color+"','"+glass+"','"+price+"')";
+					try
+					{
+						MysqlConnect.getDbCon().insertQuery(sql);
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
+						table.setModel(DbUtils.resultSetToTableModel(myRs));
+						HelpFunctions.renderingTable(table);
+						
+						double allPrice=ProjectProducts.calcAllProductPrice();
+						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
+						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
+						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
+
+					} 
+					catch (SQLException e1) 
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
+			}
+		});
 		button_10.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_10.setBounds(552, 346, 158, 46);
 		contentPane.add(button_10);
@@ -352,7 +447,14 @@ public class ProjectProducts extends JFrame
 		button_11.setBounds(368, 346, 152, 46);
 		contentPane.add(button_11);
 
-		JButton button_12 = new JButton("\u05D7\u05D6\u05E8\u05D4");
+		JButton button_12 = new JButton("צפייה במוצר");
+		button_12.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				table.getSelectionModel().clearSelection();
+			}
+		});
 		button_12.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_12.setBounds(192, 346, 152, 46);
 		contentPane.add(button_12);
@@ -401,9 +503,11 @@ public class ProjectProducts extends JFrame
 		radioButton.setSelected(true);
 		rdbtnNewRadioButton.setSelected(true);
 		double allPrice=calcAllProductPrice();
+		double productAvarage=calcProductAvaragePrice();
 		lblNewLabel_3.setText(String.valueOf(allPrice));
 		label_1.setText(String.valueOf(Math.floor(allPrice*1.17)/100*100));
-		
+		lblNewLabel_4.setText(String.valueOf(Math.floor(productAvarage)));
+
 		JButton button_16 = new JButton("צבע אביזרים");
 		button_16.addActionListener(new ActionListener() 
 		{
@@ -412,13 +516,13 @@ public class ProjectProducts extends JFrame
 				new partsColors();
 			}
 		});
-		button_16.setBounds(831, 137, 108, 40);
+		button_16.setBounds(385, 261, 272, 40);
 		contentPane.add(button_16);
-		
-				JLabel background_label = new JLabel("New label");
-				background_label.setBounds(0, 0, 1362, 705);
-				HelpFunctions.setBackground(background_label);
-				contentPane.add(background_label);
+
+		JLabel background_label = new JLabel("New label");
+		background_label.setBounds(0, 0, 1362, 705);
+		HelpFunctions.setBackground(background_label);
+		contentPane.add(background_label);
 	}
 
 	public static double calcAllProductPrice()
@@ -438,6 +542,27 @@ public class ProjectProducts extends JFrame
 		{
 			e.printStackTrace();
 		}
-		return price;
+		return Math.floor(price*100/100);
+	}
+	//--------------------------------------------------------calcProductAvaragePrice-----------------------------------------------
+	public static double calcProductAvaragePrice()
+	{
+		double price=0;
+		double quantityCount=0;
+		try
+		{
+			String query="SELECT`מחיר` , `כמות`FROM `projectsproducts` WHERE `מספר פרויקט` = '"+id+"' ";
+			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
+			while(myRs.next())
+			{
+				quantityCount+=(Double.parseDouble(myRs.getString(2)));
+				price+=(Double.parseDouble(myRs.getString(1)))*(Double.parseDouble(myRs.getString(2)));
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return Math.floor((price/quantityCount)*100/100);
 	}
 }
