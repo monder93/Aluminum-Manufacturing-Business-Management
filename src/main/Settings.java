@@ -56,6 +56,7 @@ public class Settings extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setTitle("הגדרות");
+		setVisible(true);
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setEditable(false);
 		editorPane.setFont(new Font("Tahoma", Font.BOLD, 20));

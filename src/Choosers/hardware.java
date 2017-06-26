@@ -58,11 +58,11 @@ public class hardware {
 	private void initialize() throws SQLException 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 428, 509);
+		frame.setBounds(450, 150, 428, 509);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		
+		frame.setTitle("פירזולים");
 		JLabel lblPic = new JLabel("pic");
 		lblPic.setBounds(73, 343, 248, 116);
 		frame.getContentPane().add(lblPic);
@@ -111,6 +111,7 @@ public class hardware {
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
 		HelpFunctions.renderingTable(table);
+		HelpFunctions.setBackground(lblPic, "noPic");
 
 	}
 }

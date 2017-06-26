@@ -88,7 +88,8 @@ public class AddProjectProduct
 		frame.setVisible(true);
 
 		JButton chooseProduct = new JButton("בחירת מוצר");
-		chooseProduct.addActionListener(new ActionListener() {
+		chooseProduct.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				new product();
@@ -123,12 +124,16 @@ public class AddProjectProduct
 		HelpFunctions.setBackground(proPic,"nopic");
 
 		JButton btnNewButton = new JButton("צבע");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener()
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try {
+				try
+				{
 					new colorList("AddProjectProduct");
-				} catch (SQLException e1) {
+				}
+				catch (SQLException e1)
+				{
 					e1.printStackTrace();
 				}	
 			}
@@ -145,12 +150,16 @@ public class AddProjectProduct
 		textField.setColumns(10);
 
 		JButton button = new JButton("זיגוג");
-		button.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				try {
+				try
+				{
 					new glassList("AddProjectProduct");
-				} catch (SQLException e1) {
+				}
+				catch (SQLException e1)
+				{
 					e1.printStackTrace();
 				}
 			}
@@ -176,6 +185,13 @@ public class AddProjectProduct
 				{
 					try
 					{
+						System.out.println("width is : "+textField_6.getText().toString());
+						System.out.println("height is : "+textField_7.getText().toString());
+						System.out.println("color price  projectProducts is : "+ProjectProducts.colorPrice);
+						System.out.println("color price  AddProjectProduct is : "+AddProjectProduct.colorPrice);
+						System.out.println("glass price  projectProducts is : "+ ProjectProducts.glassPrice);
+						System.out.println("glass price  AddProjectProduct is : "+AddProjectProduct.glassPrice);
+						
 						ProductFactory pr = new ProductFactory();
 						Products p = pr.getProduct(type, Double.parseDouble(textField_6.getText().toString()), Double.parseDouble(textField_7.getText().toString()),ProjectProducts.colorPrice, ProjectProducts.glassPrice,String.valueOf(series), 2);
 						price=p.calculatePrice();

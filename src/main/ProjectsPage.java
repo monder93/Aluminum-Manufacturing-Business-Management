@@ -137,9 +137,9 @@ public class ProjectsPage extends JFrame
 				{
 					String Id=(table.getModel().getValueAt(row, 0)).toString();
 					ProjectProducts.color = table.getModel().getValueAt(row, 7).toString();
-					ProjectProducts.colorPrice = (int) table.getModel().getValueAt(row, 8);
+					ProjectProducts.colorPrice = (double) table.getModel().getValueAt(row, 8);
 					ProjectProducts.glass = table.getModel().getValueAt(row, 9).toString();
-					ProjectProducts.glassPrice = (int) table.getModel().getValueAt(row, 10);
+					ProjectProducts.glassPrice = (double) table.getModel().getValueAt(row, 10);
 					new ProjectProducts(Id);
 				}
 			}

@@ -88,9 +88,7 @@ public class MainPage extends JFrame
 
 	}
 
-	/**
-	 * 
-	 */
+
 	private void initComponents()
 	{
 		PdfMaker pdfMaker = new PdfMaker();
@@ -150,16 +148,32 @@ public class MainPage extends JFrame
 
 		//-------------------------------------------------------Settings menuBar button-------------------------------------------
 		JMenu menu_2 = new JMenu("הגדרות");
-		menu_2.addMouseListener(new MouseAdapter()
+
+		menu_2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		menuBar.add(menu_2);
+		
+		JMenuItem menuItem_10 = new JMenuItem("ניהול הגדרות");
+		menuItem_10.addActionListener(new ActionListener() 
 		{
-			@Override
-			public void mouseClicked(MouseEvent e) 
+			public void actionPerformed(ActionEvent e) 
 			{
 				new Settings();
 			}
 		});
-		menu_2.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		menuBar.add(menu_2);
+		menuItem_10.setHorizontalAlignment(SwingConstants.RIGHT);
+		menu_2.add(menuItem_10);
+		
+		JMenuItem menuItem_6 = new JMenuItem("ניהול גלריה");
+		menuItem_6.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				new ManageGallery();
+
+			}
+		});
+		menuItem_6.setHorizontalAlignment(SwingConstants.RIGHT);
+		menu_2.add(menuItem_6);
 
 		//-------------------------------------------------------help menuBar button-------------------------------------------
 

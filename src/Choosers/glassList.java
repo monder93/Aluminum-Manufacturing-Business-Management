@@ -12,6 +12,7 @@ import helpClasses.MysqlConnect;
 import main.AddProject;
 import main.AddProjectProduct;
 import main.ProjectProducts;
+import main.ShowUpdateProjectProduct;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -97,22 +98,28 @@ public class glassList {
 					if(className.equals("AddProjectProduct"))
 					{
 						glassID=(table.getModel().getValueAt(row, 0)).toString();
-						AddProjectProduct.colorId=glassID;
+						AddProjectProduct.glassId=glassID;
 						glassName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProjectProduct.textField_1.setText(glassName);
-						glassPrice=(table.getModel().getValueAt(row, 0)).toString();
-						AddProjectProduct.colorPrice=glassPrice;
-						ProjectProducts.glassPrice=Integer.parseInt(glassPrice);
+						glassPrice=(table.getModel().getValueAt(row, 2)).toString();
+						AddProjectProduct.glassPrice=glassPrice;
+						ProjectProducts.glassPrice=Double.parseDouble(glassPrice);
 
+					}
+					else if(className.equals("UpdateProjectProduct"))
+					{
+						glassName=(table.getModel().getValueAt(row, 1)).toString();
+						ShowUpdateProjectProduct.glassTextField.setText(glassName);
+						ShowUpdateProjectProduct.glassPrice=(double) table.getModel().getValueAt(row, 2);
 					}
 					else
 					{
 						glassID=(table.getModel().getValueAt(row, 0)).toString();
-						AddProject.colorId=glassID;
+						AddProject.glassId=glassID;
 						glassName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProject.glass.setText(glassName);
-						glassPrice=(table.getModel().getValueAt(row, 0)).toString();
-						AddProject.colorPrice=glassPrice;
+						glassPrice=(table.getModel().getValueAt(row, 2)).toString();
+						AddProject.glassPrice=glassPrice;
 					}
 					frame.dispose();
 				}

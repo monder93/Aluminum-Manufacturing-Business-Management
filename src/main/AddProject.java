@@ -207,9 +207,9 @@ public class AddProject
 				{		
 					String cont = contact.getText();
 					String gla = glass.getText();
-					int glaPr = 40;
+					//int glaPr = 40;
 					String col = color.getText();
-					int colPr = 30;
+					//int colPr = 30;
 					String cust = customer.getText();
 					String plc = place.getText();
 					String add = adress.getText();
@@ -220,7 +220,7 @@ public class AddProject
 					try 
 					{
 						String q = "INSERT INTO `projects`(`איש קשר`, `מזהה קשר`, `אתר`, `שם מזמין`, `כתובת`, `טלפון`, `צבע`, `מחיר צבע`, `זיגוג`, `מחיר זיגוג`, `תעשייה`, `תריס`) VALUES('" +cont
-								+ "','" + id + "','" + plc + "','" + cust + "','" + add + "','" + phonenum + "','" + col + "','" + colPr + "','" + gla + "','" + glaPr + "','" + cmp + "','" + shut + "') ";
+								+ "','" + id + "','" + plc + "','" + cust + "','" + add + "','" + phonenum + "','" + col + "','" + colorPrice + "','" + gla + "','" + glassPrice + "','" + cmp + "','" + shut + "') ";
 						MysqlConnect.getDbCon().insertQuery(q);
 						JOptionPane.showMessageDialog(null, "נשמר");
 					} 

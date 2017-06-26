@@ -2,7 +2,6 @@ package main;
 import java.awt.EventQueue;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -10,9 +9,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-
 import Choosers.hardware;
 import Choosers.partsColors;
 import Choosers.profiles;
@@ -23,10 +20,7 @@ import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.imageio.ImageIO;
@@ -56,6 +50,7 @@ public class ProjectProducts extends JFrame
 	public static double colorPrice;
 	public static String glass;
 	public static double glassPrice;
+	private JTable table_1;
 	/**
 	 * Launch the application.
 	 */
@@ -111,9 +106,16 @@ public class ProjectProducts extends JFrame
 		lblNewLabel_5 = new JLabel("0");
 		lblNewLabel_5.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		proPic = new JLabel("");
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 544, 1342, 150);
+		contentPane.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
 		JScrollPane scrollPane = new JScrollPane();
 
-		scrollPane.setBounds(10, 419, 1342, 286);
+		scrollPane.setBounds(10, 344, 1342, 167);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -239,34 +241,13 @@ public class ProjectProducts extends JFrame
 		radioButton_2.setBounds(720, 81, 136, 23);
 		contentPane.add(radioButton_2);
 
-		//	lblNewLabel_8.setIcon(new ImageIcon(ProjectProducts.class.getResource("/img/background.jpg")));
-		proPic.setBounds(69, 24, 225, 265);
+		proPic.setBounds(69, 24, 225, 221);
 		contentPane.add(proPic);
 		proNumBG.add(rdbtnNewRadioButton);
 		proNumBG.add(rdbtnNewRadioButton_3);
 
 		berzolNumBG.add(radioButton);
 		berzolNumBG.add(radioButton_2);
-
-		JButton btnNewButton = new JButton("פרופילים");
-		btnNewButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				try 
-				{
-					new profiles();
-				}
-				catch (SQLException e) 
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		btnNewButton.setBounds(534, 48, 123, 46);
-		contentPane.add(btnNewButton);
 
 		JButton button = new JButton("פירזולים");
 		button.addActionListener(new ActionListener()
@@ -279,19 +260,13 @@ public class ProjectProducts extends JFrame
 				} 
 				catch (SQLException e) 
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button.setBounds(534, 98, 123, 46);
+		button.setBounds(535, 24, 123, 46);
 		contentPane.add(button);
-
-		JButton button_1 = new JButton("בילגי");
-		button_1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_1.setBounds(534, 148, 123, 46);
-		contentPane.add(button_1);
 
 		JButton button_2 = new JButton("תריס גלילה");
 		button_2.addActionListener(new ActionListener() 
@@ -302,27 +277,22 @@ public class ProjectProducts extends JFrame
 			}
 		});
 		button_2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_2.setBounds(534, 198, 123, 47);
+		button_2.setBounds(535, 74, 123, 47);
 		contentPane.add(button_2);
-
-		JButton button_3 = new JButton("קיר מסך");
-		button_3.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_3.setBounds(385, 48, 123, 46);
-		contentPane.add(button_3);
 
 		JButton button_4 = new JButton("הנחה");
 		button_4.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_4.setBounds(385, 98, 123, 46);
+		button_4.setBounds(386, 24, 123, 46);
 		contentPane.add(button_4);
 
 		JButton button_5 = new JButton("מוצר כאופציה");
 		button_5.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_5.setBounds(385, 148, 123, 46);
+		button_5.setBounds(386, 74, 123, 46);
 		contentPane.add(button_5);
 
 		JButton button_6 = new JButton("הערות למוצר");
 		button_6.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_6.setBounds(385, 198, 123, 46);
+		button_6.setBounds(386, 124, 123, 46);
 		contentPane.add(button_6);
 
 		JButton button_7 = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05D5\u05E6\u05E8 \u05DC\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
@@ -334,13 +304,8 @@ public class ProjectProducts extends JFrame
 			}
 		});
 		button_7.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_7.setBounds(1108, 346, 152, 46);
+		button_7.setBounds(1121, 270, 152, 46);
 		contentPane.add(button_7);
-
-		JButton button_8 = new JButton("\u05E2\u05D3\u05DB\u05D5\u05DF");
-		button_8.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_8.setBounds(922, 346, 152, 46);
-		contentPane.add(button_8);
 
 		JButton button_9 = new JButton("\u05DE\u05D7\u05D9\u05E7\u05D4");
 		button_9.addActionListener(new ActionListener() 
@@ -373,7 +338,7 @@ public class ProjectProducts extends JFrame
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 						HelpFunctions.renderingTable(table);
-						
+
 						double allPrice=ProjectProducts.calcAllProductPrice();
 						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
@@ -385,11 +350,11 @@ public class ProjectProducts extends JFrame
 				{
 					e1.printStackTrace();
 				}
-			
+
 			}
 		});
 		button_9.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_9.setBounds(742, 346, 152, 46);
+		button_9.setBounds(935, 270, 152, 46);
 		contentPane.add(button_9);
 
 		JButton button_10 = new JButton("\u05D4\u05E2\u05EA\u05E7\u05D4");
@@ -421,7 +386,7 @@ public class ProjectProducts extends JFrame
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 						HelpFunctions.renderingTable(table);
-						
+
 						double allPrice=ProjectProducts.calcAllProductPrice();
 						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
@@ -431,20 +396,19 @@ public class ProjectProducts extends JFrame
 					} 
 					catch (SQLException e1) 
 					{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+												e1.printStackTrace();
 					}
-					
+
 				}
 			}
 		});
 		button_10.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_10.setBounds(552, 346, 158, 46);
+		button_10.setBounds(745, 270, 158, 46);
 		contentPane.add(button_10);
 
 		JButton button_11 = new JButton("\u05E0\u05D9\u05EA\u05D5\u05D7 \u05E2\u05DC\u05D9\u05D5\u05EA");
 		button_11.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_11.setBounds(368, 346, 152, 46);
+		button_11.setBounds(561, 270, 152, 46);
 		contentPane.add(button_11);
 
 		JButton button_12 = new JButton("צפייה במוצר");
@@ -452,11 +416,34 @@ public class ProjectProducts extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				table.getSelectionModel().clearSelection();
+				//table.getSelectionModel().clearSelection();
+
+				int row = table.getSelectedRow();
+				if(row<0)
+				{
+					JOptionPane.showMessageDialog(null, "יש לבחור מוצר להעתיק");
+				}
+				else
+				{
+					String id = table.getModel().getValueAt(row, 0).toString();
+					String projectId= table.getModel().getValueAt(row, 1).toString();
+					String codeItem = table.getModel().getValueAt(row, 2).toString();
+					String te2or = table.getModel().getValueAt(row, 3).toString();
+					String series = table.getModel().getValueAt(row, 4).toString();
+					String width = table.getModel().getValueAt(row, 5).toString();
+					String height = table.getModel().getValueAt(row, 6).toString();
+					String quantity = table.getModel().getValueAt(row, 7).toString();
+					String color = table.getModel().getValueAt(row, 8).toString();
+					String glass = table.getModel().getValueAt(row, 9).toString();
+					String pricee = table.getModel().getValueAt(row, 10).toString();
+
+					new ShowUpdateProjectProduct(id,projectId,codeItem,width,height,series,color,glass,te2or,quantity,pricee);
+
+				}
 			}
 		});
 		button_12.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_12.setBounds(192, 346, 152, 46);
+		button_12.setBounds(385, 270, 152, 46);
 		contentPane.add(button_12);
 
 		JButton button_13 = new JButton("");
@@ -468,19 +455,19 @@ public class ProjectProducts extends JFrame
 			}
 		});
 		button_13.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_13.setBounds(1152, 225, 108, 64);
+		button_13.setBounds(1165, 181, 108, 64);
 		contentPane.add(button_13);
 		HelpFunctions.setIcon(button_13, "calculator");
 
 		JButton button_14 = new JButton("");
 		button_14.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_14.setBounds(998, 225, 108, 64);
+		button_14.setBounds(1011, 181, 108, 64);
 		contentPane.add(button_14);
 		HelpFunctions.setIcon(button_14, "printer");
 
 		JButton button_15 = new JButton("");
 		button_15.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_15.setBounds(850, 225, 108, 64);
+		button_15.setBounds(863, 181, 108, 64);
 		contentPane.add(button_15);
 		HelpFunctions.setIcon(button_15, "pdf");
 
@@ -516,7 +503,7 @@ public class ProjectProducts extends JFrame
 				new partsColors();
 			}
 		});
-		button_16.setBounds(385, 261, 272, 40);
+		button_16.setBounds(535, 128, 123, 41);
 		contentPane.add(button_16);
 
 		JLabel background_label = new JLabel("New label");
@@ -524,6 +511,7 @@ public class ProjectProducts extends JFrame
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
 	}
+	//--------------------------------------------------------calcAllProductPrice-----------------------------------------------
 
 	public static double calcAllProductPrice()
 	{

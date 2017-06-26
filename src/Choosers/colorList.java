@@ -12,6 +12,7 @@ import helpClasses.MysqlConnect;
 import main.AddProject;
 import main.AddProjectProduct;
 import main.ProjectProducts;
+import main.ShowUpdateProjectProduct;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -73,7 +74,8 @@ public class colorList {
 		frame.getContentPane().add(scrollPane);
 
 		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		table.addMouseListener(new MouseAdapter()
+		{
 			@Override
 			public void mousePressed(MouseEvent e) 
 			{
@@ -82,15 +84,22 @@ public class colorList {
 				int row = table.rowAtPoint(p);
 				if (e.getClickCount() == 2) 
 				{
-					if(className.equals("AddProjectProduct")){
+					if(className.equals("AddProjectProduct"))
+					{
 						colorID=(table.getModel().getValueAt(row, 0)).toString();
 						AddProjectProduct.colorId=colorID;
 						colorName=(table.getModel().getValueAt(row, 1)).toString();
 						AddProjectProduct.textField.setText(colorName);
-						//colorPrice=table.getModel().getValueAt(row, 3);
+						colorPrice=table.getModel().getValueAt(row, 3).toString();
 						AddProjectProduct.colorPrice=colorPrice;
 						ProjectProducts.colorPrice=(double) table.getModel().getValueAt(row, 3);
 						
+					}
+					else if(className.equals("UpdateProjectProduct"))
+					{
+						colorName=(table.getModel().getValueAt(row, 1)).toString();
+						ShowUpdateProjectProduct.colorTextField.setText(colorName);
+						ShowUpdateProjectProduct.colorPrice=(double) table.getModel().getValueAt(row, 3);
 					}
 					else
 					{
