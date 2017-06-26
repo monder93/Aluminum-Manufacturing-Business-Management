@@ -17,6 +17,7 @@ public class PdfMaker
 	private Pdf shutterOrdersPDF;
 	private Pdf shutterPricesPDF;
 	private Pdf projectsListPDF;
+	private Pdf projectBidPDF;
 	
 	public PdfMaker()
 	{
@@ -33,6 +34,7 @@ public class PdfMaker
 		shutterOrdersPDF = new ShutterOrdersPDF();
 		shutterPricesPDF = new ShutterPricesPDF();
 		projectsListPDF = new ProjectsListPDF();
+		projectBidPDF	= new ProjectBidPDF();
 	}
 	
 	public void exportCustomerDebtsPDF()
@@ -97,6 +99,11 @@ public class PdfMaker
 	public void exportProjectsListPDF()
 	{
 		projectsListPDF.export();
+	}
+	
+	public void exportProjectBidPDF()
+	{
+		projectBidPDF.export();
 	}
 	
 }

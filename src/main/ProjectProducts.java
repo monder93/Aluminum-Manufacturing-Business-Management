@@ -18,6 +18,8 @@ import helpClasses.Calc;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
+import pdfReports.PdfMaker;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
@@ -92,6 +94,7 @@ public class ProjectProducts extends JFrame
 	 */
 	private void initialize()
 	{
+		PdfMaker pdfMaker = new PdfMaker();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 578, 374);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -106,11 +109,11 @@ public class ProjectProducts extends JFrame
 		lblNewLabel_5 = new JLabel("0");
 		lblNewLabel_5.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		proPic = new JLabel("");
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 544, 1342, 150);
 		contentPane.add(scrollPane_1);
-		
+
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
 		JScrollPane scrollPane = new JScrollPane();
@@ -396,7 +399,7 @@ public class ProjectProducts extends JFrame
 					} 
 					catch (SQLException e1) 
 					{
-												e1.printStackTrace();
+						e1.printStackTrace();
 					}
 
 				}
@@ -466,6 +469,13 @@ public class ProjectProducts extends JFrame
 		HelpFunctions.setIcon(button_14, "printer");
 
 		JButton button_15 = new JButton("");
+		button_15.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				pdfMaker.exportProjectBidPDF();
+			}
+		});
 		button_15.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_15.setBounds(863, 181, 108, 64);
 		contentPane.add(button_15);
