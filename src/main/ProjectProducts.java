@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 import Choosers.hardware;
 import Choosers.partsColors;
 import Choosers.profiles;
@@ -30,11 +32,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.ComponentOrientation;
 
 
@@ -119,12 +124,13 @@ public class ProjectProducts extends JFrame
 		scrollPane_1.setViewportView(table_1);
 		JScrollPane scrollPane = new JScrollPane();
 
-		scrollPane.setBounds(10, 344, 1342, 167);
+		scrollPane.setBounds(32, 338, 1342, 167);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
+		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener()
 		{	
 			@Override
@@ -159,6 +165,7 @@ public class ProjectProducts extends JFrame
 
 			}
 		});
+		
 
 		try 
 		{
@@ -295,6 +302,25 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_5);
 
 		JButton button_6 = new JButton("הערות למוצר");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				int row = table.getSelectedRow();
+				if(row<0)
+				{
+					JOptionPane.showMessageDialog(null, "יש לבחור מוצר");
+				}
+				else
+				{
+					int productId= (int) table.getModel().getValueAt(row, 0);
+					try {
+						new Notes(productId);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		button_6.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_6.setBounds(386, 124, 123, 46);
 		contentPane.add(button_6);
@@ -411,6 +437,22 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_10);
 
 		JButton button_11 = new JButton("\u05E0\u05D9\u05EA\u05D5\u05D7 \u05E2\u05DC\u05D9\u05D5\u05EA");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				int row = table.getSelectedRow();
+				if(row<0)
+				{
+					JOptionPane.showMessageDialog(null, "יש לבחור מוצר");
+				}
+				else
+				{
+					String id = table.getModel().getValueAt(row, 0).toString();
+					String name = table.getModel().getValueAt(row, 3).toString();
+					new PrdCostAnalysis(Integer.parseInt(id),name);
+				}
+			}
+		});
 		button_11.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_11.setBounds(561, 270, 152, 46);
 		contentPane.add(button_11);

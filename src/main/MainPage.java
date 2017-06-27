@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
+
+import Choosers.sertotem;
 import debts.DebtsForSuppliersPage;
 import debts.DebtsPage;
 import helpClasses.Calc;
@@ -208,11 +210,33 @@ public class MainPage extends JFrame
 		menuBar.add(menu_3);
 
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("שרטוטי חלונות");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try {
+					new sertotem("חלונות");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		mntmNewMenuItem_2.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mntmNewMenuItem_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_3.add(mntmNewMenuItem_2);
 
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("שרטוטי דלתות");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					new sertotem("דלתות");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		mntmNewMenuItem_3.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mntmNewMenuItem_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_3.add(mntmNewMenuItem_3);

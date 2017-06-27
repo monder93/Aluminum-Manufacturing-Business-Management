@@ -45,6 +45,11 @@ public class AddProjectProduct
 	public static String colorPrice="err";
 	public static String glassPrice="err";
 	public static JLabel proPic;
+	public static double wight;
+	public static double almPrc;
+	public static double glPrc;
+	public static double everPrc;
+	public static double przPrc;
 
 	/**
 	 * Launch the application.
@@ -191,7 +196,7 @@ public class AddProjectProduct
 						System.out.println("color price  AddProjectProduct is : "+AddProjectProduct.colorPrice);
 						System.out.println("glass price  projectProducts is : "+ ProjectProducts.glassPrice);
 						System.out.println("glass price  AddProjectProduct is : "+AddProjectProduct.glassPrice);
-						
+
 						ProductFactory pr = new ProductFactory();
 						Products p = pr.getProduct(type, Double.parseDouble(textField_6.getText().toString()), Double.parseDouble(textField_7.getText().toString()),ProjectProducts.colorPrice, ProjectProducts.glassPrice,String.valueOf(series), 2);
 						price=p.calculatePrice();
@@ -211,14 +216,39 @@ public class AddProjectProduct
 					{
 						e1.printStackTrace();
 					}
-					
+
+
+					try 
+					{
+						ResultSet rs;
+						rs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id +"'");
+						while(rs.next());
+						rs.previous();
+						int prdID=rs.getInt(1);
+						MysqlConnect.getDbCon().insertQuery("INSERT INTO `costs`(`מספר פרויקט`, `מספר מוצר`, `משקל`, `אלומיניום`, `עוור`, `זכוכית`, `פרזול`) VALUES ('"+ProjectProducts.id+"','"+prdID+"','"+wight+"','"+almPrc+"','"+everPrc+"','"+glPrc+"','"+przPrc+"')");
+						System.out.println("------------------------");
+
+						System.out.println(prdID);
+
+						System.out.println("------------------------");
+						
+						
+						
+
+					} catch (SQLException e2) {
+						e2.printStackTrace();
+					}
+
+
+
+
 					try 
 					{
 						ResultSet myRs;
 						myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id +"'  ");
 						ProjectProducts.table.setModel(DbUtils.resultSetToTableModel(myRs));
 						HelpFunctions.renderingTable(ProjectProducts.table);
-						
+
 						double allPrice=ProjectProducts.calcAllProductPrice();
 						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
@@ -229,7 +259,7 @@ public class AddProjectProduct
 					{
 						e1.printStackTrace();
 					}
-					
+
 					frame.dispose();
 				}
 				else

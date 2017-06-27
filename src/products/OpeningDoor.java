@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import helpClasses.MysqlConnect;
+import main.AddProjectProduct;
 
 public class OpeningDoor extends Door
 {
@@ -80,7 +81,7 @@ public class OpeningDoor extends Door
 		{
 			e.printStackTrace();
 		}
-
+		AddProjectProduct.wight=sumKG/1000000;
 		return ((sumKG*colorPrice/1000000))*alumLoss;
 	}
 
@@ -88,6 +89,7 @@ public class OpeningDoor extends Door
 	public double calculateGlassPrice() 
 	{
 		double glassP= (((width-180) * (height-227))/1000000)*glassPrice;
+		AddProjectProduct.glPrc=glassP;
 		return glassP;
 
 	}
@@ -95,12 +97,15 @@ public class OpeningDoor extends Door
 	public double calculateCosts() {
 		double price = 0;
 		price	+= calculateAluminumKg();
+		AddProjectProduct.almPrc=price;
 		System.out.println(price);
 		price	+= calculateGlassPrice();
 		System.out.println(price);
 		price += mashkofEverPrice*2*(height+width)/1000 ;
+		AddProjectProduct.everPrc= mashkofEverPrice*2*(height+width)/1000 ;
 		System.out.println(price);
 		price += 709.49;
+		AddProjectProduct.przPrc=709.49;
 		System.out.println(price);
 		return price*productionsCost*workingCost;
 	}
