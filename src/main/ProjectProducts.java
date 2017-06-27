@@ -130,7 +130,7 @@ public class ProjectProducts extends JFrame
 		table = new JTable();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
+
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener()
 		{	
 			@Override
@@ -165,7 +165,7 @@ public class ProjectProducts extends JFrame
 
 			}
 		});
-		
+
 
 		try 
 		{
@@ -181,19 +181,19 @@ public class ProjectProducts extends JFrame
 		{
 			e.printStackTrace();
 		}
-		JLabel lblNewLabel = new JLabel("סה\"כ מחיר הפרויקט(ש\"ח) לפני מע\"ם :");
+		JLabel lblNewLabel = new JLabel("סה\"כ מחיר הפרויקט(ש\"ח) לפני מע\"מ :");
 		lblNewLabel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(1105, 24, 247, 24);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("מחיר ממוצע למוצר(ש\"ח) אחרי מע\"ם :");
+		JLabel lblNewLabel_1 = new JLabel("מחיר ממוצע למוצר(ש\"ח) אחרי מע\"מ :");
 		lblNewLabel_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_1.setBounds(1105, 90, 247, 24);
 		contentPane.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("מחיר המוצר(ש\"ח) אחרי מע\"ם :");
+		JLabel lblNewLabel_2 = new JLabel("מחיר המוצר(ש\"ח) אחרי מע\"מ :");
 		lblNewLabel_2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_2.setBounds(1105, 125, 247, 24);
@@ -297,6 +297,47 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_4);
 
 		JButton button_5 = new JButton("מוצר כאופציה");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				int row = table.getSelectedRow();
+				if(row<0)
+				{
+					JOptionPane.showMessageDialog(null, "יש לבחור מוצר");
+				}
+				else
+				{
+					try {
+						String id=table.getModel().getValueAt(row, 0).toString();
+						String option= table.getModel().getValueAt(row, 11).toString();
+						if(option.equals("false"))
+						{
+
+							MysqlConnect.getDbCon().updateQuery("UPDATE `projectsproducts` SET `אופציה`= '1' WHERE `מספר סידורי` = '"+id+"'");
+						}
+						else
+						{
+							MysqlConnect.getDbCon().updateQuery("UPDATE `projectsproducts` SET `אופציה`= '0' WHERE `מספר סידורי` = '"+id+"'");
+
+						}
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
+						table.setModel(DbUtils.resultSetToTableModel(myRs));
+						HelpFunctions.renderingTable(table);
+						double allPrice=ProjectProducts.calcAllProductPrice();
+						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
+						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
+						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
+						
+					}
+
+					catch (SQLException e1) 
+					{
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		button_5.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_5.setBounds(386, 74, 123, 46);
 		contentPane.add(button_5);
@@ -538,7 +579,7 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_15);
 		HelpFunctions.setIcon(button_15, "pdf");
 
-		JLabel label = new JLabel("סה\"כ מחיר הפרויקט(ש\"ח) אחרי מע\"ם :");
+		JLabel label = new JLabel("סה\"כ מחיר הפרויקט(ש\"ח) אחרי מע\"מ :");
 		label.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		label.setFont(new Font("Tahoma", Font.BOLD, 12));
 		label.setBounds(1105, 55, 247, 24);
@@ -585,7 +626,7 @@ public class ProjectProducts extends JFrame
 		double price=0;
 		try
 		{
-			String query="SELECT`מחיר` , `כמות`FROM `projectsproducts` WHERE `מספר פרויקט` = '"+id+"' ";
+			String query="SELECT`מחיר` , `כמות`FROM `projectsproducts` WHERE `מספר פרויקט` = '"+id+"' AND `אופציה` = 'false'";
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			while(myRs.next())
 			{
@@ -606,7 +647,7 @@ public class ProjectProducts extends JFrame
 		double quantityCount=0;
 		try
 		{
-			String query="SELECT`מחיר` , `כמות`FROM `projectsproducts` WHERE `מספר פרויקט` = '"+id+"' ";
+			String query="SELECT`מחיר` , `כמות`FROM `projectsproducts` WHERE `מספר פרויקט` = '"+id+"' AND `אופציה` = 'false'";
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			while(myRs.next())
 			{
