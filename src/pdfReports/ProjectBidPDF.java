@@ -18,11 +18,11 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
 import helpClasses.Fonts;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import main.ProjectProducts;
+
 
 public class ProjectBidPDF implements Pdf
 {
@@ -134,7 +134,6 @@ public class ProjectBidPDF implements Pdf
 				subjecttable.setRunDirection(PdfWriter.RUN_DIRECTION_RTL);
 
 				PdfPCell subjectCell = new PdfPCell();
-				//subjectCell.addElement(new Phrase("הצעת מחיר לכבוד :\n שם מזמין :"+clientName+"\n  איש קשר :"+contactName+"\n",Fonts.Arial14BoldItalic));
 				subjectCell.addElement(new Phrase("הצעת מחיר לכבוד : איש קשר :"+contactName+"\n שם מזמין:"+clientName+"",Fonts.Arial14BoldItalic));
 				subjectCell.setBorder(com.itextpdf.text.Rectangle.NO_BORDER);
 				subjecttable.addCell(subjectCell);

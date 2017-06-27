@@ -17,6 +17,7 @@ import Choosers.scrollShutter;
 import helpClasses.Calc;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import mails.EmailWithPdf;
 import net.proteanit.sql.DbUtils;
 import pdfReports.PdfMaker;
 
@@ -463,10 +464,24 @@ public class ProjectProducts extends JFrame
 		HelpFunctions.setIcon(button_13, "calculator");
 
 		JButton button_14 = new JButton("");
+		button_14.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				try
+				{
+					new EmailWithPdf();
+				}
+				catch (Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "שליחת מייל נכשלה");
+				}
+			}
+		});
 		button_14.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		button_14.setBounds(1011, 181, 108, 64);
 		contentPane.add(button_14);
-		HelpFunctions.setIcon(button_14, "printer");
+		HelpFunctions.setIcon(button_14, "mail");
 
 		JButton button_15 = new JButton("");
 		button_15.addActionListener(new ActionListener()
