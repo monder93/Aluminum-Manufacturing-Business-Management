@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 
 import javax.swing.JTextField;
@@ -35,6 +36,7 @@ public class PrdCostAnalysis {
 	private String name;
 	private JLabel label_11;
 	private JTextField textField_12;
+	private String price;
 	/**
 	 * Launch the application.
 	 */
@@ -56,9 +58,10 @@ public class PrdCostAnalysis {
 	 */
 	public PrdCostAnalysis() {
 	}
-	public PrdCostAnalysis(int prdID,String name) {
+	public PrdCostAnalysis(int prdID,String name,String price) {
 		this.prdID=prdID;
 		this.name=name;
+		this.price=price;
 		try {
 			initialize();
 		} catch (SQLException e) {
@@ -74,9 +77,13 @@ public class PrdCostAnalysis {
 	private void initialize() throws SQLException {
 		frame = new JFrame();
 		frame.setVisible(true);
-		frame.setBounds(100, 100, 550, 400);
+		frame.setBounds(450, 200, 550, 349);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(280, 170, 244, 123);
+		frame.getContentPane().add(lblNewLabel_1);
 
 		JLabel lblNewLabel = new JLabel("אלומיניום :");
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -265,17 +272,17 @@ public class PrdCostAnalysis {
 		
 		ResultSet rs = MysqlConnect.getDbCon().selectQuery("SELECT `משקל`, `אלומיניום`, `עוור`, `זכוכית`, `פרזול` FROM `costs` WHERE `מספר מוצר` ='"+prdID+"'");
 		rs.next();
-		double wight = Math.floor(rs.getDouble(1)*100)/100 ;
-		double almPrc =  Math.floor(rs.getDouble(2)*100)/100 ;
-		double glPrc =  Math.floor(rs.getDouble(4)*100)/100 ;
-		double everPrc =  Math.floor(rs.getDouble(3)*100)/100 ;
-		double przPrc =  Math.floor(rs.getDouble(5)*100)/100 ;
+		double wight = Math.round(rs.getDouble(1)*100.0)/100.0 ;
+		double almPrc =  Math.round(rs.getDouble(2)*100.0)/100.0 ;
+		double glPrc =  Math.round(rs.getDouble(4)*100.0)/100.0 ;
+		double everPrc =  Math.round(rs.getDouble(3)*100.0)/100.0 ;
+		double przPrc =  Math.round(rs.getDouble(5)*100.0)/100.0 ;
 		textField_11.setText(String.valueOf(wight));
 		textField.setText(String.valueOf(almPrc));
 		textField_3.setText(String.valueOf(everPrc));
 		textField_2.setText(String.valueOf(glPrc));
 		textField_1.setText(String.valueOf(przPrc));
-		double stuffcosts=Math.floor((przPrc+almPrc+everPrc+glPrc)*100)/100;
+		double stuffcosts=Math.round((przPrc+almPrc+everPrc+glPrc)*100.0)/100.0;
 		textField_4.setText(String.valueOf(stuffcosts));
 		
 		
@@ -292,18 +299,20 @@ public class PrdCostAnalysis {
 		myRs = MysqlConnect.getDbCon().selectWhereQuery("settings", "שם משתנה", "מעמ");
 		myRs.next();
 		double tax=Double.parseDouble(myRs.getString(3));
-		double prdCosts = Math.floor((stuffcosts*productionsCost)*100)/100;
+		double prdCosts = Math.round((stuffcosts*productionsCost)*100.0)/100.0;
 		textField_5.setText(String.valueOf(prdCosts));
-		double wCost = Math.floor((stuffcosts*workingCost)*100)/100;
+		double wCost = Math.round((stuffcosts*workingCost)*100.0)/100.0;
 		textField_6.setText(String.valueOf(wCost));
-		double allCosts = Math.floor((wCost+prdCosts+stuffcosts)*100)/100;
+		double allCosts = Math.round((wCost+prdCosts+stuffcosts)*100.0)/100.0;
 		textField_7.setText(String.valueOf(allCosts));
-		double profitCost = Math.floor((allCosts*profit)*100)/100;
+		double profitCost = Math.round((allCosts*profit)*100.0)/100.0;
 		textField_8.setText(String.valueOf(profitCost));
-		double price = Math.floor((allCosts+profitCost)*100)/100;
-		textField_9.setText(String.valueOf(price));
-		double fPrice = Math.floor((price+(price*tax))*100)/100;
+		double price = Math.round((allCosts+profitCost)*100.0)/100.0;
+		textField_9.setText(this.price);
+		double fPrice = Math.round((price+(price*tax))*100.0)/100.0;
 		textField_12.setText(String.valueOf(fPrice));
+		
+		HelpFunctions.setBackground(lblNewLabel_1,"analyse");
 
 
 
@@ -313,5 +322,4 @@ public class PrdCostAnalysis {
 		
 
 	}
-
 }

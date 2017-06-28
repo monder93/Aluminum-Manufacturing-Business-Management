@@ -54,25 +54,31 @@ public class CustomerDebtsPDF implements Pdf
 			{
 				// Listing 1. Instantiation of document object
 				Document document = new Document(PageSize.A4, 0, 0, 50, 50);
-
-				File file = new File(".//reports//customersDebts.pdf");
-				if (!file.exists())
-				{
-					if (file.mkdir()) 
-					{
-						System.out.println("Directory is created!");
-					} 
-					else 
-					{
-						System.out.println("Failed to create directory!");
-					}
-				}
-				else
-					System.out.println("mwgoood");
+//
+//				File file = new File(".//reports//customersDebts.pdf");
+//				if (!file.exists())
+//				{
+//					if (file.mkdir()) 
+//					{
+//						System.out.println("Directory is created!");
+//					} 
+//					else 
+//					{
+//						System.out.println("Failed to create directory!");
+//					}
+//				}
+//				else
+//					System.out.println("mwgoood");
 
 				// Listing 2. Creation of PdfWriter object
 				if(url2.compareTo(url3)==0)
 				{
+					File file = new File(url2+"\\temp\\");
+					if (!file.exists())
+						{
+							file.mkdir(); 
+							
+						}
 					
 					url=url2+"\\temp\\"+fc.getSelectedFile().getName();
 				}
@@ -325,7 +331,7 @@ public class CustomerDebtsPDF implements Pdf
 			}
 			catch(Exception e1)
 			{
-				System.out.println(e1);
+				e1.printStackTrace();;
 			}
 		}
 		

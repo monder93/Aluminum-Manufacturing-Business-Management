@@ -58,7 +58,6 @@ public class ProjectProducts extends JFrame
 	public static double colorPrice;
 	public static String glass;
 	public static double glassPrice;
-	private JTable table_1;
 	/**
 	 * Launch the application.
 	 */
@@ -115,16 +114,9 @@ public class ProjectProducts extends JFrame
 		lblNewLabel_5 = new JLabel("0");
 		lblNewLabel_5.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		proPic = new JLabel("");
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 544, 1342, 150);
-		contentPane.add(scrollPane_1);
-
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
 		JScrollPane scrollPane = new JScrollPane();
 
-		scrollPane.setBounds(32, 338, 1342, 167);
+		scrollPane.setBounds(10, 338, 1342, 356);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -260,25 +252,6 @@ public class ProjectProducts extends JFrame
 		berzolNumBG.add(radioButton);
 		berzolNumBG.add(radioButton_2);
 
-		JButton button = new JButton("פירזולים");
-		button.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				try 
-				{
-					new hardware();
-				} 
-				catch (SQLException e) 
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-		button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button.setBounds(535, 24, 123, 46);
-		contentPane.add(button);
-
 		JButton button_2 = new JButton("תריס גלילה");
 		button_2.addActionListener(new ActionListener() 
 		{
@@ -288,13 +261,8 @@ public class ProjectProducts extends JFrame
 			}
 		});
 		button_2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_2.setBounds(535, 74, 123, 47);
+		button_2.setBounds(534, 24, 123, 47);
 		contentPane.add(button_2);
-
-		JButton button_4 = new JButton("הנחה");
-		button_4.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_4.setBounds(386, 24, 123, 46);
-		contentPane.add(button_4);
 
 		JButton button_5 = new JButton("מוצר כאופציה");
 		button_5.addActionListener(new ActionListener() {
@@ -339,7 +307,7 @@ public class ProjectProducts extends JFrame
 			}
 		});
 		button_5.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_5.setBounds(386, 74, 123, 46);
+		button_5.setBounds(385, 24, 123, 46);
 		contentPane.add(button_5);
 
 		JButton button_6 = new JButton("הערות למוצר");
@@ -363,7 +331,7 @@ public class ProjectProducts extends JFrame
 			}
 		});
 		button_6.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		button_6.setBounds(386, 124, 123, 46);
+		button_6.setBounds(385, 74, 123, 46);
 		contentPane.add(button_6);
 
 		JButton button_7 = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05D5\u05E6\u05E8 \u05DC\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
@@ -490,7 +458,8 @@ public class ProjectProducts extends JFrame
 				{
 					String id = table.getModel().getValueAt(row, 0).toString();
 					String name = table.getModel().getValueAt(row, 3).toString();
-					new PrdCostAnalysis(Integer.parseInt(id),name);
+					String pr = table.getModel().getValueAt(row, 10).toString();
+					new PrdCostAnalysis(Integer.parseInt(id),name,pr);
 				}
 			}
 		});
@@ -611,7 +580,7 @@ public class ProjectProducts extends JFrame
 				new partsColors();
 			}
 		});
-		button_16.setBounds(535, 128, 123, 41);
+		button_16.setBounds(534, 78, 123, 41);
 		contentPane.add(button_16);
 
 		JLabel background_label = new JLabel("New label");

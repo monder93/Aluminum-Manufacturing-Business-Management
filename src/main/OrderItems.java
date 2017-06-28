@@ -22,6 +22,7 @@ public class OrderItems {
 	private JFrame frame;
 	public static JTable table;
 	String id;
+	String type;
 	/**
 	 * Launch the application.
 	 */
@@ -44,8 +45,9 @@ public class OrderItems {
 	public OrderItems() {
 		initialize();
 	}
-	public OrderItems(String id) {
+	public OrderItems(String id,String type) {
 		this.id=id;
+		this.type=type;
 		initialize();
 	}
 
@@ -85,7 +87,7 @@ public class OrderItems {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				new AddOrderItems(id);
+				new AddOrderItems(id,type);
 			}
 		});
 		btnNewButton.setBounds(501, 58, 106, 48);

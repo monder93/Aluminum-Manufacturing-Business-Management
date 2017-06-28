@@ -417,8 +417,10 @@ public class MainPage extends JFrame
 		JMenuItem menuItem = new JMenuItem("הזמנת זכוכית");
 		menuItem.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem.setHorizontalAlignment(SwingConstants.RIGHT);
-		menuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		menuItem.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				new Orders("הזמנת זכוכית");
 			}
 		});
@@ -427,8 +429,10 @@ public class MainPage extends JFrame
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("הזמנת פירזול");
 		mntmNewMenuItem_1.setHorizontalTextPosition(SwingConstants.RIGHT);
 		mntmNewMenuItem_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		mntmNewMenuItem_1.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				new Orders("הזמנת פירזול");
 			}
 		});
@@ -437,8 +441,10 @@ public class MainPage extends JFrame
 		JMenuItem menuItem_11 = new JMenuItem("הזמנת פרופילים");
 		menuItem_11.setHorizontalTextPosition(SwingConstants.RIGHT);
 		menuItem_11.setHorizontalAlignment(SwingConstants.RIGHT);
-		menuItem_11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		menuItem_11.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				new Orders("הזמנת פרופילים");
 			}
 		});

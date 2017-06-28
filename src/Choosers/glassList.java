@@ -9,6 +9,7 @@ import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.AddOrderItems;
 import main.AddProject;
 import main.AddProjectProduct;
 import main.ProjectProducts;
@@ -111,6 +112,13 @@ public class glassList {
 						glassName=(table.getModel().getValueAt(row, 1)).toString();
 						ShowUpdateProjectProduct.glassTextField.setText(glassName);
 						ShowUpdateProjectProduct.glassPrice=(double) table.getModel().getValueAt(row, 2);
+					}
+					else if(className.equals("AddOrderItems"))
+					{
+						glassID=(table.getModel().getValueAt(row, 0)).toString();
+						AddOrderItems.idTextField.setText(glassID);
+						glassName=(table.getModel().getValueAt(row, 1)).toString();
+						AddOrderItems.descriptionTextField_1.setText(glassName);
 					}
 					else
 					{

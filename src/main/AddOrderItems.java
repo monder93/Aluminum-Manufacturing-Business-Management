@@ -6,6 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import Choosers.glassList;
+import Choosers.hardware;
+import Choosers.profiles;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import net.proteanit.sql.DbUtils;
@@ -22,12 +25,13 @@ import java.awt.event.ActionEvent;
 public class AddOrderItems {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	public static JTextField idTextField;
+	public static JTextField descriptionTextField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	String id="";
+	String type="";
 
 	/**
 	 * Launch the application.
@@ -52,8 +56,10 @@ public class AddOrderItems {
 		initialize();
 	}
 
-	public AddOrderItems(String id) {
+	public AddOrderItems(String id,String type)
+	{
 		this.id=id;
+		this.type=type;
 		initialize();
 	}
 
@@ -93,17 +99,19 @@ public class AddOrderItems {
 		label_3.setBounds(254, 297, 82, 33);
 		frame.getContentPane().add(label_3);
 
-		textField = new JTextField();
-		textField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		textField.setBounds(65, 64, 189, 33);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		idTextField = new JTextField();
+		idTextField.setEditable(false);
+		idTextField.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		idTextField.setBounds(65, 64, 189, 33);
+		frame.getContentPane().add(idTextField);
+		idTextField.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		textField_1.setColumns(10);
-		textField_1.setBounds(65, 114, 189, 33);
-		frame.getContentPane().add(textField_1);
+		descriptionTextField_1 = new JTextField();
+		descriptionTextField_1.setEditable(false);
+		descriptionTextField_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		descriptionTextField_1.setColumns(10);
+		descriptionTextField_1.setBounds(65, 114, 189, 33);
+		frame.getContentPane().add(descriptionTextField_1);
 
 		textField_2 = new JTextField();
 		textField_2.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -124,6 +132,35 @@ public class AddOrderItems {
 		frame.getContentPane().add(textField_4);
 
 		JButton btnNewButton = new JButton("מוצר");
+		btnNewButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+
+				try
+				{
+					if(type.equals("הזמנת זכוכית"))
+					{
+						new glassList("AddOrderItems");
+					}
+					else if(type.equals("הזמנת פירזול"))
+					{
+						new hardware("AddOrderItems");
+					}
+					else if(type.equals("הזמנת פרופילים"))
+					{
+						new profiles("AddOrderItems");
+					}
+					
+				}
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+
+				}
+
+			}
+		});
 		btnNewButton.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		btnNewButton.setBounds(275, 64, 89, 33);
 		frame.getContentPane().add(btnNewButton);
@@ -137,7 +174,7 @@ public class AddOrderItems {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//				Connection myConn = HelpFunctions.DbConnection();
-				String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+textField.getText()+"','"+textField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
+				String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+idTextField.getText()+"','"+descriptionTextField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
 				try {
 					MysqlConnect.getDbCon().insertQuery(q);
 					JOptionPane.showMessageDialog(null, "נשמר");

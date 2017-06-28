@@ -78,13 +78,13 @@ public class product extends JFrame{
 	{
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(120, 20, 686, 443);
+		frame.setBounds(450, 125, 518, 443);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);		
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(508, 35, 132, 340);
+		scrollPane.setBounds(350, 35, 132, 340);
 		frame.getContentPane().add(scrollPane);
 		table_1 = new JTable()
 		 {
@@ -144,7 +144,7 @@ public class product extends JFrame{
 		}
 		
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(244, 35, 132, 340);
+		scrollPane2.setBounds(177, 35, 132, 340);
 		frame.getContentPane().add(scrollPane2);
 		table_2 = new JTable()
 		 {

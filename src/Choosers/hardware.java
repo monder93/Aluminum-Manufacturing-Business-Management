@@ -1,5 +1,6 @@
 package Choosers;
 import java.awt.EventQueue;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.AddOrderItems;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
@@ -26,6 +28,7 @@ public class hardware {
 
 	private JFrame frame;
 	private JTable table;
+	private String type;
 
 	/**
 	 * Launch the application.
@@ -47,7 +50,15 @@ public class hardware {
 	 * Create the application.
 	 * @throws SQLException 
 	 */
-	public hardware() throws SQLException {
+	public hardware(String type) throws SQLException
+	{
+		this();
+		this.type=type;
+		
+	}
+	
+	public hardware() throws SQLException
+	{
 		initialize();
 	}
 
@@ -99,6 +110,22 @@ public class hardware {
 				else
 				{
 					System.out.println("no picture selected");
+				}
+				
+				JTable table =(JTable) arg0.getSource();
+				Point p = arg0.getPoint();
+				int row = table.rowAtPoint(p);
+				if (arg0.getClickCount() == 2) 
+				{
+					if(type.equals("AddOrderItems"))
+					{
+						String hardwareID=(table.getModel().getValueAt(row, 2)).toString();
+						AddOrderItems.idTextField.setText(hardwareID);
+						String hardwareName=(table.getModel().getValueAt(row, 3)).toString();
+						AddOrderItems.descriptionTextField_1.setText(hardwareName);
+						frame.dispose();
+					}
+					
 				}
 			}
 		});

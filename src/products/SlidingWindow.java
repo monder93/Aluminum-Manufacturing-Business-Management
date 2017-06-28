@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import helpClasses.MysqlConnect;
 import main.AddProjectProduct;
 
-public class SlidingWindow extends Door
+public class SlidingWindow extends Window
 {
 
 	private double productionsCost;

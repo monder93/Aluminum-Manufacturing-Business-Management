@@ -254,7 +254,7 @@ public class Orders extends JFrame
 					else
 					{
 						String id = (table_1.getModel().getValueAt(row, 0)).toString();
-						new OrderItems(id);
+						new OrderItems(id,type);
 					}
 
 				}

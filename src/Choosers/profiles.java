@@ -1,5 +1,6 @@
 package Choosers;
 import java.awt.EventQueue;
+import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -8,16 +9,20 @@ import javax.swing.JTable;
 
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
+import main.AddOrderItems;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JScrollPane;
 import java.awt.ComponentOrientation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class profiles 
 {
 
 	private JFrame frame;
 	private JTable table;
+	private String type;
 
 	/**
 	 * Launch the application.
@@ -45,6 +50,11 @@ public class profiles
 	 * Create the application.
 	 * @throws SQLException 
 	 */
+	public profiles(String type) throws SQLException
+	{
+		this();
+		this.type=type;
+	}
 	public profiles() throws SQLException
 	{
 		initialize();
@@ -67,6 +77,28 @@ public class profiles
 		frame.setName("פרופילים");
 		frame.setVisible(true);
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mousePressed(MouseEvent e) 
+			{
+				JTable table =(JTable) e.getSource();
+				Point p = e.getPoint();
+				int row = table.rowAtPoint(p);
+				if (e.getClickCount() == 2) 
+				{
+					if(type.equals("AddOrderItems"))
+					{
+						String profileID=(table.getModel().getValueAt(row, 3)).toString();
+						AddOrderItems.idTextField.setText(profileID);
+						String profileName=(table.getModel().getValueAt(row, 4)).toString();
+						AddOrderItems.descriptionTextField_1.setText(profileName);
+						frame.dispose();
+					}
+					
+				}
+			}
+		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 		

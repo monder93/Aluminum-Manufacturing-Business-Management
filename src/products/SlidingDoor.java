@@ -50,7 +50,7 @@ public class SlidingDoor extends Door
 	public double calculatePrice() 
 	{
 		double price = calculateCosts();
-		return (Math.floor(price*profit*100)/100);
+		return (Math.round(price*profit*100.0)/100.0);
 
 	}
 
