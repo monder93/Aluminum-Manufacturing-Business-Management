@@ -354,7 +354,7 @@ public class Contacts extends JFrame{
 
 					} catch (Exception e)
 					{
-						e.printStackTrace();
+						JOptionPane.showMessageDialog(null," שם משתמש קיים, יש לבחור בשם משתמש אחר בבקשה!");
 					}
 				}
 			});

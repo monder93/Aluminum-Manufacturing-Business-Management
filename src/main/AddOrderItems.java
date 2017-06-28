@@ -151,7 +151,7 @@ public class AddOrderItems {
 					{
 						new profiles("AddOrderItems");
 					}
-					
+
 				}
 				catch(Exception e1)
 				{
@@ -174,29 +174,37 @@ public class AddOrderItems {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//				Connection myConn = HelpFunctions.DbConnection();
-				String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+idTextField.getText()+"','"+descriptionTextField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
-				try {
-					MysqlConnect.getDbCon().insertQuery(q);
-					JOptionPane.showMessageDialog(null, "נשמר");
 
-				} catch (Exception e1) 
-				{
-					e1.printStackTrace();					
+				if((!idTextField.getText().equals(""))&&(!descriptionTextField_1.getText().equals(""))&&(!textField_2.getText().equals(""))&&(!textField_3.getText().equals(""))&&(!textField_4.getText().equals(""))){
+					String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+idTextField.getText()+"','"+descriptionTextField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
+					try {
+						MysqlConnect.getDbCon().insertQuery(q);
+						JOptionPane.showMessageDialog(null, "נשמר");
+
+					} catch (Exception e1) 
+					{
+						e1.printStackTrace();					
+					}
+
+					try
+					{
+						String query1="SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'";
+						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query1);
+						OrderItems.table.setModel(DbUtils.resultSetToTableModel(myRs));
+						HelpFunctions.renderingTable(OrderItems.table);
+					} 
+					catch (SQLException e1)
+					{
+						e1.printStackTrace();
+					}
+
+					frame.dispose();
 				}
 
-				try
+				else
 				{
-					String query1="SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'";
-					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query1);
-					OrderItems.table.setModel(DbUtils.resultSetToTableModel(myRs));
-					HelpFunctions.renderingTable(OrderItems.table);
-				} 
-				catch (SQLException e1)
-				{
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "יש למלא כל הערכים בבקשה!");
 				}
-
-				frame.dispose();
 			}
 		});
 		btnNewButton_1.setBounds(165, 393, 89, 23);

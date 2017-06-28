@@ -66,7 +66,7 @@ public class Notes {
 	private void initialize() throws SQLException {
 		frame = new JFrame();
 		frame.setVisible(true);
-		frame.setBounds(100, 100, 450, 562);
+		frame.setBounds(450, 120, 450, 562);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -198,8 +198,12 @@ public class Notes {
 
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table);
-
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 434, 523);
+		frame.getContentPane().add(lblNewLabel);
+
+		HelpFunctions.setBackground(lblNewLabel);
 //		MysqlConnect.getDbCon().selectQuery(query)
 		
 	}

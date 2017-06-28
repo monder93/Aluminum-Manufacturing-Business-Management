@@ -111,7 +111,7 @@ public class ProjectProducts extends JFrame
 		getContentPane().setLayout(null);
 		JLabel lblNewLabel_5;
 		JLabel proPic;
-		lblNewLabel_5 = new JLabel("0");
+		lblNewLabel_5 = new JLabel("0.0");
 		lblNewLabel_5.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		proPic = new JLabel("");
 		JScrollPane scrollPane = new JScrollPane();
@@ -179,7 +179,7 @@ public class ProjectProducts extends JFrame
 		lblNewLabel.setBounds(1105, 24, 247, 24);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("מחיר ממוצע למוצר(ש\"ח) אחרי מע\"מ :");
+		JLabel lblNewLabel_1 = new JLabel("מחיר ממוצע למוצר(ש\"ח) לפני מע\"מ :");
 		lblNewLabel_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_1.setBounds(1105, 90, 247, 24);
@@ -570,7 +570,7 @@ public class ProjectProducts extends JFrame
 		double productAvarage=calcProductAvaragePrice();
 		lblNewLabel_3.setText(String.valueOf(allPrice));
 		label_1.setText(String.valueOf(Math.floor(allPrice*1.17)/100*100));
-		lblNewLabel_4.setText(String.valueOf(Math.floor(productAvarage)));
+		lblNewLabel_4.setText("0.0");
 
 		JButton button_16 = new JButton("צבע אביזרים");
 		button_16.addActionListener(new ActionListener() 
