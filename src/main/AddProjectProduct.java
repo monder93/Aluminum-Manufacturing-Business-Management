@@ -24,6 +24,9 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.ComponentOrientation;
 
+/*
+ *  a class for adding new products for specific project 
+ */
 public class AddProjectProduct 
 {
 
@@ -128,6 +131,7 @@ public class AddProjectProduct
 		frame.getContentPane().add(proPic);
 		HelpFunctions.setBackground(proPic,"nopic");
 
+		//choosing color for the product
 		JButton btnNewButton = new JButton("צבע");
 		btnNewButton.addActionListener(new ActionListener()
 		{
@@ -154,6 +158,7 @@ public class AddProjectProduct
 		textField.setText(ProjectProducts.color);
 		textField.setColumns(10);
 
+		//choosing the glass for the product
 		JButton button = new JButton("זיגוג");
 		button.addActionListener(new ActionListener() 
 		{
@@ -180,8 +185,8 @@ public class AddProjectProduct
 		textField_1.setText(ProjectProducts.glass);
 		frame.getContentPane().add(textField_1);
 
-		JButton btnNewButton_1 = new JButton("אישור");
 
+		JButton btnNewButton_1 = new JButton("אישור");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -231,16 +236,13 @@ public class AddProjectProduct
 						System.out.println(prdID);
 
 						System.out.println("------------------------");
-						
-						
-						
+
+
+
 
 					} catch (SQLException e2) {
 						e2.printStackTrace();
 					}
-
-
-
 
 					try 
 					{
@@ -269,6 +271,7 @@ public class AddProjectProduct
 		btnNewButton_1.setBounds(363, 364, 214, 47);
 		frame.getContentPane().add(btnNewButton_1);
 
+		//canceling buttonand closing the frame
 		JButton button_3 = new JButton("ביטול");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)

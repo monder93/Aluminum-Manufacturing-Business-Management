@@ -24,6 +24,10 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/*
+ *  this class for the paied payments for  Debts of the clients for us 
+ * */
+
 public class DebtsPagePaied extends JFrame 
 {
 
@@ -95,11 +99,11 @@ public class DebtsPagePaied extends JFrame
 
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
+
 		JTableHeader Theader = table.getTableHeader();
 		Theader.setBackground(Color.green);
 		Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
+
 		button = new JButton("הוספה");
 		button.addActionListener(new ActionListener() 
 		{
@@ -113,11 +117,11 @@ public class DebtsPagePaied extends JFrame
 					String current_time_str = time_formatter.format(System.currentTimeMillis());
 					try 
 					{
-						
+
 						String query = "INSERT INTO `customersdebtspaied`( `מספר חוב`, `תאריך`, `סוג תשלום`, `סכום` )  VALUES ('"+debtnumber+"','"+current_time_str+"','"+comboBox.getSelectedItem().toString()+"','"+payAmountTextField.getText()+"')";			
 						MysqlConnect.getDbCon().insertQuery(query);
 
-						
+
 						ResultSet myRs = MysqlConnect.getDbCon().selectWhereQuery("customersdebtspaied","מספר חוב", debtnumber);
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
 
@@ -138,7 +142,7 @@ public class DebtsPagePaied extends JFrame
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
 
-						
+
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsPage.table_1);
 						JOptionPane.showMessageDialog(null, "תשלום נוסף");
@@ -197,16 +201,16 @@ public class DebtsPagePaied extends JFrame
 						paidAmount-=Integer.parseInt((table.getModel().getValueAt(row, 4)).toString());
 						toPayAmount=debtAmount-paidAmount;
 						MysqlConnect.getDbCon().deleteRow("customersdebtspaied", ProId, PID);
-						
+
 						String query2="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
-						
+
 						table.setModel(DbUtils.resultSetToTableModel(myRs));
-						
+
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(table);
 
-						
+
 						//insert data to DebtsPage table
 						String query3="UPDATE `customersdebts` SET`שולם`="+paidAmount+",`לתשלום`="+toPayAmount+" WHERE `מספר חוב` = "+debtnumber+"";
 						MysqlConnect.getDbCon().updateQuery(query3);
@@ -216,7 +220,7 @@ public class DebtsPagePaied extends JFrame
 						myRs = MysqlConnect.getDbCon().selectQuery(query4);
 
 						DebtsPage.table_1.setModel(DbUtils.resultSetToTableModel(myRs));
-						
+
 						// changing JTable Cell Value Alignment
 						HelpFunctions.renderingTable(DebtsPage.table_1);
 					}
@@ -228,15 +232,12 @@ public class DebtsPagePaied extends JFrame
 					e1.printStackTrace();
 				}
 			}
-	});
+		});
 		button_2.setBounds(528, 69, 124, 40);
 		contentPane.add(button_2);
 
 		try 
 		{			
-//			myConn = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
-
 			String query="SELECT * FROM `customersdebtspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
@@ -249,13 +250,11 @@ public class DebtsPagePaied extends JFrame
 			label.setBounds(733, 260, 70, 34);
 			contentPane.add(label);
 
-
-
 			payAmountTextField = new JTextField();
 			payAmountTextField.setColumns(10);
 			payAmountTextField.setBounds(566, 267, 86, 20);
 			contentPane.add(payAmountTextField);
-			
+
 			comboBox = new JComboBox();
 			comboBox.setBounds(566, 172, 86, 34);
 			contentPane.add(comboBox);
@@ -265,7 +264,7 @@ public class DebtsPagePaied extends JFrame
 
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
-			
+
 
 			background_label = new JLabel("New label");
 			background_label.setBounds(0, 0, 825, 475);
@@ -276,5 +275,5 @@ public class DebtsPagePaied extends JFrame
 		{
 			// TODO: handle exception
 		}
-}
+	}
 }

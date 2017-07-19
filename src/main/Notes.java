@@ -1,5 +1,4 @@
 package main;
-
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.EventQueue;
@@ -24,8 +23,11 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-public class Notes {
+/*
+ * a class for the notes for the products 
+ */
+public class Notes 
+{
 
 	private JFrame frame;
 	private JTextField textField;
@@ -69,11 +71,12 @@ public class Notes {
 		frame.setBounds(450, 120, 450, 562);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JTextPane textPane = new JTextPane();
+		textPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		textPane.setBounds(33, 379, 370, 55);
 		frame.getContentPane().add(textPane);
-		
+
 		JButton button = new JButton("הוסיף הערה");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -113,7 +116,7 @@ public class Notes {
 		});
 		button.setBounds(230, 469, 109, 23);
 		frame.getContentPane().add(button);
-		
+
 		JButton button_1 = new JButton("מחק הערה");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -167,24 +170,24 @@ public class Notes {
 		});
 		button_1.setBounds(106, 469, 109, 23);
 		frame.getContentPane().add(button_1);
-		
+
 		JLabel label = new JLabel("הערות למוצר מספר :");
 		label.setHorizontalAlignment(SwingConstants.RIGHT);
 		label.setHorizontalTextPosition(SwingConstants.LEFT);
 		label.setBounds(250, 45, 132, 14);
 		frame.getContentPane().add(label);
-		
+
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setBounds(230, 42, 35, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		textField.setText(String.valueOf(num));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(33, 98, 364, 250);
 		frame.getContentPane().add(scrollPane);
-		
+
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -198,13 +201,11 @@ public class Notes {
 
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table);
-		
+
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(0, 0, 434, 523);
 		frame.getContentPane().add(lblNewLabel);
 
 		HelpFunctions.setBackground(lblNewLabel);
-//		MysqlConnect.getDbCon().selectQuery(query)
-		
 	}
 }

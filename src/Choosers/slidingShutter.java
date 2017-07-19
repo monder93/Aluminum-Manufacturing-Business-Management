@@ -15,6 +15,9 @@ import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/*
+ * this class for choosing slidingShutter list
+ * */
 public class slidingShutter 
 {
 
@@ -79,26 +82,23 @@ public class slidingShutter
 				int row = table.rowAtPoint(p);
 				if (e.getClickCount() == 2) 
 				{
-						String shutterID=(table.getModel().getValueAt(row, 0)).toString();
-						AddProject.shutterId=shutterID;
-						String shutterName=(table.getModel().getValueAt(row, 1)).toString();
-						AddProject.shutterName.setText(shutterName);
-						String shutterWeight=(table.getModel().getValueAt(row, 2)).toString();
-						AddProject.shutterWeight=shutterWeight;
-					
+					String shutterID=(table.getModel().getValueAt(row, 0)).toString();
+					AddProject.shutterId=shutterID;
+					String shutterName=(table.getModel().getValueAt(row, 1)).toString();
+					AddProject.shutterName.setText(shutterName);
+					String shutterWeight=(table.getModel().getValueAt(row, 2)).toString();
+					AddProject.shutterWeight=shutterWeight;
+
 
 					frame.dispose();
 				}
-			
-				
+
+
 			}
 		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
-		//connection to database 
-//		myConn = HelpFunctions.DbConnection();
-//		Statement myStmt = myConn.createStatement();
 		String query = "SELECT * FROM slidingShutter";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));

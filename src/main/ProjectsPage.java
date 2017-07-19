@@ -27,6 +27,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/*
+ * a class for all the projects 
+ */
 public class ProjectsPage extends JFrame
 {
 
@@ -80,7 +83,7 @@ public class ProjectsPage extends JFrame
 
 		setTitle("פרויקטים");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 578, 374);
+		setBounds(0, 0, 1368, 734);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		contentPane = new JPanel();
@@ -96,7 +99,7 @@ public class ProjectsPage extends JFrame
 			@Override
 			public boolean isCellEditable(int row, int column) 
 			{
-				return column==1 || column==2 || column==3 || column==4 || column==5 || column==6 || column==7 ;                
+				return  column==3 || column==4 || column==5 || column==6 || column==7 ;                
 			};
 		};
 		table.setAutoCreateRowSorter(true);
@@ -186,6 +189,7 @@ public class ProjectsPage extends JFrame
 		btnNewButton_2.setBounds(1098, 206, 203, 46);
 		getContentPane().add(btnNewButton_2);
 
+		//updating project 
 		JButton btnNewButton_3 = new JButton("עדכון פרויקט");
 		btnNewButton_3.addActionListener(new ActionListener() 
 		{
@@ -222,6 +226,7 @@ public class ProjectsPage extends JFrame
 		btnNewButton_3.setBounds(1098, 133, 203, 46);
 		getContentPane().add(btnNewButton_3);
 
+		// searching for project 
 		JButton btnNewButton_4 = new JButton("\u05D7\u05D9\u05E4\u05D5\u05E9");
 		btnNewButton_4.addActionListener(new ActionListener() 
 		{
@@ -233,6 +238,7 @@ public class ProjectsPage extends JFrame
 		btnNewButton_4.setBounds(1098, 337, 203, 46);
 		getContentPane().add(btnNewButton_4);
 
+		//close the frame 
 		JButton btnNewButton_5 = new JButton("\u05D7\u05D6\u05E8\u05D4");
 		btnNewButton_5.addActionListener(new ActionListener() 
 		{
@@ -244,7 +250,6 @@ public class ProjectsPage extends JFrame
 		btnNewButton_5.setBounds(1098, 406, 203, 46);
 		getContentPane().add(btnNewButton_5);
 
-		//		Connection myConn = HelpFunctions.DbConnection();
 		HelpFunctions.getTable("projects", table);
 		HelpFunctions.renderingTable(table);
 
@@ -268,13 +273,13 @@ public class ProjectsPage extends JFrame
 		comboBox.addItem("שם מזמין");
 		comboBox.addItem("אתר");
 
+		// searching using info 
 		search = new JButton("חפש");
 		search.setVisible(false);
 		search.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-
 				String searchBy=comboBox.getSelectedItem().toString();
 				String searchWord=searchword.getText();
 
@@ -300,6 +305,7 @@ public class ProjectsPage extends JFrame
 		contentPane.add(searchword);
 		searchword.setColumns(10);
 
+		//caneling search 
 		cancel = new JButton("בטל חיפוש");
 		cancel.setVisible(false);
 		cancel.addActionListener(new ActionListener()
@@ -331,6 +337,8 @@ public class ProjectsPage extends JFrame
 		HelpFunctions.renderingTable(table);
 
 	}
+	//----------------------------------------------------------hidrOrShow-function-------------------------------------------------
+	//function to hide some components
 	private void showHide(boolean flag)
 	{
 		sb.setVisible(flag);

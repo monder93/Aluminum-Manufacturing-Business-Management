@@ -3,6 +3,10 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.pdf.BaseFont;
 
+/*
+ *  this class for saving all the fonts we will use 
+ * */
+
 public class Fonts 
 {
 	public static final com.itextpdf.text.Font Tahoma = FontFactory.getFont("c:/windows/fonts/tahoma.ttf",BaseFont.IDENTITY_H,10);

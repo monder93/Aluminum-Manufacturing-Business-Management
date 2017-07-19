@@ -9,6 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/*
+ *  this class for biggering pictures from the gallery 
+ * */
+
 public class BigPic 
 {
 	private JFrame frame;
@@ -44,10 +48,9 @@ public class BigPic
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setTitle("תמונה גדולה");
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(0, 0, 672, 673);
-		//lblNewLabel.setIcon(new ImageIcon(new ImageIcon(gallery.class.getResource(picUrl)).getImage().getScaledInstance(lblNewLabel.getWidth(), lblNewLabel.getHeight(), Image.SCALE_DEFAULT)));
 		HelpFunctions.setImageAsIcon(lblNewLabel, ImageIcon);
 		frame.getContentPane().add(lblNewLabel);
 		frame.setVisible(true);

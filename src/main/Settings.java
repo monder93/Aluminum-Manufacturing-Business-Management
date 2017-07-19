@@ -16,6 +16,11 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/*
+ * a class for application settings 
+ * changing values of some usable variables like 
+ * password , tax , loss , profit , working ... 
+ */
 public class Settings extends JFrame
 {
 
@@ -303,6 +308,8 @@ public class Settings extends JFrame
 		//--------------------------------------------------fetching values from database and setting them----------------------
 		LoadValues();
 	}
+	
+	//load the values from the database
 	private void LoadValues()
 	{
 		try 

@@ -17,6 +17,11 @@ import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/*
+ * this class for choosing profiles list
+ * */
+
 public class profiles 
 {
 
@@ -95,16 +100,13 @@ public class profiles
 						AddOrderItems.descriptionTextField_1.setText(profileName);
 						frame.dispose();
 					}
-					
+
 				}
 			}
 		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
-		//connection to database 
-//		myConn = HelpFunctions.DbConnection();
-//		Statement myStmt = myConn.createStatement();
+
 		String query = "SELECT * FROM profiles";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));

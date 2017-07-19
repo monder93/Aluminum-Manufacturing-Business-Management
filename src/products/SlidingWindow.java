@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import helpClasses.MysqlConnect;
 import main.AddProjectProduct;
-
+/*
+ * a class for slidingWindow specific Product type
+ */
 public class SlidingWindow extends Window
 {
 
@@ -39,13 +41,9 @@ public class SlidingWindow extends Window
 		
 		if(wingCount==0)
 			wingCount=1;
-		//		System.out.println("profit : " + profit);
-		//		System.out.println("productions : " + productionsCost);
-		//		System.out.println("working : " + workingCost);
-		//		System.out.println("loss : " + alumLoss);
-
 	}
 
+	//function to calculate the Price
 	@Override
 	public double calculatePrice() 
 	{
@@ -54,6 +52,7 @@ public class SlidingWindow extends Window
 
 	}
 
+	// function to calculate the Aluminum KG 
 	@Override
 	public double calculateAluminumKg() 
 	{
@@ -84,7 +83,8 @@ public class SlidingWindow extends Window
 		AddProjectProduct.wight=sumKG/1000000;
 		return ((sumKG*colorPrice/1000000))*alumLoss;
 	}
-
+	
+	//function to calculate the glass price
 	@Override
 	public double calculateGlassPrice() 
 	{
@@ -94,6 +94,7 @@ public class SlidingWindow extends Window
 
 	}
 
+	// function to calculate the costs
 	public double calculateCosts() {
 		double price = 0;
 		price	+= calculateAluminumKg();
@@ -110,6 +111,7 @@ public class SlidingWindow extends Window
 		return price*productionsCost*workingCost;
 	}
 
+	// checking function for char
 	private boolean findChar(String text,char search)
 	{
 		for(int i=0;i<text.length();i++)

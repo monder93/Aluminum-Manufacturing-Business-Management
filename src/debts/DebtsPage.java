@@ -25,6 +25,10 @@ import helpClasses.MysqlConnect;
 
 import javax.swing.JLabel;
 
+/*
+ *  this class for the Debts of the clients for us 
+ * */
+
 public class DebtsPage extends JFrame
 {
 

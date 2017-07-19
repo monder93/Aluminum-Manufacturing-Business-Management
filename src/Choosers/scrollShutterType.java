@@ -15,6 +15,11 @@ import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/*
+ * this class for choosing scrollShutterType list
+ * */
+
 public class scrollShutterType
 {
 
@@ -79,18 +84,18 @@ public class scrollShutterType
 				int row = table.rowAtPoint(p);
 				if (e.getClickCount() == 2) 
 				{
-						String shutterID=(table.getModel().getValueAt(row, 0)).toString();
-						AddProject.shutterId=shutterID;
-						String shutterName=(table.getModel().getValueAt(row, 1)).toString();
-						AddProject.shutterName.setText(shutterName);
-						String shutterWeight=(table.getModel().getValueAt(row, 2)).toString();
-						AddProject.shutterWeight=shutterWeight;
-					
+					String shutterID=(table.getModel().getValueAt(row, 0)).toString();
+					AddProject.shutterId=shutterID;
+					String shutterName=(table.getModel().getValueAt(row, 1)).toString();
+					AddProject.shutterName.setText(shutterName);
+					String shutterWeight=(table.getModel().getValueAt(row, 2)).toString();
+					AddProject.shutterWeight=shutterWeight;
+
 
 					frame.dispose();
 				}
-			
-				
+
+
 			}
 		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);

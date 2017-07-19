@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 
+
+/*
+ * this class for choosing suppliers list
+ * */
 public class Suppliers extends JFrame{
 
 	private JFrame frame;
@@ -153,7 +157,7 @@ public class Suppliers extends JFrame{
 		textField4.setBounds(331, 568, 103, 33);
 		textField4.setColumns(10);
 		contentPane.setLayout(null);
-		
+
 		editorPane = new JEditorPane();
 		editorPane.setText("ספקים");
 		editorPane.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -256,7 +260,6 @@ public class Suppliers extends JFrame{
 
 		try 
 		{
-			//			myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("suppliers", table);
 			HelpFunctions.renderingTable(table);
 
@@ -297,12 +300,6 @@ public class Suppliers extends JFrame{
 			});
 			button.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
-
-
-
-
-
-
 			contentPane.add(label4);
 			contentPane.add(textField);
 			contentPane.add(textField1);
@@ -341,9 +338,9 @@ public class Suppliers extends JFrame{
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
 
-			 btnNewButton_3 = new JButton("ביטול");
-			 btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-			 btnNewButton_3.setVisible(false);
+			btnNewButton_3 = new JButton("ביטול");
+			btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+			btnNewButton_3.setVisible(false);
 			btnNewButton_3.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) 
 				{
@@ -372,6 +369,8 @@ public class Suppliers extends JFrame{
 
 
 	}
+	//----------------------------------------------------------hidrOrShow-function-------------------------------------------------
+	//function to hide some components
 	private void hideOrShow(boolean flag)
 	{
 		label.setVisible(flag);

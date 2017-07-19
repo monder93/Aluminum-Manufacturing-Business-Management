@@ -22,6 +22,9 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/*
+ *  a class for the login page 
+ */
 public class LoginPage extends JFrame 
 {
 
@@ -100,6 +103,7 @@ public class LoginPage extends JFrame
 		lblNewLabel.setBounds(219, 105, 80, 14);
 		contentPane.add(lblNewLabel);
 
+		// password typing field
 		passText = new JPasswordField();
 		passText.addKeyListener(new KeyAdapter() 
 		{
@@ -123,8 +127,8 @@ public class LoginPage extends JFrame
 		background_label.setBounds(0, 0, 400, 238);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);
-		//conn = (Connection) HelpFunctions.DbConnection();
 		
+		// getting the right password from the database
 		try 
 		{
 			String query="SELECT `ערך` FROM `settings` WHERE `שם משתנה` = 'סיסמה' ";

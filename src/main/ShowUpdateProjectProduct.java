@@ -34,6 +34,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/*
+ * show and update project product 
+ * used for viewing all the info in new frame  + if we want to change some values for the product so we use it 
+ * and it will calculate and update the values in the database
+ */
 public class ShowUpdateProjectProduct extends JFrame {
 
 	private JPanel contentPane;
@@ -48,7 +53,7 @@ public class ShowUpdateProjectProduct extends JFrame {
 	private JTextField proCodeTextField;
 	private JTextField descriptionTextField;
 	private JLabel image_label;
-	//variables to save data from projectProducts ,, for specefic product 
+	//variables to save data from projectProducts ,, for specific product 
 	private String id;
 	private String proId;
 	private String productCode;

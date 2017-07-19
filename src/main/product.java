@@ -32,6 +32,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/*
+ *  a class for the product 
+ */
 public class product extends JFrame{
 
 	private JFrame frame;
@@ -106,12 +109,9 @@ public class product extends JFrame{
 		        {
 		        	type=(table.getModel().getValueAt(row, 0)).toString();
 		        	AddProjectProduct.type=type;
-//		        	System.out.println("type at product: "+ type);
 		        	query2= "SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"' GROUP BY `סדרה`";
-//		        	Statement myStmt;
 					try 
 					{
-//						myStmt = myConn.createStatement();
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query2);
 						table_2.setModel(DbUtils.resultSetToTableModel(myRs));
 					} 
@@ -131,8 +131,6 @@ public class product extends JFrame{
 
 		try 
 		{
-//			myConn  = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table_1.setModel(DbUtils.resultSetToTableModel(myRs));
 			// changing JTable Cell Value Alignment
@@ -178,13 +176,10 @@ public class product extends JFrame{
 
 		try 
 		{
-//			myConn2  = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn2.createStatement();
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT `סדרה` FROM `products` WHERE `סוג פתיחה` = '"+ type +"'");
 			table_2.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table_2);
 
-			
 			label = new JLabel("כמות כנפי זכוכית:");
 			label.setHorizontalTextPosition(SwingConstants.LEFT);
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -239,6 +234,7 @@ public class product extends JFrame{
 			BG1.add(radioButton_1);
 			BG2.add(radioButton_2);
 			BG2.add(radioButton_3);
+			
 			
 			JButton btnNewButton = new JButton("אשור");
 			btnNewButton.addActionListener(new ActionListener() {

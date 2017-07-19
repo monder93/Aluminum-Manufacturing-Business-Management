@@ -1,8 +1,9 @@
 package helpClasses;
 import java.awt.*;  
 import java.awt.event.*;  
-/*********************************************/  
-
+/*
+ *  this class is a calculator 
+ * */
 public class Calc extends Frame  
 {  
 

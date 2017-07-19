@@ -24,6 +24,10 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/*
+ * this class for choosing hardware list
+ * */
 public class hardware {
 
 	private JFrame frame;
@@ -54,9 +58,9 @@ public class hardware {
 	{
 		this();
 		this.type=type;
-		
+
 	}
-	
+
 	public hardware() throws SQLException
 	{
 		initialize();
@@ -81,7 +85,7 @@ public class hardware {
 		scrollPane.setBounds(10, 11, 392, 332);
 		frame.getContentPane().add(scrollPane);
 		frame.setName("פרזול");
-		
+
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() 
 		{
@@ -111,7 +115,6 @@ public class hardware {
 				{
 					System.out.println("no picture selected");
 				}
-				
 				JTable table =(JTable) arg0.getSource();
 				Point p = arg0.getPoint();
 				int row = table.rowAtPoint(p);
@@ -125,20 +128,16 @@ public class hardware {
 						AddOrderItems.descriptionTextField_1.setText(hardwareName);
 						frame.dispose();
 					}
-					
 				}
 			}
 		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
-	
-		
+
 		String query = "SELECT * FROM hardware";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
 		HelpFunctions.renderingTable(table);
 		HelpFunctions.setBackground(lblPic, "noPic");
-
 	}
 }

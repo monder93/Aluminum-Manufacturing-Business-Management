@@ -16,6 +16,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/*
+ *  a class for adding new product 
+ */
 public class NewProduct extends JFrame
 {
 	private JFrame frame;

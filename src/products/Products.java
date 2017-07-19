@@ -1,5 +1,8 @@
 package products;
 
+/* 
+ * abstract class for the product 
+ */
 public abstract class Products implements info
 {
 	protected double width;

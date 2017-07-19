@@ -12,6 +12,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import Choosers.hardware;
 import Choosers.partsColors;
 import Choosers.profiles;
@@ -42,7 +44,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 
-
+/*
+ *  a class for the projectProducts 
+ */
 public class ProjectProducts extends JFrame
 {
 	public static JTable table;
@@ -101,7 +105,7 @@ public class ProjectProducts extends JFrame
 	{
 		PdfMaker pdfMaker = new PdfMaker();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 578, 374);
+		setBounds(0, 0, 1368, 734);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		contentPane = new JPanel();
@@ -131,8 +135,9 @@ public class ProjectProducts extends JFrame
 				if(!table.getSelectionModel().isSelectionEmpty())
 				{
 					int row = table.getSelectedRow();
-					double price=Math.floor((double) (table.getModel().getValueAt(row, 10)));
-					price=(price*117/100);
+					double price=(double)(table.getModel().getValueAt(row, 10));
+
+					price=Math.round((price*117/100.0)*100.0)/100.0;
 					lblNewLabel_5.setText(String.valueOf(price));
 					String query="SELECT  `תמונה` FROM `products` WHERE `מזהה` ='"+(table.getModel().getValueAt(row, 2))+"'";
 					ResultSet rs;
@@ -159,9 +164,9 @@ public class ProjectProducts extends JFrame
 		});
 
 
+		// selecting the project products for specific project 
 		try 
 		{
-
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT * FROM `projectsProducts` WHERE `מספר פרויקט` = '"+ProjectProducts.id+"'  ");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
@@ -275,6 +280,7 @@ public class ProjectProducts extends JFrame
 				}
 				else
 				{
+					// updating the option field for the product 
 					try {
 						String id=table.getModel().getValueAt(row, 0).toString();
 						String option= table.getModel().getValueAt(row, 11).toString();
@@ -295,8 +301,7 @@ public class ProjectProducts extends JFrame
 						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
 						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
-						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
-						
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.round(pieceAvarage)));
 					}
 
 					catch (SQLException e1) 
@@ -334,6 +339,7 @@ public class ProjectProducts extends JFrame
 		button_6.setBounds(385, 74, 123, 46);
 		contentPane.add(button_6);
 
+		//adding project product 
 		JButton button_7 = new JButton("\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05D5\u05E6\u05E8 \u05DC\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8");
 		button_7.addActionListener(new ActionListener() 
 		{
@@ -381,8 +387,8 @@ public class ProjectProducts extends JFrame
 						double allPrice=ProjectProducts.calcAllProductPrice();
 						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
-						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
-						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
+						ProjectProducts.label_1.setText(String.valueOf(Math.round(allPrice*1.17*100.0)/100.0));
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.round(pieceAvarage)));
 					}
 				}
 				catch(Exception e1)
@@ -396,6 +402,7 @@ public class ProjectProducts extends JFrame
 		button_9.setBounds(935, 270, 152, 46);
 		contentPane.add(button_9);
 
+		// copy product 
 		JButton button_10 = new JButton("\u05D4\u05E2\u05EA\u05E7\u05D4");
 		button_10.addActionListener(new ActionListener() 
 		{
@@ -429,8 +436,8 @@ public class ProjectProducts extends JFrame
 						double allPrice=ProjectProducts.calcAllProductPrice();
 						double pieceAvarage = ProjectProducts.calcProductAvaragePrice();
 						ProjectProducts.lblNewLabel_3.setText(String.valueOf(allPrice));
-						ProjectProducts.label_1.setText(String.valueOf(allPrice*1.17));
-						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.floor(pieceAvarage)));
+						ProjectProducts.label_1.setText(String.valueOf(Math.round(allPrice*1.17*100.0)/100.0));
+						ProjectProducts.lblNewLabel_4.setText(String.valueOf(Math.round(pieceAvarage)));
 
 					} 
 					catch (SQLException e1) 
@@ -459,7 +466,14 @@ public class ProjectProducts extends JFrame
 					String id = table.getModel().getValueAt(row, 0).toString();
 					String name = table.getModel().getValueAt(row, 3).toString();
 					String pr = table.getModel().getValueAt(row, 10).toString();
-					new PrdCostAnalysis(Integer.parseInt(id),name,pr);
+					try
+					{
+						new PrdCostAnalysis(Integer.parseInt(id),name,pr);
+					}
+					catch (Exception e1) 
+					{
+						System.out.println("aaa");
+					}
 				}
 			}
 		});
@@ -472,8 +486,6 @@ public class ProjectProducts extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				//table.getSelectionModel().clearSelection();
-
 				int row = table.getSelectedRow();
 				if(row<0)
 				{
@@ -502,6 +514,7 @@ public class ProjectProducts extends JFrame
 		button_12.setBounds(385, 270, 152, 46);
 		contentPane.add(button_12);
 
+		// calculator 
 		JButton button_13 = new JButton("");
 		button_13.addActionListener(new ActionListener() 
 		{
@@ -515,6 +528,7 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_13);
 		HelpFunctions.setIcon(button_13, "calculator");
 
+		//sending the mail with the bid offer 
 		JButton button_14 = new JButton("");
 		button_14.addActionListener(new ActionListener() 
 		{
@@ -535,6 +549,7 @@ public class ProjectProducts extends JFrame
 		contentPane.add(button_14);
 		HelpFunctions.setIcon(button_14, "mail");
 
+		// exporting pdf bid 
 		JButton button_15 = new JButton("");
 		button_15.addActionListener(new ActionListener()
 		{
@@ -569,7 +584,7 @@ public class ProjectProducts extends JFrame
 		double allPrice=calcAllProductPrice();
 		double productAvarage=calcProductAvaragePrice();
 		lblNewLabel_3.setText(String.valueOf(allPrice));
-		label_1.setText(String.valueOf(Math.floor(allPrice*1.17)/100*100));
+		label_1.setText(String.valueOf(Math.round(allPrice*1.17*100.0)/100.0));
 		lblNewLabel_4.setText("0.0");
 
 		JButton button_16 = new JButton("צבע אביזרים");
@@ -607,7 +622,8 @@ public class ProjectProducts extends JFrame
 		{
 			e.printStackTrace();
 		}
-		return Math.floor(price*100/100);
+		return Math.round(price*100.0)/100.0;
+		
 	}
 	//--------------------------------------------------------calcProductAvaragePrice-----------------------------------------------
 	public static double calcProductAvaragePrice()
@@ -628,6 +644,6 @@ public class ProjectProducts extends JFrame
 		{
 			e.printStackTrace();
 		}
-		return Math.floor((price/quantityCount)*100/100);
+		return Math.round((price/quantityCount)*100.0/100.0);
 	}
 }

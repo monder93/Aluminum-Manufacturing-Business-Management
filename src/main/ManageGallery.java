@@ -1,5 +1,9 @@
 package main;
 
+/*
+ * a class for managing the gallery 
+ * adding , deleting images 
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.image.BufferedImage;
@@ -136,6 +140,7 @@ public class ManageGallery extends JFrame
 		lblNewLabel.setBounds(10, 11, 225, 181);
 		contentPane.add(lblNewLabel);
 
+		//deleting image button 
 		JButton button = new JButton("מחיקת תמונה");
 		button.addActionListener(new ActionListener() 
 		{
@@ -165,6 +170,8 @@ public class ManageGallery extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				//choosing picture to add 
+
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Images", "jpg", "png", "gif");

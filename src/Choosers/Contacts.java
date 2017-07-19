@@ -21,6 +21,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 
+
+/*
+ * this class for choosing contacts list
+ * */
+
 public class Contacts extends JFrame{
 
 	private JFrame frame;
@@ -35,7 +40,7 @@ public class Contacts extends JFrame{
 	private JTextField textField3;
 	private JTextField textField4;
 	private JLabel lblNewLabel;
-	
+
 	JButton button_1;
 	JButton btnNewButton_3;
 	JLabel label;
@@ -60,7 +65,6 @@ public class Contacts extends JFrame{
 				{
 					Contacts frame = new Contacts();
 					frame.setVisible(true);
-					//resizable  false
 					frame.setResizable(false);
 				} 
 				catch (Exception e) 
@@ -155,17 +159,17 @@ public class Contacts extends JFrame{
 		textField4.setBounds(271, 568, 163, 33);
 		textField4.setColumns(10);
 		contentPane.setLayout(null);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setBounds(127, 622, 103, 33);
 		textField_1.setVisible(false);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setBounds(331, 622, 103, 33);
 		textField_2.setVisible(false);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
-		
+
 		lblNewLabel_1 = new JLabel("שם משתמש :");
 		lblNewLabel_1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel_1.setVisible(false);
@@ -173,13 +177,13 @@ public class Contacts extends JFrame{
 		contentPane.add(lblNewLabel_1);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
-		
+
 		lblNewLabel = new JLabel("סיסמה :");
 		lblNewLabel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblNewLabel.setVisible(false);
 		lblNewLabel.setBounds(235, 622, 61, 33);
 		contentPane.add(lblNewLabel);
-		
+
 		editorPane = new JEditorPane();
 		editorPane.setFont(new Font("Tahoma", Font.BOLD, 22));
 		editorPane.setEditable(false);
@@ -266,9 +270,6 @@ public class Contacts extends JFrame{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר זהות";
 						String query = "DELETE FROM `contacts` WHERE  `"+ProId+"`= '"+PID+"'";
-//						Connection myConn = HelpFunctions.DbConnection();
-//						Statement myStmt = myConn.createStatement();
-//						myStmt.executeUpdate(query);
 						MysqlConnect.getDbCon().deleteRow("contacts", ProId, PID);
 						HelpFunctions.getTable("contacts", table);
 						HelpFunctions.renderingTable(table);
@@ -285,13 +286,13 @@ public class Contacts extends JFrame{
 
 		try 
 		{
-//			myConn = HelpFunctions.DbConnection();
 			HelpFunctions.getTable("contacts", table);
 			HelpFunctions.renderingTable(table);
 
 			JButton button = new JButton("בחר");
 			button.setBounds(20, 411, 152, 55);
-			button.addActionListener(new ActionListener() {
+			button.addActionListener(new ActionListener() 
+			{
 				public void actionPerformed(ActionEvent arg0) 
 				{
 
@@ -311,22 +312,13 @@ public class Contacts extends JFrame{
 							dispose();
 						}
 					}
-
 					catch(Exception e)
 					{
 						e.printStackTrace();
 					}
 				}
-
 			});
 			button.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-
-
-
-
-
-
-
 			contentPane.add(label4);
 			contentPane.add(textField);
 			contentPane.add(textField1);
@@ -364,11 +356,12 @@ public class Contacts extends JFrame{
 
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
-			
+
 			btnNewButton_3 = new JButton("ביטול");
 			btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 			btnNewButton_3.setVisible(false);
-			btnNewButton_3.addActionListener(new ActionListener() {
+			btnNewButton_3.addActionListener(new ActionListener() 
+			{
 				public void actionPerformed(ActionEvent e) 
 				{
 					textField.setText("");
@@ -381,21 +374,20 @@ public class Contacts extends JFrame{
 			});
 			btnNewButton_3.setBounds(81, 566, 165, 42);
 			contentPane.add(btnNewButton_3);
-			
-			
-						JLabel background_label = new JLabel("New label");
-						background_label.setBounds(0, 0, 904, 666);
-						HelpFunctions.setBackground(background_label);
-						contentPane.add(background_label);
+
+			JLabel background_label = new JLabel("New label");
+			background_label.setBounds(0, 0, 904, 666);
+			HelpFunctions.setBackground(background_label);
+			contentPane.add(background_label);
 		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-
 		}
-
-
 	}
+	
+	//----------------------------------------------------------hidrOrShow-function-------------------------------------------------
+	//function to hide some components
 	private void hideOrShow(boolean flag)
 	{
 		label.setVisible(flag);
@@ -414,6 +406,5 @@ public class Contacts extends JFrame{
 		textField_2.setVisible(flag);
 		button_1.setVisible(flag);
 		btnNewButton_3.setVisible(flag);
-		
 	}
 }

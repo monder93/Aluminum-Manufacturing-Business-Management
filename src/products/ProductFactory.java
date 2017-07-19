@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+/* 
+ * a class factory for all types of products 
+ */
 public class ProductFactory 
 {
 

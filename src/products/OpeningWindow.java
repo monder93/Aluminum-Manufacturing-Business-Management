@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import helpClasses.MysqlConnect;
 import main.AddProjectProduct;
-
+/*
+ * a class for OpeningWindow specific Product type
+ */
 public class OpeningWindow extends Window
 {
 
@@ -36,24 +38,20 @@ public class OpeningWindow extends Window
 		myRs = MysqlConnect.getDbCon().selectWhereQuery("settings", "שם משתנה", "עוור");
 		myRs.next();
 		mashkofEverPrice=Double.parseDouble(myRs.getString(3));
-		
+
 		if(wingCount==0)
 			wingCount=1;
-		//		System.out.println("profit : " + profit);
-		//		System.out.println("productions : " + productionsCost);
-		//		System.out.println("working : " + workingCost);
-		//		System.out.println("loss : " + alumLoss);
-
 	}
 
+	//function to calculate the Price
 	@Override
 	public double calculatePrice() 
 	{
 		double price = calculateCosts();
 		return (Math.floor(price*profit*100)/100);
-
 	}
 
+	// function to calculate the Aluminum KG 
 	@Override
 	public double calculateAluminumKg() 
 	{
@@ -66,9 +64,9 @@ public class OpeningWindow extends Window
 				if((myRs.getString(2).equals("L"))==true)
 				{
 					if(	findChar(myRs.getString(2),'/')	==	true)
-					sumKG+= myRs.getDouble(1)*((width/wingCount)+myRs.getDouble(3))*myRs.getDouble(4);
+						sumKG+= myRs.getDouble(1)*((width/wingCount)+myRs.getDouble(3))*myRs.getDouble(4);
 					else
-					sumKG+= myRs.getDouble(1)*(width+myRs.getDouble(3))*myRs.getDouble(4);
+						sumKG+= myRs.getDouble(1)*(width+myRs.getDouble(3))*myRs.getDouble(4);
 				}
 				else if((myRs.getString(2).equals("H"))==true)
 				{
@@ -85,6 +83,7 @@ public class OpeningWindow extends Window
 		return ((sumKG*colorPrice/1000000))*alumLoss;
 	}
 
+	//function to calculate the glass price
 	@Override
 	public double calculateGlassPrice() 
 	{
@@ -94,6 +93,7 @@ public class OpeningWindow extends Window
 
 	}
 
+	// function to calculate the costs
 	public double calculateCosts() {
 		double price = 0;
 		price	+= calculateAluminumKg();
@@ -110,6 +110,7 @@ public class OpeningWindow extends Window
 		return price*productionsCost*workingCost;
 	}
 
+	// checking function for char
 	private boolean findChar(String text,char search)
 	{
 		for(int i=0;i<text.length();i++)

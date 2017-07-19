@@ -32,6 +32,9 @@ import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
+/*
+ * a class for catalogue choosing
+ */
 public class Catalogue extends JFrame {
 
 	private JPanel contentPane;
@@ -106,12 +109,9 @@ public class Catalogue extends JFrame {
 				pdfFileName="kalil/";
 				try 
 				{
-//					Connection myConn = HelpFunctions.DbConnection();
-//					Statement myStmt = myConn.createStatement();
 					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					HelpFunctions.renderingTable(table);
-					
 				} 
 				catch (Exception e1) 
 				{
@@ -140,8 +140,6 @@ public class Catalogue extends JFrame {
 					try{
 						//get link from database
 						String query="SELECT `קישור` FROM `catalogue` WHERE `חברה`='"+companyName+"' AND `שם`='"+choosedName+"' ";
-//						Connection myConn = HelpFunctions.DbConnection();
-//						Statement myStmt = myConn.createStatement();
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 						String StringTemp=pdfFileName;
 						 while (myRs.next())
@@ -174,8 +172,6 @@ public class Catalogue extends JFrame {
 		pdfFileName="kalil/";
 		try 
 		{
-//			Connection myConn = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
@@ -184,7 +180,6 @@ public class Catalogue extends JFrame {
 		{
 			e.printStackTrace();
 		}
-		
 		
 		JRadioButton radioButton_1 = new JRadioButton("אקסטל");
 		radioButton_1.addActionListener(new ActionListener() 
@@ -197,8 +192,6 @@ public class Catalogue extends JFrame {
 				pdfFileName="akstel/";
 				try 
 				{
-//					Connection myConn = HelpFunctions.DbConnection();
-//					Statement myStmt = myConn.createStatement();
 					ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 					table.setModel(DbUtils.resultSetToTableModel(myRs));
 					HelpFunctions.renderingTable(table);

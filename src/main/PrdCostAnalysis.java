@@ -13,7 +13,10 @@ import helpClasses.MysqlConnect;
 
 import javax.swing.JTextField;
 import java.awt.ComponentOrientation;
-
+/*
+ * a class for analysis the costs of the product 
+ * glass , color , KG , aluminum , loss , profits ...
+ */
 public class PrdCostAnalysis {
 
 	private JFrame frame;
@@ -46,8 +49,10 @@ public class PrdCostAnalysis {
 				try {
 					PrdCostAnalysis window = new PrdCostAnalysis();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} 
+				catch (Exception e) 
+				{
+					//e.printStackTrace();
 				}
 			}
 		});
@@ -56,16 +61,19 @@ public class PrdCostAnalysis {
 	/**
 	 * Create the application.
 	 */
-	public PrdCostAnalysis() {
+	public PrdCostAnalysis()
+	{
 	}
-	public PrdCostAnalysis(int prdID,String name,String price) {
+	public PrdCostAnalysis(int prdID,String name,String price)
+	{
 		this.prdID=prdID;
 		this.name=name;
 		this.price=price;
 		try {
 			initialize();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e) 
+		{
+			//			e.printStackTrace();
 		}
 	}
 
@@ -80,7 +88,7 @@ public class PrdCostAnalysis {
 		frame.setBounds(450, 200, 550, 349);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(280, 170, 244, 123);
 		frame.getContentPane().add(lblNewLabel_1);
@@ -253,13 +261,13 @@ public class PrdCostAnalysis {
 		textField_11.setBounds(292, 111, 80, 20);
 		frame.getContentPane().add(textField_11);
 
-		
+
 		label_11 = new JLabel("סה\"כ מחיר מוצר כולל מע\"מ :");
 		label_11.setHorizontalTextPosition(SwingConstants.LEFT);
 		label_11.setHorizontalAlignment(SwingConstants.RIGHT);
 		label_11.setBounds(358, 142, 169, 14);
 		frame.getContentPane().add(label_11);
-		
+
 		textField_12 = new JTextField();
 		textField_12.setText("0.0");
 		textField_12.setHorizontalAlignment(SwingConstants.CENTER);
@@ -268,8 +276,8 @@ public class PrdCostAnalysis {
 		textField_12.setColumns(10);
 		textField_12.setBounds(292, 139, 80, 20);
 		frame.getContentPane().add(textField_12);
-		
-		
+
+		// selecting the fields from the database for specific product and getting its info
 		ResultSet rs = MysqlConnect.getDbCon().selectQuery("SELECT `משקל`, `אלומיניום`, `עוור`, `זכוכית`, `פרזול` FROM `costs` WHERE `מספר מוצר` ='"+prdID+"'");
 		rs.next();
 		double wight = Math.round(rs.getDouble(1)*100.0)/100.0 ;
@@ -284,8 +292,8 @@ public class PrdCostAnalysis {
 		textField_1.setText(String.valueOf(przPrc));
 		double stuffcosts=Math.round((przPrc+almPrc+everPrc+glPrc)*100.0)/100.0;
 		textField_4.setText(String.valueOf(stuffcosts));
-		
-		
+
+
 		ResultSet myRs = MysqlConnect.getDbCon().selectWhereQuery("settings", "שם משתנה", "רווח");
 		myRs.next();
 		double profit=(Double.parseDouble(myRs.getString(3))-1);
@@ -311,15 +319,7 @@ public class PrdCostAnalysis {
 		textField_9.setText(this.price);
 		double fPrice = Math.round((price+(price*tax))*100.0)/100.0;
 		textField_12.setText(String.valueOf(fPrice));
-		
+
 		HelpFunctions.setBackground(lblNewLabel_1,"analyse");
-
-
-
-
-
-		
-		
-
 	}
 }

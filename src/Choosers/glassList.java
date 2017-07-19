@@ -21,6 +21,11 @@ import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+
+/*
+ * this class for choosing glass list
+ * */
 public class glassList {
 
 	private JFrame frame;
@@ -136,14 +141,9 @@ public class glassList {
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
-		//connection to database 
-//		myConn = HelpFunctions.DbConnection();
-//		Statement myStmt = myConn.createStatement();
 		String query = "SELECT * FROM glass";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));
 		HelpFunctions.renderingTable(table);
-
-
 	}
 }

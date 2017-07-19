@@ -20,6 +20,10 @@ import java.awt.ComponentOrientation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/*
+ * this class for choosing color list
+ * */
 public class colorList {
 
 	private JFrame frame;
@@ -117,9 +121,6 @@ public class colorList {
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
 
-		//connection to database 
-//		myConn = HelpFunctions.DbConnection();
-//		Statement myStmt = myConn.createStatement();
 		String query = "SELECT * FROM colors";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 		table.setModel(DbUtils.resultSetToTableModel(myRs));

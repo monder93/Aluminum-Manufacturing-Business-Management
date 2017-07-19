@@ -24,6 +24,9 @@ import java.awt.event.ActionEvent;
 import java.awt.ComponentOrientation;
 import javax.swing.JEditorPane;
 
+/*
+ * a calss to add new project
+ */
 public class AddProject 
 {
 	private JFrame frame;
@@ -32,7 +35,6 @@ public class AddProject
 	public static JTextField contact;
 	public static JTextField color;
 	public static JTextField glass;
-	//public Connection myConn;
 	private JTextField adress;
 	private JTextField phone;
 	public static String id;
@@ -124,6 +126,7 @@ public class AddProject
 		button_1.setBounds(232, 109, 135, 29);
 		frame.getContentPane().add(button_1);
 
+		//choosing the shutter type and info
 		JButton shutter = new JButton("תריס :");
 		shutter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -186,6 +189,7 @@ public class AddProject
 		comboBox_4.addItem("תריס הזזה");
 		frame.getContentPane().add(comboBox_4);
 
+		// adding a contact for the project 
 		JButton btnNewButton = new JButton("איש קשר :");
 		btnNewButton.addActionListener(new ActionListener() 
 		{
@@ -207,9 +211,7 @@ public class AddProject
 				{		
 					String cont = contact.getText();
 					String gla = glass.getText();
-					//int glaPr = 40;
 					String col = color.getText();
-					//int colPr = 30;
 					String cust = customer.getText();
 					String plc = place.getText();
 					String add = adress.getText();

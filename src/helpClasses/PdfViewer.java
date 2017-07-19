@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.adobe.acrobat.Viewer;
 
+/*
+ * a class for viewing pdf files into the application
+ * */
 public class PdfViewer extends JPanel
 {
 	private Viewer viewer;

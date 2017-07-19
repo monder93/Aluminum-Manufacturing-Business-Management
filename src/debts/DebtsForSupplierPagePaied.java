@@ -24,6 +24,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
+/*
+ *  this class for the paid payments for Debts For Suppliers 
+ * */
 public class DebtsForSupplierPagePaied extends JFrame 
 {
 
@@ -96,7 +99,7 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-		
+
 		JTableHeader Theader = table.getTableHeader();
 		Theader.setBackground(Color.green);
 		Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -227,9 +230,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 		try 
 		{			
-			//			myConn = HelpFunctions.DbConnection();
-			//			Statement myStmt = myConn.createStatement();
-
 			String query="SELECT * FROM `debtsforsupplierspaied` WHERE `מספר חוב` = '"+debtnumber+"' ";
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
@@ -242,7 +242,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 			label.setBounds(733, 260, 70, 34);
 			contentPane.add(label);
 
-
 			payAmountTextField = new JTextField();
 			payAmountTextField.setColumns(10);
 			payAmountTextField.setBounds(566, 267, 86, 20);
@@ -250,7 +249,6 @@ public class DebtsForSupplierPagePaied extends JFrame
 
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table);
-
 
 			comboBox = new JComboBox();
 			comboBox.setBounds(566, 171, 86, 34);

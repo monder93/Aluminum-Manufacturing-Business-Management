@@ -16,6 +16,10 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/*
+ * a class for viewing the tables ,, generic class
+ * used with more than 1 table
+ */
 public class Tables extends JFrame
 {
 	private JFrame frame;
@@ -52,7 +56,7 @@ public class Tables extends JFrame
 		this.table=table;
 		initialize();
 	}
-	
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -112,8 +116,7 @@ public class Tables extends JFrame
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table_1);
 
-
-
+			//choosing the title of the frame
 			if(this.table.contentEquals("contacts"))
 				frame.setTitle("טבלת לקוחות");
 			else if(this.table.contentEquals("suppliers"))
@@ -124,9 +127,6 @@ public class Tables extends JFrame
 				frame.setTitle(("טבלת זיגוג"));
 			else if(this.table.contentEquals("colors"))
 				frame.setTitle(("טבלת צבעים"));
-
-
-
 
 		} 
 		catch (Exception e) 

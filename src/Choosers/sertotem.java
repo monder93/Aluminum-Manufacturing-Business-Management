@@ -22,6 +22,11 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/*
+ * this class for choosing images list
+ * */
+
 public class sertotem {
 
 	private JFrame frame;
@@ -111,8 +116,6 @@ public class sertotem {
 		});
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		scrollPane.setViewportView(table);
-
-
 
 		String query = "SELECT `מזהה`, `חברה`, `שם`, `סוג פתיחה`, `מס כנפים` FROM `products` WHERE `סוג פתיחה` LIKE '%"+type+"%'";
 		ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query);

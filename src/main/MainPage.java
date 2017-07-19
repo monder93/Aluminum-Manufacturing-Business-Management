@@ -12,14 +12,11 @@ import helpClasses.Calc;
 import helpClasses.HelpFunctions;
 import helpClasses.MysqlConnect;
 import helpClasses.PdfViewer;
-import menuBar.OpenType;
+import menuBar.ColorEditPrice;
+import menuBar.GlassEditPrice;
 import menuBar.Orders;
 import menuBar.Tables;
 import pdfReports.PdfMaker;
-import products.OpeningDoor;
-import products.ProductFactory;
-import products.Products;
-
 import javax.swing.JMenuBar;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -42,8 +39,11 @@ import java.sql.SQLException;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import java.awt.Frame;
 
+/*
+ * a class for the main page of the application 
+ * used to start and control all the application windows
+ */
 public class MainPage extends JFrame 
 {
 	/**
@@ -106,6 +106,7 @@ public class MainPage extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		// calculator button
 		JButton btnNewButton = new JButton("מחשבון");
 		btnNewButton.addActionListener(new ActionListener() 
 		{
@@ -176,6 +177,34 @@ public class MainPage extends JFrame
 		});
 		menuItem_6.setHorizontalAlignment(SwingConstants.RIGHT);
 		menu_2.add(menuItem_6);
+		
+		JMenuItem menuItem_24 = new JMenuItem("ניהול מחירי צבע");
+		menuItem_24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				try {
+					new ColorEditPrice();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		menu_2.add(menuItem_24);
+		
+		JMenuItem menuItem_25 = new JMenuItem("ניהול מחירי זיגוג");
+		menuItem_25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try 
+				{
+					new GlassEditPrice();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		menu_2.add(menuItem_25);
 
 		//-------------------------------------------------------help menuBar button-------------------------------------------
 
@@ -639,7 +668,6 @@ public class MainPage extends JFrame
 		scrollPane.setViewportView(table);
 
 		//get reminders table
-		//Connection myConn = HelpFunctions.DbConnection();
 		table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		HelpFunctions.getTable("generalreminders", table);
 
@@ -651,16 +679,12 @@ public class MainPage extends JFrame
 		// changing JTable Cell Value Alignment
 		HelpFunctions.renderingTable(table);
 
-
-
 		JLabel background_label = new JLabel("");
 		background_label.setBounds(0, 25, 1376, 680);
 		HelpFunctions.setBackground(background_label);
 		contentPane.add(background_label);	
 
 		HelpFunctions.setIcon(btnNewButton, "calculator");
-
-		//		}
 
 	}
 }

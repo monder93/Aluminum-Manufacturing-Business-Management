@@ -26,6 +26,10 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 
+/*
+ * a class for Orders and its a generic class 
+ * used for more than 1 type of orders
+ */
 public class Orders extends JFrame 
 {
 
@@ -144,7 +148,7 @@ public class Orders extends JFrame
 			JTableHeader Theader = table_1.getTableHeader();
 			Theader.setBackground(Color.green);
 			Theader.setFont(new Font("Tahoma", Font.BOLD, 12));
-			
+
 			btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 			btnNewButton.setBounds(666, 31, 117, 41);
 			frame.getContentPane().add(btnNewButton);
@@ -331,7 +335,6 @@ public class Orders extends JFrame
 			btnNewButton_1.setBounds(10, 98, 154, 23);
 			frame.getContentPane().add(btnNewButton_1);
 
-
 			// changing JTable Cell Value Alignment
 			HelpFunctions.renderingTable(table_1);
 
@@ -340,6 +343,7 @@ public class Orders extends JFrame
 			frame.getContentPane().add(background_label);
 			HelpFunctions.setBackground(background_label);
 
+			//choosing the title of the frame
 			if(type.contentEquals("הזמנת זכוכית"))
 				frame.setTitle("הזמנת זכוכית");
 			if(type.contentEquals("הזמנת פירזול"))
@@ -358,6 +362,8 @@ public class Orders extends JFrame
 		}
 	}
 
+	//----------------------------------------------------------hidrOrShow-function-------------------------------------------------
+	//function to hide some components
 	private void hideOrShow(boolean flag)
 	{
 		btnNewButton_2.setVisible(flag);

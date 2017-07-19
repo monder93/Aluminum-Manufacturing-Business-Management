@@ -3,6 +3,9 @@ package helpClasses;
 import com.mysql.jdbc.Connection;
 import java.sql.*;
 
+/*
+ * a singelton class for the database connection
+ * */
 
 public final class MysqlConnect
 {
@@ -38,14 +41,17 @@ public final class MysqlConnect
 		return db;
 	}
 
-	
+
+	//--------------------------------------------------------------------------------------------------------------------------
+	// select query returning resultset
 	public ResultSet selectQuery(String query) throws SQLException
 	{
 		statement = db.conn.createStatement();
 		ResultSet res = statement.executeQuery(query);
 		return res;
 	}
-	
+	//--------------------------------------------------------------------------------------------------------------------------
+	//select query with where condition
 	public ResultSet selectWhereQuery(String tableName , String ID , String idValue) throws SQLException
 	{
 		String query = "SELECT * FROM "+tableName+" WHERE `"+ID+"` = '"+idValue+"'";
@@ -53,21 +59,24 @@ public final class MysqlConnect
 		ResultSet res = statement.executeQuery(query);
 		return res;
 	}
-
+	//--------------------------------------------------------------------------------------------------------------------------
+	// insert query 
 	public int insertQuery(String insertQuery) throws SQLException 
 	{
 		statement = db.conn.createStatement();
 		int result = statement.executeUpdate(insertQuery);
 		return result;
 	}
-	
+	//--------------------------------------------------------------------------------------------------------------------------
+	//update query
 	public int updateQuery(String updateQuery) throws SQLException 
 	{
 		statement = db.conn.createStatement();
 		int result = statement.executeUpdate(updateQuery);
 		return result;
 	}
-	
+	//--------------------------------------------------------------------------------------------------------------------------
+	//deleteRow function
 	public void deleteRow(String tableName ,String primaryId, String ID)
 	{
 		try
@@ -81,5 +90,5 @@ public final class MysqlConnect
 			e.printStackTrace();
 		}
 	}
-	
+
 }

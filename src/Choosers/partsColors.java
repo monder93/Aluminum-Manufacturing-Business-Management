@@ -23,6 +23,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+
+/*
+ * this class for choosing color list for the parts
+ * */
 public class partsColors {
 
 	private JFrame frame;

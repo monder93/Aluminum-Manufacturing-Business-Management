@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/*
+ *  a class for gallery .. images for products
+ */
 public class gallery extends JFrame 
 {
 	//--------------------------------------------------global variables-----------------------------------------------
@@ -250,6 +253,7 @@ public class gallery extends JFrame
 		label_1.setBounds(187, 82, 234, 168);
 		contentPane.add(label_1);
 
+		//next button
 		JButton btnNewButton = new JButton("הבא");
 		btnNewButton.addActionListener(new ActionListener() 
 		{
@@ -290,6 +294,8 @@ public class gallery extends JFrame
 		btnNewButton.setBounds(734, 587, 137, 56);
 		contentPane.add(btnNewButton);
 
+		
+		// back button 
 		JButton button = new JButton("אחורה");
 		button.addActionListener(new ActionListener() 
 		{

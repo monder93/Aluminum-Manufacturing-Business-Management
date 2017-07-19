@@ -57,7 +57,7 @@ public class HelpFunctions
 	}
 
 	//------------------------------------------------------------------------------------------------------------------	
-
+	//getting current time function	
 	public static String getCurrentTime()
 	{
 		Calendar cal = new GregorianCalendar();
@@ -74,7 +74,7 @@ public class HelpFunctions
 	}
 
 	//---------------------------------------------------------------------------------------------------------------------
-
+	//getting full table function	
 	public static void getTable(String tableName , JTable viewTable)
 	{
 		try
@@ -89,7 +89,7 @@ public class HelpFunctions
 		}
 	}
 	//----------------------------------------------------------------------------------------------------------------------
-
+	//rendering table in the center function	
 	public static void renderingTable(JTable table)
 	{
 		// changing JTable Cell Value Alignment
@@ -101,27 +101,28 @@ public class HelpFunctions
 		}
 	}
 	//----------------------------------------------------------------------------------------------------------------------
-
+	//setting default background function	
 	public static void setBackground(JLabel background_label)
 	{
 		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/banner1.jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
 	}
 
 	//----------------------------------------------------------------------------------------------------------------------
-
+	//setting alternative background  function	
 	public static void setBackground(JLabel background_label,String name)
 	{
 		background_label.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+name+".jpg")).getImage().getScaledInstance(background_label.getWidth(), background_label.getHeight(), Image.SCALE_DEFAULT)));
 	}
 
 	//----------------------------------------------------------------------------------------------------------------------
-
+	//setting icon for button function	
 	public static void setIcon(JButton background_button , String picName)
 	{
 		background_button.setIcon(new ImageIcon(new ImageIcon(LoginPage.class.getResource("/img/"+picName+".jpg")).getImage().getScaledInstance(background_button.getWidth(), background_button.getHeight(), Image.SCALE_DEFAULT)));
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------------
+	//setting image as icon function	
 	public static void setImageAsIcon(JLabel label , ImageIcon ImageIcon)
 	{
 		label.setIcon(new ImageIcon(ImageIcon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT)));

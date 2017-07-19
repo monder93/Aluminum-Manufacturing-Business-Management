@@ -22,6 +22,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
+/*
+ * a class to add new OrderItem
+ */
 public class AddOrderItems {
 
 	private JFrame frame;
@@ -137,6 +140,7 @@ public class AddOrderItems {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 
+				// choosing the right item list to open
 				try
 				{
 					if(type.equals("הזמנת זכוכית"))
@@ -156,9 +160,7 @@ public class AddOrderItems {
 				catch(Exception e1)
 				{
 					e1.printStackTrace();
-
 				}
-
 			}
 		});
 		btnNewButton.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -172,9 +174,8 @@ public class AddOrderItems {
 
 		JButton btnNewButton_1 = new JButton("הוסף מוצר");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//				Connection myConn = HelpFunctions.DbConnection();
-
+			public void actionPerformed(ActionEvent e) 
+			{
 				if((!idTextField.getText().equals(""))&&(!descriptionTextField_1.getText().equals(""))&&(!textField_2.getText().equals(""))&&(!textField_3.getText().equals(""))&&(!textField_4.getText().equals(""))){
 					String q = "INSERT INTO `ordersproducts`( `מספר הזמנה`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`) VALUES ('"+id+"','"+idTextField.getText()+"','"+descriptionTextField_1.getText()+"','"+textField_2.getText()+"','"+textField_3.getText()+"','"+textField_4.getText()+"','"+textPane.getText()+"')";
 					try {

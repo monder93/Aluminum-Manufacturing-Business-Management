@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import java.awt.Font;
 
+/*
+ *  a class for viewing openTypes of the products
+ */
 public class OpenType
 {
 

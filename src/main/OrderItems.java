@@ -17,6 +17,9 @@ import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
+/*
+ * a class for adding new orderItem
+ */
 public class OrderItems {
 
 	private JFrame frame;
@@ -71,8 +74,6 @@ public class OrderItems {
 
 		try 
 		{
-//			myConn = HelpFunctions.DbConnection();
-//			Statement myStmt = myConn.createStatement();
 			ResultSet myRs = MysqlConnect.getDbCon().selectQuery("SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+this.id+"'");
 			table.setModel(DbUtils.resultSetToTableModel(myRs));
 			HelpFunctions.renderingTable(table);
@@ -93,6 +94,7 @@ public class OrderItems {
 		btnNewButton.setBounds(501, 58, 106, 48);
 		frame.getContentPane().add(btnNewButton);
 
+		//deleting item
 		JButton button = new JButton("מחיקת מוצר");
 		button.addActionListener(new ActionListener()
 		{
@@ -119,7 +121,6 @@ public class OrderItems {
 					{
 						String PID=(table.getModel().getValueAt(row, 0)).toString();
 						String ProId="מספר סידורי";
-//						Connection myConn = HelpFunctions.DbConnection();
 						MysqlConnect.getDbCon().deleteRow("ordersproducts", ProId, PID);
 						String query1="SELECT `מספר סידורי`, `מספר מוצר`, `תיאור`, `רוחב`, `גובה`, `כמות`, `הערות`  FROM `ordersproducts` WHERE `מספר הזמנה` = '"+id+"'";
 						ResultSet myRs = MysqlConnect.getDbCon().selectQuery(query1);

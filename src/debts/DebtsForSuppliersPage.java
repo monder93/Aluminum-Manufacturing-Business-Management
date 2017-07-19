@@ -26,6 +26,10 @@ import helpClasses.MysqlConnect;
 
 import javax.swing.JLabel;
 
+/*
+ *  this class for the Debts For Suppliers 
+ * */
+
 public class DebtsForSuppliersPage extends JFrame
 {
 
@@ -78,7 +82,7 @@ public class DebtsForSuppliersPage extends JFrame
 	frame.setVisible(true);
 	frame.getContentPane().setLayout(null);	
 	frame.setTitle("חובות לספקים");
-	
+
 	button = new JButton("שם ספק");
 	button.addActionListener(new ActionListener() 
 	{
